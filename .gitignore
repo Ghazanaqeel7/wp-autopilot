@@ -9,3 +9,4 @@ secrets/
 /tmp/
 dashboard/dist/
 reports/**/*.tmp
+dist/

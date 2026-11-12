@@ -37,8 +37,13 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Use only the client's real data: their services, prices, locations, team, projects, testimonials,
   certifications. Source order: request/attachments → `sites/<site>/brief.md` → client's existing site
   → client's public profiles. Never invent stats, reviews, client logos, awards or years of experience.
-- Missing facts → write a `[NEEDS CLIENT INPUT: …]` placeholder and list it in `questions.md`.
-  Never ship filler to live.
+- Thin brief → research and write it yourself (industry, competitors, the client's market and
+  region): service descriptions, process steps, benefits, FAQs, page copy, SEO titles. It must be
+  specific to this client's business and audience, never generic. Mark it `researched` in
+  `content-sources.md` so the owner can review it before go-live.
+- Only hard facts are never invented: numbers/stats, years in business, client names/logos,
+  testimonials, awards, certifications, prices, addresses. Missing → `[NEEDS CLIENT INPUT: …]` +
+  `questions.md`, or design the section so it works without that fact. Never ship filler to live.
 - Images: client media library and supplied assets first; then licensed stock that matches the
   client's actual industry, region and audience (e.g. GCC clients → regional people/settings).
   Never use images that contradict the business (wrong product, wrong country, wrong service).

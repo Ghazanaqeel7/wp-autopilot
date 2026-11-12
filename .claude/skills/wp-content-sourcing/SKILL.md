@@ -12,7 +12,11 @@ description: How to gather, verify and place real client content and images on a
 ## Rules
 - Every fact (number, year, award, client name, price, address, phone) must trace to a source.
   Record it in `sites/<site>/content-sources.md`: `fact | source | date`.
-- No source → `[NEEDS CLIENT INPUT: …]` + question in `requests/<id>/questions.md`.
+- Descriptive copy (services, process, benefits, FAQs) may be researched and written when the
+  client gave little: study the client's market, region and top 3–5 competitors, then write copy
+  specific to this client. Log it as `researched` in `content-sources.md`.
+- Hard facts (numbers, years, clients, testimonials, awards, prices, addresses) with no source →
+  `[NEEDS CLIENT INPUT: …]` + question in `requests/<id>/questions.md`.
 - Testimonials: real only, with name/role as given. Never write or "improve" a testimonial.
 - Rewrite for clarity and tone, never change meaning or inflate claims.
 
