@@ -33,6 +33,36 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
   scripts from unknown origins.
 - Scoped CSS: prefix every class with the site's `css_prefix`; no global selectors.
 
+## Content & images — real, relevant, verified
+- Use only the client's real data: their services, prices, locations, team, projects, testimonials,
+  certifications. Source order: request/attachments → `sites/<site>/brief.md` → client's existing site
+  → client's public profiles. Never invent stats, reviews, client logos, awards or years of experience.
+- Missing facts → write a `[NEEDS CLIENT INPUT: …]` placeholder and list it in `questions.md`.
+  Never ship filler to live.
+- Images: client media library and supplied assets first; then licensed stock that matches the
+  client's actual industry, region and audience (e.g. GCC clients → regional people/settings).
+  Never use images that contradict the business (wrong product, wrong country, wrong service).
+- Every image: descriptive alt text, correct aspect ratio, WebP, sized for its slot, consistent
+  colour grading across the page. No watermarks, no visible AI artefacts (warped hands/text, plastic
+  skin, impossible lighting).
+- Copy: written for the client's specific audience, in their tone; concrete over generic.
+  Banned filler: "elevate", "unlock", "seamless", "cutting-edge", "in today's fast-paced world",
+  "your one-stop solution", "take your business to the next level", stacked em dashes.
+
+## Design — premium, human-crafted, never "AI template"
+- Start from the client's brand (logo, colours, fonts) and the research brief; one clear visual
+  idea per site, applied consistently. No default purple/blue gradients, no generic glassmorphism,
+  no emoji icons, no identical three-card grids repeated down the page.
+- Real design system per site: type scale, spacing scale (8px grid), 2–3 brand colours + neutrals,
+  one icon family, consistent radii/shadows. Store it in `sites/<site>/design.json` and reuse it.
+- Layout rhythm: vary section structure (split, full-bleed, editorial, asymmetric), deliberate
+  whitespace, strong typographic hierarchy, real content density — like a senior agency designer.
+- Micro-interactions subtle and purposeful (hover, focus, reveal); respect `prefers-reduced-motion`.
+- Benchmark against the top competitors in `brief.md`: the result must look at least as polished
+  as the best of them, while staying distinct from them.
+- Self-review before marking a change ready: "Would a client believe a senior human team spent
+  weeks on this?" If not, revise.
+
 ## Statuses
 `new → planned → applying → preview_ready → approved → live`
 side paths: `needs_info`, `qa_failed`, `rejected`, `rolled_back`, `error`
