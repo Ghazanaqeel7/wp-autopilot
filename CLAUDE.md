@@ -63,6 +63,19 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Self-review before marking a change ready: "Would a client believe a senior human team spent
   weeks on this?" If not, revise.
 
+## Token economy (many sites, one plan — be frugal)
+- No work → exit immediately: if `state.json` has no `new` requests, stop after reading it.
+- Read only what the request needs: `site.json`, the targeted entries of `inventory.json`
+  (grep by post_id/element_id), never whole exports, never whole media lists.
+- Never read reports, screenshots, lighthouse JSON or logs unless the request is about them;
+  QA verdicts arrive as one-line status in `state.json`.
+- Load a skill only when its trigger applies (design → wp-premium-design, content → wp-content-sourcing).
+- Change packages carry only diffs (target + new value), never full page dumps.
+- One request per commit; batch requests for the same site in one run.
+- Questions to the client: one message, all questions at once.
+- Heavy/mechanical work (crawl, screenshots, Lighthouse, image conversion) belongs to GitHub
+  Actions scripts, not to Claude.
+
 ## Statuses
 `new → planned → applying → preview_ready → approved → live`
 side paths: `needs_info`, `qa_failed`, `rejected`, `rolled_back`, `error`
