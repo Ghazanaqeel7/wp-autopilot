@@ -1,0 +1,16 @@
+{
+  "id": "example-site",
+  "tenant": "default",
+  "name": "Example Site",
+  "client": "",
+  "url": "https://example.com",
+  "type": "existing",
+  "status": "pending_connect",
+  "paused": false,
+  "builder": "unknown",
+  "theme": "",
+  "css_prefix": "ap-",
+  "bridge": {},
+  "channels": {},
+  "created_at": ""
+}

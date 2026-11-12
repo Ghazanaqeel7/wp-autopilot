@@ -1,0 +1,23 @@
+name: Change request
+description: Ask for a change on a connected website
+title: "[change] "
+labels: ["request", "change"]
+body:
+  - type: input
+    id: site
+    attributes:
+      label: Site ID
+      description: Folder name under sites/ (e.g. centric-tech)
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: What should change?
+      description: Paste the client's words, or attach a doc / voice note / screenshot.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Done when…

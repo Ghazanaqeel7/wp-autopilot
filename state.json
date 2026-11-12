@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "config": {
+    "paused": false,
+    "tenant": "default",
+    "approval_channel": "discord",
+    "qa": {
+      "viewports": [320, 375, 768, 1024, 1366, 1920],
+      "lighthouse_min": { "performance": 80, "accessibility": 90, "best_practices": 90, "seo": 90 },
+      "max_score_drop": 5
+    },
+    "preview_link_ttl_hours": 72
+  },
+  "sites": [],
+  "requests": []
+}

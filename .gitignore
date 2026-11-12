@@ -1,0 +1,11 @@
+node_modules/
+vendor/
+.env
+.env.*
+*.pem
+*.key
+secrets/
+.DS_Store
+/tmp/
+dashboard/dist/
+reports/**/*.tmp

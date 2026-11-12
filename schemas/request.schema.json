@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "request.schema.json",
+  "title": "Request (entry in state.json → requests)",
+  "type": "object",
+  "required": ["id", "site", "kind", "status", "source", "created_at"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^R[0-9]{8}-[0-9]{3}$" },
+    "site": { "type": "string" },
+    "kind": { "enum": ["change", "new_site", "revamp", "brief", "maintenance"] },
+    "status": {
+      "enum": ["new", "needs_info", "planned", "applying", "preview_ready", "qa_failed",
+               "approved", "live", "rejected", "rolled_back", "error"]
+    },
+    "source": { "enum": ["dashboard", "discord", "slack", "email", "chat"] },
+    "title": { "type": "string" },
+    "preview_url_ref": { "type": "string", "description": "id only; the tokenised link is never stored in git" },
+    "report": { "type": "string" },
+    "approved_by": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  }
+}

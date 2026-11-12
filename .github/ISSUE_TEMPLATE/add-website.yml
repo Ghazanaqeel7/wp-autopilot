@@ -1,0 +1,29 @@
+name: Add website
+description: Connect a WordPress site to Autopilot (fallback for the dashboard form)
+title: "[site] "
+labels: ["site", "onboarding"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Website name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      placeholder: https://example.com
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options: [existing, revamp, new]
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Client

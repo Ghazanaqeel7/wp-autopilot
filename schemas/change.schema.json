@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "change.schema.json",
+  "title": "Change package",
+  "type": "object",
+  "required": ["id", "site", "request", "summary", "risk", "operations", "rollback", "qa"],
+  "properties": {
+    "id": { "type": "string" },
+    "site": { "type": "string" },
+    "request": { "type": "string" },
+    "summary": { "type": "string", "maxLength": 300 },
+    "risk": { "enum": ["low", "medium", "high"] },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["op", "target"],
+        "properties": {
+          "op": {
+            "enum": [
+              "page.update_section", "page.update_content", "page.create",
+              "template.update", "menu.update", "media.upload",
+              "css.update", "option.update", "seo.update"
+            ]
+          },
+          "target": {
+            "type": "object",
+            "description": "e.g. {post_id, element_id} for Elementor, {post_id, block_path} for Gutenberg"
+          },
+          "adapter": { "type": "string" },
+          "payload": {},
+          "payload_file": { "type": "string", "description": "path relative to the change folder" },
+          "expect_before_hash": { "type": "string", "description": "sha256 of target before change; apply aborts if it differs" }
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "required": ["strategy"],
+      "properties": {
+        "strategy": { "enum": ["snapshot_restore", "inverse_ops"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "qa": {
+      "type": "object",
+      "required": ["urls"],
+      "properties": {
+        "urls": { "type": "array", "items": { "type": "string" } },
+        "checks": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
