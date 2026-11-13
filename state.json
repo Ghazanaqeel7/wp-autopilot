@@ -5,12 +5,31 @@
     "tenant": "default",
     "approval_channel": "discord",
     "qa": {
-      "viewports": [320, 375, 768, 1024, 1366, 1920],
-      "lighthouse_min": { "performance": 80, "accessibility": 90, "best_practices": 90, "seo": 90 },
+      "viewports": [
+        320,
+        375,
+        768,
+        1024,
+        1366,
+        1920
+      ],
+      "lighthouse_min": {
+        "performance": 80,
+        "accessibility": 90,
+        "best_practices": 90,
+        "seo": 90
+      },
       "max_score_drop": 5
     },
     "preview_link_ttl_hours": 72
   },
-  "sites": [],
+  "sites": [
+    {
+      "id": "nextleveldigitals",
+      "name": "Next Level Digitals",
+      "url": "https://nextleveldigitals.com",
+      "status": "pending_connect"
+    }
+  ],
   "requests": []
 }
