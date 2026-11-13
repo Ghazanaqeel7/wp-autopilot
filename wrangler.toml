@@ -1,0 +1,11 @@
+name = "wp-autopilot"
+main = "dashboard/worker.js"
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "dashboard/public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[vars]
+GITHUB_REPO = "Ghazanaqeel7/wp-autopilot"
