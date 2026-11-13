@@ -214,7 +214,18 @@ async function site(id, tab = "overview") {
       <form class="form" id="sf"><div class="form-grid"><label class="field"><span>Website name</span><input type="text" name="name" value="${esc(s.name)}" required maxlength="80"></label>
       <label class="field"><span>Client</span><input type="text" name="client" value="${esc(s.client || "")}" maxlength="80"></label></div>
       <div class="form-actions"><button class="btn btn-primary" type="submit">Save changes</button></div><p class="form-error" id="se"></p></form></div></section>
+      <section class="panel"><div class="panel-head"><h2>Where changes come from</h2><span class="muted">Messages from these places reach the Inbox for this website</span></div><div class="panel-body">
+        <form class="form" id="cf"><div class="form-grid">
+          <label class="field"><span>Slack channel IDs</span><input type="text" name="slack" value="${esc((s.channels?.slack || []).join(", "))}" placeholder="C0123ABCD"></label>
+          <label class="field"><span>Trello board IDs</span><input type="text" name="trello" value="${esc((s.channels?.trello || []).join(", "))}" placeholder="5f1c…"></label>
+          <label class="field"><span>ClickUp list IDs</span><input type="text" name="clickup" value="${esc((s.channels?.clickup || []).join(", "))}" placeholder="901100…"></label>
+          <label class="field"><span>Email senders <small>address or @domain</small></span><input type="text" name="email" value="${esc((s.channels?.email || []).join(", "))}" placeholder="@client.com, owner@client.com"></label></div>
+          <p class="muted" style="margin:0">Anything can also be routed by writing <span class="mono">[${esc(id)}]</span> in the message or subject.</p>
+          <label class="check"><input type="checkbox" name="auto" ${s.channels?.auto ? "checked" : ""}><div><b>Create requests automatically</b><span>Messages from the places above become requests without review. Leave off to check them in the Inbox first.</span></div></label>
+          <div class="form-actions"><button class="btn btn-primary" type="submit">Save</button></div><p class="form-error" id="ce"></p></form></div></section>
       <section class="panel"><div class="panel-head"><h2>Automation</h2></div><div class="panel-body">
+        <div class="toggle"><div><b>This is a staging copy</b><p>Plugin installs and code changes (high risk) are only applied to a site marked as a staging copy of the real website, never to the live one.</p></div>
+          <label class="switch"><input type="checkbox" id="stg" ${s.is_staging ? "checked" : ""} aria-label="Staging copy"><span></span></label></div>
         <div class="toggle"><div><b>Pause this website</b><p>No change will be sent to this site until you resume it.</p></div>
           <label class="switch"><input type="checkbox" id="pause" ${s.paused ? "checked" : ""} aria-label="Pause this website"><span></span></label></div></div></section>
       <section class="panel"><div class="panel-head"><h2>Danger zone</h2></div><div class="panel-body">
@@ -224,6 +235,15 @@ async function site(id, tab = "overview") {
       e.preventDefault(); const b = e.target.querySelector("button"); b.disabled = true;
       try { await api("/sites/update", { method: "POST", body: { id, ...Object.fromEntries(new FormData(e.target)) } }); toast("Saved."); }
       catch (err) { $("#se").textContent = err.message; } finally { b.disabled = false; }
+    };
+    $("#cf").onsubmit = async (e) => {
+      e.preventDefault(); const f = e.target; const b = f.querySelector("button"); b.disabled = true;
+      try { await api("/sites/channels", { method: "POST", body: { id, ...Object.fromEntries(new FormData(f)), auto: f.auto.checked } }); toast("Saved."); }
+      catch (err) { $("#ce").textContent = err.message; } finally { b.disabled = false; }
+    };
+    $("#stg").onchange = async (e) => {
+      try { await api("/sites/update", { method: "POST", body: { id, is_staging: e.target.checked } }); toast("Saved."); }
+      catch (err) { e.target.checked = !e.target.checked; toast(err.message, 6000); }
     };
     $("#pause").onchange = async (e) => {
       try { await api("/sites/update", { method: "POST", body: { id, paused: e.target.checked } }); toast(e.target.checked ? "Website paused." : "Website resumed."); }
@@ -529,6 +549,70 @@ async function newRequest(params) {
   };
 }
 
+
+/* ================================================================ inbox */
+const SRC = { slack: "Slack", trello: "Trello", clickup: "ClickUp", email: "Email", chat: "Chat", document: "Document", raw: "Raw", other: "Other" };
+async function inbox(params) {
+  crumbs(["Inbox"]);
+  const st = await state(false);
+  const sites = st.sites.filter((s) => s.status === "active");
+  const items = await api("/inbox");
+  const filter = params.get("show") || "new";
+  const shown = items.filter((i) => filter === "all" || i.status === filter);
+  const count = (k) => items.filter((i) => i.status === k).length;
+  const nc = $("#inbox-count"); nc.textContent = count("new"); nc.hidden = !count("new");
+  const opts = (sel) => `<option value="">Choose website…</option>${sites.map((s) => `<option value="${esc(s.id)}" ${sel === s.id ? "selected" : ""}>${esc(s.name)}</option>`).join("")}`;
+  view.innerHTML = `<div class="page-head"><div><h1>Inbox</h1><p>Changes that arrive from Slack, Trello, ClickUp and email, or that you add yourself. Turn each into a request when it is ready.</p></div>
+      <div class="actions"><button class="btn" id="re">Refresh</button><button class="btn btn-primary" id="addbtn">Add a change</button></div></div>
+    <section class="panel" id="addp" hidden><div class="panel-head"><h2>Add a change</h2><span class="muted">Type it, paste raw notes, or drop a document or PDF</span></div><div class="panel-body">
+      <form class="form" id="af"><div class="form-grid"><label class="field"><span>Website <small>optional</small></span><select name="site">${opts("")}</select></label>
+        <label class="field"><span>Title <small>optional</small></span><input type="text" name="title" maxlength="120" placeholder="Update team page"></label></div>
+      <label class="field"><span>The change</span><textarea name="text" placeholder="Describe it, or paste the raw message, notes or client email…"></textarea></label>
+      <div class="field"><span>Documents <small>— PDF, DOCX, images, audio, raw text · 8 MB total</small></span>
+        <label class="dropzone" id="dz"><input type="file" id="files" multiple hidden><b>Drop files here or click to browse</b><span>They are stored with the request</span></label><ul class="files" id="fl"></ul></div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Add to Inbox</button></div><p class="form-error" id="err"></p></form></div></section>
+    <nav class="tabs">${[["new", "New"], ["converted", "Requests"], ["ignored", "Ignored"], ["all", "All"]].map(([k, l]) => `<a href="#/inbox?show=${k}" class="${k === filter ? "on" : ""}">${l}${k !== "all" ? ` (${count(k)})` : ""}</a>`).join("")}</nav>
+    <section class="panel inbox">${shown.length ? `<table class="table"><thead><tr><th>Message</th><th class="hide-sm">From</th><th class="hide-sm">Received</th><th>Website</th><th></th></tr></thead><tbody>
+      ${shown.map((i) => `<tr data-id="${esc(i.id)}"><td style="max-width:420px"><div class="cell-title"><span class="badge">${esc(SRC[i.source] || i.source)}</span> ${i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)} ↗</a>` : esc(i.title)}</div>
+        <div class="cell-sub ellipsis">${esc((i.text || "").replace(/\s+/g, " ").slice(0, 160))}${i.attachments?.length ? ` · ${i.attachments.length} file${i.attachments.length > 1 ? "s" : ""}` : ""}</div></td>
+        <td class="hide-sm muted">${esc(i.from || "—")}</td><td class="hide-sm muted">${ago(i.created_at)}</td>
+        <td>${i.status === "converted" ? `<a href="#/req/${esc(i.request)}">${esc(i.request)}</a>` : i.status === "ignored" ? '<span class="muted">Ignored</span>' : `<select class="sel" aria-label="Website">${opts(i.site)}</select>`}</td>
+        <td style="text-align:right;white-space:nowrap">${i.status === "new" ? `<button class="btn btn-sm btn-primary" data-go>Create request</button> <button class="btn btn-sm" data-ig>Ignore</button>`
+          : i.status === "ignored" ? `<button class="btn btn-sm" data-un>Restore</button>` : ""}</td></tr>`).join("")}
+      </tbody></table>` : `<div class="empty"><b>${filter === "new" ? "Nothing waiting" : "Nothing here"}</b>${filter === "new" ? "New messages from your connected channels show up here." : ""}</div>`}</section>
+    <section class="panel"><div class="panel-head"><h2>Connect your channels</h2><a class="muted" href="#/settings">Setup guide</a></div><div class="panel-body"><p class="muted" style="margin:0">Choose which Slack channels, Trello boards, ClickUp lists and email senders belong to a website under <b>Site → Settings → Where changes come from</b>.</p></div></section>`;
+  $("#re").onclick = () => route();
+  $("#addbtn").onclick = () => { $("#addp").hidden = !$("#addp").hidden; };
+  let files = [];
+  const list = () => ($("#fl").innerHTML = files.map((f, i) => `<li><span>${esc(f.name)}</span><span class="muted">${(f.size / 1024).toFixed(0)} KB · <a href="#" data-x="${i}">remove</a></span></li>`).join(""));
+  const dz = $("#dz");
+  $("#files").onchange = (e) => { files = [...files, ...e.target.files].slice(0, 10); list(); };
+  ["dragenter", "dragover"].forEach((t) => dz.addEventListener(t, (e) => { e.preventDefault(); dz.classList.add("drag"); }));
+  ["dragleave", "drop"].forEach((t) => dz.addEventListener(t, (e) => { e.preventDefault(); dz.classList.remove("drag"); }));
+  dz.addEventListener("drop", (e) => { files = [...files, ...e.dataTransfer.files].slice(0, 10); list(); });
+  $("#fl").onclick = (e) => { if (e.target.dataset.x) { e.preventDefault(); files.splice(+e.target.dataset.x, 1); list(); } };
+  $("#af").onsubmit = async (e) => {
+    e.preventDefault(); const f = e.target; const b = f.querySelector("[type=submit]"); b.disabled = true; $("#err").textContent = "";
+    try {
+      if (files.reduce((n, x) => n + x.size, 0) > 8 * 1024 * 1024) throw new Error("Files are larger than 8 MB in total.");
+      const d = Object.fromEntries(new FormData(f));
+      await api("/inbox/add", { method: "POST", body: { site: d.site, title: d.title, text: d.text, files: await readFiles(files) } });
+      toast("Added to the Inbox."); route();
+    } catch (err) { $("#err").textContent = err.message; b.disabled = false; }
+  };
+  view.onclick = async (e) => {
+    const tr = e.target.closest("tr[data-id]"); if (!tr) return;
+    const id = tr.dataset.id, btn = e.target.closest("button"); if (!btn) return;
+    try {
+      if (btn.dataset.go !== undefined) {
+        const site = tr.querySelector("select")?.value; if (!site) { toast("Choose the website first.", 5000); return; }
+        btn.disabled = true; const r = await api("/inbox/convert", { method: "POST", body: { id, site } }); toast(`Request ${r.id} created.`); go("#/req/" + r.id);
+      } else if (btn.dataset.ig !== undefined) { btn.disabled = true; await api("/inbox/ignore", { method: "POST", body: { id } }); route(); }
+      else if (btn.dataset.un !== undefined) { btn.disabled = true; await api("/inbox/ignore", { method: "POST", body: { id, restore: true } }); route(); }
+    } catch (err) { toast(err.message, 6000); btn.disabled = false; }
+  };
+}
+
 /* ================================================================ activity & settings */
 async function activity() {
   crumbs(["Activity"]);
@@ -560,6 +644,10 @@ async function settings() {
         <div class="form-actions"><button class="btn btn-primary" type="submit">Save</button></div><p class="form-error" id="qe"></p></form></div></section>
     <section class="panel"><div class="panel-head"><h2>Bridge plugin</h2></div><div class="panel-body">
       <div class="toggle"><div><b>Autopilot Bridge</b><p>Install on every website you add. Updates are announced here.</p></div><a class="btn" href="/downloads/autopilot-bridge.zip">Download .zip</a></div></div></section>
+    <section class="panel"><div class="panel-head"><h2>Channel connections</h2><span class="muted">Where changes arrive from, and where answers go back</span></div><div class="panel-body">
+      <p class="muted" style="margin-top:0">Webhook addresses for this dashboard. Each needs its secret added in Cloudflare (Settings → Variables and Secrets); step-by-step in <span class="mono">docs/CHANNELS.md</span>.</p>
+      <dl class="kv">${[["Slack", "slack", "SLACK_SIGNING_SECRET"], ["Trello", "trello", "TRELLO_SECRET"], ["ClickUp", "clickup", "CLICKUP_WEBHOOK_SECRET"], ["Email / Outlook", "email", "INBOX_TOKEN"]]
+        .map(([n, k, v]) => `<dt>${n}</dt><dd><span class="mono">${esc(location.origin)}/api/hooks/${k}</span><br><small class="muted">secret: ${v}</small></dd>`).join("")}</dl></div></section>
     <section class="panel"><div class="panel-head"><h2>Urgent requests</h2></div><div class="panel-body">
       <p style="margin:0" class="muted">Urgent requests start Claude immediately when the repository secret <span class="mono">ANTHROPIC_API_KEY</span> is set in GitHub → Settings → Secrets → Actions. Without it, urgent requests go to the front of the queue.</p></div></section>`;
   $("#gp").onchange = async (e) => {
@@ -614,6 +702,7 @@ async function route() {
     else if (p[0] === "req") await request(p[1]);
     else if (p[0] === "new-site") await newSite();
     else if (p[0] === "new-request") await newRequest(params);
+    else if (p[0] === "inbox") await inbox(params);
     else if (p[0] === "activity") await activity();
     else if (p[0] === "settings") await settings();
     else if (p[0] === "search") await search(params.get("q") || "");
@@ -624,7 +713,10 @@ async function route() {
 }
 
 function showLogin() { $("#app").hidden = true; $("#login").hidden = false; }
-function showApp() { $("#login").hidden = true; $("#app").hidden = false; route(); }
+function showApp() {
+  $("#login").hidden = true; $("#app").hidden = false; route();
+  api("/inbox").then((l) => { const n = l.filter((i) => i.status === "new").length; $("#inbox-count").textContent = n; $("#inbox-count").hidden = !n; }).catch(() => {});
+}
 
 $("#login-form").onsubmit = async (e) => {
   e.preventDefault(); $("#login-err").textContent = "";

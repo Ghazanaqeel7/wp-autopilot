@@ -12,7 +12,8 @@
       "enum": ["new", "needs_info", "changes_requested", "planned", "applying", "preview_ready", "qa_failed",
                "approved", "live", "rejected", "rolled_back", "error"]
     },
-    "source": { "enum": ["dashboard", "discord", "slack", "email", "chat"] },
+    "source": { "enum": ["dashboard", "discord", "slack", "trello", "clickup", "email", "chat", "document", "raw", "other"] },
+    "origin": { "type": "object", "description": "Where it came from, so answers go back there", "properties": { "source": {"type":"string"}, "url": {"type":"string"}, "from": {"type":"string"}, "channel": {"type":"string"}, "thread_ts": {"type":"string"}, "card": {"type":"string"}, "board": {"type":"string"}, "task": {"type":"string"}, "list": {"type":"string"}, "message_id": {"type":"string"} } },
     "title": { "type": "string" },
     "urgent": { "type": "boolean" },
     "revision": { "type": "integer" },

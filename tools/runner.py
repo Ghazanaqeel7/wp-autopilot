@@ -8,6 +8,7 @@
   runner.py rollback <site> <request>         restore the snapshot taken at promote
   runner.py discard  <site> <request>         drop a staged change
   runner.py health                            check every active site
+  runner.py notice   <site> <request> <event> send the Slack/Trello/ClickUp/email notice for an event (needs_info …)
 
 Secret via env: AP_SIGNING_KEY (key id is derived). Preview links are time-limited (default 72h) and
 are stored only in reports/<site>/<request>/preview.json of this private repo for the dashboard.
@@ -82,8 +83,27 @@ def set_request(site, req, **fields):
     if not entry:
         entry = {"id": req, "site": site, "kind": "change", "source": "chat", "created_at": now()}
         st["requests"].append(entry)
+    before = entry.get("status")
     entry.update(fields, updated_at=now())
     save(STATE, st)
+    if fields.get("status") and fields["status"] != before:
+        send_notice(site, entry, fields["status"])
+
+
+def send_notice(site, entry, event):
+    try:
+        import notify
+        name = (load(ROOT / "sites" / site / "site.json", {}) or {}).get("name", site)
+        notify.notify(name, entry, event)
+    except Exception as e:  # noqa: BLE001
+        print(f"notify skipped: {type(e).__name__}")
+
+
+def notice(site, req, event):
+    """CLI for Claude after it sets needs_info/planned by hand: runner.py notice <site> <req> <event>"""
+    entry = next((r for r in load(STATE)["requests"] if r["id"] == req), None)
+    if entry:
+        send_notice(site, entry, event)
 
 
 def set_site(site, **fields):
@@ -206,7 +226,14 @@ def _resolve_ops(site, req):
         if k not in change:
             fail(f"change.json missing {k}")
     if change["risk"] == "high":
-        fail("risk=high needs full clone staging (Step 6) — not applied")
+        if not (load(ROOT / "sites" / site / "site.json", {}) or {}).get("is_staging"):
+            set_request(site, req, status="needs_info")
+            (ROOT / "requests" / req).mkdir(parents=True, exist_ok=True)
+            (ROOT / "requests" / req / "questions.md").write_text(
+                "# Staging copy needed\n\nThis change installs a plugin or runs code (risk: high), so it is never tried on the live site first.\n"
+                "Make a full copy of the website with your WordPress migration plugin, add it on the dashboard as its own site, tick "
+                "\"This is a staging copy\" in its settings, and send this request on that site instead. Go-live of code changes stays manual.\n")
+            fail("risk=high is only applied to a site marked is_staging — not applied")
     ops = []
     for op in change["operations"]:
         op = dict(op)
@@ -400,7 +427,7 @@ def health():
 
 if __name__ == "__main__":
     cmds = {"onboard": onboard, "stage": stage, "finalize": finalize, "promote": promote,
-            "rollback": rollback, "discard": discard, "health": health}
+            "rollback": rollback, "discard": discard, "health": health, "notice": notice}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         print(__doc__)
         sys.exit(64)

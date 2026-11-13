@@ -9,9 +9,18 @@ const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.
 const enc = new TextEncoder();
 
 export async function onRequest(ctx) {
+  try {
+    return await handle(ctx);
+  } catch (e) {
+    return json({ error: e.message || String(e) }, e.status || 500);
+  }
+}
+
+async function handle(ctx) {
   const { request, env, params } = ctx;
   const path = "/" + [].concat(params.path || []).join("/");
-  try {
+  {
+    if (path.startsWith("/hooks/")) return hooks(path.slice(7), request, env, ctx);
     if (path === "/login" && request.method === "POST") return login(request, env);
     if (path === "/logout") return json({ ok: true }, 200, { "Set-Cookie": cookie("", 0) });
     if (!(await authed(request, env))) return json({ error: "unauthorized" }, 401);
@@ -29,11 +38,14 @@ export async function onRequest(ctx) {
     if (path === "/assets" && request.method === "GET") return listAssets(gh, url.searchParams.get("site") || "");
     if (path === "/assets" && request.method === "POST") return uploadAssets(gh, await request.json());
     if (path === "/assets/delete" && request.method === "POST") return deleteAsset(gh, await request.json());
+    if (path === "/inbox" && request.method === "GET") return inboxList(gh);
+    if (path === "/inbox/add" && request.method === "POST") return inboxManual(gh, await request.json());
+    if (path === "/inbox/convert" && request.method === "POST") return inboxConvert(gh, await request.json());
+    if (path === "/inbox/ignore" && request.method === "POST") return inboxIgnore(gh, await request.json());
+    if (path === "/sites/channels" && request.method === "POST") return saveChannels(gh, await request.json());
     if (path === "/config" && request.method === "POST") return updateConfig(gh, await request.json());
     if (path === "/requests/feedback" && request.method === "POST") return feedback(gh, await request.json());
     return json({ error: "not found" }, 404);
-  } catch (e) {
-    return json({ error: e.message || String(e) }, e.status || 500);
   }
 }
 
@@ -135,6 +147,13 @@ function github(env) {
   };
 }
 
+function bufB64(buf) {
+  const bytes = new Uint8Array(buf);
+  let bin = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+
 function b64(s) {
   const bytes = enc.encode(s);
   let bin = "";
@@ -198,13 +217,22 @@ async function addSite(gh, b) {
 }
 
 async function newRequest(gh, b) {
+  return json(await createRequest(gh, b));
+}
+
+const bad = (msg, status = 400) => Object.assign(new Error(msg), { status });
+
+// Shared by the dashboard form, the Inbox and the webhooks. Throws on invalid input.
+async function createRequest(gh, b) {
   const site = String(b.site || "");
   const text = String(b.text || "").trim();
-  if (!/^[a-z0-9-]{2,40}$/.test(site) || !text) return json({ error: "Choose a site and describe the request." }, 400);
+  if (!/^[a-z0-9-]{2,40}$/.test(site) || !text) throw bad("Choose a site and describe the request.");
+  const source = ["dashboard", "slack", "trello", "clickup", "email", "chat", "document", "raw", "other"].includes(b.source) ? b.source : "dashboard";
+  const origin = b.origin && typeof b.origin === "object" ? b.origin : null;
   const kind = ["change", "new_site", "revamp", "brief", "maintenance"].includes(b.kind) ? b.kind : "change";
   const rb = b.reference || {};
   const refUrl = String(rb.url || "").trim();
-  if (refUrl && !/^https?:\/\/[^\s]+\.[^\s]+$/.test(refUrl)) return json({ error: "Reference URL must start with http:// or https://" }, 400);
+  if (refUrl && !/^https?:\/\/[^\s]+\.[^\s]+$/.test(refUrl)) throw bad("Reference URL must start with http:// or https://");
   const ref = refUrl ? { url: refUrl.slice(0, 300), mode: rb.mode === "replicate" ? "replicate" : "inspired", own: !!rb.own,
     notes: String(rb.notes || "").replace(/\s+/g, " ").trim().slice(0, 1000) } : null;
 
@@ -220,12 +248,12 @@ async function newRequest(gh, b) {
     for (const f of files) {
       const name = String(f.name || "file").replace(/[^A-Za-z0-9._-]/g, "_").slice(0, 80);
       total += (f.data || "").length * 0.75;
-      if (total > MAX_UPLOAD) return json({ error: "Attachments are larger than 8 MB in total." }, 400);
+      if (total > MAX_UPLOAD) throw bad("Attachments are larger than 8 MB in total.");
       await gh.put(`requests/${id}/attachments/${name}`, f.data, `dashboard: attachment for ${id}`);
       names.push(name);
     }
     const refMd = ref ? `\n\n## Reference\n- url: ${ref.url}\n- mode: ${ref.mode}\n- own_site: ${ref.own ? "yes" : "no"}\n- notes: ${ref.notes || "-"}` : "";
-    const md = `---\nid: ${id}\nsite: ${site}\nkind: ${kind}\nsource: dashboard\n---\n\n## Request\n${text}${refMd}\n\n## Attachments\n${
+    const md = `---\nid: ${id}\nsite: ${site}\nkind: ${kind}\nsource: ${source}\n---\n\n## Request\n${text}${refMd}${origin ? `\n\n## Origin\n- source: ${source}\n- url: ${clip(origin.url, 300) || "-"}\n- from: ${clip(origin.from, 120) || "-"}` : ""}\n\n## Attachments\n${
       names.map((n) => `- attachments/${n}`).join("\n") || "- none"
     }\n\n## Acceptance\n${String(b.acceptance || "").trim() || "- (as described above)"}\n`;
     await gh.put(`requests/${id}/request.md`, b64(md), `dashboard: request ${id}`);
@@ -234,17 +262,17 @@ async function newRequest(gh, b) {
     if (fresh.requests.some((r) => r.id === id)) continue; // id taken meanwhile → retry
     const now = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
     const urgent = !!b.urgent;
-    fresh.requests.push({ id, site, kind, status: "new", source: "dashboard", urgent, ...(ref ? { reference: { url: ref.url, mode: ref.mode } } : {}), title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
+    fresh.requests.push({ id, site, kind, status: "new", source, urgent, ...(origin ? { origin: cleanOrigin(origin) } : {}), ...(ref ? { reference: { url: ref.url, mode: ref.mode } } : {}), title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
     try {
       await gh.put("state.json", b64(JSON.stringify(fresh, null, 2) + "\n"), `dashboard: new request ${id}`);
       if (ref) await gh.dispatch(WORKFLOWS.reference, { request: id }).catch(() => {});
       if (urgent) await gh.dispatch(WORKFLOWS.urgent, { request: id }).catch(() => {});
-      return json({ ok: true, id, urgent });
+      return { ok: true, id, urgent };
     } catch (e) {
       if (e.status !== 409) throw e;
     }
   }
-  return json({ error: "Busy — please try again." }, 409);
+  throw bad("Busy — please try again.", 409);
 }
 
 async function action(gh, b) {
@@ -285,6 +313,7 @@ async function updateSite(gh, b) {
     if (typeof b.name === "string" && b.name.trim()) s.name = b.name.trim().slice(0, 80);
     if (typeof b.client === "string") s.client = b.client.trim().slice(0, 80);
     if (typeof b.paused === "boolean") s.paused = b.paused;
+    if (typeof b.is_staging === "boolean") s.is_staging = b.is_staging;
     if (b.archive === true) s.status = "archived";
     if (b.archive === false && s.status === "archived") s.status = "pending_connect";
   }, `dashboard: update site ${id}`);
@@ -375,3 +404,226 @@ function json(data, status = 200, headers = {}) {
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/* ---------------------------------------------------------------- inbox */
+// Every incoming change request (Slack, Trello, ClickUp, email, manual) lands in inbox/<id>.json first.
+// A site with channels.auto = true turns matching items into requests straight away; otherwise you review them in the Inbox.
+
+const INBOX_SOURCES = ["slack", "trello", "clickup", "email", "chat", "document", "raw", "other"];
+const cleanOrigin = (o) => {
+  const out = {};
+  for (const k of ["source", "url", "from", "channel", "thread_ts", "card", "board", "task", "list", "message_id"]) if (o[k]) out[k] = clip(o[k], 300);
+  return out;
+};
+const strip = (html) => String(html || "").replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/\s+\n/g, "\n").replace(/[ \t]{2,}/g, " ").trim();
+
+async function sha8(s) {
+  const d = new Uint8Array(await crypto.subtle.digest("SHA-256", enc.encode(s)));
+  return [...d.slice(0, 4)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function loadSites(gh) {
+  const dirs = (await gh.list("sites")).filter((d) => d.type === "dir" && !d.name.startsWith("_"));
+  return (await Promise.all(dirs.map((d) => gh.getJson(`sites/${d.name}/site.json`)))).filter((s) => s && s.status !== "archived");
+}
+
+// Which site does this item belong to? channels: {slack:[ids], trello:[board ids], clickup:[list ids], email:[addresses or @domains], auto:bool}
+function resolveSite(sites, item) {
+  const text = `${item.title || ""} ${item.text || ""}`.toLowerCase();
+  const tag = text.match(/\[([a-z0-9-]{2,40})\]/g) || [];
+  for (const t of tag) { const id = t.slice(1, -1); if (sites.some((s) => s.id === id)) return sites.find((s) => s.id === id); }
+  const o = item.origin || {};
+  return sites.find((s) => {
+    const c = s.channels || {};
+    if (item.source === "slack") return (c.slack || []).includes(o.channel);
+    if (item.source === "trello") return (c.trello || []).includes(o.board);
+    if (item.source === "clickup") return (c.clickup || []).includes(o.list);
+    if (item.source === "email") {
+      const from = String(item.from || o.from || "").toLowerCase();
+      return (c.email || []).some((m) => { m = String(m).toLowerCase(); return m.startsWith("@") ? from.endsWith(m) : from === m; });
+    }
+    return false;
+  });
+}
+
+async function inboxAdd(gh, item, sites) {
+  const day = (item.created_at || new Date().toISOString()).slice(0, 10).replace(/-/g, "");
+  const id = `I${day}-${item.source.slice(0, 2)}-${await sha8(item.external_id || crypto.randomUUID())}`;
+  const p = `inbox/${id}.json`;
+  if (await gh.sha(p)) return { id, duplicate: true };
+  const site = resolveSite(sites || (await loadSites(gh)), item);
+  const doc = {
+    id, source: item.source, site: site ? site.id : "", title: clip(item.title || item.text, 120), text: clip(item.text, 20000),
+    from: clip(item.from, 120), url: clip(item.url, 300), origin: { source: item.source, ...(item.origin || {}), url: item.url || "", from: item.from || "" },
+    attachments: [], status: "new", created_at: item.created_at || new Date().toISOString(),
+  };
+  let total = 0;
+  for (const f of (item.files || []).slice(0, 10)) {
+    const name = String(f.name || "file").replace(/[^A-Za-z0-9._-]/g, "_").replace(/^\.+/, "").slice(0, 80) || "file";
+    total += (f.data || "").length * 0.75;
+    if (total > MAX_UPLOAD) throw bad("Attachments are larger than 8 MB in total.");
+    await gh.put(`inbox/${id}/files/${name}`, f.data, `inbox: attachment for ${id}`);
+    doc.attachments.push(name);
+  }
+  await gh.put(p, b64(JSON.stringify(doc, null, 2) + "\n"), `inbox: ${item.source} message ${id}`);
+  if (site && site.channels?.auto === true && site.status === "active" && !site.paused) {
+    const r = await convertItem(gh, doc, { site: site.id, kind: "change" }).catch(() => null);
+    if (r) return { id, request: r.id };
+  }
+  return { id };
+}
+
+async function convertItem(gh, doc, o) {
+  const files = [];
+  for (const name of doc.attachments || []) {
+    const r = await gh.getRaw(`inbox/${doc.id}/files/${name}`);
+    if (r) files.push({ name, data: bufB64(await r.arrayBuffer()) });
+  }
+  const res = await createRequest(gh, {
+    site: o.site, kind: o.kind || "change", title: o.title || doc.title, text: doc.text || doc.title, urgent: !!o.urgent,
+    source: INBOX_SOURCES.includes(doc.source) ? doc.source : "other", origin: doc.origin, files,
+  });
+  await mutateJson(gh, `inbox/${doc.id}.json`, (d) => { d.status = "converted"; d.site = o.site; d.request = res.id; }, `inbox: ${doc.id} → ${res.id}`);
+  return res;
+}
+
+async function inboxList(gh) {
+  const names = (await gh.list("inbox")).filter((f) => f.type === "file" && f.name.endsWith(".json")).map((f) => f.name).sort().reverse().slice(0, 60);
+  const items = (await Promise.all(names.map((n) => gh.getJson(`inbox/${n}`)))).filter(Boolean);
+  items.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  return json(items);
+}
+
+async function inboxManual(gh, b) {
+  const text = clip(b.text, 20000);
+  const files = Array.isArray(b.files) ? b.files : [];
+  if (!text && !files.length) throw bad("Write the change or attach a document.");
+  const source = ["chat", "document", "raw"].includes(b.source) ? b.source : files.length && !text ? "document" : "chat";
+  const sites = await loadSites(gh);
+  const site = SITE_RE.test(String(b.site || "")) ? b.site : "";
+  const r = await inboxAdd(gh, { source, title: clip(b.title, 120) || clip(text, 120) || files[0]?.name, text: text || `See attached: ${files.map((f) => f.name).join(", ")}`, from: "dashboard", files, origin: {} }, sites);
+  if (site && !r.request) await mutateJson(gh, `inbox/${r.id}.json`, (d) => { d.site = site; }, `inbox: assign ${r.id}`);
+  return json({ ok: true, ...r });
+}
+
+async function inboxConvert(gh, b) {
+  const id = String(b.id || "");
+  if (!/^I\d{8}-[a-z]{2}-[0-9a-f]{8}$/.test(id)) throw bad("bad item");
+  const doc = await gh.getJson(`inbox/${id}.json`);
+  if (!doc) throw bad("Item not found.", 404);
+  if (doc.status === "converted") throw bad(`Already turned into ${doc.request}.`, 409);
+  const kind = ["change", "new_site", "revamp", "brief", "maintenance"].includes(b.kind) ? b.kind : "change";
+  return json({ ok: true, ...(await convertItem(gh, doc, { site: String(b.site || ""), kind, title: clip(b.title, 120), urgent: !!b.urgent })) });
+}
+
+async function inboxIgnore(gh, b) {
+  const id = String(b.id || "");
+  if (!/^I\d{8}-[a-z]{2}-[0-9a-f]{8}$/.test(id)) throw bad("bad item");
+  const err = await mutateJson(gh, `inbox/${id}.json`, (d) => { d.status = b.restore ? "new" : "ignored"; }, `inbox: ${id} ${b.restore ? "restored" : "ignored"}`);
+  return err || json({ ok: true });
+}
+
+async function saveChannels(gh, b) {
+  const id = String(b.id || "");
+  if (!SITE_RE.test(id)) throw bad("bad site");
+  const list = (v) => String(v || "").split(/[\s,]+/).map((x) => x.trim()).filter(Boolean).slice(0, 20).map((x) => x.slice(0, 120));
+  const err = await mutateJson(gh, `sites/${id}/site.json`, (s) => {
+    s.channels = { ...(s.channels || {}), slack: list(b.slack), trello: list(b.trello), clickup: list(b.clickup), email: list(b.email), auto: !!b.auto };
+  }, `dashboard: channels for ${id}`);
+  return err || json({ ok: true });
+}
+
+/* ---------------------------------------------------------------- webhooks (public, verified by signature or token) */
+
+async function hmacRaw(secret, msg, hash = "SHA-256", out = "hex") {
+  const key = await crypto.subtle.importKey("raw", enc.encode(secret), { name: "HMAC", hash }, false, ["sign"]);
+  const sig = new Uint8Array(await crypto.subtle.sign("HMAC", key, typeof msg === "string" ? enc.encode(msg) : msg));
+  return out === "hex" ? [...sig].map((b) => b.toString(16).padStart(2, "0")).join("") : btoa(String.fromCharCode(...sig));
+}
+
+async function hooks(name, request, env, ctx) {
+  if (request.method === "HEAD" || request.method === "GET") return new Response("ok"); // Trello checks the URL with HEAD
+  if (request.method !== "POST") return json({ error: "method" }, 405);
+  const raw = await request.text();
+  if (raw.length > 6 * 1024 * 1024) return json({ error: "too large" }, 413);
+  let body;
+  try { body = JSON.parse(raw || "{}"); } catch { return json({ error: "bad json" }, 400); }
+  const need = (v) => { if (!v) throw bad("This channel is not configured on the dashboard.", 503); return v; };
+  const gh = github(env);
+
+  if (name === "slack") {
+    const secret = need(env.SLACK_SIGNING_SECRET);
+    const ts = request.headers.get("X-Slack-Request-Timestamp") || "";
+    if (Math.abs(Date.now() / 1000 - Number(ts)) > 300) throw bad("stale", 401);
+    const sig = request.headers.get("X-Slack-Signature") || "";
+    if (!(await safeEqual(sig, `v0=${await hmacRaw(secret, `v0:${ts}:${raw}`)}`))) throw bad("bad signature", 401);
+    if (body.type === "url_verification") return json({ challenge: body.challenge });
+    const ev = body.event || {};
+    if (body.type !== "event_callback" || !["message", "app_mention"].includes(ev.type) || ev.bot_id || (ev.subtype && ev.subtype !== "file_share")) return json({ ok: true, ignored: true });
+    const text = String(ev.text || "").replace(/<@[A-Z0-9]+>/g, "").trim();
+    if (!text) return json({ ok: true, ignored: true });
+    const job = inboxAdd(gh, {
+      source: "slack", external_id: `${ev.channel}:${ev.ts}`, text, title: text.split("\n")[0], from: ev.user,
+      created_at: new Date(Number(ev.ts) * 1000).toISOString(), origin: { channel: ev.channel, thread_ts: ev.thread_ts || ev.ts },
+      url: "",
+    });
+    if (ctx?.waitUntil) { ctx.waitUntil(job.catch(() => {})); return json({ ok: true }); } // Slack wants a reply within 3 s
+    return json({ ok: true, ...(await job) });
+  }
+
+  if (name === "trello") {
+    const secret = need(env.TRELLO_SECRET);
+    const callback = new URL(request.url).origin + "/api/hooks/trello";
+    const sig = request.headers.get("X-Trello-Webhook") || "";
+    if (!(await safeEqual(sig, await hmacRaw(secret, raw + callback, "SHA-1", "b64")))) throw bad("bad signature", 401);
+    const a = body.action || {};
+    if (!["createCard", "commentCard"].includes(a.type)) return json({ ok: true, ignored: true });
+    const card = a.data?.card || {};
+    let desc = "";
+    if (a.type === "createCard" && env.TRELLO_KEY && env.TRELLO_TOKEN) {
+      const r = await fetch(`https://api.trello.com/1/cards/${card.id}?fields=desc&key=${env.TRELLO_KEY}&token=${env.TRELLO_TOKEN}`, { signal: AbortSignal.timeout(10000) }).catch(() => null);
+      if (r?.ok) desc = (await r.json()).desc || "";
+    }
+    const text = a.type === "commentCard" ? `${card.name}\n\n${a.data?.text || ""}` : `${card.name}${desc ? `\n\n${desc}` : ""}`;
+    return json({ ok: true, ...(await inboxAdd(gh, {
+      source: "trello", external_id: a.id, text, title: card.name, from: a.memberCreator?.fullName || a.memberCreator?.username,
+      created_at: a.date, url: card.shortLink ? `https://trello.com/c/${card.shortLink}` : "",
+      origin: { card: card.id, board: a.data?.board?.id },
+    })) });
+  }
+
+  if (name === "clickup") {
+    const secret = need(env.CLICKUP_WEBHOOK_SECRET);
+    if (!(await safeEqual(request.headers.get("X-Signature") || "", await hmacRaw(secret, raw)))) throw bad("bad signature", 401);
+    if (!["taskCreated", "taskCommentPosted"].includes(body.event) || !body.task_id) return json({ ok: true, ignored: true });
+    let task = {};
+    if (env.CLICKUP_TOKEN) {
+      const r = await fetch(`https://api.clickup.com/api/v2/task/${body.task_id}`, { headers: { Authorization: env.CLICKUP_TOKEN }, signal: AbortSignal.timeout(10000) }).catch(() => null);
+      if (r?.ok) task = await r.json();
+    }
+    const comment = body.event === "taskCommentPosted" ? String(body.history_items?.[0]?.comment?.text_content || "") : "";
+    const text = `${task.name || `ClickUp task ${body.task_id}`}${task.description ? `\n\n${task.description}` : ""}${comment ? `\n\nComment: ${comment}` : ""}`;
+    return json({ ok: true, ...(await inboxAdd(gh, {
+      source: "clickup", external_id: `${body.event}:${body.task_id}:${body.history_items?.[0]?.id || ""}`, text, title: task.name || "ClickUp task",
+      from: body.history_items?.[0]?.user?.username, url: task.url || `https://app.clickup.com/t/${body.task_id}`,
+      origin: { task: body.task_id, list: task.list?.id },
+    })) });
+  }
+
+  if (name === "email" || name === "generic") {
+    const token = need(env.INBOX_TOKEN);
+    const given = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "") || new URL(request.url).searchParams.get("token") || "";
+    if (!(await safeEqual(given, token))) throw bad("unauthorized", 401);
+    const text = clip(body.text || strip(body.html || body.body || ""), 20000);
+    const subject = clip(body.subject, 200);
+    if (!text && !subject) throw bad("Empty message.");
+    return json({ ok: true, ...(await inboxAdd(gh, {
+      source: name === "email" ? "email" : (INBOX_SOURCES.includes(body.source) ? body.source : "other"),
+      external_id: body.message_id || `${body.from}:${subject}:${text.slice(0, 200)}`, text: subject ? `${subject}\n\n${text}` : text,
+      title: subject || text.split("\n")[0], from: clip(body.from, 120), created_at: body.received_at || undefined,
+      origin: { message_id: body.message_id },
+      files: (body.attachments || []).map((a) => ({ name: a.name, data: a.content_base64 || a.data })).filter((a) => a.data),
+    })) });
+  }
+  return json({ error: "not found" }, 404);
+}

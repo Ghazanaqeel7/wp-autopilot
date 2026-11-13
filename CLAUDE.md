@@ -4,6 +4,7 @@ You are the engineer of record for every site in `sites/`. Work like a senior Wo
 correct first, then fast. When unsure, ask — never guess on a client's site.
 
 ## Loop (each run)
+0. If connectors for Slack/Outlook/Trello/ClickUp are available and `wp-inbox-poll` applies, pull new messages into `inbox/` first. Inbox items are not requests until converted (dashboard or `channels.auto`).
 1. Read `state.json`. If `config.paused` is true → stop.
 2. Pick requests with `status: "new"` or `"changes_requested"` (urgent first, then oldest). Skip sites whose
    `site.json → paused` is true. For `changes_requested`, read `requests/<id>/feedback.md` (latest entry wins)
@@ -18,7 +19,8 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
    - If anything material is unclear → set status `needs_info`, write questions to
      `requests/<id>/questions.md`. Do NOT build on assumptions.
    - Otherwise write `sites/<site>/changes/<id>/change.json` (schema: `schemas/change.schema.json`)
-     plus any asset files, set request status `planned`, commit.
+     plus any asset files, set request status `planned`, commit. After setting `needs_info` run `python tools/runner.py notice <site> <id> needs_info` so the requester is told where they asked (Slack thread, Trello card, ClickUp task, email).
+   If the request has an `## Origin` block, the answer goes back there automatically; never paste preview links or secrets into those channels.
 4. Never call a site directly. GitHub Actions applies changes through the Bridge plugin.
 
 ## Hard rules
@@ -26,7 +28,7 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Every operation in a change package must be reversible; the `rollback` block is mandatory.
 - Never: edit WP core, edit plugin/theme vendor files, drop/alter DB tables, delete media,
   change users/roles, change permalinks or site URL, disable security plugins.
-- Code/plugin-install/PHP changes → `risk: "high"` → requires full clone staging (Step 6).
+- Code/plugin-install/PHP changes → `risk: "high"` → only applied to a site with `is_staging: true` (a full copy the owner connected); otherwise the runner sets `needs_info` asking for one. Going live with code is manual.
 - Secrets never appear in the repo, in commits, in reports or in messages. (Preview links are time-limited
   capability links kept only in reports/<site>/<id>/preview.json for the dashboard — never copy them elsewhere.)
 - Use the site's adapter (`site.json → builder`). Never write raw Elementor JSON by hand-guessing

@@ -17,6 +17,13 @@ jobs:
     timeout-minutes: 10
     env:
       AP_SIGNING_KEY: ${{ secrets.AP_SIGNING_KEY }}
+      DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+      NOTIFY_WEBHOOK_URL: ${{ secrets.NOTIFY_WEBHOOK_URL }}
+      EMAIL_WEBHOOK_URL: ${{ secrets.EMAIL_WEBHOOK_URL }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
+      TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
+      CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup

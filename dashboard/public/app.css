@@ -270,3 +270,15 @@ textarea { min-height: 130px; resize: vertical; }
   .table th, .table td { padding: 10px 12px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+.sel { height: 34px; padding: 0 28px 0 10px; border: 1px solid var(--line-2, var(--line)); border-radius: var(--r-sm, 6px); background: var(--surface, #fff); color: var(--ink); font: inherit; max-width: 200px; }
+.sel:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+@media (max-width: 640px) {
+  .inbox .table thead { display: none; }
+  .inbox .table, .inbox .table tbody { display: block; }
+  .inbox .table tr { display: block; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .inbox .table td { display: block; padding: 4px 0; max-width: none !important; text-align: left !important; white-space: normal !important; }
+  .inbox .sel { max-width: 100%; width: 100%; }
+}
+.inbox { margin-bottom: 16px; }

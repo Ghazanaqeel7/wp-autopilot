@@ -13,6 +13,7 @@
     "type": { "enum": ["existing", "new", "revamp"] },
     "status": { "enum": ["pending_connect", "onboarding", "active", "error", "archived"] },
     "paused": { "type": "boolean" },
+    "is_staging": { "type": "boolean", "description": "A full copy of a live site; the only place high-risk (code/plugin) changes are applied" },
     "builder": { "enum": ["elementor", "gutenberg", "classic", "divi", "wpbakery", "bricks", "unknown"] },
     "theme": { "type": "string" },
     "css_prefix": { "type": "string", "pattern": "^[a-z]{2,6}-$" },
@@ -27,7 +28,14 @@
     },
     "channels": {
       "type": "object",
-      "properties": { "discord_channel_id": { "type": "string" } }
+      "properties": {
+        "discord_channel_id": { "type": "string" },
+        "slack": { "type": "array", "items": { "type": "string" } },
+        "trello": { "type": "array", "items": { "type": "string" } },
+        "clickup": { "type": "array", "items": { "type": "string" } },
+        "email": { "type": "array", "items": { "type": "string" } },
+        "auto": { "type": "boolean" }
+      }
     },
     "created_at": { "type": "string", "format": "date-time" }
   }
