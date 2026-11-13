@@ -12,3 +12,5 @@ reports/**/*.tmp
 dist/
 .dev.vars
 .wrangler/
+__pycache__/
+*.pyc
