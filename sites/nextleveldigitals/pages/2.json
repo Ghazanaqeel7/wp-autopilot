@@ -1,0 +1,46 @@
+{
+  "id": 2,
+  "type": "page",
+  "title": "Sample Page",
+  "status": "publish",
+  "builder": "gutenberg",
+  "data_hash": "f9f499a8b5953282f3fe687f8b02c26ceaa35231f8fa3be4680527dde745fa64",
+  "blocks": [
+    {
+      "path": [
+        0
+      ],
+      "type": "core/paragraph",
+      "t": "This is an example page. It's different from a blog post because it will stay in"
+    },
+    {
+      "path": [
+        1
+      ],
+      "type": "core/quote",
+      "t": "Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my w"
+    },
+    {
+      "path": [
+        2
+      ],
+      "type": "core/paragraph",
+      "t": "...or something like this:"
+    },
+    {
+      "path": [
+        3
+      ],
+      "type": "core/quote",
+      "t": "The XYZ Doohickey Company was founded in 1971, and has been providing quality do"
+    },
+    {
+      "path": [
+        4
+      ],
+      "type": "core/paragraph",
+      "t": "As a new WordPress user, you should go to your dashboard to delete this page and"
+    }
+  ],
+  "elements": null
+}

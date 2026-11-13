@@ -29,9 +29,9 @@
       "name": "Next Level Digitals",
       "url": "https://nextleveldigitals.com",
       "status": "active",
-      "builder": "elementor",
-      "last_inventory": "2026-11-13T07:32:53+00:00",
-      "pages": 33
+      "builder": "gutenberg",
+      "last_inventory": "2026-11-13T07:43:30+00:00",
+      "pages": 2
     }
   ],
   "requests": [
@@ -42,7 +42,7 @@
       "source": "chat",
       "created_at": "2026-11-13T07:34:17+00:00",
       "status": "rejected",
-      "title": "Fix homepage typo: 'buketio' \u2192 'but' in the portfolio intro line",
+      "title": "Fix homepage typo: 'buketio' → 'but' in the portfolio intro line",
       "updated_at": "2026-11-13T07:34:48+00:00",
       "report": "reports/nextleveldigitals/R20261113-001/report.md",
       "problems": 6,

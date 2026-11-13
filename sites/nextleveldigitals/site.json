@@ -7,8 +7,8 @@
   "type": "existing",
   "status": "active",
   "paused": false,
-  "builder": "elementor",
-  "theme": "Hamela",
+  "builder": "gutenberg",
+  "theme": "Twenty Twenty-Five",
   "css_prefix": "nld-",
   "bridge": {
     "version": "0.1.1",

@@ -5,7 +5,7 @@
     "plugin": "0.1.1",
     "site_id": "nextleveldigitals",
     "paused": false,
-    "time": 1794555160,
+    "time": 1794555810,
     "wp": "6.8.12",
     "php": "8.2.35",
     "https": true,
@@ -13,22 +13,18 @@
     "file_mods": true
   },
   "theme": {
-    "name": "Hamela",
-    "version": "1.2.5",
+    "name": "Twenty Twenty-Five",
+    "version": "1.3",
     "parent": null,
-    "block": false
+    "block": true
   },
   "builders": {
-    "elementor": "4.3.6",
-    "elementor_pro": "3.31.2",
     "gutenberg": "6.8.12"
   },
   "cache": [],
   "security": [],
-  "seo": [
-    "wordpress-seo"
-  ],
-  "permalinks": "/%postname%/",
+  "seo": [],
+  "permalinks": "/%year%/%monthnum%/%day%/%postname%/",
   "plugins": [
     {
       "slug": "akismet",
@@ -53,32 +49,32 @@
     {
       "slug": "contact-form-7",
       "version": "6.1.2",
-      "active": true
+      "active": false
     },
     {
       "slug": "duplicate-page",
       "version": "4.5.6",
-      "active": true
+      "active": false
     },
     {
       "slug": "elementor",
-      "version": "4.3.6",
-      "active": true
+      "version": "4.4.0",
+      "active": false
     },
     {
       "slug": "elementor-pro",
       "version": "3.31.2",
-      "active": true
+      "active": false
     },
     {
       "slug": "envato-elements",
       "version": "2.0.16",
-      "active": true
+      "active": false
     },
     {
       "slug": "essential-addons-for-elementor-lite",
       "version": "6.8.8",
-      "active": true
+      "active": false
     },
     {
       "slug": "hello",
@@ -107,43 +103,43 @@
     },
     {
       "slug": "marquee-addons-for-elementor",
-      "version": "3.8.3",
-      "active": true
+      "version": "3.9.93",
+      "active": false
     },
     {
       "slug": "mystickyelements",
-      "version": "2.3.4",
-      "active": true
+      "version": "2.4.1",
+      "active": false
     },
     {
       "slug": "one-click-demo-import",
-      "version": "3.4.0",
-      "active": true
+      "version": "3.4.1",
+      "active": false
     },
     {
       "slug": "orbit-beacon",
       "version": "1.1.6",
-      "active": true
+      "active": false
     },
     {
       "slug": "google-site-kit",
       "version": "1.187.0",
-      "active": true
+      "active": false
     },
     {
       "slug": "tawkto-live-chat",
-      "version": "0.9.2",
-      "active": true
+      "version": "0.9.3",
+      "active": false
     },
     {
       "slug": "themesflat",
       "version": "1.0.1",
-      "active": true
+      "active": false
     },
     {
       "slug": "themesflat-addons",
       "version": "1.0.1",
-      "active": true
+      "active": false
     },
     {
       "slug": "unlimited-elements-for-elementor-premium",
@@ -151,457 +147,54 @@
       "active": false
     },
     {
+      "slug": "wp-reset",
+      "version": "2.08",
+      "active": true
+    },
+    {
       "slug": "datum-proxy-rig",
       "version": "1.1.3",
-      "active": true
+      "active": false
     },
     {
       "slug": "wordpress-seo",
       "version": "25.7",
-      "active": true
+      "active": false
     },
     {
       "slug": "wordpress-seo-premium",
       "version": "25.7.1",
-      "active": true
+      "active": false
     }
   ],
   "pages": [
     {
-      "id": 8456,
-      "type": "elementor_library",
-      "title": "about",
-      "slug": "about",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=about",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-20 13:13:56",
-      "data_hash": "8b142af77f77267a6c543245e2fbccdcbafd1dab63ea0559cc00f0f56fd5eb3b"
-    },
-    {
-      "id": 7474,
-      "type": "page",
-      "title": "About",
-      "slug": "about",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/about/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-10-02 08:06:43",
-      "data_hash": "d5d450d0db89e12ada2a042df0ea1667faacc7dd27bcaffafa9321b8e2ae8bd9"
-    },
-    {
-      "id": 8454,
-      "type": "page",
-      "title": "Article",
-      "slug": "article",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/article/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-09-30 13:27:53",
-      "data_hash": "dcafd6938e6f445688553398f7b67557f7e24d8fa54f9c9d51c2d4c3fefc467f"
-    },
-    {
-      "id": 15,
-      "type": "page",
-      "title": "Contact",
-      "slug": "contact",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/contact/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2026-02-26 18:59:04",
-      "data_hash": "a955c319683a73d259f225125cdf47675ebc024c80880a33ad2ef16bbf3a20a2"
-    },
-    {
-      "id": 7560,
-      "type": "elementor_library",
-      "title": "dark testimonial",
-      "slug": "dark-testimonial-2",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=dark-testimonial-2",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2021-09-13 09:54:17",
-      "data_hash": "51b9693ed65dd2ec3ce5e8a21dfd68e3fff76930d6d5eb3e907d8a4da62c5f5c"
-    },
-    {
-      "id": 2447,
-      "type": "elementor_library",
-      "title": "dark testimonial",
-      "slug": "dark-testimonial",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=dark-testimonial",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-11 08:09:25",
-      "data_hash": "51b9693ed65dd2ec3ce5e8a21dfd68e3fff76930d6d5eb3e907d8a4da62c5f5c"
-    },
-    {
-      "id": 7,
-      "type": "elementor_library",
-      "title": "Default Kit",
-      "slug": "default-kit",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=default-kit",
-      "builder": "elementor",
-      "tpl": "kit",
-      "modified": "2025-08-11 08:05:22",
-      "data_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "id": 43,
-      "type": "elementor_library",
-      "title": "Default Kit",
-      "slug": "default-kit-2",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=default-kit-2",
-      "builder": "elementor",
-      "tpl": "kit",
-      "modified": "2025-08-22 15:46:06",
-      "data_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
-    },
-    {
-      "id": 7591,
-      "type": "elementor_library",
-      "title": "Default Kit",
-      "slug": "default-kit-3",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=default-kit-3",
-      "builder": "elementor",
-      "tpl": "kit",
-      "modified": "2023-02-17 06:20:48",
-      "data_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "id": 9220,
-      "type": "elementor_library",
-      "title": "Free Consultation",
-      "slug": "free-consultation",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=free-consultation",
-      "builder": "elementor",
-      "tpl": "popup",
-      "modified": "2025-10-01 19:42:46",
-      "data_hash": "2119185c2bc65388d5a2973c4619713d8903376cfee489db8829413e748d2d58"
-    },
-    {
-      "id": 7873,
-      "type": "elementor_library",
-      "title": "Header",
-      "slug": "header",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=header",
-      "builder": "elementor",
-      "tpl": "header",
-      "modified": "2026-02-26 18:58:53",
-      "data_hash": "e1f79361d38754951fc58e713830340473cbfffec8435eda01651f81762c42ac"
-    },
-    {
-      "id": 7874,
-      "type": "elementor_library",
-      "title": "Header (with Nav)",
-      "slug": "header-with-nav",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=header-with-nav",
-      "builder": "elementor",
-      "tpl": "section",
-      "modified": "2025-08-11 12:28:53",
-      "data_hash": "8e9f43b5ca99e5751f7a0c15c6bbce11485e35678e3f456b95a039d3dcc87627"
-    },
-    {
-      "id": 9074,
-      "type": "elementor_library",
-      "title": "header212",
-      "slug": "header212",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=header212",
-      "builder": "elementor",
-      "tpl": "header",
-      "modified": "2025-09-01 10:38:19",
-      "data_hash": "bd6ac704e2b071a2b34e5e409c4ef73a1574fc59a1c40c2876aa7ef102acb779"
-    },
-    {
-      "id": 9055,
-      "type": "page",
-      "title": "Home",
-      "slug": "home-2",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/home-2/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-09-30 13:30:17",
-      "data_hash": "a983a461fcc66670421b7b80c94328831b32d38afd0056a861cbbcada1af0d21"
-    },
-    {
-      "id": 7593,
-      "type": "page",
-      "title": "Home",
-      "slug": "home",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-10-25 13:19:45",
-      "data_hash": "8b3521162680c8167fafe31b7bba1a372cc59f8c468167d42a92eab5f909eef3"
-    },
-    {
-      "id": 2695,
-      "type": "elementor_library",
-      "title": "home1",
-      "slug": "home1",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=home1",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-11 08:09:25",
-      "data_hash": "1d6e672264fae875455a9355db09c534b1ff4148b88146fe2e02cda63e84b8a1"
-    },
-    {
-      "id": 7988,
-      "type": "elementor_library",
-      "title": "homee",
-      "slug": "homee",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=homee",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-14 23:45:13",
-      "data_hash": "b6bfdf86691067e2402663965a717070d46df2db895ed91df58dc149eead014a"
-    },
-    {
-      "id": 8944,
-      "type": "page",
-      "title": "Logo Packages",
-      "slug": "logo-packages",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/logo-packages/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-10-01 19:09:29",
-      "data_hash": "568cbc0ae04f17c6f3a53fcea3a978de11d2c9cc1fb3ae6e776cf61a3790ca0a"
-    },
-    {
-      "id": 1031,
-      "type": "page",
-      "title": "Our Services",
-      "slug": "our-services",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/our-services/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-09-30 13:32:18",
-      "data_hash": "6bbc304403e36d57bdf5ad3919c3c7c356ea0f439e4ffe62169e1c4285a6263d"
-    },
-    {
-      "id": 8440,
-      "type": "elementor_library",
-      "title": "Pricing Table",
-      "slug": "pricing-table",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=pricing-table",
-      "builder": "elementor",
-      "tpl": "section",
-      "modified": "2025-08-20 08:31:17",
-      "data_hash": "a44bdb37c71054354eac9434f4167e8e7a2f4ca7ad432972ff09a8b5a6037dca"
-    },
-    {
-      "id": 9115,
+      "id": 3,
       "type": "page",
       "title": "Privacy Policy",
       "slug": "privacy-policy",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/privacy-policy/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2026-03-06 22:01:05",
-      "data_hash": "20dbf33e7b7958d2f0ca9e9e8eb04fa9ad055315e087185921824e5f5e682e58"
+      "status": "draft",
+      "url": null,
+      "builder": "gutenberg",
+      "tpl": "default",
+      "modified": "2026-11-13 07:42:00",
+      "data_hash": "39d3daafcac1f9c8d09150703318a2c528232ad2a12f9ef26812a1223e042c93"
     },
     {
-      "id": 8885,
+      "id": 2,
       "type": "page",
-      "title": "Reviews",
-      "slug": "reviews",
+      "title": "Sample Page",
+      "slug": "sample-page",
       "status": "publish",
-      "url": "https://nextleveldigitals.com/reviews/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-09-30 13:34:50",
-      "data_hash": "a541106761a1a3f07a72192fc80c78c0d1f7824757e9e91fdff8579b43b98aea"
-    },
-    {
-      "id": 4820,
-      "type": "elementor_library",
-      "title": "service detail",
-      "slug": "service-detail",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=service-detail",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-11 08:09:25",
-      "data_hash": "9e24a69f228a67da25a51ee4695af0a2a8f35e536a6c8a0bf3c11916cf8037f0"
-    },
-    {
-      "id": 3,
-      "type": "page",
-      "title": "Terms & Conditions",
-      "slug": "terms-conditions",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/terms-conditions/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2026-03-06 22:00:53",
-      "data_hash": "1d8b4df3ac7be6841254dfb3bc66633b691e707cc7c23ef732d52e6522cd6d32"
-    },
-    {
-      "id": 7559,
-      "type": "elementor_library",
-      "title": "testimonial",
-      "slug": "testimonial-2",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=testimonial-2",
-      "builder": "elementor",
-      "tpl": "section",
-      "modified": "2021-08-10 01:54:08",
-      "data_hash": "e275cfdb423924ad2de160e4a9e09c01a06f51ccc0092120124f2eca0654f08e"
-    },
-    {
-      "id": 466,
-      "type": "elementor_library",
-      "title": "testimonial",
-      "slug": "testimonial",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=testimonial",
-      "builder": "elementor",
-      "tpl": "section",
-      "modified": "2025-08-11 08:09:25",
-      "data_hash": "e275cfdb423924ad2de160e4a9e09c01a06f51ccc0092120124f2eca0654f08e"
-    },
-    {
-      "id": 2839,
-      "type": "elementor_library",
-      "title": "testimonial gray",
-      "slug": "testimonial-gray",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=testimonial-gray",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-11 08:09:25",
-      "data_hash": "8c9f16e9c0f43ace7075796ff23ab357d881fa052e134a0ec0144490e85cbf49"
-    },
-    {
-      "id": 7561,
-      "type": "elementor_library",
-      "title": "testimonial gray",
-      "slug": "testimonial-gray-2",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=testimonial-gray-2",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2021-09-15 10:56:54",
-      "data_hash": "8c9f16e9c0f43ace7075796ff23ab357d881fa052e134a0ec0144490e85cbf49"
-    },
-    {
-      "id": 8433,
-      "type": "elementor_library",
-      "title": "Web Design Package",
-      "slug": "web-design-package",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=web-design-package",
-      "builder": "elementor",
-      "tpl": "section",
-      "modified": "2025-08-20 08:30:02",
-      "data_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "id": 8435,
-      "type": "elementor_library",
-      "title": "Web Design Package",
-      "slug": "web-design-package-2",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/?elementor_library=web-design-package-2",
-      "builder": "elementor",
-      "tpl": "page",
-      "modified": "2025-08-20 09:24:53",
-      "data_hash": "e6254580f0c5997f9401a29979c26ac8c2dcebeec3ea50e3d1d975a12221f5ff"
-    },
-    {
-      "id": 8924,
-      "type": "page",
-      "title": "Website Packages",
-      "slug": "packages",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/packages/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-08-22 15:33:02",
-      "data_hash": "cf209c87e7deacdfd485183176caf8717762aa5abd48a27b854d82cb17e93c5a"
-    },
-    {
-      "id": 9052,
-      "type": "page",
-      "title": "Wordpress Development",
-      "slug": "wordpress-development",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/wordpress-development/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-08-26 18:28:44",
-      "data_hash": "7fa17697a7dfc3c8fee309a120d7ba5c7fa0440790fea0a6b4a09e563f73a2cb"
-    },
-    {
-      "id": 8798,
-      "type": "page",
-      "title": "Work",
-      "slug": "work",
-      "status": "publish",
-      "url": "https://nextleveldigitals.com/work/",
-      "builder": "elementor",
-      "tpl": "wp-page",
-      "modified": "2025-09-30 13:36:15",
-      "data_hash": "1c2ae1f48f34dbaf7c9bdba073a68e5ac6e1d36be093c71077b29ee8bcc51aa5"
+      "url": "https://nextleveldigitals.com/sample-page/",
+      "builder": "gutenberg",
+      "tpl": "default",
+      "modified": "2026-11-13 07:42:00",
+      "data_hash": "f9f499a8b5953282f3fe687f8b02c26ceaa35231f8fa3be4680527dde745fa64"
     }
   ],
-  "menus": [
-    {
-      "id": 22,
-      "name": "About",
-      "count": 2
-    },
-    {
-      "id": 23,
-      "name": "Copyright",
-      "count": 3
-    },
-    {
-      "id": 24,
-      "name": "Main",
-      "count": 9
-    },
-    {
-      "id": 25,
-      "name": "Main 2",
-      "count": 9
-    },
-    {
-      "id": 26,
-      "name": "Quick",
-      "count": 4
-    },
-    {
-      "id": 27,
-      "name": "slider-menu",
-      "count": 3
-    },
-    {
-      "id": 28,
-      "name": "Support",
-      "count": 0
-    }
-  ],
+  "menus": [],
   "counts": {
-    "posts": 0
+    "posts": 1
   }
 }
