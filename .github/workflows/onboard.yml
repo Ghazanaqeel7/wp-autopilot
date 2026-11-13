@@ -1,0 +1,28 @@
+name: Onboard site
+on:
+  workflow_dispatch:
+    inputs:
+      site: { description: "Site id (folder under sites/)", required: true }
+  push:
+    branches: [main]
+    paths: ["sites/*/site.json"]
+concurrency: { group: autopilot-state, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  onboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      AP_SIGNING_KEY: ${{ secrets.AP_SIGNING_KEY }}
+      AP_KEY_ID: ${{ secrets.AP_KEY_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - uses: ./.github/actions/setup
+      - name: Onboard
+        run: |
+          if [ -n "${{ inputs.site }}" ]; then sites="${{ inputs.site }}"; else
+            sites=$(git diff --name-only HEAD~1 HEAD -- 'sites/*/site.json' | cut -d/ -f2 | grep -v '^_template$' | sort -u || true); fi
+          rc=0; for s in $sites; do python tools/runner.py onboard "$s" || rc=1; done
+          tools/commit.sh "autopilot: onboard $sites"
+          exit $rc

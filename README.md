@@ -41,7 +41,7 @@ human approval. Every change is reversible.
 ## Status
 - [x] Step 1 — repo skeleton, rules, schemas
 - [x] Step 2 — Autopilot Bridge plugin v1 (tested end-to-end)
-- [ ] Step 3 — Actions: apply / QA / report / promote / rollback / health
+- [x] Step 3 — Actions: onboard / apply → QA → report / approve / rollback / health (tested end-to-end)
 - [ ] Step 4 — Dashboard v1 + Add Website module
 - [ ] Step 5 — n8n + Discord intake/approvals
 - [ ] Step 6 — Full clone staging

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Autopilot Bridge
  * Description:       Secure bridge between this site and WP Autopilot: signed API, staged changesets with full-site preview links, snapshots and one-click rollback.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Centric Tech
@@ -12,7 +12,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'AP_BRIDGE_VERSION', '0.1.0' );
+define( 'AP_BRIDGE_VERSION', '0.1.1' );
 define( 'AP_BRIDGE_FILE', __FILE__ );
 define( 'AP_BRIDGE_DIR', plugin_dir_path( __FILE__ ) );
 

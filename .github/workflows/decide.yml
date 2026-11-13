@@ -1,0 +1,28 @@
+name: Approve / Rollback / Discard
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: What to do
+        type: choice
+        options: [promote, rollback, discard]
+        required: true
+      site: { description: "Site id", required: true }
+      request: { description: "Request id", required: true }
+concurrency: { group: autopilot-state, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      AP_SIGNING_KEY: ${{ secrets.AP_SIGNING_KEY }}
+      AP_KEY_ID: ${{ secrets.AP_KEY_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: ${{ inputs.action }}
+        run: |
+          rc=0; python tools/runner.py "${{ inputs.action }}" "${{ inputs.site }}" "${{ inputs.request }}" || rc=$?
+          tools/commit.sh "autopilot: ${{ inputs.action }} ${{ inputs.site }}/${{ inputs.request }}"
+          exit $rc

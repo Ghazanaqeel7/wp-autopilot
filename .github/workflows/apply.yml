@@ -1,0 +1,39 @@
+name: Apply change
+on:
+  workflow_dispatch:
+    inputs:
+      site: { description: "Site id", required: true }
+      request: { description: "Request id, e.g. R20261113-001", required: true }
+  push:
+    branches: [main]
+    paths: ["sites/*/changes/*/change.json"]
+concurrency: { group: autopilot-state, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      AP_SIGNING_KEY: ${{ secrets.AP_SIGNING_KEY }}
+      AP_KEY_ID: ${{ secrets.AP_KEY_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - uses: ./.github/actions/setup
+        with: { qa: "true" }
+      - name: Stage → QA → report
+        run: |
+          if [ -n "${{ inputs.site }}" ]; then targets="${{ inputs.site }}/${{ inputs.request }}"; else
+            targets=$(git diff --name-only HEAD~1 HEAD -- 'sites/*/changes/*/change.json' | awk -F/ '{print $2"/"$4}' | sort -u); fi
+          rc=0
+          for t in $targets; do
+            site=${t%%/*}; req=${t##*/}
+            echo "::group::$site $req"
+            if python tools/runner.py stage "$site" "$req"; then
+              python tools/qa.py || echo "qa crashed"
+              python tools/runner.py finalize "$site" "$req" || rc=1
+            else rc=1; fi
+            echo "::endgroup::"
+          done
+          tools/commit.sh "autopilot: applied $targets"
+          exit $rc

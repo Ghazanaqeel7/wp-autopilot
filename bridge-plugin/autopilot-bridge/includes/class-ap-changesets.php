@@ -78,6 +78,9 @@ class AP_Changesets {
 		}
 		$cs     = self::load( $id );
 		$insert = ! $cs;
+		if ( $cs && 'discarded' === $cs['status'] ) {
+			$cs = null; // a discarded changeset may be re-staged from scratch (row is overwritten)
+		}
 		if ( $cs && 'staged' !== $cs['status'] ) {
 			return new WP_Error( 'ap_state', 'Changeset is ' . $cs['status'] . '.', array( 'status' => 409 ) );
 		}
