@@ -137,6 +137,16 @@ def onboard(site):
     if status != 200:
         fail(f"inventory failed: HTTP {status} {inv}")
     save(ROOT / "sites" / site / "inventory.json", inv)
+    # Compact per-page outlines (ids, widget types, short texts) so Claude can target edits without
+    # fetching whole pages. Refreshed on every onboard; data_hash in inventory guards against staleness.
+    pdir = ROOT / "sites" / site / "pages"
+    pdir.mkdir(parents=True, exist_ok=True)
+    for pg in inv["pages"]:
+        if pg["status"] != "publish":
+            continue
+        s, out = call(cfg, "page", {"post_id": pg["id"]}, timeout=60)
+        if s == 200:
+            save(pdir / f"{pg['id']}.json", out)
 
     b = inv.get("builders", {})
     builder = next((k for k in ("elementor", "divi", "wpbakery", "bricks") if k in b), None)

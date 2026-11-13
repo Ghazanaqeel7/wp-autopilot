@@ -2,7 +2,7 @@
   "id": "nextleveldigitals",
   "tenant": "default",
   "name": "Next Level Digitals",
-  "client": "Next Level Digitals",
+  "client": "Next Level Digitals (test site)",
   "url": "https://nextleveldigitals.com",
   "type": "existing",
   "status": "active",
