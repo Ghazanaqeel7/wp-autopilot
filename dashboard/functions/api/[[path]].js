@@ -706,8 +706,7 @@ const ext = async (url, opt = {}) => {
 };
 const slackManifest = (origin) => ({
   display_information: { name: "WP Autopilot", description: "Sends website change requests to WP Autopilot" },
-  features: { bot_user: { display_name: "WP Autopilot", always_online: false }, app_home: { messages_tab_enabled: true, messages_tab_read_only_enabled: false },
-    shortcuts: [{ name: "Send to Autopilot", type: "message", callback_id: "send_to_autopilot", description: "Add this message to the WP Autopilot Inbox" }] },
+  features: { bot_user: { display_name: "WP Autopilot", always_online: false }, app_home: { messages_tab_enabled: true, messages_tab_read_only_enabled: false } },
   oauth_config: { scopes: { bot: ["app_mentions:read", "channels:history", "channels:join", "channels:read", "chat:write", "groups:history", "groups:read", "im:history"] } },
   settings: { event_subscriptions: { request_url: `${origin}/api/hooks/slack`, bot_events: ["app_mention", "message.channels", "message.groups", "message.im"] },
     interactivity: { is_enabled: true, request_url: `${origin}/api/hooks/slack-action` },
