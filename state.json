@@ -31,7 +31,11 @@
       "status": "active",
       "builder": "gutenberg",
       "last_inventory": "2026-11-13T07:43:30+00:00",
-      "pages": 2
+      "pages": 2,
+      "last_health": "2026-11-13T08:22:41+00:00",
+      "health": "ok",
+      "paused_on_site": false,
+      "bridge_version": "0.1.1"
     }
   ],
   "requests": [
