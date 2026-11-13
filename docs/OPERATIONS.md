@@ -3,7 +3,7 @@
 All buttons live in GitHub → **Actions** (left list → workflow → **Run workflow**).
 
 ## One-time
-Repo secrets `AP_SIGNING_KEY` and `AP_KEY_ID` (Settings → Secrets and variables → Actions).
+Repo secret `AP_SIGNING_KEY` (the key id is derived automatically) (Settings → Secrets and variables → Actions).
 
 ## Add a website
 1. Create `sites/<site-id>/site.json` from `sites/_template/site.json` (id = lowercase-dashes).

@@ -15,7 +15,6 @@ jobs:
     timeout-minutes: 40
     env:
       AP_SIGNING_KEY: ${{ secrets.AP_SIGNING_KEY }}
-      AP_KEY_ID: ${{ secrets.AP_KEY_ID }}
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 2 }

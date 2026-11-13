@@ -5,7 +5,7 @@
   ap_client.py code <site_id>                 -> connection code to paste in wp-admin (needs AP_SIGNING_KEY)
   ap_client.py call <site_url> <route> [json] -> signed POST, prints JSON response
 
-Env: AP_SIGNING_KEY (base64 Ed25519 seed, 32 bytes), AP_KEY_ID.
+Env: AP_SIGNING_KEY (base64 Ed25519 seed, 32 bytes). The key id is derived from the public key.
 Requires: pip install pynacl requests
 """
 import base64, hashlib, json, os, secrets, sys, time
@@ -24,7 +24,8 @@ def _key():
 
 
 def key_id():
-    return os.environ.get("AP_KEY_ID", "hub-1")
+    """Public, derived from the public key — never a secret (GitHub would mask it inside codes)."""
+    return "hub-" + hashlib.sha256(bytes(_key().verify_key)).hexdigest()[:10]
 
 
 def connection_code(site_id, hub="WP Autopilot"):
@@ -59,7 +60,6 @@ if __name__ == "__main__":
         sk = SigningKey.generate()
         print("AP_SIGNING_KEY=" + base64.b64encode(bytes(sk)).decode())
         print("AP_PUBLIC_KEY=" + base64.b64encode(bytes(sk.verify_key)).decode())
-        print("AP_KEY_ID=hub-" + secrets.token_hex(3))
     elif cmd == "code" and len(sys.argv) >= 3:
         print(connection_code(sys.argv[2]))
     elif cmd == "call" and len(sys.argv) >= 4:

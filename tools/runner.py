@@ -141,7 +141,7 @@ def onboard(site):
     if not builder:
         builder = "gutenberg" if inv["theme"].get("block") or any(p["builder"] == "gutenberg" for p in inv["pages"]) else "classic"
     cfg.update(status="active", builder=builder, theme=inv["theme"]["name"],
-               bridge={"version": h["plugin"], "site_key_id": os.environ.get("AP_KEY_ID", ""),
+               bridge={"version": h["plugin"], "site_key_id": ap_client.key_id(),
                        "connected_at": cfg.get("bridge", {}).get("connected_at") or now(),
                        "checks": {k: h[k] for k in ("https", "sodium", "file_mods", "wp", "php")}})
     save(ROOT / "sites" / site / "site.json", cfg)
