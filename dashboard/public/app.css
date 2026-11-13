@@ -282,3 +282,10 @@ textarea { min-height: 130px; resize: vertical; }
   .inbox .sel { max-width: 100%; width: 100%; }
 }
 .inbox { margin-bottom: 16px; }
+
+h3.sub { font-size: 13px; font-weight: 600; margin: 4px 0 10px; }
+.inline { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+.routes { margin-bottom: 8px; }
+pre.code { margin: 8px 0 0; padding: 12px; background: var(--bg-2, #f4f5f7); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.conn { margin-bottom: 16px; }

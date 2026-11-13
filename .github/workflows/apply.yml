@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths: ["sites/*/changes/*/change.json"]
 concurrency: { group: autopilot-state, cancel-in-progress: false }
-permissions: { contents: write }
+permissions: { contents: write, actions: read }
 jobs:
   apply:
     runs-on: ubuntu-latest
@@ -16,6 +16,7 @@ jobs:
     env:
       AP_SIGNING_KEY: ${{ secrets.AP_SIGNING_KEY }}
       DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+      GITHUB_TOKEN: ${{ github.token }}
       NOTIFY_WEBHOOK_URL: ${{ secrets.NOTIFY_WEBHOOK_URL }}
       EMAIL_WEBHOOK_URL: ${{ secrets.EMAIL_WEBHOOK_URL }}
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

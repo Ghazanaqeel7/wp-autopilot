@@ -1,0 +1,31 @@
+name: Notify requester
+# Fires when Claude commits questions for a request (status needs_info), so the person who asked is told where they asked.
+on:
+  push:
+    branches: [main]
+    paths: ["requests/*/questions.md"]
+permissions: { contents: read, actions: read }
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - run: |
+          for f in $(git diff --name-only HEAD~1 HEAD -- 'requests/*/questions.md'); do
+            id=$(echo "$f" | cut -d/ -f2)
+            python3 - "$id" <<'PY'
+          import json, sys, os
+          sys.path.insert(0, "tools")
+          import notify
+          rid = sys.argv[1]
+          st = json.load(open("state.json"))
+          e = next((r for r in st["requests"] if r["id"] == rid), None)
+          if e and e.get("status") == "needs_info":
+              notify.notify(e["site"], e, "needs_info")
+          PY
+          done

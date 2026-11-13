@@ -1,5 +1,17 @@
 # Channels — changes in, answers out
 
+## Easiest: the dashboard's **Connections** page
+Open **Connections**, follow the short steps on each card and paste the token. The dashboard keeps tokens encrypted (Cloudflare KV, never in the repo),
+creates the Trello and ClickUp webhooks for you, lists your Slack channels / Trello boards / ClickUp lists so you just pick which website each belongs to,
+and sends the answers back to where the request came from. Only one thing is left outside the dashboard: a **repo variable** `DASHBOARD_URL`
+(GitHub → Settings → Secrets and variables → Actions → Variables) holding the dashboard address, so the workflows know where to report.
+
+**Storage:** the first deploy after this update creates the KV store (binding `CONNECTIONS`) automatically. If the Connections page still says
+"Storage is not connected", create it by hand: Cloudflare → Storage & databases → KV → Create (any name), then in `wrangler.toml` set `id = "<its id>"`
+under `[[kv_namespaces]]`, commit, and let it deploy. Tokens are encrypted with a key derived from `SESSION_SECRET`; changing that secret means reconnecting.
+
+Everything below is the manual alternative (secrets in Cloudflare/GitHub instead of the Connections page) and still works.
+
 Everything lands in the dashboard **Inbox** first. Per website (Site → Settings → *Where changes come from*) you list the Slack
 channels, Trello boards, ClickUp lists and email senders that belong to it, and choose whether messages become requests
 automatically or wait for you. A `[site-id]` tag in a message or email subject routes it to that site anywhere.

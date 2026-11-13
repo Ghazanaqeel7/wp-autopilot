@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Tell people what happened to a request — best effort, never fails a job, never includes secrets or preview links.
 
-Where it goes (each only if its secret/variable is set):
+Preferred: DASHBOARD_URL (repo variable) → the dashboard sends it with the tokens saved on its Connections page.
+Fallback, direct from the workflow (each only if its secret/variable is set):
   NOTIFY_WEBHOOK_URL   Slack incoming webhook, n8n, Discord, Teams … gets {"text", "event", "site", "request", "link"}
   EMAIL_WEBHOOK_URL    Power Automate / n8n flow that sends mail: {"to", "subject", "body"}
   SLACK_BOT_TOKEN      replies in the Slack thread the request came from
@@ -34,8 +35,18 @@ def _post(url, data, headers=None):
         return False
 
 
+def via_dashboard(entry, event):
+    """The dashboard holds the connection tokens; a workflow proves itself with its own run token (no shared secret)."""
+    base, tok, run = os.environ.get("DASHBOARD_URL", "").rstrip("/"), os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_RUN_ID")
+    if not (base and tok and run):
+        return False
+    return _post(f"{base}/api/hooks/notify", {"request": entry["id"], "event": event, "run_id": run}, {"Authorization": f"Bearer {tok}"})
+
+
 def notify(site_name, entry, event):
     if event not in EVENTS:
+        return
+    if via_dashboard(entry, event):
         return
     icon, phrase = EVENTS[event]
     rid = entry["id"]

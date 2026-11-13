@@ -613,6 +613,82 @@ async function inbox(params) {
   };
 }
 
+
+/* ================================================================ connections */
+async function connections() {
+  crumbs(["Connections"]);
+  const [c, st] = await Promise.all([api("/connections"), state(false)]);
+  const sites = st.sites.filter((s) => s.status === "active");
+  const P = c.providers || {};
+  const mapped = (prov) => st.sites.flatMap((s) => (s.channels?.[prov] || []).map((id) => ({ site: s, id })));
+  const siteOpts = `<option value="">Website…</option>${sites.map((s) => `<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("")}`;
+  const head = (name, key, hint) => `<div class="panel-head"><h2>${name}</h2>${P[key] ? `<span class="badge ok">Connected${P[key].label ? " · " + esc(P[key].label) : ""}</span>` : '<span class="badge">Not connected</span>'}</div>${hint ? "" : ""}`;
+  const secretForm = (key, fields, btn = "Connect") => `<form class="form" data-save="${key}"><div class="form-grid">${fields.map(([n, l, ph]) => `<label class="field"><span>${esc(l)}</span><input type="password" name="${n}" autocomplete="off" placeholder="${esc(ph || "")}" ${P[key] ? "" : "required"}></label>`).join("")}</div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">${btn}</button></div><p class="form-error"></p></form>`;
+  const routes = (prov, what) => `<div class="routes" data-prov="${prov}"><h3 class="sub">${what}</h3>
+      <div class="inline"><button class="btn btn-sm" data-load>Load ${what.toLowerCase()}</button><select class="sel" data-pick hidden></select><select class="sel" data-site>${siteOpts}</select><button class="btn btn-sm btn-primary" data-add hidden>${prov === "slack" ? "Route" : "Watch"}</button></div>
+      <ul class="files">${mapped(prov).map((m) => `<li><span>${esc(m.id)} → <b>${esc(m.site.name)}</b></span><a href="#" data-rm="${esc(m.id)}" data-s="${esc(m.site.id)}">remove</a></li>`).join("") || '<li class="muted">Nothing routed yet.</li>'}</ul></div>`;
+  const dis = (key) => `<div class="form-actions" style="margin-top:16px"><button class="btn btn-sm btn-danger" data-disc="${key}">Disconnect</button></div>`;
+  const flow = JSON.stringify({ from: "<From>", subject: "<Subject>", html: "<Body>", message_id: "<Message Id>", attachments: [{ name: "<Attachment Name>", content_base64: "<Attachment Content>" }] }, null, 2);
+
+  view.innerHTML = `<div class="page-head"><div><h1>Connections</h1><p>Connect Slack, Trello, ClickUp and email once. Messages arrive in the Inbox, and answers go back to where they were asked.</p></div></div>
+    ${c.storage ? "" : `<div class="callout warn"><div><b>Storage is not connected yet.</b> Saving tokens here needs a small encrypted store (Cloudflare KV, binding <span class="mono">CONNECTIONS</span>). It is created on the next deploy; if this notice stays after a deploy, see <span class="mono">docs/CHANNELS.md</span> → Storage.</div></div>`}
+    <section class="panel conn">${head("Slack", "slack")}<div class="panel-body">
+      ${P.slack ? `${routes("slack", "Channels")}<p class="muted">Invite the bot to each routed channel: <span class="mono">/invite @WP Autopilot</span>. Update the token: ${secretForm("slack", [["bot_token", "Bot token"], ["signing_secret", "Signing secret"]], "Update")}</p>${dis("slack")}`
+      : `<ol class="steps"><li><button class="btn btn-sm" id="cpm">Copy app manifest</button> — it sets every permission and event for you.</li>
+        <li>Open <a href="https://api.slack.com/apps?new_app=1" target="_blank" rel="noopener">api.slack.com/apps ↗</a> → <b>From an app manifest</b> → pick your workspace → paste → <b>Create</b>.</li>
+        <li>Press <b>Install to Workspace</b>. Then copy the <b>Bot User OAuth Token</b> (OAuth &amp; Permissions) and the <b>Signing Secret</b> (Basic Information) into the boxes below.</li></ol>
+        ${secretForm("slack", [["bot_token", "Bot token", "xoxb-…"], ["signing_secret", "Signing secret"]])}`}</div></section>
+    <section class="panel conn">${head("Trello", "trello")}<div class="panel-body">
+      ${P.trello ? `${routes("trello", "Boards")}${dis("trello")}` : `<ol class="steps"><li>Open <a href="https://trello.com/power-ups/admin" target="_blank" rel="noopener">trello.com/power-ups/admin ↗</a> → <b>New</b> → name it, pick your workspace, any email → <b>Create</b>.</li>
+        <li>Open <b>API key</b> → <b>Generate a new API key</b>. Copy the <b>API key</b> and the <b>Secret</b>. Press the <b>Token</b> link, allow, and copy the token.</li></ol>
+        ${secretForm("trello", [["key", "API key"], ["token", "Token"], ["secret", "Secret"]])}`}</div></section>
+    <section class="panel conn">${head("ClickUp", "clickup")}<div class="panel-body">
+      ${P.clickup ? `${routes("clickup", "Lists")}${dis("clickup")}` : `<ol class="steps"><li>In ClickUp: your avatar → <b>Settings</b> → <b>Apps</b> → <b>API Token</b> → Generate, and copy it.</li></ol>${secretForm("clickup", [["token", "Personal API token", "pk_…"]])}`}</div></section>
+    <section class="panel conn">${head("Email / Outlook", "email")}<div class="panel-body">
+      <p class="muted" style="margin-top:0">Outlook cannot call us directly, so one small <b>Power Automate</b> flow (free with Microsoft 365) forwards mail here. It takes about five minutes, once.</p>
+      <div class="inline"><button class="btn btn-sm ${P.email ? "" : "btn-primary"}" id="mk">${P.email ? "Regenerate token" : "Generate token"}</button>${P.email ? '<button class="btn btn-sm" id="rv">Show token</button>' : ""}</div>
+      <div id="emout" hidden>
+        <dl class="kv"><dt>Address</dt><dd class="mono">${esc(c.origin)}/api/hooks/email</dd><dt>Header</dt><dd class="mono">Authorization: Bearer <span id="tk"></span></dd></dl>
+        <ol class="steps"><li>make.powerautomate.com → <b>Create</b> → <b>Automated cloud flow</b> → trigger <b>When a new email arrives (V3)</b> (pick the folder or filter the sender).</li>
+          <li>Add the action <b>HTTP</b>: Method <b>POST</b>, the address above, header <span class="mono">Authorization</span> with the value shown, header <span class="mono">Content-Type: application/json</span>.</li>
+          <li>Body, using the dynamic content from the trigger:<pre class="code">${esc(flow)}</pre></li></ol></div></div></section>
+    <section class="panel conn"><div class="panel-head"><h2>Send updates to a chat or an inbox</h2><span class="muted">Optional</span></div><div class="panel-body">
+      <p class="muted" style="margin-top:0">Replies already go back to the Slack thread, Trello card or ClickUp task a request came from. Add these to also get every update in one place.</p>
+      <form class="form" data-save="notify"><div class="form-grid"><label class="field"><span>Chat webhook <small>Slack incoming webhook, Teams, Discord or n8n</small></span><input type="password" name="webhook_url" autocomplete="off" placeholder="https://hooks…"></label>
+        <label class="field"><span>Email flow address <small>a Power Automate flow that sends mail</small></span><input type="password" name="email_flow_url" autocomplete="off" placeholder="https://prod-…"></label></div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Save</button></div><p class="form-error"></p></form>
+      ${P.notify ? `<p class="muted" style="margin-bottom:0">Saved: ${esc(P.notify.label)}. Leave a box empty to keep its current value.</p>` : ""}</div></section>
+    ${Object.values(c.legacy || {}).some(Boolean) ? `<div class="callout"><div>Some channels still use secrets set directly in Cloudflare. They keep working; saving here takes over.</div></div>` : ""}`;
+
+  const cp = $("#cpm"); if (cp) cp.onclick = async () => { await navigator.clipboard.writeText(c.slack_manifest || ""); toast("Manifest copied."); };
+  $$("form[data-save]", view).forEach((f) => (f.onsubmit = async (e) => {
+    e.preventDefault(); const btn = f.querySelector("[type=submit]"), er = f.querySelector(".form-error"); btn.disabled = true; er.textContent = "";
+    try { await api("/connections/save", { method: "POST", body: { provider: f.dataset.save, fields: Object.fromEntries(new FormData(f)) } }); toast("Saved."); route(); }
+    catch (err) { er.textContent = err.message; btn.disabled = false; }
+  }));
+  const showTok = (t) => { $("#emout").hidden = false; $("#tk").textContent = t; };
+  const mk = $("#mk"); if (mk) mk.onclick = async () => { if (P.email && !confirm("Regenerating stops the old Power Automate flow until you paste the new token.")) return; showTok((await api("/connections/email/new", { method: "POST", body: {} })).token); if (!P.email) setTimeout(route, 6000); };
+  const rv = $("#rv"); if (rv) rv.onclick = async () => showTok((await api("/connections/email/reveal", { method: "POST", body: {} })).token);
+  view.onclick = async (e) => {
+    const d = e.target.closest("[data-disc]");
+    if (d) { if (!confirm(`Disconnect ${d.dataset.disc}? Webhooks it created are removed.`)) return; d.disabled = true; try { await api("/connections/disconnect", { method: "POST", body: { provider: d.dataset.disc } }); toast("Disconnected."); route(); } catch (err) { toast(err.message, 6000); d.disabled = false; } return; }
+    const box = e.target.closest(".routes"); if (!box) return;
+    const prov = box.dataset.prov;
+    try {
+      if (e.target.dataset.load !== undefined) {
+        e.target.disabled = true; const items = await api("/connections/choices", { method: "POST", body: { provider: prov } });
+        const pick = $("[data-pick]", box); pick.innerHTML = items.map((i) => `<option value="${esc(i.id)}">${esc(i.name)}${i.member === false ? " (bot not invited)" : ""}</option>`).join(""); pick.hidden = false; $("[data-add]", box).hidden = false; e.target.hidden = true;
+      } else if (e.target.dataset.add !== undefined) {
+        const site = $("[data-site]", box).value, id = $("[data-pick]", box).value; if (!site) { toast("Choose the website first.", 5000); return; }
+        e.target.disabled = true; await api("/connections/watch", { method: "POST", body: { provider: prov, id, site } }); toast("Done."); await state(); route();
+      } else if (e.target.dataset.rm) {
+        e.preventDefault(); await api("/connections/map", { method: "POST", body: { provider: prov, id: e.target.dataset.rm, site: e.target.dataset.s, remove: true } }); await state(); route();
+      }
+    } catch (err) { toast(err.message, 6000); e.target.disabled = false; }
+  };
+}
+
 /* ================================================================ activity & settings */
 async function activity() {
   crumbs(["Activity"]);
@@ -645,9 +721,9 @@ async function settings() {
     <section class="panel"><div class="panel-head"><h2>Bridge plugin</h2></div><div class="panel-body">
       <div class="toggle"><div><b>Autopilot Bridge</b><p>Install on every website you add. Updates are announced here.</p></div><a class="btn" href="/downloads/autopilot-bridge.zip">Download .zip</a></div></div></section>
     <section class="panel"><div class="panel-head"><h2>Channel connections</h2><span class="muted">Where changes arrive from, and where answers go back</span></div><div class="panel-body">
-      <p class="muted" style="margin-top:0">Webhook addresses for this dashboard. Each needs its secret added in Cloudflare (Settings → Variables and Secrets); step-by-step in <span class="mono">docs/CHANNELS.md</span>.</p>
+      <p class="muted" style="margin-top:0">Connect each one on the <a href="#/connections">Connections</a> page. These are the webhook addresses it uses.</p>
       <dl class="kv">${[["Slack", "slack", "SLACK_SIGNING_SECRET"], ["Trello", "trello", "TRELLO_SECRET"], ["ClickUp", "clickup", "CLICKUP_WEBHOOK_SECRET"], ["Email / Outlook", "email", "INBOX_TOKEN"]]
-        .map(([n, k, v]) => `<dt>${n}</dt><dd><span class="mono">${esc(location.origin)}/api/hooks/${k}</span><br><small class="muted">secret: ${v}</small></dd>`).join("")}</dl></div></section>
+        .map(([n, k, v]) => `<dt>${n}</dt><dd><span class="mono">${esc(location.origin)}/api/hooks/${k}</span></dd>`).join("")}</dl></div></section>
     <section class="panel"><div class="panel-head"><h2>Urgent requests</h2></div><div class="panel-body">
       <p style="margin:0" class="muted">Urgent requests start Claude immediately when the repository secret <span class="mono">ANTHROPIC_API_KEY</span> is set in GitHub → Settings → Secrets → Actions. Without it, urgent requests go to the front of the queue.</p></div></section>`;
   $("#gp").onchange = async (e) => {
@@ -703,6 +779,7 @@ async function route() {
     else if (p[0] === "new-site") await newSite();
     else if (p[0] === "new-request") await newRequest(params);
     else if (p[0] === "inbox") await inbox(params);
+    else if (p[0] === "connections") await connections();
     else if (p[0] === "activity") await activity();
     else if (p[0] === "settings") await settings();
     else if (p[0] === "search") await search(params.get("q") || "");

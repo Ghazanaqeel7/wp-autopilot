@@ -43,6 +43,7 @@ async function handle(ctx) {
     if (path === "/inbox/convert" && request.method === "POST") return inboxConvert(gh, await request.json());
     if (path === "/inbox/ignore" && request.method === "POST") return inboxIgnore(gh, await request.json());
     if (path === "/sites/channels" && request.method === "POST") return saveChannels(gh, await request.json());
+    if (path.startsWith("/connections")) return connections(path.slice(12), request, env, url);
     if (path === "/config" && request.method === "POST") return updateConfig(gh, await request.json());
     if (path === "/requests/feedback" && request.method === "POST") return feedback(gh, await request.json());
     return json({ error: "not found" }, 404);
@@ -550,14 +551,17 @@ async function hooks(name, request, env, ctx) {
   try { body = JSON.parse(raw || "{}"); } catch { return json({ error: "bad json" }, 400); }
   const need = (v) => { if (!v) throw bad("This channel is not configured on the dashboard.", 503); return v; };
   const gh = github(env);
+  if (name === "notify") return hookNotify(gh, env, request, body);
+  // Slack's one-time URL check carries no secret yet; echoing the challenge has no side effects.
+  if (name === "slack" && body.type === "url_verification") return json({ challenge: body.challenge });
+  const c = await creds(env, name === "generic" ? "email" : name);
 
   if (name === "slack") {
-    const secret = need(env.SLACK_SIGNING_SECRET);
+    const secret = need(c.signing_secret || env.SLACK_SIGNING_SECRET);
     const ts = request.headers.get("X-Slack-Request-Timestamp") || "";
     if (Math.abs(Date.now() / 1000 - Number(ts)) > 300) throw bad("stale", 401);
     const sig = request.headers.get("X-Slack-Signature") || "";
     if (!(await safeEqual(sig, `v0=${await hmacRaw(secret, `v0:${ts}:${raw}`)}`))) throw bad("bad signature", 401);
-    if (body.type === "url_verification") return json({ challenge: body.challenge });
     const ev = body.event || {};
     if (body.type !== "event_callback" || !["message", "app_mention"].includes(ev.type) || ev.bot_id || (ev.subtype && ev.subtype !== "file_share")) return json({ ok: true, ignored: true });
     const text = String(ev.text || "").replace(/<@[A-Z0-9]+>/g, "").trim();
@@ -572,7 +576,7 @@ async function hooks(name, request, env, ctx) {
   }
 
   if (name === "trello") {
-    const secret = need(env.TRELLO_SECRET);
+    const secret = need(c.secret || env.TRELLO_SECRET);
     const callback = new URL(request.url).origin + "/api/hooks/trello";
     const sig = request.headers.get("X-Trello-Webhook") || "";
     if (!(await safeEqual(sig, await hmacRaw(secret, raw + callback, "SHA-1", "b64")))) throw bad("bad signature", 401);
@@ -580,8 +584,9 @@ async function hooks(name, request, env, ctx) {
     if (!["createCard", "commentCard"].includes(a.type)) return json({ ok: true, ignored: true });
     const card = a.data?.card || {};
     let desc = "";
-    if (a.type === "createCard" && env.TRELLO_KEY && env.TRELLO_TOKEN) {
-      const r = await fetch(`https://api.trello.com/1/cards/${card.id}?fields=desc&key=${env.TRELLO_KEY}&token=${env.TRELLO_TOKEN}`, { signal: AbortSignal.timeout(10000) }).catch(() => null);
+    const tk = c.key || env.TRELLO_KEY, tt = c.token || env.TRELLO_TOKEN;
+    if (a.type === "createCard" && tk && tt) {
+      const r = await fetch(`https://api.trello.com/1/cards/${card.id}?fields=desc&key=${tk}&token=${tt}`, { signal: AbortSignal.timeout(10000) }).catch(() => null);
       if (r?.ok) desc = (await r.json()).desc || "";
     }
     const text = a.type === "commentCard" ? `${card.name}\n\n${a.data?.text || ""}` : `${card.name}${desc ? `\n\n${desc}` : ""}`;
@@ -593,12 +598,16 @@ async function hooks(name, request, env, ctx) {
   }
 
   if (name === "clickup") {
-    const secret = need(env.CLICKUP_WEBHOOK_SECRET);
-    if (!(await safeEqual(request.headers.get("X-Signature") || "", await hmacRaw(secret, raw)))) throw bad("bad signature", 401);
+    const secrets = [...Object.values(c.webhooks || {}).map((w) => w.secret), env.CLICKUP_WEBHOOK_SECRET].filter(Boolean);
+    need(secrets.length);
+    const given = request.headers.get("X-Signature") || "";
+    let okSig = false;
+    for (const sec of secrets) if (await safeEqual(given, await hmacRaw(sec, raw))) okSig = true;
+    if (!okSig) throw bad("bad signature", 401);
     if (!["taskCreated", "taskCommentPosted"].includes(body.event) || !body.task_id) return json({ ok: true, ignored: true });
     let task = {};
-    if (env.CLICKUP_TOKEN) {
-      const r = await fetch(`https://api.clickup.com/api/v2/task/${body.task_id}`, { headers: { Authorization: env.CLICKUP_TOKEN }, signal: AbortSignal.timeout(10000) }).catch(() => null);
+    if (c.token || env.CLICKUP_TOKEN) {
+      const r = await fetch(`https://api.clickup.com/api/v2/task/${body.task_id}`, { headers: { Authorization: c.token || env.CLICKUP_TOKEN }, signal: AbortSignal.timeout(10000) }).catch(() => null);
       if (r?.ok) task = await r.json();
     }
     const comment = body.event === "taskCommentPosted" ? String(body.history_items?.[0]?.comment?.text_content || "") : "";
@@ -611,7 +620,7 @@ async function hooks(name, request, env, ctx) {
   }
 
   if (name === "email" || name === "generic") {
-    const token = need(env.INBOX_TOKEN);
+    const token = need(c.token || env.INBOX_TOKEN);
     const given = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "") || new URL(request.url).searchParams.get("token") || "";
     if (!(await safeEqual(given, token))) throw bad("unauthorized", 401);
     const text = clip(body.text || strip(body.html || body.body || ""), 20000);
@@ -626,4 +635,260 @@ async function hooks(name, request, env, ctx) {
     })) });
   }
   return json({ error: "not found" }, 404);
+}
+
+/* ---------------------------------------------------------------- connections (tokens kept encrypted in Workers KV, never in the repo) */
+
+const b64buf = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+async function aesKey(env) {
+  const raw = await crypto.subtle.digest("SHA-256", enc.encode("ap-conn:" + env.SESSION_SECRET));
+  return crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["encrypt", "decrypt"]);
+}
+async function seal(env, obj) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await aesKey(env), enc.encode(JSON.stringify(obj)));
+  return JSON.stringify({ iv: bufB64(iv), ct: bufB64(ct) });
+}
+async function unseal(env, text) {
+  if (!text) return null;
+  const { iv, ct } = JSON.parse(text);
+  return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64buf(iv) }, await aesKey(env), b64buf(ct))));
+}
+async function creds(env, provider) {
+  if (!env.CONNECTIONS) return {};
+  try { return (await unseal(env, await env.CONNECTIONS.get("conn:" + provider))) || {}; } catch { return {}; }
+}
+async function putCreds(env, provider, obj, meta) {
+  await env.CONNECTIONS.put("conn:" + provider, await seal(env, obj));
+  await env.CONNECTIONS.put("meta:" + provider, JSON.stringify({ ...meta, connected_at: meta.connected_at || new Date().toISOString() }));
+}
+async function getMeta(env, provider) {
+  try { return JSON.parse((await env.CONNECTIONS.get("meta:" + provider)) || "null"); } catch { return null; }
+}
+
+const CHANNEL_PROVIDERS = ["slack", "trello", "clickup"];
+const ext = async (url, opt = {}) => {
+  const r = await fetch(url, { ...opt, signal: AbortSignal.timeout(15000) }).catch(() => null);
+  if (!r) throw bad("Could not reach the service. Try again.", 502);
+  const data = await r.json().catch(() => ({}));
+  return { ok: r.ok, status: r.status, data };
+};
+const slackManifest = (origin) => ({
+  display_information: { name: "WP Autopilot", description: "Sends website change requests to WP Autopilot" },
+  features: { bot_user: { display_name: "WP Autopilot", always_online: false } },
+  oauth_config: { scopes: { bot: ["app_mentions:read", "channels:history", "channels:read", "chat:write", "groups:history", "groups:read"] } },
+  settings: { event_subscriptions: { request_url: `${origin}/api/hooks/slack`, bot_events: ["app_mention", "message.channels", "message.groups"] },
+    org_deploy_enabled: false, socket_mode_enabled: false, token_rotation_enabled: false },
+});
+
+async function connections(sub, request, env, url) {
+  const p = sub.split("/").filter(Boolean);
+  const gh = github(env);
+  const origin = url.origin;
+  if (p[0] === undefined && request.method === "GET") return connectionsStatus(gh, env, origin);
+  if (request.method !== "POST") return json({ error: "not found" }, 404);
+  if (!env.CONNECTIONS) throw bad("Storage is not connected yet — see the notice at the top of this page.", 503);
+  const b = await request.json().catch(() => ({}));
+  const f = (b.fields && typeof b.fields === "object") ? b.fields : {};
+  const val = (k, n = 400) => clip(f[k], n);
+
+  if (p[0] === "save") {
+    const prov = String(b.provider || "");
+    const old = await creds(env, prov);
+    if (prov === "slack") {
+      const bot_token = val("bot_token") || old.bot_token, signing_secret = val("signing_secret") || old.signing_secret;
+      if (!/^xoxb-/.test(bot_token || "")) throw bad("The Bot token starts with xoxb-.");
+      if (!signing_secret) throw bad("Paste the Signing Secret from Basic Information.");
+      const r = await ext("https://slack.com/api/auth.test", { method: "POST", headers: { Authorization: `Bearer ${bot_token}` } });
+      if (!r.data.ok) throw bad(`Slack refused the token (${r.data.error || r.status}).`);
+      await putCreds(env, "slack", { bot_token, signing_secret }, { label: r.data.team || "Slack" });
+    } else if (prov === "trello") {
+      const key = val("key") || old.key, token = val("token") || old.token, secret = val("secret") || old.secret;
+      if (!key || !token || !secret) throw bad("Trello needs the API key, the token and the API secret.");
+      const r = await ext(`https://api.trello.com/1/members/me?fields=username&key=${encodeURIComponent(key)}&token=${encodeURIComponent(token)}`);
+      if (!r.ok) throw bad("Trello refused the key or token.");
+      await putCreds(env, "trello", { key, token, secret, webhooks: old.webhooks || {} }, { label: r.data.username || "Trello" });
+    } else if (prov === "clickup") {
+      const token = val("token") || old.token;
+      if (!token) throw bad("Paste your ClickUp personal API token.");
+      const r = await ext("https://api.clickup.com/api/v2/team", { headers: { Authorization: token } });
+      if (!r.ok || !r.data.teams?.length) throw bad("ClickUp refused the token.");
+      await putCreds(env, "clickup", { token, team_id: r.data.teams[0].id, webhooks: old.webhooks || {} }, { label: r.data.teams[0].name });
+    } else if (prov === "notify") {
+      const webhook_url = val("webhook_url", 500), email_flow_url = val("email_flow_url", 500);
+      for (const u of [webhook_url, email_flow_url]) if (u && !/^https:\/\/[^\s]+$/.test(u)) throw bad("Addresses must start with https://");
+      await putCreds(env, "notify", { webhook_url, email_flow_url }, { label: [webhook_url && "Chat webhook", email_flow_url && "Email flow"].filter(Boolean).join(" + ") || "Nothing set" });
+    } else throw bad("unknown provider");
+    return json({ ok: true });
+  }
+
+  if (p[0] === "disconnect") {
+    const prov = String(b.provider || "");
+    const c = await creds(env, prov);
+    if (prov === "trello") for (const w of Object.values(c.webhooks || {})) await ext(`https://api.trello.com/1/webhooks/${w.id}?key=${c.key}&token=${c.token}`, { method: "DELETE" }).catch(() => {});
+    if (prov === "clickup") for (const w of Object.values(c.webhooks || {})) await ext(`https://api.clickup.com/api/v2/webhook/${w.id}`, { method: "DELETE", headers: { Authorization: c.token } }).catch(() => {});
+    if (!["slack", "trello", "clickup", "email", "notify"].includes(prov)) throw bad("unknown provider");
+    await env.CONNECTIONS.delete("conn:" + prov); await env.CONNECTIONS.delete("meta:" + prov);
+    return json({ ok: true });
+  }
+
+  if (p[0] === "email") {
+    const old = await creds(env, "email");
+    if (p[1] === "reveal") return json({ ok: true, token: old.token || "" });
+    const token = [...crypto.getRandomValues(new Uint8Array(24))].map((x) => x.toString(16).padStart(2, "0")).join("");
+    await putCreds(env, "email", { token }, { label: "Token set" });
+    return json({ ok: true, token });
+  }
+
+  if (p[0] === "choices") {   // channels / boards / lists the connected account can see
+    const prov = String(b.provider || "");
+    const c = await creds(env, prov);
+    if (prov === "slack") {
+      const r = await ext("https://slack.com/api/conversations.list?types=public_channel,private_channel&exclude_archived=true&limit=200", { headers: { Authorization: `Bearer ${c.bot_token}` } });
+      if (!r.data.ok) throw bad(`Slack: ${r.data.error || r.status}`);
+      return json((r.data.channels || []).map((x) => ({ id: x.id, name: "#" + x.name, member: !!x.is_member })));
+    }
+    if (prov === "trello") {
+      const r = await ext(`https://api.trello.com/1/members/me/boards?fields=name&filter=open&key=${c.key}&token=${c.token}`);
+      if (!r.ok) throw bad("Trello refused the request.");
+      return json(r.data.map((x) => ({ id: x.id, name: x.name })));
+    }
+    if (prov === "clickup") {
+      const h = { headers: { Authorization: c.token } };
+      const sp = await ext(`https://api.clickup.com/api/v2/team/${c.team_id}/space?archived=false`, h);
+      const out = [];
+      for (const s of (sp.data.spaces || []).slice(0, 20)) {
+        const [fo, li] = await Promise.all([ext(`https://api.clickup.com/api/v2/space/${s.id}/folder?archived=false`, h), ext(`https://api.clickup.com/api/v2/space/${s.id}/list?archived=false`, h)]);
+        for (const l of li.data.lists || []) out.push({ id: l.id, name: `${s.name} / ${l.name}` });
+        for (const fd of fo.data.folders || []) for (const l of fd.lists || []) out.push({ id: l.id, name: `${s.name} / ${fd.name} / ${l.name}` });
+      }
+      return json(out);
+    }
+    throw bad("unknown provider");
+  }
+
+  if (p[0] === "watch") {     // create the webhook at Trello / ClickUp and route it to a website
+    const prov = String(b.provider || ""), id = clip(b.id, 60), site = String(b.site || "");
+    if (!SITE_RE.test(site) || !id) throw bad("Choose the board or list and the website.");
+    const c = await creds(env, prov);
+    const callback = `${origin}/api/hooks/${prov}`;
+    if (prov === "trello") {
+      if (!c.webhooks?.[id]) {
+        const q = new URLSearchParams({ callbackURL: callback, idModel: id, description: "WP Autopilot", key: c.key, token: c.token });
+        const r = await ext(`https://api.trello.com/1/webhooks/?${q}`, { method: "POST" });
+        if (!r.ok) throw bad(`Trello could not create the webhook (${r.status}).`);
+        c.webhooks = { ...(c.webhooks || {}), [id]: { id: r.data.id } };
+        await putCreds(env, "trello", c, (await getMeta(env, "trello")) || {});
+      }
+    } else if (prov === "clickup") {
+      if (!c.webhooks?.[id]) {
+        const r = await ext(`https://api.clickup.com/api/v2/team/${c.team_id}/webhook`, { method: "POST", headers: { Authorization: c.token, "Content-Type": "application/json" },
+          body: JSON.stringify({ endpoint: callback, events: ["taskCreated", "taskCommentPosted"], list_id: Number(id) }) });
+        if (!r.ok || !r.data.webhook?.secret) throw bad(`ClickUp could not create the webhook (${r.status}).`);
+        c.webhooks = { ...(c.webhooks || {}), [id]: { id: r.data.id, secret: r.data.webhook.secret } };
+        await putCreds(env, "clickup", c, (await getMeta(env, "clickup")) || {});
+      }
+    } else throw bad("unknown provider");
+    return mapChannel(gh, prov, id, site, false);
+  }
+
+  if (p[0] === "map") {
+    const prov = String(b.provider || ""), id = clip(b.id, 60), site = String(b.site || "");
+    if (!CHANNEL_PROVIDERS.includes(prov) || !id || !SITE_RE.test(site)) throw bad("bad request");
+    if (b.remove && prov !== "slack") {  // stop watching: remove webhook too when no website uses it any more
+      const c = await creds(env, prov);
+      const others = (await loadSites(gh)).filter((s) => s.id !== site && (s.channels?.[prov] || []).includes(id));
+      const w = c.webhooks?.[id];
+      if (w && !others.length) {
+        if (prov === "trello") await ext(`https://api.trello.com/1/webhooks/${w.id}?key=${c.key}&token=${c.token}`, { method: "DELETE" }).catch(() => {});
+        else await ext(`https://api.clickup.com/api/v2/webhook/${w.id}`, { method: "DELETE", headers: { Authorization: c.token } }).catch(() => {});
+        delete c.webhooks[id];
+        await putCreds(env, prov, c, (await getMeta(env, prov)) || {});
+      }
+    }
+    return mapChannel(gh, prov, id, site, !!b.remove);
+  }
+  return json({ error: "not found" }, 404);
+}
+
+async function mapChannel(gh, prov, id, site, remove) {
+  const err = await mutateJson(gh, `sites/${site}/site.json`, (s) => {
+    const c = (s.channels = s.channels || {});
+    const set = new Set(c[prov] || []);
+    if (remove) set.delete(id); else set.add(id);
+    c[prov] = [...set];
+  }, `dashboard: ${remove ? "unmap" : "map"} ${prov} ${id} for ${site}`);
+  return err || json({ ok: true });
+}
+
+async function connectionsStatus(gh, env, origin) {
+  const out = { storage: !!env.CONNECTIONS, origin, providers: {} };
+  if (env.CONNECTIONS) {
+    for (const prov of ["slack", "trello", "clickup", "email", "notify"]) {
+      const m = await getMeta(env, prov);
+      if (m) out.providers[prov] = { connected: true, label: m.label || "", since: m.connected_at };
+    }
+    out.slack_manifest = JSON.stringify(slackManifest(origin), null, 2);
+  }
+  out.legacy = { slack: !!env.SLACK_SIGNING_SECRET, trello: !!env.TRELLO_SECRET, clickup: !!env.CLICKUP_WEBHOOK_SECRET, email: !!env.INBOX_TOKEN };
+  return json(out);
+}
+
+/* ---------------------------------------------------------------- outbound notices (Actions → dashboard → Slack/Trello/ClickUp/email) */
+
+const NOTICE = {
+  needs_info: ["❓", "needs your answers before it can be built"],
+  preview_ready: ["👀", "is ready to review — open it in the dashboard to approve or ask for changes"],
+  qa_failed: ["⚠️", "failed the automatic checks and was not published"],
+  live: ["🚀", "is live"], rolled_back: ["↩️", "was rolled back"], error: ["❌", "hit an error"],
+};
+
+// The caller proves it is a workflow run of this repository by presenting that run's own GITHUB_TOKEN; no shared secret is needed.
+async function hookNotify(gh, env, request, body) {
+  const token = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");
+  const runId = String(body.run_id || "");
+  if (!token || !/^\d{1,20}$/.test(runId)) throw bad("unauthorized", 401);
+  const base = `${env.GITHUB_API || "https://api.github.com"}/repos/${env.GITHUB_REPO}`;
+  const v = await fetch(`${base}/actions/runs/${runId}`, { headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "User-Agent": "wp-autopilot-dashboard" }, signal: AbortSignal.timeout(15000) }).catch(() => null);
+  const run = v?.ok ? await v.json() : null;
+  if (!run || !["in_progress", "queued"].includes(run.status)) throw bad("unauthorized", 401);
+  const rid = String(body.request || ""), event = String(body.event || "");
+  if (!/^R\d{8}-\d{3}$/.test(rid) || !NOTICE[event]) throw bad("bad notice");
+  return json({ ok: true, sent: await sendNotice(gh, env, rid, event, new URL(request.url).origin) });
+}
+
+async function sendNotice(gh, env, rid, event, origin) {
+  const st = await gh.getJson("state.json");
+  const r = (st?.requests || []).find((x) => x.id === rid);
+  if (!r) throw bad("request not found", 404);
+  const site = (await gh.getJson(`sites/${r.site}/site.json`)) || {};
+  const [icon, phrase] = NOTICE[event];
+  const link = `${origin}/#/req/${rid}`;
+  let text = `${icon} ${site.name || r.site}: “${r.title || ""}” (${rid}) ${phrase}.${link ? `\n${link}` : ""}`;
+  if (event === "needs_info") {
+    const q = await gh.getRaw(`requests/${rid}/questions.md`);
+    if (q) text += "\n\n" + (await q.text()).slice(0, 900);
+  }
+  const sent = [];
+  const post = async (name, url, data, headers = {}) => {
+    const x = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(data), signal: AbortSignal.timeout(10000) }).catch(() => null);
+    if (x?.ok) sent.push(name);
+  };
+  const n = await creds(env, "notify");
+  if (n.webhook_url) await post("webhook", n.webhook_url, { text, event, site: r.site, request: rid, link });
+  const o = r.origin || {};
+  const src = o.source || r.source;
+  if (src === "slack" && o.channel) {
+    const c = await creds(env, "slack");
+    if (c.bot_token) await post("slack", "https://slack.com/api/chat.postMessage", { channel: o.channel, thread_ts: o.thread_ts, text }, { Authorization: `Bearer ${c.bot_token}` });
+  } else if (src === "trello" && o.card) {
+    const c = await creds(env, "trello");
+    if (c.key) await post("trello", `https://api.trello.com/1/cards/${o.card}/actions/comments?${new URLSearchParams({ text, key: c.key, token: c.token })}`, {});
+  } else if (src === "clickup" && o.task) {
+    const c = await creds(env, "clickup");
+    if (c.token) await post("clickup", `https://api.clickup.com/api/v2/task/${o.task}/comment`, { comment_text: text }, { Authorization: c.token });
+  } else if (src === "email" && o.from && n.email_flow_url) {
+    await post("email", n.email_flow_url, { to: o.from, subject: `Re: ${r.title || ""} (${rid})`, body: text });
+  }
+  return sent;
 }
