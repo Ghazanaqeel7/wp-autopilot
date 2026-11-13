@@ -116,6 +116,8 @@ def onboard(site):
              f"blocking GitHub's servers — allow the path /wp-json/autopilot/* and try again.")
     if status in (401, 403) and h.get("code") in ("ap_not_connected", "ap_bad_key"):
         code = ap_client.connection_code(site)
+        # Not secret (public key + ids): saved so the dashboard / Claude can show it without Actions logs.
+        (ROOT / "sites" / site / "connection-code.txt").write_text(code + "\n")
         cfg["status"] = "pending_connect"
         save(ROOT / "sites" / site / "site.json", cfg)
         set_site(site, name=cfg["name"], url=cfg["url"], status="pending_connect")
