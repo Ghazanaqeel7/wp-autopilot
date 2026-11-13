@@ -9,7 +9,7 @@
   runner.py discard  <site> <request>         drop a staged change
   runner.py health                            check every active site
 
-Secrets via env: AP_SIGNING_KEY, AP_KEY_ID. Preview links are secrets too: they go to
+Secret via env: AP_SIGNING_KEY (key id is derived). Preview links are secrets too: they go to
 $RUNNER_TEMP / step summary only, never into git.
 """
 import base64, datetime as dt, json, os, pathlib, re, sys
