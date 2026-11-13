@@ -1,0 +1,174 @@
+{
+  "id": 8454,
+  "type": "page",
+  "title": "Article",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "dcafd6938e6f445688553398f7b67557f7e24d8fa54f9c9d51c2d4c3fefc467f",
+  "elements": [
+    {
+      "id": "62d7a2df",
+      "type": "section",
+      "s": {
+        "background_background": "classic",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#000000",
+        "background_color": "#202020",
+        "background_position": "center center",
+        "background_attachment": "fixed",
+        "background_size": "cover",
+        "layout": "full_width",
+        "stretch_section": "section-stretched"
+      },
+      "c": [
+        {
+          "id": "4ffd37e5",
+          "type": "column",
+          "c": [
+            {
+              "id": "1708efe7",
+              "type": "heading",
+              "s": {
+                "title": "Article",
+                "title_color": "#FFFFFF",
+                "align": "center",
+                "typography_typography": "custom"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1caa59cc",
+      "type": "section",
+      "s": {
+        "gap": "extended",
+        "background_background": "classic",
+        "background_position": "initial",
+        "background_repeat": "no-repeat",
+        "background_size": "cover",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#FFFFFF",
+        "background_attachment": "fixed"
+      },
+      "c": [
+        {
+          "id": "5eeae96c",
+          "type": "column",
+          "c": [
+            {
+              "id": "7a5c7e0a",
+              "type": "section",
+              "s": {
+                "layout": "full_width",
+                "gap": "extended"
+              },
+              "c": [
+                {
+                  "id": "f63ee62",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "45bdc11",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "How Digital Marketing Transforms Your Business Online\nIn today’s fast-paced worl",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "text_color": "#000000"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "3b9942f",
+              "type": "section",
+              "s": {
+                "layout": "full_width",
+                "gap": "extended"
+              },
+              "c": [
+                {
+                  "id": "d79c436",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "f43eae3",
+                      "type": "tfl-heading",
+                      "s": {
+                        "heading": "All-in-One Digital Solutions Under One Roof",
+                        "heading_color": "#000000",
+                        "heading_typography_typography": "custom",
+                        "heading_typography_font_family": "Bricolage Grotesque",
+                        "heading_typography_font_weight": "800",
+                        "subtitle_typography_typography": "custom",
+                        "align": "left",
+                        "title_tag": "h2"
+                      }
+                    },
+                    {
+                      "id": "afcd591",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Tired of juggling multiple agencies for different services? At Next Level Digita",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "text_color": "#000000"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "a9a1cff",
+              "type": "section",
+              "s": {
+                "layout": "full_width",
+                "gap": "extended"
+              },
+              "c": [
+                {
+                  "id": "9616278",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "e5962db",
+                      "type": "tfl-heading",
+                      "s": {
+                        "heading": "Custom Digital Experiences Tailored for Your Brand",
+                        "heading_color": "#000000",
+                        "heading_typography_typography": "custom",
+                        "heading_typography_font_family": "Bricolage Grotesque",
+                        "heading_typography_font_weight": "800",
+                        "subtitle_typography_typography": "custom",
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "f847ef1",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Your business is unique—and your digital presence should be too. At Next Level D",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "text_color": "#000000"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

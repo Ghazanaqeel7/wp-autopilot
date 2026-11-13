@@ -1,0 +1,60 @@
+{
+  "id": 7561,
+  "type": "elementor_library",
+  "title": "testimonial gray",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "8c9f16e9c0f43ace7075796ff23ab357d881fa052e134a0ec0144490e85cbf49",
+  "elements": [
+    {
+      "id": "38fb742",
+      "type": "section",
+      "s": {
+        "gap": "no",
+        "background_background": "classic",
+        "background_color": "#F3F3F4"
+      },
+      "c": [
+        {
+          "id": "d143538",
+          "type": "column",
+          "c": [
+            {
+              "id": "a44cf85",
+              "type": "image",
+              "s": {
+                "align": "left"
+              }
+            },
+            {
+              "id": "5ba699a",
+              "type": "text-editor",
+              "s": {
+                "editor": "Pellentesque vel dolor consectetur, ate eros vitae, molestie felis. Vivamus orna"
+              }
+            },
+            {
+              "id": "56e6a04",
+              "type": "spacer"
+            },
+            {
+              "id": "c6712ee",
+              "type": "tfl-heading",
+              "s": {
+                "subtitle": "Exclusive at UX/UI",
+                "heading": "Kamrul Islam",
+                "align": "left",
+                "title_tag": "h6"
+              }
+            },
+            {
+              "id": "9fa1f6d",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

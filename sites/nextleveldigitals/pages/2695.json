@@ -1,0 +1,733 @@
+{
+  "id": 2695,
+  "type": "elementor_library",
+  "title": "home1",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "1d6e672264fae875455a9355db09c534b1ff4148b88146fe2e02cda63e84b8a1",
+  "elements": [
+    {
+      "id": "7c855896",
+      "type": "section",
+      "s": {
+        "gap": "no"
+      },
+      "c": [
+        {
+          "id": "71dd2efb",
+          "type": "column",
+          "c": [
+            {
+              "id": "699d8e50",
+              "type": "slider_revolution",
+              "s": {
+                "revslidertitle": "Slider 1",
+                "shortcode": "[rev_slider alias=\"slider-1-1\" slidertitle=\"Slider 1\"][/rev_slider]"
+              }
+            },
+            {
+              "id": "38cbbfe9",
+              "type": "wp-widget-nav_menu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6237e59",
+      "type": "section",
+      "s": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "gap": "no"
+      },
+      "c": [
+        {
+          "id": "5b5bf3e0",
+          "type": "column",
+          "c": [
+            {
+              "id": "72ba8954",
+              "type": "spacer"
+            },
+            {
+              "id": "3502792a",
+              "type": "section",
+              "s": {
+                "structure": "20",
+                "gap": "extended"
+              },
+              "c": [
+                {
+                  "id": "56412d7d",
+                  "type": "column",
+                  "s": {
+                    "css_classes": "tfl-col-5"
+                  },
+                  "c": [
+                    {
+                      "id": "1b43b081",
+                      "type": "spacer"
+                    },
+                    {
+                      "id": "63773472",
+                      "type": "tfl-heading",
+                      "s": {
+                        "heading": "OUR 10 YEARS WORKINGEXPERIENCE DESIGN.",
+                        "subtitle": "ABOUT US"
+                      }
+                    },
+                    {
+                      "id": "128fc995",
+                      "type": "spacer"
+                    },
+                    {
+                      "id": "3c7b640c",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Nulla feugiat aliquam purus, ac ultrices augue aliquam vel. Sed venenatis a nunc",
+                        "text_color": "#777777",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Open Sans",
+                        "typography_font_weight": "400"
+                      }
+                    },
+                    {
+                      "id": "6a431fa3",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Donec scelerisque dolor id nunc dictum, interdum gravida mauris rhoncus. Aliquam",
+                        "text_color": "#777777",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Open Sans",
+                        "typography_font_weight": "400"
+                      }
+                    },
+                    {
+                      "id": "6f6bc954",
+                      "type": "spacer"
+                    },
+                    {
+                      "id": "3c026d09",
+                      "type": "tfl-button",
+                      "s": {
+                        "button_text": "Discover More"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "262d8010",
+                  "type": "column",
+                  "s": {
+                    "css_classes": "tfl-col-7"
+                  },
+                  "c": [
+                    {
+                      "id": "432fbbe6",
+                      "type": "image",
+                      "s": {
+                        "image_size": "full",
+                        "align": "right"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "789874a7",
+              "type": "spacer"
+            },
+            {
+              "id": "59680d9d",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3bbbc29a",
+      "type": "section",
+      "s": {
+        "gap": "extended"
+      },
+      "c": [
+        {
+          "id": "2a829dd",
+          "type": "column",
+          "c": [
+            {
+              "id": "532eb57c",
+              "type": "spacer"
+            },
+            {
+              "id": "2d1cce71",
+              "type": "tfl-services-grid",
+              "s": {
+                "tfl_title": "Title 1",
+                "style": "style2"
+              }
+            },
+            {
+              "id": "475f6ab5",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7cd5b5c9",
+      "type": "section",
+      "s": {
+        "structure": "22",
+        "css_classes": "no-icon",
+        "gap": "extended"
+      },
+      "c": [
+        {
+          "id": "6bbabf95",
+          "type": "column",
+          "c": [
+            {
+              "id": "55eff118",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "An agency is a business that provides specific Portfolio.",
+                "subtitle": "Our Works",
+                "align": "left"
+              }
+            }
+          ]
+        },
+        {
+          "id": "646498c8",
+          "type": "column",
+          "c": [
+            {
+              "id": "7e9e0200",
+              "type": "spacer"
+            },
+            {
+              "id": "1ac1beaa",
+              "type": "text-editor",
+              "s": {
+                "editor": "There are many variations of passages of Lorem Ipsum available, have suffered in"
+              }
+            },
+            {
+              "id": "73230a75",
+              "type": "divider",
+              "s": {
+                "text": "Divider",
+                "color": "#11161E"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "74b65b3f",
+      "type": "section",
+      "s": {
+        "background_background": "classic",
+        "background_color": "#F3F3F5",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#F3F3F5",
+        "gap": "no"
+      },
+      "c": [
+        {
+          "id": "2bd20bf1",
+          "type": "column",
+          "c": [
+            {
+              "id": "629194be",
+              "type": "spacer"
+            },
+            {
+              "id": "186d18fc",
+              "type": "tfl-portfolio-grid",
+              "s": {
+                "tfl_title": "Title 1",
+                "post_lists_size_size": "themesflat-blog-five-columns",
+                "thumbnail_size_size": "themesflat-blog-five-columns",
+                "portfolio_thumbnail_size": "themesflat-blog-five-columns",
+                "columns": "5"
+              }
+            },
+            {
+              "id": "5df7f182",
+              "type": "spacer"
+            },
+            {
+              "id": "6f44bf1f",
+              "type": "tfl-button",
+              "s": {
+                "button_text": "VIEW ALL PORTFOLIO",
+                "style": "style2"
+              }
+            },
+            {
+              "id": "2510caad",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3ea62717",
+      "type": "section",
+      "s": {
+        "gap": "no",
+        "stretch_section": "section-stretched",
+        "background_background": "classic",
+        "css_classes": "no-icon stories has-circle"
+      },
+      "c": [
+        {
+          "id": "29c61f1a",
+          "type": "column",
+          "c": [
+            {
+              "id": "68083b55",
+              "type": "spacer"
+            },
+            {
+              "id": "63881bb1",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "WE DO AWESOME CONTRIBUTE FOR OUR CLIENTS. CHECK SOME OF OUR COUNTER.",
+                "subtitle": "Completed stories!",
+                "title_tag": "h5",
+                "heading_color": "#FFFFFF",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_weight": "400"
+              }
+            },
+            {
+              "id": "418465fe",
+              "type": "spacer"
+            },
+            {
+              "id": "149effd9",
+              "type": "section",
+              "s": {
+                "structure": "40",
+                "gap": "extended"
+              },
+              "c": [
+                {
+                  "id": "89eaf02",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "2c54bb47",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Project  completed",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF33",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "title_typography_typography": "custom",
+                        "general_box_shadow_box_shadow_type": "yes"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "e4704fb",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "5ee1db2e",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Our Happy clients",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFA800",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "65608c80",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "7fe149b4",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Cups  Of coffee",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF33",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "3e4ecefa",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "5ac89e29",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Win   Awards",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF33",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "33fea815",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "70199b99",
+      "type": "section",
+      "s": {
+        "gap": "no",
+        "stretch_section": "section-stretched"
+      },
+      "c": [
+        {
+          "id": "61ae9b2a",
+          "type": "column",
+          "c": [
+            {
+              "id": "6a36fc02",
+              "type": "text-editor",
+              "s": {
+                "editor": "We help Videos to createDigital agency amazing experience.",
+                "align": "left",
+                "typography_font_family": "Oswald",
+                "typography_font_weight": "400"
+              }
+            },
+            {
+              "id": "4337efd9",
+              "type": "section",
+              "s": {
+                "background_background": "classic",
+                "gap": "no"
+              },
+              "c": [
+                {
+                  "id": "68ed8bd4",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "1313967d",
+                      "type": "video",
+                      "s": {
+                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
+                        "vimeo_url": "https://vimeo.com/235215203",
+                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
+                        "lazy_load": "yes",
+                        "show_image_overlay": "yes",
+                        "lightbox": "yes"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "339d6229",
+      "type": "section",
+      "s": {
+        "css_classes": "our-testimonials"
+      },
+      "c": [
+        {
+          "id": "44e4e29c",
+          "type": "column",
+          "c": [
+            {
+              "id": "6c12027d",
+              "type": "spacer"
+            },
+            {
+              "id": "ba93f7",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "WE DO AWESOME CONTRIBUTE FOR OUR CLIENTS.CHECK SOME OF OUR CLIENT SAYS?",
+                "subtitle": "Our Testimonials",
+                "heading_typography_typography": "custom"
+              }
+            },
+            {
+              "id": "58b238cb",
+              "type": "spacer"
+            },
+            {
+              "id": "b36b3f4",
+              "type": "tfcarousel",
+              "s": {
+                "carousel_column_desk": "3",
+                "carousel_bullets_bg_color": "#000000",
+                "carousel_bullets_hover_bg_color": "#FFA800",
+                "carousel_arrow_bg_color": "#FFA800"
+              }
+            },
+            {
+              "id": "5dfc0945",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "49a210df",
+      "type": "section",
+      "s": {
+        "stretch_section": "section-stretched",
+        "background_background": "classic",
+        "css_classes": "text-center"
+      },
+      "c": [
+        {
+          "id": "57a54ea0",
+          "type": "column",
+          "c": [
+            {
+              "id": "354a98e1",
+              "type": "spacer"
+            },
+            {
+              "id": "1d5025bc",
+              "type": "text-editor",
+              "s": {
+                "editor": "SHOULD YOU HIRE A MARKETINGAGENCY FOR YOUAR SMALL BUSINESS? KEYFACTS ABOUT HIRIN",
+                "text_color": "#FFFFFF",
+                "typography_typography": "custom",
+                "typography_font_family": "Roboto",
+                "typography_font_weight": "400",
+                "typography_text_decoration": "underline"
+              }
+            },
+            {
+              "id": "234cada1",
+              "type": "spacer"
+            },
+            {
+              "id": "460e5c70",
+              "type": "tfl-button",
+              "s": {
+                "button_text": "DISCOVER MORE"
+              }
+            },
+            {
+              "id": "7007cc3f",
+              "type": "spacer"
+            },
+            {
+              "id": "386d4c0f",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3f85c265",
+      "type": "section",
+      "s": {
+        "css_classes": "no-icon"
+      },
+      "c": [
+        {
+          "id": "781d7a94",
+          "type": "column",
+          "c": [
+            {
+              "id": "5e9f1dca",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "13bbe2f7",
+      "type": "section",
+      "s": {
+        "structure": "22",
+        "css_classes": "no-icon",
+        "gap": "extended"
+      },
+      "c": [
+        {
+          "id": "dddf4b5",
+          "type": "column",
+          "c": [
+            {
+              "id": "65fccc66",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "An agency is a business that provides Pricing Table.",
+                "subtitle": "Pricing Table",
+                "align": "left"
+              }
+            }
+          ]
+        },
+        {
+          "id": "30a8d205",
+          "type": "column",
+          "c": [
+            {
+              "id": "33b377fd",
+              "type": "spacer"
+            },
+            {
+              "id": "40a3b2b7",
+              "type": "text-editor",
+              "s": {
+                "editor": "There are many variations of passages of Lorem Ipsum available, have suffered in"
+              }
+            },
+            {
+              "id": "4b725ad2",
+              "type": "divider",
+              "s": {
+                "text": "Divider",
+                "color": "#11161E"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3f715845",
+      "type": "section",
+      "s": {
+        "gap": "no"
+      },
+      "c": [
+        {
+          "id": "46aa4160",
+          "type": "column",
+          "c": [
+            {
+              "id": "4e1a53d6",
+              "type": "spacer"
+            },
+            {
+              "id": "ad8ff18",
+              "type": "tfl-pricing-table",
+              "s": {
+                "column_layout": "custom"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b687d3f",
+      "type": "section",
+      "c": [
+        {
+          "id": "41ab8efc",
+          "type": "column",
+          "c": [
+            {
+              "id": "221db173",
+              "type": "spacer"
+            },
+            {
+              "id": "42158c99",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "WE DO AWESOME CONTRIBUTE FOR OUR CLIENTS. CHECK SOME OF LETEST NEWS.",
+                "subtitle": "Our Blog"
+              }
+            },
+            {
+              "id": "3c721306",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "783dc57f",
+      "type": "section",
+      "s": {
+        "css_classes": "height-243",
+        "gap": "no"
+      },
+      "c": [
+        {
+          "id": "1b813fd3",
+          "type": "column",
+          "c": [
+            {
+              "id": "6c907dfa",
+              "type": "tfl-posts-grid",
+              "s": {
+                "tfl_title": "Title 1",
+                "tfl_title_tag": "h5",
+                "post_lists_size_size": "themesflat-blog-grid"
+              }
+            },
+            {
+              "id": "1a997a02",
+              "type": "spacer"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

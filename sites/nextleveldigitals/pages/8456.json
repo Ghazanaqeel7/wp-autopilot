@@ -1,0 +1,369 @@
+{
+  "id": 8456,
+  "type": "elementor_library",
+  "title": "about",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "8b142af77f77267a6c543245e2fbccdcbafd1dab63ea0559cc00f0f56fd5eb3b",
+  "elements": [
+    {
+      "id": "7d5f12d2",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "background_background": "classic",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#000000",
+        "background_color": "#202020",
+        "background_position": "center center",
+        "background_attachment": "fixed",
+        "background_size": "cover"
+      },
+      "c": [
+        {
+          "id": "6daeb307",
+          "type": "column",
+          "c": [
+            {
+              "id": "72109d92",
+              "type": "heading",
+              "s": {
+                "title": "About",
+                "title_color": "#FFFFFF",
+                "align": "center",
+                "typography_typography": "custom"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ebd600f",
+      "type": "section",
+      "s": {
+        "background_background": "classic",
+        "background_color": "#FE750F85"
+      },
+      "c": [
+        {
+          "id": "599501ac",
+          "type": "column",
+          "c": [
+            {
+              "id": "5cedc709",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "our 10 years working experience design.",
+                "heading_color": "#000000",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_family": "Bricolage Grotesque",
+                "heading_typography_font_weight": "800",
+                "subtitle_typography_typography": "custom"
+              }
+            },
+            {
+              "id": "533eb2cd",
+              "type": "text-editor",
+              "s": {
+                "editor": "Our process is built for busy teams who want quality without the wait—simple, sm",
+                "align": "center",
+                "typography_typography": "custom",
+                "typography_font_family": "Bricolage Grotesque",
+                "text_color": "#000000"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7e2868c5",
+      "type": "section",
+      "s": {
+        "structure": "20",
+        "background_background": "classic",
+        "background_color": "#FE750F85"
+      },
+      "c": [
+        {
+          "id": "2b6c1bec",
+          "type": "column",
+          "c": [
+            {
+              "id": "2f10757f",
+              "type": "image",
+              "s": {
+                "image_size": "custom",
+                "align": "left",
+                "css_filters_css_filter": "custom",
+                "css_filters_hover_css_filter": "custom"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1e9de2ba",
+          "type": "column",
+          "s": {
+            "content_position": "center",
+            "background_background": "classic"
+          },
+          "c": [
+            {
+              "id": "68ea25d1",
+              "type": "tabs",
+              "s": {
+                "tab_color": "#11161E",
+                "tab_active_color": "#11161E",
+                "tab_typography_typography": "custom",
+                "tab_typography_font_family": "Bricolage Grotesque",
+                "tab_typography_font_weight": "400",
+                "tab_typography_text_transform": "uppercase",
+                "content_color": "#000000",
+                "content_typography_typography": "custom",
+                "content_typography_font_family": "Bricolage Grotesque",
+                "content_typography_font_weight": "400"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1450f4c5",
+      "type": "section",
+      "s": {
+        "gap": "extended",
+        "background_background": "classic",
+        "background_position": "initial",
+        "background_repeat": "no-repeat",
+        "background_size": "cover",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#FFFFFF",
+        "background_attachment": "fixed"
+      },
+      "c": [
+        {
+          "id": "3198a8ca",
+          "type": "column",
+          "c": [
+            {
+              "id": "5cb1e293",
+              "type": "section",
+              "s": {
+                "layout": "full_width",
+                "gap": "extended"
+              },
+              "c": [
+                {
+                  "id": "127a049c",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "5946a02c",
+                      "type": "tfl-heading",
+                      "s": {
+                        "heading": "Creative Environment",
+                        "heading_color": "#000000",
+                        "heading_typography_typography": "custom",
+                        "heading_typography_font_family": "Bricolage Grotesque",
+                        "heading_typography_font_weight": "800",
+                        "subtitle_typography_typography": "custom"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "6e078b8e",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "72353d7a",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "7443f9d5",
+                      "type": "toggle",
+                      "s": {
+                        "title_color": "#000000",
+                        "content_color": "#000000",
+                        "title_typography_typography": "custom",
+                        "title_typography_font_family": "Bricolage Grotesque",
+                        "content_typography_typography": "custom",
+                        "content_typography_font_family": "Bricolage Grotesque"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "8a3ec72",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "3f8ad63f",
+                      "type": "toggle",
+                      "s": {
+                        "title_color": "#000000",
+                        "content_color": "#000000",
+                        "title_typography_typography": "custom",
+                        "title_typography_font_family": "Bricolage Grotesque",
+                        "content_typography_typography": "custom",
+                        "content_typography_font_family": "Bricolage Grotesque"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "493d33cf",
+      "type": "section",
+      "s": {
+        "gap": "no",
+        "stretch_section": "section-stretched",
+        "background_background": "classic",
+        "css_classes": "no-icon stories has-circle gray",
+        "background_position": "center center",
+        "background_repeat": "no-repeat",
+        "background_size": "cover",
+        "background_attachment": "fixed",
+        "background_color": "#000000"
+      },
+      "c": [
+        {
+          "id": "59717ac6",
+          "type": "column",
+          "c": [
+            {
+              "id": "6e74ae9d",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "WE DO AWESOME CONTRIBUTE FOR OUR CLIENTS. CHECK SOME OF OUR COUNTER.",
+                "title_tag": "h5",
+                "heading_color": "#FFFFFF",
+                "heading_typography_typography": "custom"
+              }
+            },
+            {
+              "id": "26218a8a",
+              "type": "section",
+              "s": {
+                "structure": "40",
+                "gap": "extended",
+                "css_classes": "active-2"
+              },
+              "c": [
+                {
+                  "id": "4178bcef",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "4fd84347",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Project  completed",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF75",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "title_typography_typography": "custom",
+                        "title_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "2a85dd5a",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "64632f7e",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Our Happy clients",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFA800",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none",
+                        "title_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "1bf8f034",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "7b4b2f4c",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Cups  Of coffee",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF33",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none",
+                        "title_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "4b2d13df",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "2187bb6c",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Win   Awards",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF33",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Oswald",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none",
+                        "title_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

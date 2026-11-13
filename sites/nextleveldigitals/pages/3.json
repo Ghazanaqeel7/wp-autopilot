@@ -1,0 +1,41 @@
+{
+  "id": 3,
+  "type": "page",
+  "title": "Terms & Conditions",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "1d8b4df3ac7be6841254dfb3bc66633b691e707cc7c23ef732d52e6522cd6d32",
+  "elements": [
+    {
+      "id": "6a608951",
+      "type": "section",
+      "s": {
+        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
+        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+      },
+      "c": [
+        {
+          "id": "18a06097",
+          "type": "column",
+          "s": {
+            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
+            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+          },
+          "c": [
+            {
+              "id": "bfe555a",
+              "type": "text-editor",
+              "s": {
+                "editor": "Terms and Conditions\nEffective Date: 9/1/2023Company: Next Level Digitals (“we,”",
+                "text_color": "#000000",
+                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
+                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

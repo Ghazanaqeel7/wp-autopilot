@@ -1,0 +1,58 @@
+{
+  "id": 7560,
+  "type": "elementor_library",
+  "title": "dark testimonial",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "51b9693ed65dd2ec3ce5e8a21dfd68e3fff76930d6d5eb3e907d8a4da62c5f5c",
+  "elements": [
+    {
+      "id": "38fb742",
+      "type": "section",
+      "s": {
+        "gap": "no",
+        "background_position": "center center",
+        "background_repeat": "no-repeat",
+        "background_size": "cover"
+      },
+      "c": [
+        {
+          "id": "d143538",
+          "type": "column",
+          "c": [
+            {
+              "id": "a44cf85",
+              "type": "image",
+              "s": {
+                "align": "left"
+              }
+            },
+            {
+              "id": "5ba699a",
+              "type": "text-editor",
+              "s": {
+                "editor": "Phasellus vestibulum, lorem sit amet congue egestas, mi nibh congue nisi, vel vu",
+                "text_color": "#FFFFFF"
+              }
+            },
+            {
+              "id": "56e6a04",
+              "type": "spacer"
+            },
+            {
+              "id": "c6712ee",
+              "type": "tfl-heading",
+              "s": {
+                "subtitle": "Exclusive at UX/UI",
+                "heading": "Kamrul Islam",
+                "align": "left",
+                "title_tag": "h6"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

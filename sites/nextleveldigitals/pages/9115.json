@@ -1,0 +1,42 @@
+{
+  "id": 9115,
+  "type": "page",
+  "title": "Privacy Policy",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "20dbf33e7b7958d2f0ca9e9e8eb04fa9ad055315e087185921824e5f5e682e58",
+  "elements": [
+    {
+      "id": "14a72df",
+      "type": "section",
+      "s": {
+        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
+        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+      },
+      "c": [
+        {
+          "id": "37b8d178",
+          "type": "column",
+          "s": {
+            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
+            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+          },
+          "c": [
+            {
+              "id": "6f8c4af4",
+              "type": "text-editor",
+              "s": {
+                "editor": "Privacy Policy\nEffective Date: 9/1/2023\nCompany: Next Level DigitalsWebsite: htt",
+                "text_color": "#000000",
+                "link_color": "#4E4E4E",
+                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
+                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

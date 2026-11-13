@@ -1,0 +1,892 @@
+{
+  "id": 9055,
+  "type": "page",
+  "title": "Home",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "a983a461fcc66670421b7b80c94328831b32d38afd0056a861cbbcada1af0d21",
+  "elements": [
+    {
+      "id": "81cd16b",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "background_background": "classic",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#000000",
+        "background_color": "#202020",
+        "background_position": "center center",
+        "background_attachment": "fixed",
+        "background_size": "cover"
+      },
+      "c": [
+        {
+          "id": "1d3c01c",
+          "type": "column",
+          "c": [
+            {
+              "id": "9b6b97f",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "caad241",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "ab7ba7b",
+                      "type": "heading",
+                      "s": {
+                        "title": "Wordpress Development",
+                        "typography_typography": "custom"
+                      }
+                    },
+                    {
+                      "id": "817508d",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Welcome to Next Level Digitals, your trusted US-based WordPress development comp",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "21ee12b",
+                  "type": "column"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "35c8ff5",
+      "type": "section",
+      "s": {
+        "background_background": "classic",
+        "background_color": "#000000",
+        "hide_tablet": "hidden-tablet",
+        "hide_mobile": "hidden-mobile"
+      },
+      "c": [
+        {
+          "id": "6b5054a",
+          "type": "column",
+          "c": [
+            {
+              "id": "52dbe91",
+              "type": "section",
+              "s": {
+                "layout": "full_width",
+                "gap": "no",
+                "content_position": "space-between",
+                "css_classes": "wrap-menu-on-slider"
+              },
+              "c": [
+                {
+                  "id": "179ef4c",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "df59a1e",
+                      "type": "image",
+                      "s": {
+                        "image_size": "full",
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "ddd978e",
+                      "type": "wp-widget-nav_menu"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11db0c4",
+      "type": "section",
+      "s": {
+        "layout": "full_width"
+      },
+      "c": [
+        {
+          "id": "6010cd0",
+          "type": "column",
+          "c": [
+            {
+              "id": "2656944",
+              "type": "deensimc-smooth-marquee"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b9d7775",
+      "type": "section",
+      "c": [
+        {
+          "id": "4421f36",
+          "type": "column",
+          "c": [
+            {
+              "id": "b07b505",
+              "type": "heading",
+              "s": {
+                "title": "What is a WordPress Website?",
+                "title_color": "#000000"
+              }
+            },
+            {
+              "id": "fe36037",
+              "type": "text-editor",
+              "s": {
+                "editor": "WordPress is the most versatile platform for businesses looking to build appeali",
+                "typography_typography": "custom",
+                "typography_font_family": "Bricolage Grotesque",
+                "text_color": "#000000"
+              }
+            },
+            {
+              "id": "2703f30",
+              "type": "heading",
+              "s": {
+                "title": "Why You Need a WordPress Website",
+                "title_color": "#000000"
+              }
+            },
+            {
+              "id": "0d488ee",
+              "type": "text-editor",
+              "s": {
+                "editor": "In today’s digital age, your website is often the first point of contact between",
+                "text_color": "#000000",
+                "link_color": "#000000"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3e0a72e",
+      "type": "section",
+      "c": [
+        {
+          "id": "14d720e",
+          "type": "column",
+          "c": [
+            {
+              "id": "83ece71",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "Services",
+                "heading_color": "#000000",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_family": "Bricolage Grotesque",
+                "heading_typography_font_weight": "800",
+                "subtitle_typography_typography": "custom"
+              }
+            },
+            {
+              "id": "1494ea2",
+              "type": "text-editor",
+              "s": {
+                "editor": "Branding is our thing, we're kinda good at it.",
+                "align": "center",
+                "typography_typography": "custom",
+                "typography_font_family": "Bricolage Grotesque",
+                "text_color": "#000000"
+              }
+            },
+            {
+              "id": "bb375e4",
+              "type": "section",
+              "s": {
+                "structure": "30"
+              },
+              "c": [
+                {
+                  "id": "52791f8",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "1a5e81a",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "def0cd0",
+                      "type": "heading",
+                      "s": {
+                        "title": "Web Development with WordPress",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#FFFFFF"
+                      }
+                    },
+                    {
+                      "id": "2dbd3f2",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "As a leading WordPress development company in the USA, Next Level Digitals build",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "d97e0aa",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "41372f0",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "f5bfced",
+                      "type": "heading",
+                      "s": {
+                        "title": "Custom Theme Design",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#FFFFFF"
+                      }
+                    },
+                    {
+                      "id": "564523c",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Your website deserves a unique personality, just like your brand. At Next Level ",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cb30410",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "b80d6b3",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "40f95a6",
+                      "type": "heading",
+                      "s": {
+                        "title": "Plugin Development",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#FFF7F7"
+                      }
+                    },
+                    {
+                      "id": "9fa27ac",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Want to have some special functionality on your website? At Next Level Digitals,",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "1e26645",
+              "type": "section",
+              "s": {
+                "structure": "30"
+              },
+              "c": [
+                {
+                  "id": "c794cc6",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "9f73118",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "a5e87ff",
+                      "type": "heading",
+                      "s": {
+                        "title": "eCommerce Website Development",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#FFFFFF"
+                      }
+                    },
+                    {
+                      "id": "c264f5f",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "At Next Level Digitals, we help transform businesses by building powerful online",
+                        "typography_typography": "custom",
+                        "text_color": "#FFF3F3"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "93634c6",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "1c30381",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "c7a6d69",
+                      "type": "heading",
+                      "s": {
+                        "title": "CMS Websites",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#FFFFFF"
+                      }
+                    },
+                    {
+                      "id": "7dfdb54",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "A dynamic website needs seamless content management, and at Next Level Digitals,",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "985678b",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "36d27b6",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "c6cec4d",
+                      "type": "heading",
+                      "s": {
+                        "title": "WordPress Theme Creation",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#DADADA"
+                      }
+                    },
+                    {
+                      "id": "42741f6",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "If you’re looking for a unique look and feel for your website, Next Level Digita",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "9de8acf",
+              "type": "section",
+              "s": {
+                "structure": "30"
+              },
+              "c": [
+                {
+                  "id": "56a3cc5",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "1fdc00e",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "c7c55d1",
+                      "type": "heading",
+                      "s": {
+                        "title": "Hosting for WordPress",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#DADADA"
+                      }
+                    },
+                    {
+                      "id": "0da853a",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Reliable hosting is essential for maintaining both speed and security, and at Ne",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "c43c976",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "8659343",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "51de6e2",
+                      "type": "heading",
+                      "s": {
+                        "title": "Integration of Third-Party APIs",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#DADADA"
+                      }
+                    },
+                    {
+                      "id": "16abd98",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "At Next Level Digitals, we enhance your website’s functionality with seamless th",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cdc9ce8",
+                  "type": "column",
+                  "s": {
+                    "background_background": "classic"
+                  },
+                  "c": [
+                    {
+                      "id": "7d2b396",
+                      "type": "icon",
+                      "s": {
+                        "align": "left"
+                      }
+                    },
+                    {
+                      "id": "7f969f9",
+                      "type": "heading",
+                      "s": {
+                        "title": "WordPress Search Engine Optimization",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "title_color": "#DADADA"
+                      }
+                    },
+                    {
+                      "id": "eb8c19d",
+                      "type": "text-editor",
+                      "s": {
+                        "editor": "Success in the online world starts with visibility, and at Next Level Digitals, ",
+                        "typography_typography": "custom",
+                        "text_color": "#FFFFFF"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4c5eafa",
+      "type": "section",
+      "c": [
+        {
+          "id": "c2975b7",
+          "type": "column",
+          "c": [
+            {
+              "id": "f17a7d6",
+              "type": "text-editor",
+              "s": {
+                "editor": "What Makes Us Stand Out"
+              }
+            },
+            {
+              "id": "a02f190",
+              "type": "text-editor",
+              "s": {
+                "editor": "In today’s competitive market, choosing the right WordPress development company ",
+                "typography_typography": "custom"
+              }
+            },
+            {
+              "id": "8574b87",
+              "type": "text-editor",
+              "s": {
+                "editor": "Expertise and Experience"
+              }
+            },
+            {
+              "id": "1e4aa71",
+              "type": "text-editor",
+              "s": {
+                "editor": "With years of hands-on experience in WordPress development across multiple indus"
+              }
+            },
+            {
+              "id": "54acce6",
+              "type": "text-editor",
+              "s": {
+                "editor": "Customized Solutions"
+              }
+            },
+            {
+              "id": "259a277",
+              "type": "text-editor",
+              "s": {
+                "editor": "At Next Level Digitals, we understand that every business is unique. That’s why "
+              }
+            },
+            {
+              "id": "47d921c",
+              "type": "text-editor",
+              "s": {
+                "editor": "Client-Centric Approach"
+              }
+            },
+            {
+              "id": "9386562",
+              "type": "text-editor",
+              "s": {
+                "editor": "Your satisfaction is our priority. We collaborate closely with you throughout th"
+              }
+            },
+            {
+              "id": "4592fb8",
+              "type": "text-editor",
+              "s": {
+                "editor": "Comprehensive Services"
+              }
+            },
+            {
+              "id": "068f8af",
+              "type": "text-editor",
+              "s": {
+                "editor": "As a full-service WordPress development agency in the USA, we cover everything f"
+              }
+            },
+            {
+              "id": "be17c21",
+              "type": "text-editor",
+              "s": {
+                "editor": "Quality Assurance"
+              }
+            },
+            {
+              "id": "ae0b4dd",
+              "type": "text-editor",
+              "s": {
+                "editor": "We are committed to delivering high-performance, reliable websites. Through rigo",
+                "typography_typography": "custom"
+              }
+            },
+            {
+              "id": "b1788bd",
+              "type": "heading",
+              "s": {
+                "title": "Why Choose Next Level Digitals for WordPress Development in the USA",
+                "align": "center"
+              }
+            },
+            {
+              "id": "4604d2f",
+              "type": "text-editor",
+              "s": {
+                "editor": "In the world of WordPress development, Next Level Digitals has become a trusted ",
+                "typography_typography": "custom"
+              }
+            },
+            {
+              "id": "cd0c4de",
+              "type": "heading",
+              "s": {
+                "title": "Why Go for WordPress Development for Your Unique Business"
+              }
+            },
+            {
+              "id": "34bc2f6",
+              "type": "text-editor",
+              "s": {
+                "editor": "Choosing WordPress development in the USA is a smart decision if you want a fast",
+                "typography_typography": "custom"
+              }
+            },
+            {
+              "id": "840efe8",
+              "type": "heading",
+              "s": {
+                "title": "Cost of WordPress Development in the USA"
+              }
+            },
+            {
+              "id": "e28f980",
+              "type": "text-editor",
+              "s": {
+                "editor": "Choosing WordPress development in the USA is a smart decision if you want a fast",
+                "typography_typography": "custom"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9773f50",
+      "type": "section",
+      "s": {
+        "layout": "full_width"
+      },
+      "c": [
+        {
+          "id": "fb88879",
+          "type": "column",
+          "c": [
+            {
+              "id": "aea40bd",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "Strategic Technology Partnerships",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_family": "Bricolage Grotesque",
+                "subtitle_typography_typography": "custom",
+                "heading_color": "#000000",
+                "heading_typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "477172c",
+              "type": "deensimc-smooth-marquee",
+              "s": {
+                "deensimc_slide_direction": "yes"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1ee40d2",
+      "type": "section",
+      "s": {
+        "gap": "no",
+        "stretch_section": "section-stretched",
+        "background_background": "classic",
+        "css_classes": "no-icon stories has-circle gray",
+        "background_position": "center center",
+        "background_repeat": "no-repeat",
+        "background_size": "cover",
+        "background_attachment": "fixed"
+      },
+      "c": [
+        {
+          "id": "f713498",
+          "type": "column",
+          "c": [
+            {
+              "id": "220f347",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "Our Counters",
+                "heading_color": "#FFFFFF",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_family": "Bricolage Grotesque",
+                "heading_typography_font_weight": "800",
+                "subtitle_typography_typography": "custom",
+                "title_tag": "h2"
+              }
+            },
+            {
+              "id": "8838650",
+              "type": "section",
+              "s": {
+                "structure": "40",
+                "gap": "extended",
+                "css_classes": "active-2"
+              },
+              "c": [
+                {
+                  "id": "8cd8ee5",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "37b5586",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Project  completed",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF75",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Bricolage Grotesque",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "title_typography_typography": "custom",
+                        "title_color": "#FFFFFF",
+                        "title_typography_font_family": "Bricolage Grotesque",
+                        "counter_alignment_mobile": "left"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "94aab25",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "6c81019",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Our Happy clients",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF75",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Bricolage Grotesque",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none",
+                        "title_color": "#FFFFFF",
+                        "title_typography_typography": "custom",
+                        "title_typography_font_family": "Bricolage Grotesque",
+                        "counter_alignment_mobile": "left"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "23e37fb",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "6922184",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Cups  Of coffee",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF75",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Bricolage Grotesque",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none",
+                        "title_color": "#FFFFFF",
+                        "number_typography_font_weight": "500",
+                        "title_typography_typography": "custom",
+                        "title_typography_font_family": "Bricolage Grotesque",
+                        "counter_alignment_mobile": "left"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "63ff105",
+                  "type": "column",
+                  "c": [
+                    {
+                      "id": "2c2ca64",
+                      "type": "tfcounter",
+                      "s": {
+                        "title": "Win   Awards",
+                        "counter_alignment": "left",
+                        "separator": "none",
+                        "icon_color": "#FFFFFF75",
+                        "number_typography_typography": "custom",
+                        "number_typography_font_family": "Bricolage Grotesque",
+                        "number_typography_font_weight": "500",
+                        "number_color": "#FFFFFF",
+                        "prefix_color": "#FFFFFF",
+                        "suffix_color": "#FFFFFF",
+                        "icon_type": "none",
+                        "title_color": "#FFFFFF",
+                        "title_typography_typography": "custom",
+                        "title_typography_font_family": "Bricolage Grotesque",
+                        "counter_alignment_mobile": "left"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}

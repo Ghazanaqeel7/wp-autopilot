@@ -1,0 +1,1308 @@
+{
+  "id": 8798,
+  "type": "page",
+  "title": "Work",
+  "status": "publish",
+  "builder": "elementor",
+  "data_hash": "1c2ae1f48f34dbaf7c9bdba073a68e5ac6e1d36be093c71077b29ee8bcc51aa5",
+  "elements": [
+    {
+      "id": "8369312",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "background_background": "classic",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#000000",
+        "background_color": "#202020",
+        "background_position": "center center",
+        "background_attachment": "fixed",
+        "background_size": "cover"
+      },
+      "c": [
+        {
+          "id": "54a5279",
+          "type": "column",
+          "c": [
+            {
+              "id": "c2dab80",
+              "type": "heading",
+              "s": {
+                "title": "Our Work",
+                "title_color": "#FFFFFF",
+                "align": "center",
+                "typography_typography": "custom",
+                "header_size": "h1"
+              }
+            },
+            {
+              "id": "0643a28",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "Explore Our Work",
+                "heading_color": "#FFFFFF",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_family": "Bricolage Grotesque",
+                "heading_typography_font_weight": "800",
+                "subtitle_typography_typography": "custom"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "025702b",
+      "type": "section",
+      "c": [
+        {
+          "id": "6fc7acf",
+          "type": "column",
+          "c": [
+            {
+              "id": "6244901",
+              "type": "heading",
+              "s": {
+                "title": "Current Live Projects propertyplanet",
+                "title_color": "#000000",
+                "align": "center",
+                "typography_typography": "custom",
+                "header_size": "h1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4547c62",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "structure": "30"
+      },
+      "c": [
+        {
+          "id": "0ea8a03",
+          "type": "column",
+          "c": [
+            {
+              "id": "79f4fa6",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "b5de098",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "6e44334",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "f4739a5",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "778eb3d",
+                      "type": "heading",
+                      "s": {
+                        "title": "Savvy",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "24757d4",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "41fb922",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "2fe4e09",
+          "type": "column",
+          "c": [
+            {
+              "id": "1ad7fce",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "fe06459",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "2e85339",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "340b51c",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "e2bab7f",
+                      "type": "heading",
+                      "s": {
+                        "title": "Lady Lake Windows",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "94165a8",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "891093f",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "bfd3f14",
+          "type": "column",
+          "c": [
+            {
+              "id": "f84dc99",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "0438ee8",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "590d494",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "acb395e",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "51afcf4",
+                      "type": "heading",
+                      "s": {
+                        "title": "Free-2-Grow",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "e01e243",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "eb06fab",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b97052d",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "structure": "30"
+      },
+      "c": [
+        {
+          "id": "b832f7c",
+          "type": "column",
+          "c": [
+            {
+              "id": "91e45f2",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "981c296",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "369fbe7",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "97867a7",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "8bb5045",
+                      "type": "heading",
+                      "s": {
+                        "title": "SAS Landscaping",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "be563d4",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "20a3ca2",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fb1922c",
+          "type": "column",
+          "c": [
+            {
+              "id": "b4d492d",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "d794ff3",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "4002a24",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "2b4eff7",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "5b93046",
+                      "type": "heading",
+                      "s": {
+                        "title": "Paw Tenant",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "14fc7ec",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "eec9454",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "40f3e17",
+          "type": "column",
+          "c": [
+            {
+              "id": "97fafe7",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "c169282",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "7a64005",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "13c22f5",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "63304e1",
+                      "type": "heading",
+                      "s": {
+                        "title": "Floating Friends Boat Club",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "124356c",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "9700cbc",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8da078c",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "structure": "30"
+      },
+      "c": [
+        {
+          "id": "b07a4bd",
+          "type": "column",
+          "c": [
+            {
+              "id": "fcbbb58",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "811ae79",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "a039adb",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "f6a3f7a",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "38603ad",
+                      "type": "heading",
+                      "s": {
+                        "title": "Circuit Breaker Outlet",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "8d21cc8",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "b5f64e0",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9aec234",
+          "type": "column",
+          "c": [
+            {
+              "id": "119dda7",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "5d9fbba",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "1aba26a",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "ddc0b93",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "6e99095",
+                      "type": "heading",
+                      "s": {
+                        "title": "Jupiter",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "9511ce4",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "c7edee7",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "f1a3994",
+          "type": "column",
+          "c": [
+            {
+              "id": "481092f",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "694077a",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "46321ec",
+              "type": "section",
+              "s": {
+                "structure": "20"
+              },
+              "c": [
+                {
+                  "id": "aaa7870",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "9e7224e",
+                      "type": "heading",
+                      "s": {
+                        "title": "Grocliq",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "89fee77",
+                  "type": "column",
+                  "s": {
+                    "content_position": "bottom"
+                  },
+                  "c": [
+                    {
+                      "id": "e17b9fe",
+                      "type": "button",
+                      "s": {
+                        "text": "Visit website",
+                        "icon_align": "row-reverse",
+                        "align": "right",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "typography_font_weight": "600",
+                        "button_text_color": "#000000",
+                        "background_color": "#02010100",
+                        "align_mobile": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "340c9e2",
+      "type": "section",
+      "c": [
+        {
+          "id": "31d8716",
+          "type": "column",
+          "c": [
+            {
+              "id": "f6a95fa",
+              "type": "heading",
+              "s": {
+                "title": "What We’re Working On",
+                "title_color": "#000000",
+                "align": "center",
+                "typography_typography": "custom",
+                "header_size": "h1"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bb02be6",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "structure": "30"
+      },
+      "c": [
+        {
+          "id": "d56ef52",
+          "type": "column",
+          "c": [
+            {
+              "id": "d746d37",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "2448fc4",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "7e66911",
+              "type": "section",
+              "c": [
+                {
+                  "id": "fde6594",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "8394ba2",
+                      "type": "heading",
+                      "s": {
+                        "title": "Sport Man Bar & Grill",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "0f473a2",
+          "type": "column",
+          "c": [
+            {
+              "id": "4fc099f",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "ddfbcb3",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "0d88253",
+              "type": "section",
+              "c": [
+                {
+                  "id": "4bbf3b3",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "a83f59d",
+                      "type": "heading",
+                      "s": {
+                        "title": "Gas Pump Locker Plus",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "403f8e4",
+          "type": "column",
+          "c": [
+            {
+              "id": "864af70",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "228bf7c",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "8e0c1a5",
+              "type": "section",
+              "c": [
+                {
+                  "id": "c2c1e2d",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "0f35448",
+                      "type": "heading",
+                      "s": {
+                        "title": "Goat  Hill Legendary",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8f3d1d5",
+      "type": "section",
+      "s": {
+        "height": "min-height",
+        "structure": "30"
+      },
+      "c": [
+        {
+          "id": "6d1d9b9",
+          "type": "column",
+          "c": [
+            {
+              "id": "94810ee",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "f2ad7e1",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "095636d",
+              "type": "section",
+              "c": [
+                {
+                  "id": "a62a9cb",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "88394e4",
+                      "type": "heading",
+                      "s": {
+                        "title": "Yogik Bliss",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "004d8ac",
+          "type": "column",
+          "c": [
+            {
+              "id": "1250252",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "b55c8d4",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "7d0573b",
+              "type": "section",
+              "c": [
+                {
+                  "id": "5a58e52",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "242ae40",
+                      "type": "heading",
+                      "s": {
+                        "title": "Refmans Library",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1e92207",
+          "type": "column",
+          "c": [
+            {
+              "id": "a201e32",
+              "type": "section",
+              "s": {
+                "height_inner": "min-height",
+                "background_background": "classic",
+                "background_position": "top center",
+                "background_size": "cover",
+                "border_border": "solid",
+                "border_color": "#FE750F85",
+                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
+                "background_attachment": "scroll"
+              },
+              "c": [
+                {
+                  "id": "f99c3c8",
+                  "type": "column"
+                }
+              ]
+            },
+            {
+              "id": "19604c8",
+              "type": "section",
+              "c": [
+                {
+                  "id": "55d74b6",
+                  "type": "column",
+                  "s": {
+                    "content_position": "center"
+                  },
+                  "c": [
+                    {
+                      "id": "e254d55",
+                      "type": "heading",
+                      "s": {
+                        "title": "Eric Stolz",
+                        "align": "left",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Bricolage Grotesque",
+                        "align_mobile": "center",
+                        "align_tablet": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "18c10e3",
+      "type": "section",
+      "s": {
+        "background_background": "classic",
+        "background_color": "#FE750F85"
+      },
+      "c": [
+        {
+          "id": "8a69aa2",
+          "type": "column",
+          "c": [
+            {
+              "id": "7c0859d",
+              "type": "tfl-heading",
+              "s": {
+                "heading": "Getting started is easy",
+                "heading_color": "#000000",
+                "heading_typography_typography": "custom",
+                "heading_typography_font_family": "Bricolage Grotesque",
+                "heading_typography_font_weight": "800",
+                "subtitle_typography_typography": "custom"
+              }
+            },
+            {
+              "id": "96ffdac",
+              "type": "text-editor",
+              "s": {
+                "editor": "Our process is built for busy teams who want quality without the wait—simple, sm",
+                "align": "center",
+                "typography_typography": "custom",
+                "typography_font_family": "Bricolage Grotesque",
+                "text_color": "#000000"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bfbbb6b",
+      "type": "section",
+      "s": {
+        "structure": "40",
+        "background_background": "classic",
+        "background_color": "#FE750F85"
+      },
+      "c": [
+        {
+          "id": "6085c15",
+          "type": "column",
+          "c": [
+            {
+              "id": "0218b5b",
+              "type": "image-box",
+              "s": {
+                "title_text": "Subscribe",
+                "description_text": "Kick off with a free 30-min call. Choose your plan, and let’s get moving on your",
+                "text_align": "left",
+                "title_typography_typography": "custom",
+                "title_typography_font_family": "Bricolage Grotesque",
+                "motion_fx_translateX_effect": "yes",
+                "motion_fx_translateX_direction": "negative"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d3c7ff6",
+          "type": "column",
+          "c": [
+            {
+              "id": "d8f7ca1",
+              "type": "image-box",
+              "s": {
+                "title_text": "Request",
+                "description_text": "Send your design brief in our private Slack channel or Notion. We’ll get started",
+                "text_align": "left",
+                "title_typography_typography": "custom",
+                "title_typography_font_family": "Bricolage Grotesque",
+                "motion_fx_translateX_effect": "yes",
+                "motion_fx_translateX_direction": "negative"
+              }
+            }
+          ]
+        },
+        {
+          "id": "70a9ecf",
+          "type": "column",
+          "c": [
+            {
+              "id": "de270ee",
+              "type": "image-box",
+              "s": {
+                "title_text": "Revise",
+                "description_text": "Get the results within 1-3 days. We will make unlimited  revisions until you are",
+                "text_align": "left",
+                "title_typography_typography": "custom",
+                "title_typography_font_family": "Bricolage Grotesque",
+                "motion_fx_translateX_effect": "yes",
+                "motion_fx_translateX_direction": "negative"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9e36ee6",
+          "type": "column",
+          "c": [
+            {
+              "id": "32f512e",
+              "type": "image-box",
+              "s": {
+                "title_text": "Enjoy the results",
+                "description_text": "Get more done, look your best, and enjoy the freedom of  having your design team",
+                "text_align": "left",
+                "title_typography_typography": "custom",
+                "title_typography_font_family": "Bricolage Grotesque",
+                "motion_fx_translateX_effect": "yes",
+                "motion_fx_translateX_direction": "negative"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "settings": null
+}
