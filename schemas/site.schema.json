@@ -14,6 +14,7 @@
     "status": { "enum": ["pending_connect", "onboarding", "active", "error", "archived"] },
     "paused": { "type": "boolean" },
     "is_staging": { "type": "boolean", "description": "A full copy of a live site; the only place high-risk (code/plugin) changes are applied" },
+    "allow_live_snippets": { "type": "boolean", "description": "Owner allows snippet.* operations (php/js/css) on this live site. Plugin operations still need is_staging." },
     "builder": { "enum": ["elementor", "gutenberg", "classic", "divi", "wpbakery", "bricks", "unknown"] },
     "theme": { "type": "string" },
     "css_prefix": { "type": "string", "pattern": "^[a-z]{2,6}-$" },

@@ -21,7 +21,9 @@
             "enum": [
               "page.update_section", "page.update_content", "page.create",
               "template.update", "menu.update", "media.upload",
-              "css.update", "option.update", "seo.update"
+              "css.update", "option.update", "seo.update",
+              "snippet.set", "snippet.remove",
+              "plugin.install", "plugin.activate", "plugin.deactivate"
             ]
           },
           "target": {

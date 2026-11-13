@@ -28,7 +28,7 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Every operation in a change package must be reversible; the `rollback` block is mandatory.
 - Never: edit WP core, edit plugin/theme vendor files, drop/alter DB tables, delete media,
   change users/roles, change permalinks or site URL, disable security plugins.
-- Code/plugin-install/PHP changes → `risk: "high"` → only applied to a site with `is_staging: true` (a full copy the owner connected); otherwise the runner sets `needs_info` asking for one. Going live with code is manual.
+- Code/plugin-install/PHP changes → `risk: "high"` → only applied to a site with `is_staging: true` (a full copy the owner connected); otherwise the runner sets `needs_info` asking for one. Exception: `snippet.*` only changes may run on a live site with `allow_live_snippets: true`. Plugin installs never go to a live site. Build new functionality with the `wp-functionality` skill (snippet first, WordPress.org plugin second).
 - Secrets never appear in the repo, in commits, in reports or in messages. (Preview links are time-limited
   capability links kept only in reports/<site>/<id>/preview.json for the dashboard — never copy them elsewhere.)
 - Use the site's adapter (`site.json → builder`). Never write raw Elementor JSON by hand-guessing
@@ -84,7 +84,7 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Never read reports, screenshots, lighthouse JSON or logs unless the request is about them;
   QA verdicts arrive as one-line status in `state.json`.
 - Load a skill only when its trigger applies (design → wp-premium-design, content → wp-content-sourcing,
-  reference → wp-reference-build).
+  reference → wp-reference-build, new feature/plugin/code → wp-functionality).
 - Change packages carry only diffs (target + new value), never full page dumps.
 - One request per commit; batch requests for the same site in one run.
 - Questions to the client: one message, all questions at once.

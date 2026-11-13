@@ -69,7 +69,7 @@ class AP_Store {
 		foreach ( array( 'audit', 'nonces', 'changesets', 'snapshots' ) as $t ) {
 			$wpdb->query( 'DROP TABLE IF EXISTS ' . self::t( $t ) ); // phpcs:ignore
 		}
-		foreach ( array( 'ap_bridge_db', 'ap_bridge_conn', 'ap_bridge_paused', 'ap_bridge_css' ) as $o ) {
+		foreach ( array( 'ap_bridge_db', 'ap_bridge_conn', 'ap_bridge_paused', 'ap_bridge_css', 'ap_bridge_snippets', 'ap_bridge_snippets_off', 'ap_bridge_code_mode', 'ap_bridge_plugin_allow' ) as $o ) {
 			delete_option( $o );
 		}
 	}

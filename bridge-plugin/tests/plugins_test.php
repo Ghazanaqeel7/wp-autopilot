@@ -1,0 +1,21 @@
+<?php // Run from CLI on a local WP with the bridge active: php plugins_test.php (mocks WordPress.org)
+$_SERVER['HTTP_HOST']='127.0.0.1:8099'; require '/tmp/wp/wp/wp-load.php';
+update_option('ap_bridge_code_mode','all');
+$ok = fn($n,$c)=>print(($c?'PASS ':'FAIL ').$n."\n");
+add_filter('plugins_api', function($r,$a,$args){ if(($args->slug??'')==='ap-test-plugin') return (object)['slug'=>'ap-test-plugin','download_link'=>'https://downloads.wordpress.org/plugin/ap-test-plugin.zip','active_installs'=>50000]; if(($args->slug??'')==='tiny-plugin') return (object)['slug'=>'tiny-plugin','download_link'=>'https://downloads.wordpress.org/plugin/tiny-plugin.zip','active_installs'=>12]; return $r;},10,3);
+add_filter('pre_http_request', function($r,$a,$url){ if(strpos($url,'ap-test-plugin.zip')!==false){ $f=get_temp_dir().'x.zip'; copy('/tmp/pt/ap-test-plugin.zip',$f); return ['response'=>['code'=>200,'message'=>'OK'],'body'=>file_get_contents($f),'headers'=>[],'cookies'=>[],'filename'=>$a['filename']??null]; } return $r;},10,3);
+add_filter('upgrader_pre_download', function($r,$pkg){ if(strpos($pkg,'ap-test-plugin.zip')!==false){ $f=wp_tempnam('apt'); copy('/tmp/pt/ap-test-plugin.zip',$f); return $f; } return $r;},10,2);
+$id='P'.time();
+$r=AP_Changesets::stage($id,[['op'=>'plugin.install','target'=>[],'payload'=>['slug'=>'tiny-plugin']]]);
+$ok('low-install-count plugin refused', is_wp_error($r) && $r->get_error_code()==='ap_plugin');
+$r=AP_Changesets::stage($id,[['op'=>'plugin.install','target'=>[],'payload'=>['slug'=>'ap-test-plugin','activate'=>true]]]);
+$ok('stage plugin.install', !is_wp_error($r));
+if(is_wp_error($r)) die($r->get_error_message()."\n");
+$ok('not installed yet after stage', !is_dir(WP_PLUGIN_DIR.'/ap-test-plugin'));
+$p=AP_Changesets::promote($id);
+$ok('promote installs', !is_wp_error($p) && is_dir(WP_PLUGIN_DIR.'/ap-test-plugin'));
+if(is_wp_error($p)) die($p->get_error_message()."\n");
+$ok('plugin active', is_plugin_active('ap-test-plugin/ap-test-plugin.php'));
+$rs=AP_Changesets::restore($p['snapshot_id']);
+$ok('restore removes plugin', !is_wp_error($rs) && !is_dir(WP_PLUGIN_DIR.'/ap-test-plugin') && !is_plugin_active('ap-test-plugin/ap-test-plugin.php'));
+update_option('ap_bridge_code_mode','off');

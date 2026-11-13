@@ -23,6 +23,7 @@ class AP_Inventory {
 			'https'     => is_ssl() || 0 === strpos( home_url(), 'https://' ),
 			'sodium'    => function_exists( 'sodium_crypto_sign_verify_detached' ),
 			'file_mods' => ! ( defined( 'DISALLOW_FILE_MODS' ) && DISALLOW_FILE_MODS ),
+			'code_mode' => AP_Functions::mode(),
 		);
 	}
 

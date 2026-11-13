@@ -161,6 +161,13 @@ class AP_Changesets {
 				return self::op_seo( $cs, $target, (array) $payload );
 			case 'media.upload':
 				return self::op_media( (array) $payload, $media );
+			case 'snippet.set':
+			case 'snippet.remove':
+				return AP_Functions::op_snippet( $cs, $type, $target, (array) $payload );
+			case 'plugin.install':
+			case 'plugin.activate':
+			case 'plugin.deactivate':
+				return AP_Functions::op_plugin_stage( $cs, $type, (array) $payload );
 			case 'menu.update':
 				return new WP_Error( 'ap_not_implemented', 'menu.update is not available in this version.' );
 		}
@@ -398,6 +405,14 @@ class AP_Changesets {
 		$cs['overlay']['options'][ $name ] = $value;
 	}
 
+	public static function overlay_option_value( $cs, $name ) {
+		return array_key_exists( $name, $cs['overlay']['options'] ) ? $cs['overlay']['options'][ $name ] : get_option( $name, array() );
+	}
+
+	public static function overlay_option( &$cs, $name, $value ) {
+		self::set_option( $cs, $name, $value );
+	}
+
 	private static function h( $v ) {
 		return hash( 'sha256', is_string( $v ) ? $v : maybe_serialize( $v ) );
 	}
@@ -441,6 +456,16 @@ class AP_Changesets {
 			return new WP_Error( 'ap_db', 'Snapshot failed; nothing was changed.', array( 'status' => 500 ) );
 		}
 		self::write_live( $cs['overlay'] );
+		if ( array_key_exists( AP_Functions::OPT, $cs['overlay']['options'] ) ) {
+			AP_Functions::clear_off( array_keys( (array) $cs['overlay']['options'][ AP_Functions::OPT ] ) );
+		}
+		if ( ! empty( $cs['overlay']['plugins'] ) ) {
+			$pl = AP_Functions::plugins_apply( $cs['overlay']['plugins'] );
+			if ( is_wp_error( $pl ) ) {
+				self::restore( $snap );
+				return new WP_Error( 'ap_plugin', $pl->get_error_message() . ' Everything was rolled back.', array( 'status' => 500 ) );
+			}
+		}
 		foreach ( array_keys( $cs['created_posts'] ) as $pid ) {
 			self::set_status( (int) $pid, 'publish' );
 		}
@@ -494,7 +519,7 @@ class AP_Changesets {
 
 	private static function snapshot( $cs ) {
 		global $wpdb;
-		$data = array( 'posts' => array(), 'options' => array(), 'created' => array_map( 'intval', array_keys( $cs['created_posts'] ) ) );
+		$data = array( 'posts' => array(), 'options' => array(), 'created' => array_map( 'intval', array_keys( $cs['created_posts'] ) ), 'plugins' => AP_Functions::plugins_state( $cs['overlay']['plugins'] ?? array() ) );
 		foreach ( $cs['overlay']['posts'] as $pid => $o ) {
 			$post = get_post( (int) $pid );
 			$s    = array( 'fields' => array(), 'meta' => array() );
@@ -543,6 +568,7 @@ class AP_Changesets {
 				delete_option( $name );
 			}
 		}
+		AP_Functions::plugins_restore( $data['plugins'] ?? array() );
 		foreach ( (array) $data['created'] as $pid ) {
 			self::set_status( (int) $pid, 'draft' );
 		}

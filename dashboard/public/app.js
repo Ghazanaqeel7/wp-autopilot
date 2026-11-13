@@ -226,6 +226,8 @@ async function site(id, tab = "overview") {
       <section class="panel"><div class="panel-head"><h2>Automation</h2></div><div class="panel-body">
         <div class="toggle"><div><b>This is a staging copy</b><p>Plugin installs and code changes (high risk) are only applied to a site marked as a staging copy of the real website, never to the live one.</p></div>
           <label class="switch"><input type="checkbox" id="stg" ${s.is_staging ? "checked" : ""} aria-label="Staging copy"><span></span></label></div>
+        <div class="toggle"><div><b>Allow small code snippets on the live site</b><p>Lets Autopilot add short PHP/JS/CSS snippets for new functionality here too. They are previewed first, switched off automatically if they crash, and can be rolled back. Plugin installs still need a staging copy. Also set "Code changes" in the site's Tools → Autopilot Bridge.</p></div>
+          <label class="switch"><input type="checkbox" id="lsn" ${s.allow_live_snippets ? "checked" : ""} aria-label="Allow snippets on live"><span></span></label></div>
         <div class="toggle"><div><b>Pause this website</b><p>No change will be sent to this site until you resume it.</p></div>
           <label class="switch"><input type="checkbox" id="pause" ${s.paused ? "checked" : ""} aria-label="Pause this website"><span></span></label></div></div></section>
       <section class="panel"><div class="panel-head"><h2>Danger zone</h2></div><div class="panel-body">
@@ -243,6 +245,10 @@ async function site(id, tab = "overview") {
     };
     $("#stg").onchange = async (e) => {
       try { await api("/sites/update", { method: "POST", body: { id, is_staging: e.target.checked } }); toast("Saved."); }
+      catch (err) { e.target.checked = !e.target.checked; toast(err.message, 6000); }
+    };
+    $("#lsn").onchange = async (e) => {
+      try { await api("/sites/update", { method: "POST", body: { id, allow_live_snippets: e.target.checked } }); toast("Saved."); }
       catch (err) { e.target.checked = !e.target.checked; toast(err.message, 6000); }
     };
     $("#pause").onchange = async (e) => {

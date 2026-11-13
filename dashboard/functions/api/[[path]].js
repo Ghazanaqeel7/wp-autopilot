@@ -315,6 +315,7 @@ async function updateSite(gh, b) {
     if (typeof b.client === "string") s.client = b.client.trim().slice(0, 80);
     if (typeof b.paused === "boolean") s.paused = b.paused;
     if (typeof b.is_staging === "boolean") s.is_staging = b.is_staging;
+    if (typeof b.allow_live_snippets === "boolean") s.allow_live_snippets = b.allow_live_snippets;
     if (b.archive === true) s.status = "archived";
     if (b.archive === false && s.status === "archived") s.status = "pending_connect";
   }, `dashboard: update site ${id}`);

@@ -226,11 +226,14 @@ def _resolve_ops(site, req):
         if k not in change:
             fail(f"change.json missing {k}")
     if change["risk"] == "high":
-        if not (load(ROOT / "sites" / site / "site.json", {}) or {}).get("is_staging"):
+        sj = load(ROOT / "sites" / site / "site.json", {}) or {}
+        snippets_only = all(o.get("op", "").startswith("snippet.") for o in change["operations"])
+        if not (sj.get("is_staging") or (sj.get("allow_live_snippets") and snippets_only)):
             set_request(site, req, status="needs_info")
             (ROOT / "requests" / req).mkdir(parents=True, exist_ok=True)
             (ROOT / "requests" / req / "questions.md").write_text(
-                "# Staging copy needed\n\nThis change installs a plugin or runs code (risk: high), so it is never tried on the live site first.\n"
+                "# Staging copy needed\n\nThis change installs a plugin or adds code (risk: high), so it is never tried on the live site first.\n"
+                "(Small snippets can run on a live site if you switch on \"Allow small code snippets on the live site\" in the site settings.)\n"
                 "Make a full copy of the website with your WordPress migration plugin, add it on the dashboard as its own site, tick "
                 "\"This is a staging copy\" in its settings, and send this request on that site instead. Go-live of code changes stays manual.\n")
             fail("risk=high is only applied to a site marked is_staging — not applied")
