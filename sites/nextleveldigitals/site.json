@@ -22,6 +22,10 @@
       "php": "8.2.35"
     }
   },
-  "channels": {},
+  "channels": {
+    "slack": [
+      "C09NCU8B25V"
+    ]
+  },
   "created_at": "2026-11-13T07:12:00+00:00"
 }
