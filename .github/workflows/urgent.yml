@@ -1,0 +1,30 @@
+name: Urgent request (Claude)
+# Starts Claude immediately for a request marked Urgent in the dashboard.
+# Needs repo secret ANTHROPIC_API_KEY (pay-per-use). Without it this run exits and the request
+# waits for the next scheduled check or a "check karo" in chat.
+on:
+  workflow_dispatch:
+    inputs:
+      request: { description: "Request id", required: true }
+concurrency: { group: autopilot-claude, cancel-in-progress: false }
+permissions: { contents: write, id-token: write }
+jobs:
+  claude:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - id: key
+        env: { K: "${{ secrets.ANTHROPIC_API_KEY }}" }
+        run: echo "present=$([ -n "$K" ] && echo yes || echo no)" >> "$GITHUB_OUTPUT"
+      - if: steps.key.outputs.present == 'no'
+        run: echo "### No ANTHROPIC_API_KEY — ${{ inputs.request }} will be picked up by the next check." >> "$GITHUB_STEP_SUMMARY"
+      - if: steps.key.outputs.present == 'yes'
+        uses: actions/checkout@v4
+      - if: steps.key.outputs.present == 'yes'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Process request ${{ inputs.request }} exactly as CLAUDE.md describes (one request only),
+            then commit and push to main.
+          claude_args: "--max-turns 60"

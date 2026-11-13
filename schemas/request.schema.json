@@ -9,11 +9,13 @@
     "site": { "type": "string" },
     "kind": { "enum": ["change", "new_site", "revamp", "brief", "maintenance"] },
     "status": {
-      "enum": ["new", "needs_info", "planned", "applying", "preview_ready", "qa_failed",
+      "enum": ["new", "needs_info", "changes_requested", "planned", "applying", "preview_ready", "qa_failed",
                "approved", "live", "rejected", "rolled_back", "error"]
     },
     "source": { "enum": ["dashboard", "discord", "slack", "email", "chat"] },
     "title": { "type": "string" },
+    "urgent": { "type": "boolean" },
+    "revision": { "type": "integer" },
     "preview_url_ref": { "type": "string", "description": "id only; the tokenised link is never stored in git" },
     "report": { "type": "string" },
     "approved_by": { "type": "string" },

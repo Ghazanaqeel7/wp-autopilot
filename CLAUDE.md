@@ -5,7 +5,9 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 
 ## Loop (each run)
 1. Read `state.json`. If `config.paused` is true → stop.
-2. Pick requests with `status: "new"` (oldest first). Skip sites whose `site.json → paused` is true.
+2. Pick requests with `status: "new"` or `"changes_requested"` (urgent first, then oldest). Skip sites whose
+   `site.json → paused` is true. For `changes_requested`, read `requests/<id>/feedback.md` (latest entry wins)
+   and write a revised package for the same request id — it replaces the staged version.
 3. For each request:
    - Read `requests/<id>/request.md` and attachments (transcripts for voice notes).
    - Read `sites/<site>/site.json`, `sites/<site>/inventory.json`, `sites/<site>/notes.md`.
@@ -84,7 +86,7 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 
 ## Statuses
 `new → planned → applying → preview_ready → approved → live`
-side paths: `needs_info`, `qa_failed`, `rejected`, `rolled_back`, `error`
+side paths: `needs_info`, `changes_requested`, `qa_failed`, `rejected`, `rolled_back`, `error`
 
 ## Learnings
 Read `docs/LEARNINGS.md` before working. When a change fails QA or is rejected, add one line there

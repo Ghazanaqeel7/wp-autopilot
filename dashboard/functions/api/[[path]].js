@@ -5,7 +5,7 @@
 const SESSION_DAYS = 7;
 const MAX_UPLOAD = 8 * 1024 * 1024;
 const READ_PREFIXES = ["sites/", "reports/", "requests/", "state.json", "docs/"];
-const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml" };
+const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml", urgent: "urgent.yml" };
 const enc = new TextEncoder();
 
 export async function onRequest(ctx) {
@@ -24,6 +24,9 @@ export async function onRequest(ctx) {
     if (path === "/sites" && request.method === "POST") return addSite(gh, await request.json());
     if (path === "/requests" && request.method === "POST") return newRequest(gh, await request.json());
     if (path === "/action" && request.method === "POST") return action(gh, await request.json());
+    if (path === "/sites/update" && request.method === "POST") return updateSite(gh, await request.json());
+    if (path === "/config" && request.method === "POST") return updateConfig(gh, await request.json());
+    if (path === "/requests/feedback" && request.method === "POST") return feedback(gh, await request.json());
     return json({ error: "not found" }, 404);
   } catch (e) {
     return json({ error: e.message || String(e) }, e.status || 500);
@@ -208,10 +211,12 @@ async function newRequest(gh, b) {
     const fresh = await gh.getJson("state.json");
     if (fresh.requests.some((r) => r.id === id)) continue; // id taken meanwhile → retry
     const now = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
-    fresh.requests.push({ id, site, kind, status: "new", source: "dashboard", title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
+    const urgent = !!b.urgent;
+    fresh.requests.push({ id, site, kind, status: "new", source: "dashboard", urgent, title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
     try {
       await gh.put("state.json", b64(JSON.stringify(fresh, null, 2) + "\n"), `dashboard: new request ${id}`);
-      return json({ ok: true, id });
+      if (urgent) await gh.dispatch(WORKFLOWS.urgent, { request: id }).catch(() => {});
+      return json({ ok: true, id, urgent });
     } catch (e) {
       if (e.status !== 409) throw e;
     }
@@ -231,6 +236,67 @@ async function action(gh, b) {
   else if (a === "health") await gh.dispatch(WORKFLOWS.health, {});
   else return json({ error: "unknown action" }, 400);
   return json({ ok: true, queued: a });
+}
+
+// Read-modify-write a JSON file with optimistic retry (Actions commit to the same repo).
+async function mutateJson(gh, p, fn, message) {
+  for (let i = 0; i < 3; i++) {
+    const data = await gh.getJson(p);
+    if (!data) throw Object.assign(new Error("not found: " + p), { status: 404 });
+    const out = fn(data);
+    if (out instanceof Response) return out;
+    try {
+      await gh.put(p, b64(JSON.stringify(data, null, 2) + "\n"), message);
+      return null;
+    } catch (e) {
+      if (e.status !== 409) throw e;
+    }
+  }
+  throw Object.assign(new Error("Busy — please try again."), { status: 409 });
+}
+
+async function updateSite(gh, b) {
+  const id = String(b.id || "");
+  if (!/^[a-z0-9-]{2,40}$/.test(id)) return json({ error: "bad site" }, 400);
+  const err = await mutateJson(gh, `sites/${id}/site.json`, (s) => {
+    if (typeof b.name === "string" && b.name.trim()) s.name = b.name.trim().slice(0, 80);
+    if (typeof b.client === "string") s.client = b.client.trim().slice(0, 80);
+    if (typeof b.paused === "boolean") s.paused = b.paused;
+    if (b.archive === true) s.status = "archived";
+    if (b.archive === false && s.status === "archived") s.status = "pending_connect";
+  }, `dashboard: update site ${id}`);
+  return err || json({ ok: true });
+}
+
+async function updateConfig(gh, b) {
+  const err = await mutateJson(gh, "state.json", (st) => {
+    const c = st.config;
+    if (typeof b.paused === "boolean") c.paused = b.paused;
+    if (Number.isFinite(+b.preview_link_ttl_hours)) c.preview_link_ttl_hours = Math.max(1, Math.min(168, +b.preview_link_ttl_hours));
+    for (const k of ["performance", "accessibility", "best_practices", "seo"]) {
+      if (b.lighthouse_min && Number.isFinite(+b.lighthouse_min[k])) c.qa.lighthouse_min[k] = Math.max(0, Math.min(100, +b.lighthouse_min[k]));
+    }
+  }, "dashboard: update settings");
+  return err || json({ ok: true });
+}
+
+async function feedback(gh, b) {
+  const id = String(b.request || "");
+  const note = String(b.note || "").trim();
+  if (!/^R\d{8}-\d{3}$/.test(id) || !note) return json({ error: "Write what should change." }, 400);
+  const p = `requests/${id}/feedback.md`;
+  const prev = await gh.getRaw(p);
+  const old = prev ? await prev.text() : "# Feedback\n";
+  const stamp = new Date().toISOString().slice(0, 16).replace("T", " ");
+  await gh.put(p, b64(`${old}\n## ${stamp} UTC\n${note.slice(0, 5000)}\n`), `dashboard: feedback on ${id}`);
+  const err = await mutateJson(gh, "state.json", (st) => {
+    const r = st.requests.find((x) => x.id === id);
+    if (!r) return json({ error: "Request not found." }, 404);
+    r.status = "changes_requested";
+    r.revision = (r.revision || 1) + 1;
+    r.updated_at = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
+  }, `dashboard: changes requested on ${id}`);
+  return err || json({ ok: true });
 }
 
 /* ---------------------------------------------------------------- utils */
