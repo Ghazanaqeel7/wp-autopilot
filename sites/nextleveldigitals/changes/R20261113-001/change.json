@@ -1,0 +1,18 @@
+{
+  "id": "R20261113-001",
+  "site": "nextleveldigitals",
+  "request": "R20261113-001",
+  "summary": "Fix homepage typo: 'buketio' → 'but' in the portfolio intro line",
+  "request_text": "Fix the typo on the homepage: \"buketio\" → \"but\".",
+  "risk": "low",
+  "operations": [
+    {
+      "op": "page.update_section",
+      "target": { "post_id": 7593, "element_id": "1494ea2" },
+      "expect_before_hash": "8b3521162680c8167fafe31b7bba1a372cc59f8c468167d42a92eab5f909eef3",
+      "payload": { "mode": "settings", "settings": { "editor": "<p>Branding is our thing, but we're kinda good at it.</p>" } }
+    }
+  ],
+  "rollback": { "strategy": "snapshot_restore" },
+  "qa": { "urls": ["/"] }
+}

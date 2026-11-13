@@ -9,11 +9,6 @@
     {
       "id": "38fb742",
       "type": "section",
-      "s": {
-        "gap": "no",
-        "background_background": "classic",
-        "background_color": "#F3F3F4"
-      },
       "c": [
         {
           "id": "d143538",
@@ -21,10 +16,7 @@
           "c": [
             {
               "id": "a44cf85",
-              "type": "image",
-              "s": {
-                "align": "left"
-              }
+              "type": "image"
             },
             {
               "id": "5ba699a",
@@ -43,7 +35,6 @@
               "s": {
                 "subtitle": "Exclusive at UX/UI",
                 "heading": "Kamrul Islam",
-                "align": "left",
                 "title_tag": "h6"
               }
             },

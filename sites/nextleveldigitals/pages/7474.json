@@ -9,16 +9,6 @@
     {
       "id": "8369312",
       "type": "section",
-      "s": {
-        "height": "min-height",
-        "background_background": "classic",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#000000",
-        "background_color": "#202020",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_size": "cover"
-      },
       "c": [
         {
           "id": "54a5279",
@@ -28,35 +18,21 @@
               "id": "c2dab80",
               "type": "heading",
               "s": {
-                "title": "About",
-                "title_color": "#FFFFFF",
-                "align": "center",
-                "typography_typography": "custom",
-                "header_size": "h1"
+                "title": "About"
               }
             },
             {
               "id": "0643a28",
               "type": "tfl-heading",
               "s": {
-                "heading": "10 years working experience design.",
-                "heading_color": "#FFFFFF",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom"
+                "heading": "10 years working experience design."
               }
             },
             {
               "id": "a6ac49f",
               "type": "text-editor",
               "s": {
-                "editor": "Our process is built for busy teams who want quality without the wait—simple, te",
-                "align": "center",
-                "typography_typography": "custom",
-                "typography_font_family": "Bricolage Grotesque",
-                "text_color": "#FFFFFF",
-                "link_color": "#FFFFFF"
+                "editor": "Our process is built for busy teams who want quality without the wait—simple, te"
               }
             }
           ]
@@ -66,55 +42,21 @@
     {
       "id": "82955b3",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "structure": "20",
-        "background_background": "classic",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_motion_fx_motion_fx_scrolling": "yes",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#FFFFFF"
-      },
       "c": [
         {
           "id": "2367338",
           "type": "column",
           "s": {
-            "content_position": "top",
-            "background_background": "gradient",
-            "background_color_b": "#070707",
-            "background_gradient_type": "radial",
-            "background_overlay_background": "gradient",
-            "background_overlay_color_b": "#FFFEFE00"
+            "content_position": "top"
           },
           "c": [
             {
               "id": "9e36141",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "css_filters_css_filter": "custom",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "30739e3",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             }
           ]
         },
@@ -125,11 +67,6 @@
             {
               "id": "4c50d84",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "21bb866",
@@ -140,12 +77,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Our Vision",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -153,11 +84,7 @@
                       "id": "1dc4e5d",
                       "type": "text-editor",
                       "s": {
-                        "editor": "To be the world’s most trusted digital marketing agency, empowering brands to ac",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "To be the world’s most trusted digital marketing agency, empowering brands to ac"
                       }
                     }
                   ]
@@ -167,11 +94,6 @@
             {
               "id": "d1d52c6",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "f3a9a9f",
@@ -182,12 +104,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Our Mission",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -195,11 +111,7 @@
                       "id": "835e09c",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Our mission is to help businesses of all sizes achieve next-level growth by deli",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Our mission is to help businesses of all sizes achieve next-level growth by deli"
                       }
                     }
                   ]
@@ -209,11 +121,6 @@
             {
               "id": "d8701f8",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "dce2993",
@@ -224,12 +131,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Brand design",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -237,11 +138,7 @@
                       "id": "95001a0",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Sustainable Growth – We believe in building long-term success for our clients th",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Sustainable Growth – We believe in building long-term success for our clients th"
                       }
                     }
                   ]
@@ -255,16 +152,6 @@
     {
       "id": "b252820",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "background_background": "classic",
-        "background_position": "initial",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#FFFFFF",
-        "background_attachment": "fixed"
-      },
       "c": [
         {
           "id": "5d0b42a",
@@ -273,10 +160,6 @@
             {
               "id": "0f42f0d",
               "type": "section",
-              "s": {
-                "layout": "full_width",
-                "gap": "extended"
-              },
               "c": [
                 {
                   "id": "820e57e",
@@ -286,12 +169,7 @@
                       "id": "31a8f02",
                       "type": "tfl-heading",
                       "s": {
-                        "heading": "Creative Environment",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom"
+                        "heading": "Creative Environment"
                       }
                     }
                   ]
@@ -301,9 +179,6 @@
             {
               "id": "4c36924",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "af86c92",
@@ -311,15 +186,7 @@
                   "c": [
                     {
                       "id": "f84e260",
-                      "type": "toggle",
-                      "s": {
-                        "title_color": "#000000",
-                        "content_color": "#000000",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "content_typography_typography": "custom",
-                        "content_typography_font_family": "Bricolage Grotesque"
-                      }
+                      "type": "toggle"
                     }
                   ]
                 },
@@ -329,15 +196,7 @@
                   "c": [
                     {
                       "id": "5bcce09",
-                      "type": "toggle",
-                      "s": {
-                        "title_color": "#000000",
-                        "content_color": "#000000",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "content_typography_typography": "custom",
-                        "content_typography_font_family": "Bricolage Grotesque"
-                      }
+                      "type": "toggle"
                     }
                   ]
                 }
@@ -350,10 +209,6 @@
     {
       "id": "18c10e3",
       "type": "section",
-      "s": {
-        "background_background": "classic",
-        "background_color": "#FE750F85"
-      },
       "c": [
         {
           "id": "8a69aa2",
@@ -363,23 +218,14 @@
               "id": "7c0859d",
               "type": "tfl-heading",
               "s": {
-                "heading": "Getting started is easy",
-                "heading_color": "#000000",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom"
+                "heading": "Getting started is easy"
               }
             },
             {
               "id": "96ffdac",
               "type": "text-editor",
               "s": {
-                "editor": "Our process is built for busy teams who want quality without the wait—simple, sm",
-                "align": "center",
-                "typography_typography": "custom",
-                "typography_font_family": "Bricolage Grotesque",
-                "text_color": "#000000"
+                "editor": "Our process is built for busy teams who want quality without the wait—simple, sm"
               }
             }
           ]
@@ -389,11 +235,6 @@
     {
       "id": "bfbbb6b",
       "type": "section",
-      "s": {
-        "structure": "40",
-        "background_background": "classic",
-        "background_color": "#FE750F85"
-      },
       "c": [
         {
           "id": "6085c15",
@@ -404,12 +245,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Subscribe",
-                "description_text": "Kick off with a free 30-min call. Choose your plan, and let’s get moving on your",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Kick off with a free 30-min call. Choose your plan, and let’s get moving on your"
               }
             }
           ]
@@ -423,12 +259,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Request",
-                "description_text": "Send your design brief in our private Slack channel or Notion. We’ll get started",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Send your design brief in our private Slack channel or Notion. We’ll get started"
               }
             }
           ]
@@ -442,12 +273,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Revise",
-                "description_text": "Get the results within 1-3 days. We will make unlimited  revisions until you are",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Get the results within 1-3 days. We will make unlimited  revisions until you are"
               }
             }
           ]
@@ -461,12 +287,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Enjoy the results",
-                "description_text": "Get more done, look your best, and enjoy the freedom of  having your design team",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Get more done, look your best, and enjoy the freedom of  having your design team"
               }
             }
           ]
@@ -476,16 +297,6 @@
     {
       "id": "9edf284",
       "type": "section",
-      "s": {
-        "gap": "no",
-        "stretch_section": "section-stretched",
-        "background_background": "classic",
-        "css_classes": "no-icon stories has-circle gray",
-        "background_position": "center center",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_attachment": "fixed"
-      },
       "c": [
         {
           "id": "245cfa9",
@@ -496,22 +307,12 @@
               "type": "tfl-heading",
               "s": {
                 "heading": "Our Counters",
-                "heading_color": "#FFFFFF",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom",
                 "title_tag": "h2"
               }
             },
             {
               "id": "4496748",
               "type": "section",
-              "s": {
-                "structure": "40",
-                "gap": "extended",
-                "css_classes": "active-2"
-              },
               "c": [
                 {
                   "id": "a101378",
@@ -521,20 +322,7 @@
                       "id": "f1e0d02",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Project  completed",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_typography_font_weight": "500",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "title_typography_typography": "custom",
-                        "title_color": "#FFFFFF",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Project  completed"
                       }
                     }
                   ]
@@ -547,21 +335,7 @@
                       "id": "c30c3b5",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Our Happy clients",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_typography_font_weight": "500",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "icon_type": "none",
-                        "title_color": "#FFFFFF",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Our Happy clients"
                       }
                     }
                   ]
@@ -574,21 +348,7 @@
                       "id": "9f85a40",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Cups  Of coffee",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "icon_type": "none",
-                        "title_color": "#FFFFFF",
-                        "number_typography_font_weight": "500",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Cups  Of coffee"
                       }
                     }
                   ]
@@ -601,21 +361,7 @@
                       "id": "d497d54",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Win   Awards",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_typography_font_weight": "500",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "icon_type": "none",
-                        "title_color": "#FFFFFF",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Win   Awards"
                       }
                     }
                   ]

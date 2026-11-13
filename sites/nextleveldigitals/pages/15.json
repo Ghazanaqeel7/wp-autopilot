@@ -9,85 +9,35 @@
     {
       "id": "4676fa2",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "stretch_section": "section-stretched",
-        "background_background": "classic",
-        "background_color": "#F3F3F4",
-        "background_position": "initial",
-        "background_repeat": "no-repeat",
-        "background_overlay_background": "classic",
-        "background_overlay_position": "initial",
-        "background_overlay_repeat": "no-repeat",
-        "height": "min-height",
-        "background_size": "cover",
-        "background_overlay_color": "#000000",
-        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-      },
       "c": [
         {
           "id": "47bb402",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "7b31fda",
-              "type": "spacer",
-              "s": {
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "spacer"
             },
             {
               "id": "4bf7d4e",
               "type": "section",
-              "s": {
-                "gap": "no",
-                "background_background": "classic",
-                "background_color": "#FFFFFF",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              },
               "c": [
                 {
                   "id": "168c7a4",
                   "type": "column",
-                  "s": {
-                    "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                    "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-                  },
                   "c": [
                     {
                       "id": "95c0359",
                       "type": "heading",
                       "s": {
-                        "title": "Contact us",
-                        "align": "center",
-                        "title_color": "#11161E",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Oswald",
-                        "typography_font_weight": "500",
-                        "typography_text_transform": "uppercase",
-                        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+                        "title": "Contact us"
                       }
                     },
                     {
                       "id": "5a1761b",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Ready to speak with a pmpcert marketing expert? Let’s chat!",
-                        "align": "center",
-                        "text_color": "#7A7A7A",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Open Sans",
-                        "typography_font_weight": "400",
-                        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+                        "editor": "Ready to speak with a pmpcert marketing expert? Let’s chat!"
                       }
                     },
                     {
@@ -98,25 +48,10 @@
                         "step_next_label": "Next",
                         "step_previous_label": "Previous",
                         "button_text": "Send",
-                        "email_to": "Info@nextleveldigitals.com",
-                        "email_subject": "New message from \"Next Level Digital\"",
                         "email_content": "[all-fields]",
-                        "email_from": "email@nextleveldigitals.com",
                         "email_from_name": "Next Level Digital",
-                        "email_to_2": "ghazanaqeel73@gmail.com",
-                        "email_subject_2": "New message from \"Next Level Digital\"",
                         "email_content_2": "[all-fields]",
-                        "email_from_2": "email@nextleveldigitals.com",
-                        "email_from_name_2": "Next Level Digital",
-                        "email_reply_to_2": "ghazanaqeel73@gmail.com",
-                        "success_message": "Your submission was successful.",
-                        "error_message": "Your submission failed because of an error.",
-                        "server_message": "Your submission failed because of a server error.",
-                        "invalid_message": "Your submission failed because the form is invalid.",
-                        "required_field_message": "This field is required.",
-                        "button_background_color": "#000000",
-                        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+                        "email_from_name_2": "Next Level Digital"
                       }
                     }
                   ]
@@ -130,92 +65,40 @@
     {
       "id": "5d0aa9e",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "structure": "20",
-        "background_background": "classic",
-        "background_color": "#000000",
-        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-      },
       "c": [
         {
           "id": "50c73a3",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "be9f3ec",
-              "type": "image-box",
-              "s": {
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "image-box"
             },
             {
               "id": "39b356d",
-              "type": "icon-list",
-              "s": {
-                "icon_align": "center",
-                "icon_color": "#FFFFFF",
-                "icon_typography_typography": "custom",
-                "icon_typography_font_family": "Poppins",
-                "text_color": "#FFFFFF",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "icon-list"
             },
             {
               "id": "b2ff22b",
-              "type": "tfl-google_maps",
-              "s": {
-                "address": "1603 Capitol Ave Suite 310 Cheyenne, WY 8200",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "tfl-google_maps"
             }
           ]
         },
         {
           "id": "da207a7",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "9dcc072",
-              "type": "image-box",
-              "s": {
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "image-box"
             },
             {
               "id": "1711e85",
-              "type": "icon-list",
-              "s": {
-                "icon_align": "center",
-                "icon_color": "#FFFFFF",
-                "icon_typography_typography": "custom",
-                "icon_typography_font_family": "Poppins",
-                "text_color": "#FFFFFF",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "icon-list"
             },
             {
               "id": "051b11a",
-              "type": "tfl-google_maps",
-              "s": {
-                "address": "38 Cielo court, Hamilton, Ontario, Canada L9B 0J1",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "tfl-google_maps"
             }
           ]
         }

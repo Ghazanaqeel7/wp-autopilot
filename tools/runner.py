@@ -146,6 +146,7 @@ def onboard(site):
             continue
         s, out = call(cfg, "page", {"post_id": pg["id"]}, timeout=60)
         if s == 200:
+            out["elements"] = _slim(out.get("elements"))
             save(pdir / f"{pg['id']}.json", out)
 
     b = inv.get("builders", {})
@@ -170,6 +171,30 @@ def onboard(site):
         warn.append("No security plugin detected.")
     summary(f"### ✅ {cfg['name']} onboarded\nBuilder **{builder}**, theme **{inv['theme']['name']}**, "
             f"{len(inv['pages'])} pages/templates.\n" + "".join(f"- ⚠️ {w}\n" for w in warn))
+
+
+CONTENT_KEYS = ("title", "editor", "text", "description", "heading", "label", "content", "caption",
+                "subtitle", "name", "html", "button", "price", "link")
+
+
+def _slim(nodes):
+    """Keep only content-like settings in Elementor outlines (drops styling noise, saves tokens)."""
+    if not isinstance(nodes, list):
+        return nodes
+    out = []
+    for n in nodes:
+        n = dict(n)
+        if "s" in n:
+            s = {k: v for k, v in n["s"].items()
+                 if any(c in k for c in CONTENT_KEYS) and not any(x in k for x in ("color", "typography", "size", "align", "css", "clip"))}
+            if s:
+                n["s"] = s
+            else:
+                n.pop("s")
+        if "c" in n:
+            n["c"] = _slim(n["c"])
+        out.append(n)
+    return out
 
 
 def _resolve_ops(site, req):

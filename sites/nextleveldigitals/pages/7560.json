@@ -9,12 +9,6 @@
     {
       "id": "38fb742",
       "type": "section",
-      "s": {
-        "gap": "no",
-        "background_position": "center center",
-        "background_repeat": "no-repeat",
-        "background_size": "cover"
-      },
       "c": [
         {
           "id": "d143538",
@@ -22,17 +16,13 @@
           "c": [
             {
               "id": "a44cf85",
-              "type": "image",
-              "s": {
-                "align": "left"
-              }
+              "type": "image"
             },
             {
               "id": "5ba699a",
               "type": "text-editor",
               "s": {
-                "editor": "Phasellus vestibulum, lorem sit amet congue egestas, mi nibh congue nisi, vel vu",
-                "text_color": "#FFFFFF"
+                "editor": "Phasellus vestibulum, lorem sit amet congue egestas, mi nibh congue nisi, vel vu"
               }
             },
             {
@@ -45,7 +35,6 @@
               "s": {
                 "subtitle": "Exclusive at UX/UI",
                 "heading": "Kamrul Islam",
-                "align": "left",
                 "title_tag": "h6"
               }
             }

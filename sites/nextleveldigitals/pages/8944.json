@@ -9,16 +9,6 @@
     {
       "id": "bca1b44",
       "type": "section",
-      "s": {
-        "height": "min-height",
-        "background_background": "classic",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#000000",
-        "background_color": "#202020",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_size": "cover"
-      },
       "c": [
         {
           "id": "bcaa2f6",
@@ -28,11 +18,7 @@
               "id": "a04dc34",
               "type": "heading",
               "s": {
-                "title": "Logo Packages",
-                "title_color": "#FFFFFF",
-                "align": "center",
-                "typography_typography": "custom",
-                "header_size": "h1"
+                "title": "Logo Packages"
               }
             }
           ]
@@ -42,16 +28,6 @@
     {
       "id": "4a262db",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "background_background": "classic",
-        "background_position": "bottom right",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#FFFFFF",
-        "background_attachment": "fixed"
-      },
       "c": [
         {
           "id": "b0e3684",
@@ -60,9 +36,6 @@
             {
               "id": "e7d8d1a",
               "type": "section",
-              "s": {
-                "structure": "30"
-              },
               "c": [
                 {
                   "id": "7e90b8f",
@@ -70,20 +43,13 @@
                   "c": [
                     {
                       "id": "b6ad2ce",
-                      "type": "image",
-                      "s": {
-                        "image_box_shadow_box_shadow_type": "yes"
-                      }
+                      "type": "image"
                     },
                     {
                       "id": "44813bf",
                       "type": "button",
                       "s": {
                         "text": "Call Now",
-                        "align_mobile": "center",
-                        "typography_typography": "custom",
-                        "background_color": "#FD5F0E",
-                        "align": "center",
                         "button_box_shadow_box_shadow_type": "yes"
                       }
                     }
@@ -95,20 +61,13 @@
                   "c": [
                     {
                       "id": "233a29f",
-                      "type": "image",
-                      "s": {
-                        "image_box_shadow_box_shadow_type": "yes"
-                      }
+                      "type": "image"
                     },
                     {
                       "id": "aa27c5c",
                       "type": "button",
                       "s": {
                         "text": "Call Now",
-                        "align_mobile": "center",
-                        "typography_typography": "custom",
-                        "background_color": "#FD5F0E",
-                        "align": "center",
                         "button_box_shadow_box_shadow_type": "yes"
                       }
                     }
@@ -120,20 +79,13 @@
                   "c": [
                     {
                       "id": "6a3c383",
-                      "type": "image",
-                      "s": {
-                        "image_box_shadow_box_shadow_type": "yes"
-                      }
+                      "type": "image"
                     },
                     {
                       "id": "5a75c53",
                       "type": "button",
                       "s": {
                         "text": "Call Now",
-                        "align_mobile": "center",
-                        "typography_typography": "custom",
-                        "background_color": "#FD5F0E",
-                        "align": "center",
                         "button_box_shadow_box_shadow_type": "yes"
                       }
                     }

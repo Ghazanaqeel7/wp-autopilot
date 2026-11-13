@@ -9,18 +9,6 @@
     {
       "id": "48e58f3",
       "type": "section",
-      "s": {
-        "height": "min-height",
-        "background_background": "classic",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#000000",
-        "background_color": "#202020",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_size": "cover",
-        "layout": "full_width",
-        "stretch_section": "section-stretched"
-      },
       "c": [
         {
           "id": "a39ced0",
@@ -30,23 +18,14 @@
               "id": "23d0c39",
               "type": "heading",
               "s": {
-                "title": "Reviews",
-                "title_color": "#FFFFFF",
-                "align": "center",
-                "typography_typography": "custom",
-                "header_size": "h1"
+                "title": "Reviews"
               }
             },
             {
               "id": "28ca235",
               "type": "tfl-heading",
               "s": {
-                "heading": "Explore Our Recent Client Reviews",
-                "heading_color": "#FFFFFF",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom"
+                "heading": "Explore Our Recent Client Reviews"
               }
             }
           ]
@@ -56,14 +35,6 @@
     {
       "id": "3a6e455",
       "type": "section",
-      "s": {
-        "css_classes": "our-testimonials",
-        "gap": "extended",
-        "background_background": "classic",
-        "background_position": "bottom right",
-        "background_repeat": "no-repeat",
-        "background_size": "initial"
-      },
       "c": [
         {
           "id": "a6905c7",
@@ -73,41 +44,23 @@
               "id": "cf85e8a",
               "type": "tfl-heading",
               "s": {
-                "heading": "Kissies from our Clients",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "subtitle_typography_typography": "custom",
-                "heading_color": "#000000",
-                "heading_typography_font_weight": "800"
+                "heading": "Kissies from our Clients"
               }
             },
             {
               "id": "2bbca48",
               "type": "text-editor",
               "s": {
-                "editor": "Great partnerships leave stories behind. These are kidsparadise a few stories we",
-                "align": "center",
-                "typography_typography": "custom",
-                "typography_font_family": "Bricolage Grotesque",
-                "text_color": "#000000",
-                "link_color": "#000000"
+                "editor": "Great partnerships leave stories behind. These are kidsparadise a few stories we"
               }
             },
             {
               "id": "97b23ce",
-              "type": "deensimc-video-marquee",
-              "s": {
-                "hide_desktop": "hidden-desktop"
-              }
+              "type": "deensimc-video-marquee"
             },
             {
               "id": "546df7d",
               "type": "section",
-              "s": {
-                "structure": "30",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              },
               "c": [
                 {
                   "id": "daf4143",
@@ -115,16 +68,7 @@
                   "c": [
                     {
                       "id": "29ab4f4",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "insert_url": "yes",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -134,15 +78,7 @@
                   "c": [
                     {
                       "id": "c5c8d65",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -152,15 +88,7 @@
                   "c": [
                     {
                       "id": "312ab8f",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 }
@@ -169,11 +97,6 @@
             {
               "id": "39ecc08",
               "type": "section",
-              "s": {
-                "structure": "30",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              },
               "c": [
                 {
                   "id": "ba8e72f",
@@ -181,15 +104,7 @@
                   "c": [
                     {
                       "id": "a831d85",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -199,15 +114,7 @@
                   "c": [
                     {
                       "id": "80ad0c6",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -217,15 +124,7 @@
                   "c": [
                     {
                       "id": "08d9a65",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 }

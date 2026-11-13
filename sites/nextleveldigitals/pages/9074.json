@@ -10,12 +10,7 @@
       "id": "7657ba1f",
       "type": "section",
       "s": {
-        "background_background": "classic",
-        "background_color_b": "#ffffff",
-        "background_color": "#000000",
-        "content_position": "middle",
-        "hide_tablet": "hidden-tablet",
-        "hide_mobile": "hidden-mobile"
+        "content_position": "middle"
       },
       "c": [
         {
@@ -25,12 +20,6 @@
             {
               "id": "3b2fd09",
               "type": "section",
-              "s": {
-                "structure": "20",
-                "hide_mobile": "hidden-phone",
-                "height_inner": "min-height",
-                "gap": "no"
-              },
               "c": [
                 {
                   "id": "2e6d6308",
@@ -38,16 +27,7 @@
                   "c": [
                     {
                       "id": "5014832e",
-                      "type": "icon-list",
-                      "s": {
-                        "view": "inline",
-                        "icon_align": "left",
-                        "icon_color": "#FFFFFF",
-                        "text_color": "#FFFFFF",
-                        "icon_typography_typography": "custom",
-                        "icon_typography_font_family": "Montserrat",
-                        "icon_typography_font_weight": "500"
-                      }
+                      "type": "icon-list"
                     }
                   ]
                 },
@@ -60,13 +40,7 @@
                   "c": [
                     {
                       "id": "35207c3f",
-                      "type": "social-icons",
-                      "s": {
-                        "align": "right",
-                        "icon_color": "custom",
-                        "icon_primary_color": "#FD5F0E",
-                        "icon_secondary_color": "#FFFFFF"
-                      }
+                      "type": "social-icons"
                     }
                   ]
                 }
@@ -80,12 +54,7 @@
       "id": "19f4b351",
       "type": "section",
       "s": {
-        "background_background": "classic",
-        "background_color_b": "#ffffff",
-        "background_color": "#000000",
-        "content_position": "middle",
-        "structure": "20",
-        "hide_desktop": "hidden-desktop"
+        "content_position": "middle"
       },
       "c": [
         {
@@ -94,16 +63,7 @@
           "c": [
             {
               "id": "5cb453d0",
-              "type": "icon-list",
-              "s": {
-                "view": "inline",
-                "icon_align": "left",
-                "icon_color": "#FFFFFF",
-                "text_color": "#FFFFFF",
-                "icon_typography_typography": "custom",
-                "icon_typography_font_family": "Montserrat",
-                "icon_typography_font_weight": "500"
-              }
+              "type": "icon-list"
             }
           ]
         },
@@ -113,13 +73,7 @@
           "c": [
             {
               "id": "67c44b12",
-              "type": "social-icons",
-              "s": {
-                "align": "right",
-                "icon_color": "custom",
-                "icon_primary_color": "#FD5F0E",
-                "icon_secondary_color": "#FFFFFF"
-              }
+              "type": "social-icons"
             }
           ]
         }
@@ -129,14 +83,7 @@
       "id": "3dd172fa",
       "type": "section",
       "s": {
-        "content_position": "middle",
-        "structure": "30",
-        "background_background": "classic",
-        "background_color": "#FFFFFF",
-        "border_border": "solid",
-        "border_color": "#FCA512",
-        "background_color_b": "rgba(47,187,197,0)",
-        "sticky": "top"
+        "content_position": "middle"
       },
       "c": [
         {
@@ -147,7 +94,6 @@
               "id": "13bab4e0",
               "type": "image",
               "s": {
-                "align": "center",
                 "link_to": "custom"
               }
             }
@@ -161,23 +107,7 @@
               "id": "43d6b1bc",
               "type": "nav-menu",
               "s": {
-                "pointer": "none",
-                "color_menu_item": "#000000",
-                "color_menu_item_hover_pointer_bg": "#000000",
-                "menu_typography_typography": "custom",
-                "menu_typography_font_weight": "900",
-                "menu_typography_text_transform": "uppercase",
-                "full_width": "stretch",
-                "toggle_align": "left",
-                "toggle_color": "#FFFFFF",
-                "menu": "main",
-                "menu_typography_font_family": "Bricolage Grotesque",
-                "align_items": "center",
-                "menu_name": "Menu",
-                "toggle_background_color": "#FD5F0E",
-                "toggle_icon_hover_animation": "buzz",
-                "color_menu_item_hover": "#000000",
-                "color_dropdown_item_hover": "#000000"
+                "menu_name": "Menu"
               }
             }
           ]
@@ -185,10 +115,6 @@
         {
           "id": "58c627b2",
           "type": "column",
-          "s": {
-            "hide_tablet": "hidden-tablet",
-            "hide_mobile": "hidden-mobile"
-          },
           "c": [
             {
               "id": "32b20c31",

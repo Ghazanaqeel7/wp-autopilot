@@ -9,16 +9,6 @@
     {
       "id": "81cd16b",
       "type": "section",
-      "s": {
-        "height": "min-height",
-        "background_background": "classic",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#000000",
-        "background_color": "#202020",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_size": "cover"
-      },
       "c": [
         {
           "id": "0d27115",
@@ -27,9 +17,6 @@
             {
               "id": "f7a950f",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "bcdc508",
@@ -42,23 +29,12 @@
                       "id": "df57692",
                       "type": "tfl-heading",
                       "s": {
-                        "heading": "We are a design agency helping to get your digital identity up and running for g",
-                        "align": "left",
-                        "heading_color": "#FFFFFF",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "500"
+                        "heading": "We are a design agency helping to get your digital identity up and running for g"
                       }
                     },
                     {
                       "id": "f418cf9",
-                      "type": "image",
-                      "s": {
-                        "align": "center",
-                        "css_filters_css_filter": "custom",
-                        "motion_fx_translateY_effect": "yes",
-                        "align_mobile": "right"
-                      }
+                      "type": "image"
                     }
                   ]
                 },
@@ -70,34 +46,20 @@
             },
             {
               "id": "121a53d",
-              "type": "tfl-heading",
-              "s": {
-                "align": "right",
-                "heading_color": "#FFFFFF",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800"
-              }
+              "type": "tfl-heading"
             },
             {
               "id": "99f354c",
               "type": "heading",
               "s": {
-                "title": "Your new design partner",
-                "title_color": "#FFFFFF",
-                "align": "right",
-                "typography_typography": "custom"
+                "title": "Your new design partner"
               }
             },
             {
               "id": "35d08fa",
               "type": "button",
               "s": {
-                "text": "Free Consultation",
-                "align_mobile": "center",
-                "typography_typography": "custom",
-                "background_color": "#FD5F0E",
-                "align": "right"
+                "text": "Free Consultation"
               }
             }
           ]
@@ -107,12 +69,6 @@
     {
       "id": "35c8ff5",
       "type": "section",
-      "s": {
-        "background_background": "classic",
-        "background_color": "#000000",
-        "hide_tablet": "hidden-tablet",
-        "hide_mobile": "hidden-mobile"
-      },
       "c": [
         {
           "id": "6b5054a",
@@ -122,10 +78,7 @@
               "id": "52dbe91",
               "type": "section",
               "s": {
-                "layout": "full_width",
-                "gap": "no",
-                "content_position": "space-between",
-                "css_classes": "wrap-menu-on-slider"
+                "content_position": "space-between"
               },
               "c": [
                 {
@@ -134,11 +87,7 @@
                   "c": [
                     {
                       "id": "df59a1e",
-                      "type": "image",
-                      "s": {
-                        "image_size": "full",
-                        "align": "left"
-                      }
+                      "type": "image"
                     },
                     {
                       "id": "ddd978e",
@@ -155,9 +104,6 @@
     {
       "id": "396a3ed",
       "type": "section",
-      "s": {
-        "height": "min-height"
-      },
       "c": [
         {
           "id": "cb9bcef",
@@ -167,82 +113,32 @@
               "id": "9f5a51e",
               "type": "tfl-heading",
               "s": {
-                "heading": "We help startups and enterprise to establish an emotional connection between the",
-                "heading_color": "#000000",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom"
+                "heading": "We help startups and enterprise to establish an emotional connection between the"
               }
             },
             {
               "id": "95341e5",
-              "type": "image",
-              "s": {
-                "align": "left",
-                "motion_fx_motion_fx_scrolling": "yes",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "721c165",
-              "type": "image",
-              "s": {
-                "align": "right",
-                "motion_fx_motion_fx_scrolling": "yes",
-                "motion_fx_translateX_effect": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "7050680",
-              "type": "image",
-              "s": {
-                "align": "right",
-                "motion_fx_motion_fx_scrolling": "yes",
-                "motion_fx_translateX_effect": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "3ee7a04",
-              "type": "image",
-              "s": {
-                "align": "right",
-                "motion_fx_motion_fx_scrolling": "yes",
-                "motion_fx_translateX_effect": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "33ba97b",
-              "type": "image",
-              "s": {
-                "align": "left",
-                "motion_fx_motion_fx_scrolling": "yes",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "6c528b3",
-              "type": "image",
-              "s": {
-                "align": "left",
-                "motion_fx_motion_fx_scrolling": "yes",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             }
           ]
         }
@@ -251,9 +147,6 @@
     {
       "id": "11db0c4",
       "type": "section",
-      "s": {
-        "layout": "full_width"
-      },
       "c": [
         {
           "id": "6010cd0",
@@ -270,10 +163,6 @@
     {
       "id": "58a5b76",
       "type": "section",
-      "s": {
-        "background_background": "classic",
-        "background_color": "#FE750F85"
-      },
       "c": [
         {
           "id": "a9dc013",
@@ -283,23 +172,14 @@
               "id": "bb53a1e",
               "type": "tfl-heading",
               "s": {
-                "heading": "Getting started is easy",
-                "heading_color": "#000000",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom"
+                "heading": "Getting started is easy"
               }
             },
             {
               "id": "f0536eb",
               "type": "text-editor",
               "s": {
-                "editor": "Our process is built for busy teams who want quality without the wait—simple, sm",
-                "align": "center",
-                "typography_typography": "custom",
-                "typography_font_family": "Bricolage Grotesque",
-                "text_color": "#000000"
+                "editor": "Our process is built for busy teams who want quality without the wait—simple, sm"
               }
             }
           ]
@@ -309,11 +189,6 @@
     {
       "id": "336d6fc",
       "type": "section",
-      "s": {
-        "structure": "40",
-        "background_background": "classic",
-        "background_color": "#FE750F85"
-      },
       "c": [
         {
           "id": "48e372e",
@@ -324,12 +199,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Subscribe",
-                "description_text": "Kick off with a free 30-min call. Choose your plan, and let’s get moving on your",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Kick off with a free 30-min call. Choose your plan, and let’s get moving on your"
               }
             }
           ]
@@ -343,12 +213,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Request",
-                "description_text": "Send your design brief in our private Slack channel or Notion. We’ll get started",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Send your design brief in our private Slack channel or Notion. We’ll get started"
               }
             }
           ]
@@ -362,12 +227,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Revise",
-                "description_text": "Get the results within 1-3 days. We will make unlimited  revisions until you are",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Get the results within 1-3 days. We will make unlimited  revisions until you are"
               }
             }
           ]
@@ -381,12 +241,7 @@
               "type": "image-box",
               "s": {
                 "title_text": "Enjoy the results",
-                "description_text": "Get more done, look your best, and enjoy the freedom of  having your design team",
-                "text_align": "left",
-                "title_typography_typography": "custom",
-                "title_typography_font_family": "Bricolage Grotesque",
-                "motion_fx_translateX_effect": "yes",
-                "motion_fx_translateX_direction": "negative"
+                "description_text": "Get more done, look your best, and enjoy the freedom of  having your design team"
               }
             }
           ]
@@ -396,68 +251,25 @@
     {
       "id": "758dbb2",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "structure": "20",
-        "background_background": "classic",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_motion_fx_motion_fx_scrolling": "yes",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#FFFFFF"
-      },
       "c": [
         {
           "id": "c8b5add",
           "type": "column",
           "s": {
-            "content_position": "top",
-            "background_background": "gradient",
-            "background_color_b": "#070707",
-            "background_gradient_type": "radial",
-            "background_overlay_background": "gradient",
-            "background_overlay_color_b": "#FFFEFE00"
+            "content_position": "top"
           },
           "c": [
             {
               "id": "eb2375a",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "css_filters_css_filter": "custom",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "4cbf6ab",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "css_filters_css_filter": "custom",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "034ef7f",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             }
           ]
         },
@@ -468,11 +280,6 @@
             {
               "id": "a769f05",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "d64edcb",
@@ -483,12 +290,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "01",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -497,12 +298,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "UI/UX design",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -510,111 +305,77 @@
                       "id": "ce63bb7",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Websites and apps that are easy to love, hard to ignore. We design digital exper",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Websites and apps that are easy to love, hard to ignore. We design digital exper"
                       }
                     },
                     {
                       "id": "276e9e6",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/01        Website &amp; landing page design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/01        Website &amp; landing page design"
                       }
                     },
                     {
                       "id": "d549c58",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "d217980",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/02         App UI/UX design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/02         App UI/UX design"
                       }
                     },
                     {
                       "id": "359d347",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "4538172",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/03        E-commerce design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/03        E-commerce design"
                       }
                     },
                     {
                       "id": "41aab84",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "a89d450",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/04        MVP &amp; prototypes",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/04        MVP &amp; prototypes"
                       }
                     },
                     {
                       "id": "fcb6090",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "d333e07",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/05        Design systems",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/05        Design systems"
                       }
                     },
                     {
                       "id": "53f204d",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     }
                   ]
@@ -624,11 +385,6 @@
             {
               "id": "830b4ab",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "f8e09a0",
@@ -639,12 +395,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "02",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -653,12 +403,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Web development",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -666,111 +410,77 @@
                       "id": "34cbbaa",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Websites that look stunning, load fast, and work flawlessly. From no-code to pix",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Websites that look stunning, load fast, and work flawlessly. From no-code to pix"
                       }
                     },
                     {
                       "id": "ba6e38d",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/01      Webflow &amp; Framer development",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/01      Webflow &amp; Framer development"
                       }
                     },
                     {
                       "id": "f847b74",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "4170be0",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/02      High-converting landing pages.",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/02      High-converting landing pages."
                       }
                     },
                     {
                       "id": "b73a7e1",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "69e1cb3",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/03      No-code/low-code builds",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/03      No-code/low-code builds"
                       }
                     },
                     {
                       "id": "20642df",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "4a7f420",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/04       CMS setups",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/04       CMS setups"
                       }
                     },
                     {
                       "id": "5cf0bc6",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "520a8a8",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/05       SEO-friendly, mobile-first dev",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/05       SEO-friendly, mobile-first dev"
                       }
                     },
                     {
                       "id": "55e35ab",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     }
                   ]
@@ -780,11 +490,6 @@
             {
               "id": "0f928ca",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "7bea4e2",
@@ -795,12 +500,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "03",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -809,12 +508,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Brand design",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -822,111 +515,77 @@
                       "id": "61f4366",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Look sharp, feel right, and make your brand unforgettable. From logos to full br",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Look sharp, feel right, and make your brand unforgettable. From logos to full br"
                       }
                     },
                     {
                       "id": "5ec7454",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/01    Logo &amp; identity design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/01    Logo &amp; identity design"
                       }
                     },
                     {
                       "id": "b4b742e",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "f971de2",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/02    Brand guidelines",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/02    Brand guidelines"
                       }
                     },
                     {
                       "id": "3ef1d8e",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "04d9d38",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/03    Business cards &amp; collaterals",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/03    Business cards &amp; collaterals"
                       }
                     },
                     {
                       "id": "ba6c650",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "a3061c3",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/04      Visual storytelling",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/04      Visual storytelling"
                       }
                     },
                     {
                       "id": "9570d91",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "aeff533",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/05      Rebranding &amp; refresh",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/05      Rebranding &amp; refresh"
                       }
                     },
                     {
                       "id": "9950ed4",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     }
                   ]
@@ -949,23 +608,14 @@
               "id": "83ece71",
               "type": "tfl-heading",
               "s": {
-                "heading": "Designs that you'll love",
-                "heading_color": "#000000",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom"
+                "heading": "Designs that you'll love"
               }
             },
             {
               "id": "1494ea2",
               "type": "text-editor",
               "s": {
-                "editor": "Branding is our thing, buketio we're kinda good at it.",
-                "align": "center",
-                "typography_typography": "custom",
-                "typography_font_family": "Bricolage Grotesque",
-                "text_color": "#000000"
+                "editor": "Branding is our thing, buketio we're kinda good at it."
               }
             }
           ]
@@ -975,31 +625,14 @@
     {
       "id": "77ae24e",
       "type": "section",
-      "s": {
-        "height": "min-height",
-        "structure": "30"
-      },
       "c": [
         {
           "id": "53c027d",
           "type": "column",
-          "s": {
-            "background_background": "classic"
-          },
           "c": [
             {
               "id": "7f9a189",
               "type": "section",
-              "s": {
-                "height_inner": "min-height",
-                "background_background": "classic",
-                "background_position": "top center",
-                "background_size": "cover",
-                "border_border": "solid",
-                "border_color": "#FE750F85",
-                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
-                "background_attachment": "scroll"
-              },
               "c": [
                 {
                   "id": "d8587a6",
@@ -1010,9 +643,6 @@
             {
               "id": "313f5a3",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "08a86a2",
@@ -1025,11 +655,7 @@
                       "id": "a32be40",
                       "type": "heading",
                       "s": {
-                        "title": "Savvy",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "align_mobile": "center"
+                        "title": "Savvy"
                       }
                     }
                   ]
@@ -1045,15 +671,7 @@
                       "id": "aa67cdc",
                       "type": "button",
                       "s": {
-                        "text": "Visit website",
-                        "icon_align": "row-reverse",
-                        "align": "right",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "600",
-                        "button_text_color": "#000000",
-                        "background_color": "#02010100",
-                        "align_mobile": "center"
+                        "text": "Visit website"
                       }
                     }
                   ]
@@ -1069,16 +687,6 @@
             {
               "id": "2e24d26",
               "type": "section",
-              "s": {
-                "height_inner": "min-height",
-                "background_background": "classic",
-                "background_position": "top center",
-                "background_size": "cover",
-                "border_border": "solid",
-                "border_color": "#FE750F85",
-                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
-                "background_attachment": "scroll"
-              },
               "c": [
                 {
                   "id": "55f1417",
@@ -1089,9 +697,6 @@
             {
               "id": "d35a9c0",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "6029cd7",
@@ -1104,11 +709,7 @@
                       "id": "0160776",
                       "type": "heading",
                       "s": {
-                        "title": "Lady Lake Windows",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "align_mobile": "center"
+                        "title": "Lady Lake Windows"
                       }
                     }
                   ]
@@ -1124,15 +725,7 @@
                       "id": "4525c49",
                       "type": "button",
                       "s": {
-                        "text": "Visit website",
-                        "icon_align": "row-reverse",
-                        "align": "right",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "600",
-                        "button_text_color": "#000000",
-                        "background_color": "#02010100",
-                        "align_mobile": "center"
+                        "text": "Visit website"
                       }
                     }
                   ]
@@ -1148,16 +741,6 @@
             {
               "id": "3ddac9c",
               "type": "section",
-              "s": {
-                "height_inner": "min-height",
-                "background_background": "classic",
-                "background_position": "top center",
-                "background_size": "cover",
-                "border_border": "solid",
-                "border_color": "#FE750F85",
-                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
-                "background_attachment": "scroll"
-              },
               "c": [
                 {
                   "id": "28f0533",
@@ -1168,9 +751,6 @@
             {
               "id": "c28403e",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "04fbb1e",
@@ -1183,11 +763,7 @@
                       "id": "a0f912c",
                       "type": "heading",
                       "s": {
-                        "title": "Free-2-Grow",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "align_mobile": "center"
+                        "title": "Free-2-Grow"
                       }
                     }
                   ]
@@ -1203,15 +779,7 @@
                       "id": "ec237ec",
                       "type": "button",
                       "s": {
-                        "text": "Visit website",
-                        "icon_align": "row-reverse",
-                        "align": "right",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "600",
-                        "button_text_color": "#000000",
-                        "background_color": "#02010100",
-                        "align_mobile": "center"
+                        "text": "Visit website"
                       }
                     }
                   ]
@@ -1225,10 +793,6 @@
     {
       "id": "fec59cd",
       "type": "section",
-      "s": {
-        "height": "min-height",
-        "structure": "30"
-      },
       "c": [
         {
           "id": "c80ee15",
@@ -1237,16 +801,6 @@
             {
               "id": "744bd28",
               "type": "section",
-              "s": {
-                "height_inner": "min-height",
-                "background_background": "classic",
-                "background_position": "top center",
-                "background_size": "cover",
-                "border_border": "solid",
-                "border_color": "#FE750F85",
-                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
-                "background_attachment": "scroll"
-              },
               "c": [
                 {
                   "id": "a8e4082",
@@ -1257,9 +811,6 @@
             {
               "id": "cc07d02",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "814643c",
@@ -1272,11 +823,7 @@
                       "id": "2e046ac",
                       "type": "heading",
                       "s": {
-                        "title": "SAS Landscaping",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "align_mobile": "center"
+                        "title": "SAS Landscaping"
                       }
                     }
                   ]
@@ -1292,15 +839,7 @@
                       "id": "9ce28e3",
                       "type": "button",
                       "s": {
-                        "text": "Visit website",
-                        "icon_align": "row-reverse",
-                        "align": "right",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "600",
-                        "button_text_color": "#000000",
-                        "background_color": "#02010100",
-                        "align_mobile": "center"
+                        "text": "Visit website"
                       }
                     }
                   ]
@@ -1316,16 +855,6 @@
             {
               "id": "39ce5df",
               "type": "section",
-              "s": {
-                "height_inner": "min-height",
-                "background_background": "classic",
-                "background_position": "top center",
-                "background_size": "cover",
-                "border_border": "solid",
-                "border_color": "#FE750F85",
-                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
-                "background_attachment": "scroll"
-              },
               "c": [
                 {
                   "id": "3b78d6b",
@@ -1336,9 +865,6 @@
             {
               "id": "311c1c6",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "39b5026",
@@ -1351,11 +877,7 @@
                       "id": "bcbe376",
                       "type": "heading",
                       "s": {
-                        "title": "Paw Tenant",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "align_mobile": "center"
+                        "title": "Paw Tenant"
                       }
                     }
                   ]
@@ -1371,15 +893,7 @@
                       "id": "efeae31",
                       "type": "button",
                       "s": {
-                        "text": "Visit website",
-                        "icon_align": "row-reverse",
-                        "align": "right",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "600",
-                        "button_text_color": "#000000",
-                        "background_color": "#02010100",
-                        "align_mobile": "center"
+                        "text": "Visit website"
                       }
                     }
                   ]
@@ -1395,16 +909,6 @@
             {
               "id": "8167bed",
               "type": "section",
-              "s": {
-                "height_inner": "min-height",
-                "background_background": "classic",
-                "background_position": "top center",
-                "background_size": "cover",
-                "border_border": "solid",
-                "border_color": "#FE750F85",
-                "custom_css": "/*Image Smooth Scrolling Effect*/\r\nselector{\r\n    -webkit-transition: ease-in-ou",
-                "background_attachment": "scroll"
-              },
               "c": [
                 {
                   "id": "32fa7f6",
@@ -1415,9 +919,6 @@
             {
               "id": "fe08629",
               "type": "section",
-              "s": {
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "bf0e3ae",
@@ -1430,11 +931,7 @@
                       "id": "5b8eb03",
                       "type": "heading",
                       "s": {
-                        "title": "Floating Friends Boat Club",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "align_mobile": "center"
+                        "title": "Floating Friends Boat Club"
                       }
                     }
                   ]
@@ -1450,15 +947,7 @@
                       "id": "ff6e4b3",
                       "type": "button",
                       "s": {
-                        "text": "Visit website",
-                        "icon_align": "row-reverse",
-                        "align": "right",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "600",
-                        "button_text_color": "#000000",
-                        "background_color": "#02010100",
-                        "align_mobile": "center"
+                        "text": "Visit website"
                       }
                     }
                   ]
@@ -1481,12 +970,7 @@
               "id": "9397373",
               "type": "button",
               "s": {
-                "text": "View More Work",
-                "align_mobile": "center",
-                "typography_typography": "custom",
-                "background_color": "#FD5F0E",
-                "align": "center",
-                "typography_font_family": "Bricolage Grotesque"
+                "text": "View More Work"
               }
             }
           ]
@@ -1496,14 +980,6 @@
     {
       "id": "6985f45",
       "type": "section",
-      "s": {
-        "css_classes": "our-testimonials",
-        "gap": "extended",
-        "background_background": "classic",
-        "background_position": "bottom right",
-        "background_repeat": "no-repeat",
-        "background_size": "initial"
-      },
       "c": [
         {
           "id": "49811d4",
@@ -1513,41 +989,23 @@
               "id": "5c263d2",
               "type": "tfl-heading",
               "s": {
-                "heading": "Kissies from our Clients",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "subtitle_typography_typography": "custom",
-                "heading_color": "#000000",
-                "heading_typography_font_weight": "800"
+                "heading": "Kissies from our Clients"
               }
             },
             {
               "id": "ed3170a",
               "type": "text-editor",
               "s": {
-                "editor": "Great partnerships leave stories behind. These are a few stories we’re blushing ",
-                "align": "center",
-                "typography_typography": "custom",
-                "typography_font_family": "Bricolage Grotesque",
-                "text_color": "#000000"
+                "editor": "Great partnerships leave stories behind. These are a few stories we’re blushing "
               }
             },
             {
               "id": "d8ec5ac",
-              "type": "deensimc-video-marquee",
-              "s": {
-                "hide_desktop": "hidden-desktop",
-                "deensimc_videos_aspect_ratio": "9/16"
-              }
+              "type": "deensimc-video-marquee"
             },
             {
               "id": "bd1b5f6",
               "type": "section",
-              "s": {
-                "structure": "30",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              },
               "c": [
                 {
                   "id": "73af9d4",
@@ -1555,16 +1013,7 @@
                   "c": [
                     {
                       "id": "776a61d",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "insert_url": "yes",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -1574,15 +1023,7 @@
                   "c": [
                     {
                       "id": "d43e25a",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -1592,15 +1033,7 @@
                   "c": [
                     {
                       "id": "f8fcc6a",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 }
@@ -1609,11 +1042,6 @@
             {
               "id": "e3745c0",
               "type": "section",
-              "s": {
-                "structure": "30",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              },
               "c": [
                 {
                   "id": "e2bb4e9",
@@ -1621,15 +1049,7 @@
                   "c": [
                     {
                       "id": "5d9078b",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -1639,15 +1059,7 @@
                   "c": [
                     {
                       "id": "8e6e46f",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 },
@@ -1657,15 +1069,7 @@
                   "c": [
                     {
                       "id": "bc0620f",
-                      "type": "video",
-                      "s": {
-                        "video_type": "hosted",
-                        "youtube_url": "https://www.youtube.com/watch?v=XHOmBV4js_E",
-                        "vimeo_url": "https://vimeo.com/235215203",
-                        "dailymotion_url": "https://www.dailymotion.com/video/x6tqhqb",
-                        "videopress_url": "https://videopress.com/v/ZCAOzTNk",
-                        "aspect_ratio": "916"
-                      }
+                      "type": "video"
                     }
                   ]
                 }
@@ -1697,18 +1101,6 @@
     {
       "id": "f65e24f",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "structure": "20",
-        "background_background": "classic",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_motion_fx_motion_fx_scrolling": "yes",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#FFFFFF"
-      },
       "c": [
         {
           "id": "609f531",
@@ -1717,11 +1109,6 @@
             {
               "id": "cde9098",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "f371a8b",
@@ -1732,12 +1119,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Design",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -1745,11 +1126,7 @@
                       "id": "223f024",
                       "type": "text-editor",
                       "s": {
-                        "editor": "One request at a time. Pause or cancel anytime. ",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "One request at a time. Pause or cancel anytime. "
                       }
                     },
                     {
@@ -1757,12 +1134,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "$799 /month",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -1770,223 +1141,154 @@
                       "id": "602b7f7",
                       "type": "button",
                       "s": {
-                        "text": "Book a discovery call",
-                        "align_mobile": "center",
-                        "typography_typography": "custom",
-                        "background_color": "#FD5F0E"
+                        "text": "Book a discovery call"
                       }
                     },
                     {
                       "id": "7937e0d",
                       "type": "tfl-heading",
                       "s": {
-                        "heading": "What’s included?",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left"
+                        "heading": "What’s included?"
                       }
                     },
                     {
                       "id": "da01964",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/01     Unlimited revisions",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/01     Unlimited revisions"
                       }
                     },
                     {
                       "id": "79ba50f",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "d14f6ee",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/02    Brand identity &amp; logo design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/02    Brand identity &amp; logo design"
                       }
                     },
                     {
                       "id": "bc39e22",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "974ce1f",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/03    Social media graphics",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/03    Social media graphics"
                       }
                     },
                     {
                       "id": "ad93490",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "a5d7f73",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/04     Web &amp; app UI design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/04     Web &amp; app UI design"
                       }
                     },
                     {
                       "id": "9f73572",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "8fdd216",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/05     Landing page design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/05     Landing page design"
                       }
                     },
                     {
                       "id": "9877e71",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "9c6af7a",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/06   Presentation decks &amp; pitch design",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/06   Presentation decks &amp; pitch design"
                       }
                     },
                     {
                       "id": "9b87fa2",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "a325a6b",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/07    Packaging &amp; product mockups",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/07    Packaging &amp; product mockups"
                       }
                     },
                     {
                       "id": "e7acfb5",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "69fd707",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/08    Fast turnaround time",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/08    Fast turnaround time"
                       }
                     },
                     {
                       "id": "22230e9",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "725f570",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/06    Dedicated design manager",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/06    Dedicated design manager"
                       }
                     },
                     {
                       "id": "b70747e",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "af6fb5c",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/06    Access to requests portal",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/06    Access to requests portal"
                       }
                     },
                     {
                       "id": "aaec769",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     }
                   ]
@@ -1996,11 +1298,6 @@
             {
               "id": "4ee142a",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "7c727bd",
@@ -2011,12 +1308,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Design + Development",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -2024,11 +1315,7 @@
                       "id": "560e356",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Two request at a time. Pause or cancel anytime.",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Two request at a time. Pause or cancel anytime."
                       }
                     },
                     {
@@ -2036,12 +1323,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "$999 /month",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -2049,143 +1330,98 @@
                       "id": "c479b9e",
                       "type": "button",
                       "s": {
-                        "text": "Book a discovery call",
-                        "align_mobile": "center",
-                        "typography_typography": "custom",
-                        "background_color": "#FD5F0E"
+                        "text": "Book a discovery call"
                       }
                     },
                     {
                       "id": "17aa6f1",
                       "type": "tfl-heading",
                       "s": {
-                        "heading": "What’s included?",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left"
+                        "heading": "What’s included?"
                       }
                     },
                     {
                       "id": "6d6eeb0",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/01  Everything from design plan",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/01  Everything from design plan"
                       }
                     },
                     {
                       "id": "8394c62",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "39a00ba",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/02  Wordpress development",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/02  Wordpress development"
                       }
                     },
                     {
                       "id": "af2d2c2",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "a9d7de7",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/03  Custom animations",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/03  Custom animations"
                       }
                     },
                     {
                       "id": "01c6040",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "16d3d77",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/04  Email development (HTML responsive)",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/04  Email development (HTML responsive)"
                       }
                     },
                     {
                       "id": "8e23313",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "62c3b9f",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/05  Landing page development",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/05  Landing page development"
                       }
                     },
                     {
                       "id": "eb00580",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "c94e46c",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/06  Basic SEO Setup",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/06  Basic SEO Setup"
                       }
                     },
                     {
                       "id": "e0a7840",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     }
                   ]
@@ -2195,11 +1431,6 @@
             {
               "id": "3862990",
               "type": "section",
-              "s": {
-                "background_background": "classic",
-                "background_color": "#FE750F85",
-                "box_shadow_box_shadow_type": "yes"
-              },
               "c": [
                 {
                   "id": "1b21b78",
@@ -2210,12 +1441,6 @@
                       "type": "tfl-heading",
                       "s": {
                         "heading": "Customised",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left",
                         "title_tag": "h2"
                       }
                     },
@@ -2223,114 +1448,77 @@
                       "id": "94548ca",
                       "type": "text-editor",
                       "s": {
-                        "editor": "Best for scaling businesses with high-volume needs. Reach out to us today to tai",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "text_color": "#000000"
+                        "editor": "Best for scaling businesses with high-volume needs. Reach out to us today to tai"
                       }
                     },
                     {
                       "id": "52199c1",
                       "type": "button",
                       "s": {
-                        "text": "Book a discovery call",
-                        "align_mobile": "center",
-                        "typography_typography": "custom",
-                        "background_color": "#FD5F0E"
+                        "text": "Book a discovery call"
                       }
                     },
                     {
                       "id": "c16bd23",
                       "type": "tfl-heading",
                       "s": {
-                        "heading": "What’s included?",
-                        "heading_color": "#000000",
-                        "heading_typography_typography": "custom",
-                        "heading_typography_font_family": "Bricolage Grotesque",
-                        "heading_typography_font_weight": "800",
-                        "subtitle_typography_typography": "custom",
-                        "align": "left"
+                        "heading": "What’s included?"
                       }
                     },
                     {
                       "id": "ec855ba",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/01   Fully personalised plan",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/01   Fully personalised plan"
                       }
                     },
                     {
                       "id": "7d443ad",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "025eb12",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/02  Flexible billing — project-based or monthly",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/02  Flexible billing — project-based or monthly"
                       }
                     },
                     {
                       "id": "3bbce68",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "e3b449b",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/03 Choose the services you need",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/03 Choose the services you need"
                       }
                     },
                     {
                       "id": "e1949a7",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     },
                     {
                       "id": "ea6321d",
                       "type": "text-editor",
                       "s": {
-                        "editor": "/04  Unlimited requests at a time",
-                        "align": "left",
-                        "typography_typography": "custom",
-                        "typography_font_family": "Bricolage Grotesque",
-                        "typography_font_weight": "500",
-                        "text_color": "#000000"
+                        "editor": "/04  Unlimited requests at a time"
                       }
                     },
                     {
                       "id": "5e33e8a",
                       "type": "divider",
                       "s": {
-                        "text": "Divider",
-                        "color": "#000000"
+                        "text": "Divider"
                       }
                     }
                   ]
@@ -2343,51 +1531,20 @@
           "id": "2e6f951",
           "type": "column",
           "s": {
-            "content_position": "top",
-            "background_background": "gradient",
-            "background_color_b": "#070707",
-            "background_gradient_type": "radial",
-            "background_overlay_background": "gradient",
-            "background_overlay_color_b": "#FFFEFE00"
+            "content_position": "top"
           },
           "c": [
             {
               "id": "82bff8b",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "css_filters_css_filter": "custom",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "aeb2b8f",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "css_filters_css_filter": "custom",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             },
             {
               "id": "6935c58",
-              "type": "image",
-              "s": {
-                "image_size": "full",
-                "align": "left",
-                "sticky": "top",
-                "sticky_parent": "yes",
-                "hide_tablet": "hidden-tablet",
-                "hide_mobile": "hidden-mobile"
-              }
+              "type": "image"
             }
           ]
         }
@@ -2396,9 +1553,6 @@
     {
       "id": "9773f50",
       "type": "section",
-      "s": {
-        "layout": "full_width"
-      },
       "c": [
         {
           "id": "fb88879",
@@ -2408,20 +1562,12 @@
               "id": "aea40bd",
               "type": "tfl-heading",
               "s": {
-                "heading": "Strategic Technology Partnerships",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "subtitle_typography_typography": "custom",
-                "heading_color": "#000000",
-                "heading_typography_font_weight": "800"
+                "heading": "Strategic Technology Partnerships"
               }
             },
             {
               "id": "477172c",
-              "type": "deensimc-smooth-marquee",
-              "s": {
-                "deensimc_slide_direction": "yes"
-              }
+              "type": "deensimc-smooth-marquee"
             }
           ]
         }
@@ -2430,16 +1576,6 @@
     {
       "id": "1ee40d2",
       "type": "section",
-      "s": {
-        "gap": "no",
-        "stretch_section": "section-stretched",
-        "background_background": "classic",
-        "css_classes": "no-icon stories has-circle gray",
-        "background_position": "center center",
-        "background_repeat": "no-repeat",
-        "background_size": "cover",
-        "background_attachment": "fixed"
-      },
       "c": [
         {
           "id": "f713498",
@@ -2450,22 +1586,12 @@
               "type": "tfl-heading",
               "s": {
                 "heading": "Our Counters",
-                "heading_color": "#FFFFFF",
-                "heading_typography_typography": "custom",
-                "heading_typography_font_family": "Bricolage Grotesque",
-                "heading_typography_font_weight": "800",
-                "subtitle_typography_typography": "custom",
                 "title_tag": "h2"
               }
             },
             {
               "id": "8838650",
               "type": "section",
-              "s": {
-                "structure": "40",
-                "gap": "extended",
-                "css_classes": "active-2"
-              },
               "c": [
                 {
                   "id": "8cd8ee5",
@@ -2475,20 +1601,7 @@
                       "id": "37b5586",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Project  completed",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_typography_font_weight": "500",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "title_typography_typography": "custom",
-                        "title_color": "#FFFFFF",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Project  completed"
                       }
                     }
                   ]
@@ -2501,21 +1614,7 @@
                       "id": "6c81019",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Our Happy clients",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_typography_font_weight": "500",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "icon_type": "none",
-                        "title_color": "#FFFFFF",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Our Happy clients"
                       }
                     }
                   ]
@@ -2528,21 +1627,7 @@
                       "id": "6922184",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Cups  Of coffee",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "icon_type": "none",
-                        "title_color": "#FFFFFF",
-                        "number_typography_font_weight": "500",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Cups  Of coffee"
                       }
                     }
                   ]
@@ -2555,21 +1640,7 @@
                       "id": "2c2ca64",
                       "type": "tfcounter",
                       "s": {
-                        "title": "Win   Awards",
-                        "counter_alignment": "left",
-                        "separator": "none",
-                        "icon_color": "#FFFFFF75",
-                        "number_typography_typography": "custom",
-                        "number_typography_font_family": "Bricolage Grotesque",
-                        "number_typography_font_weight": "500",
-                        "number_color": "#FFFFFF",
-                        "prefix_color": "#FFFFFF",
-                        "suffix_color": "#FFFFFF",
-                        "icon_type": "none",
-                        "title_color": "#FFFFFF",
-                        "title_typography_typography": "custom",
-                        "title_typography_font_family": "Bricolage Grotesque",
-                        "counter_alignment_mobile": "left"
+                        "title": "Win   Awards"
                       }
                     }
                   ]

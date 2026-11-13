@@ -9,47 +9,24 @@
     {
       "id": "27ae5f0e",
       "type": "section",
-      "s": {
-        "layout": "full_width",
-        "gap": "extended",
-        "stretch_section": "section-stretched",
-        "pxl_section_overflow": "hidden",
-        "background_background": "classic",
-        "background_position": "center center",
-        "background_attachment": "fixed",
-        "background_repeat": "no-repeat",
-        "background_size": "cover"
-      },
       "c": [
         {
           "id": "9db8531",
           "type": "column",
-          "s": {
-            "col_sticky_offset_top": "30"
-          },
           "c": [
             {
               "id": "41019af",
               "type": "section",
-              "s": {
-                "gap": "no",
-                "structure": "20"
-              },
               "c": [
                 {
                   "id": "f79e66d",
-                  "type": "column",
-                  "s": {
-                    "col_sticky_offset_top": "30"
-                  }
+                  "type": "column"
                 },
                 {
                   "id": "3aa151a1",
                   "type": "column",
                   "s": {
-                    "col_sticky_offset_top": "30",
-                    "content_position": "center",
-                    "align_mobile_extra": "center"
+                    "content_position": "center"
                   }
                 }
               ]
@@ -61,67 +38,32 @@
     {
       "id": "1875e119",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "stretch_section": "section-stretched",
-        "background_background": "classic",
-        "background_color": "#FFFFFF40"
-      },
       "c": [
         {
           "id": "3dadd516",
           "type": "column",
-          "s": {
-            "col_sticky_offset_top": "30"
-          },
           "c": [
             {
               "id": "71d2de9f",
               "type": "section",
-              "s": {
-                "gap": "no",
-                "background_background": "classic",
-                "background_position": "center center",
-                "background_size": "cover"
-              },
               "c": [
                 {
                   "id": "b65812",
                   "type": "column",
-                  "s": {
-                    "col_sticky_offset_top": "30",
-                    "background_background": "classic",
-                    "background_position": "center center",
-                    "background_size": "auto",
-                    "background_overlay_background": "classic",
-                    "background_overlay_color": "#35E1B4",
-                    "col_position": "relative",
-                    "pxl_column_overflow_hidden": "yes"
-                  },
                   "c": [
                     {
                       "id": "2d07760",
                       "type": "section",
-                      "s": {
-                        "gap": "no",
-                        "structure": "20"
-                      },
                       "c": [
                         {
                           "id": "623e4a36",
-                          "type": "column",
-                          "s": {
-                            "col_sticky_offset_top": "30"
-                          }
+                          "type": "column"
                         },
                         {
                           "id": "45f5b3a7",
                           "type": "column",
                           "s": {
-                            "content_position": "center",
-                            "align": "flex-end",
-                            "col_sticky_offset_top": "30",
-                            "align_mobile_extra": "flex-start"
+                            "content_position": "center"
                           }
                         }
                       ]
@@ -137,72 +79,36 @@
     {
       "id": "364293dd",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "stretch_section": "section-stretched"
-      },
       "c": [
         {
           "id": "3b682e21",
           "type": "column",
-          "s": {
-            "align": "center",
-            "col_sticky_offset_top": "30"
-          },
           "c": [
             {
               "id": "31e31105",
               "type": "section",
-              "s": {
-                "layout": "full_width",
-                "gap": "no",
-                "structure": "20",
-                "row_scroll_fixed": "fixed"
-              },
               "c": [
                 {
                   "id": "25c162b",
-                  "type": "column",
-                  "s": {
-                    "col_sticky_offset_top": "30",
-                    "col_sticky": "sticky"
-                  }
+                  "type": "column"
                 },
                 {
                   "id": "17ec2a06",
-                  "type": "column",
-                  "s": {
-                    "col_sticky_offset_top": "30"
-                  }
+                  "type": "column"
                 }
               ]
             },
             {
               "id": "64a63151",
               "type": "section",
-              "s": {
-                "layout": "full_width",
-                "gap": "no",
-                "structure": "20",
-                "reverse_order_mobile_extra": "reverse-mobile_extra",
-                "reverse_order_mobile": "reverse-mobile",
-                "row_scroll_fixed": "fixed"
-              },
               "c": [
                 {
                   "id": "55f9885c",
-                  "type": "column",
-                  "s": {
-                    "col_sticky_offset_top": "30"
-                  }
+                  "type": "column"
                 },
                 {
                   "id": "418f7053",
-                  "type": "column",
-                  "s": {
-                    "col_sticky_offset_top": "30",
-                    "col_sticky": "sticky"
-                  }
+                  "type": "column"
                 }
               ]
             }
@@ -213,21 +119,10 @@
     {
       "id": "41ea74ef",
       "type": "section",
-      "s": {
-        "gap": "extended",
-        "stretch_section": "section-stretched",
-        "background_background": "classic",
-        "background_overlay_background": "classic",
-        "background_overlay_color": "#1D5E52",
-        "pxl_section_overflow": "hidden"
-      },
       "c": [
         {
           "id": "1d47acc1",
-          "type": "column",
-          "s": {
-            "col_sticky_offset_top": "30"
-          }
+          "type": "column"
         }
       ]
     }

@@ -10,58 +10,24 @@
       "id": "2ce57adc",
       "type": "section",
       "s": {
-        "background_background": "classic",
-        "background_color_b": "#ffffff",
-        "background_color": "#000000",
-        "content_position": "middle",
-        "hide_tablet": "hidden-tablet",
-        "hide_mobile": "hidden-mobile",
-        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+        "content_position": "middle"
       },
       "c": [
         {
           "id": "5c930ef6",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "6507fe2e",
               "type": "section",
-              "s": {
-                "structure": "20",
-                "hide_mobile": "hidden-phone",
-                "height_inner": "min-height",
-                "gap": "no",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              },
               "c": [
                 {
                   "id": "796f0a82",
                   "type": "column",
-                  "s": {
-                    "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                    "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-                  },
                   "c": [
                     {
                       "id": "4ef795ea",
-                      "type": "icon-list",
-                      "s": {
-                        "view": "inline",
-                        "icon_align": "left",
-                        "icon_color": "#FFFFFF",
-                        "text_color": "#FFFFFF",
-                        "icon_typography_typography": "custom",
-                        "icon_typography_font_family": "Montserrat",
-                        "icon_typography_font_weight": "500",
-                        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-                      }
+                      "type": "icon-list"
                     }
                   ]
                 },
@@ -69,22 +35,12 @@
                   "id": "dddc16d",
                   "type": "column",
                   "s": {
-                    "content_position": "center",
-                    "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                    "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+                    "content_position": "center"
                   },
                   "c": [
                     {
                       "id": "d17e444",
-                      "type": "social-icons",
-                      "s": {
-                        "align": "right",
-                        "icon_color": "custom",
-                        "icon_primary_color": "#FD5F0E",
-                        "icon_secondary_color": "#FFFFFF",
-                        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-                      }
+                      "type": "social-icons"
                     }
                   ]
                 }
@@ -98,60 +54,26 @@
       "id": "3dd8eae",
       "type": "section",
       "s": {
-        "background_background": "classic",
-        "background_color_b": "#ffffff",
-        "background_color": "#000000",
-        "content_position": "middle",
-        "structure": "20",
-        "hide_desktop": "hidden-desktop",
-        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+        "content_position": "middle"
       },
       "c": [
         {
           "id": "2dec789",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "2f4a124",
-              "type": "icon-list",
-              "s": {
-                "view": "inline",
-                "icon_align": "left",
-                "icon_color": "#FFFFFF",
-                "text_color": "#FFFFFF",
-                "icon_typography_typography": "custom",
-                "icon_typography_font_family": "Montserrat",
-                "icon_typography_font_weight": "500",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "icon-list"
             }
           ]
         },
         {
           "id": "7707f1f",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "442f272",
-              "type": "social-icons",
-              "s": {
-                "align": "right",
-                "icon_color": "custom",
-                "icon_primary_color": "#FD5F0E",
-                "icon_secondary_color": "#FFFFFF",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "social-icons"
             }
           ]
         }
@@ -161,34 +83,18 @@
       "id": "1969992c",
       "type": "section",
       "s": {
-        "content_position": "middle",
-        "structure": "30",
-        "background_background": "classic",
-        "background_color": "#FFFFFF",
-        "border_border": "solid",
-        "border_color": "#FCA512",
-        "background_color_b": "rgba(47,187,197,0)",
-        "sticky": "top",
-        "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-        "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+        "content_position": "middle"
       },
       "c": [
         {
           "id": "1bd3556f",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "078ad2d",
               "type": "image",
               "s": {
-                "align": "center",
-                "link_to": "custom",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
+                "link_to": "custom"
               }
             }
           ]
@@ -196,59 +102,20 @@
         {
           "id": "25a46cb3",
           "type": "column",
-          "s": {
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "8db4e21",
-              "type": "eael-simple-menu",
-              "s": {
-                "eael_simple_menu_menu": "24",
-                "eael_simple_menu_background": "#02010100",
-                "eael_simple_menu_item_typography_typography": "custom",
-                "eael_simple_menu_item_typography_font_family": "Bricolage Grotesque",
-                "eael_simple_menu_item_typography_font_weight": "800",
-                "eael_simple_menu_item_typography_text_transform": "uppercase",
-                "eael_simple_menu_item_color": "#000000",
-                "eael_simple_menu_item_background_hover": "#FFFFFF",
-                "eael_simple_menu_item_color_active": "#000000",
-                "eael_simple_menu_item_background_active": "#FFFFFF",
-                "eael_simple_menu_dropdown_background": "#FFFFFFFC",
-                "eael_simple_menu_dropdown_item_typography_typography": "custom",
-                "eael_simple_menu_dropdown_item_typography_font_family": "Bricolage Grotesque",
-                "eael_simple_menu_dropdown_item_typography_font_weight": "700",
-                "eael_simple_menu_dropdown_item_typography_text_transform": "uppercase",
-                "eael_simple_menu_dropdown_item_indicator_background": "#FFFFFF",
-                "eael_simple_menu_dropdown_item_background_hover": "#02010100",
-                "eael_simple_menu_full_width": "yes",
-                "eael_simple_menu_item_background": "#FFFFFF",
-                "eael_simple_menu_hamburger_top_level_item_background": "#FFFFFF",
-                "eael_simple_menu_dropdown_item_background": "#FFFFFF",
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "eael-simple-menu"
             }
           ]
         },
         {
           "id": "1b9ee7d",
           "type": "column",
-          "s": {
-            "hide_tablet": "hidden-tablet",
-            "hide_mobile": "hidden-mobile",
-            "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-            "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-          },
           "c": [
             {
               "id": "fa29102",
-              "type": "image",
-              "s": {
-                "eael_image_masking_custom_clip_path": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9",
-                "eael_image_masking_custom_clip_path_hover": "clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 9"
-              }
+              "type": "image"
             }
           ]
         }
