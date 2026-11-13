@@ -1,0 +1,124 @@
+{
+  "pages": [
+    {
+      "path": "/",
+      "viewports": [
+        {
+          "width": 320,
+          "before": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-320-before.jpg"
+          },
+          "after": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-320-after.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "before": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-375-before.jpg"
+          },
+          "after": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-375-after.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "before": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-768-before.jpg"
+          },
+          "after": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-768-after.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "before": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-1024-before.jpg"
+          },
+          "after": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-1024-after.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "before": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-1366-before.jpg"
+          },
+          "after": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-1366-after.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "before": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-1920-before.jpg"
+          },
+          "after": {
+            "status": 500,
+            "overflow": false,
+            "console_errors": [
+              "Failed to load resource: the server responded with a status of 500 ()"
+            ],
+            "shot": "screens/home-1920-after.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    }
+  ]
+}

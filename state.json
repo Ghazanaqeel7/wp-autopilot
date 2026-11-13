@@ -34,5 +34,18 @@
       "pages": 33
     }
   ],
-  "requests": []
+  "requests": [
+    {
+      "id": "R20261113-001",
+      "site": "nextleveldigitals",
+      "kind": "change",
+      "source": "chat",
+      "created_at": "2026-11-13T07:34:17+00:00",
+      "status": "qa_failed",
+      "title": "Fix homepage typo: 'buketio' → 'but' in the portfolio intro line",
+      "updated_at": "2026-11-13T07:34:48+00:00",
+      "report": "reports/nextleveldigitals/R20261113-001/report.md",
+      "problems": 6
+    }
+  ]
 }

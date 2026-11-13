@@ -1,0 +1,24 @@
+{
+  "site": "nextleveldigitals",
+  "request": "R20261113-001",
+  "staged_at": "2026-11-13T07:34:17+00:00",
+  "results": [
+    {
+      "op": "page.update_section",
+      "post_id": 7593,
+      "adapter": "elementor"
+    }
+  ],
+  "preview_expires": "2026-11-16T07:34:17+00:00",
+  "qa_passed": false,
+  "problems": [
+    "HTTP 500 on /",
+    "HTTP 500 on /",
+    "HTTP 500 on /",
+    "HTTP 500 on /",
+    "HTTP 500 on /",
+    "HTTP 500 on /"
+  ],
+  "warnings": [],
+  "finalized_at": "2026-11-13T07:34:48+00:00"
+}
