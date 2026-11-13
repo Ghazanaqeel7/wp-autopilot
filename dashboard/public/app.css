@@ -221,6 +221,22 @@ textarea { min-height: 130px; resize: vertical; }
 .switch input:checked + span { background: var(--accent); }
 .switch input:checked + span::after { transform: translateX(16px); }
 
+.form-grid.three { grid-template-columns: repeat(3, 1fr); }
+.color-field { display: flex; align-items: center; gap: 8px; }
+.swatch { width: 38px; height: 38px; flex: none; border-radius: var(--r-sm); border: 1px solid var(--line); background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%); background-size: 8px 8px; }
+.group { border: 1px solid var(--line); border-radius: var(--r); padding: 16px; margin: 0; display: grid; gap: 14px; min-width: 0; }
+.group legend { font-weight: 600; font-size: 13px; padding: 0 6px; }
+.group legend small { color: var(--ink-3); font-weight: 400; }
+.choice { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.check:has(input:checked) { border-color: var(--ink); background: #fbfbfc; }
+.asset-up { display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: end; }
+.asset-list { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid var(--line-2); }
+.asset-list li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line-2); }
+.asset-list img, .file-ico { width: 44px; height: 44px; flex: none; border-radius: var(--r-sm); border: 1px solid var(--line); object-fit: contain; background: #fafafa; }
+.file-ico { display: grid; place-items: center; font-size: 10px; font-weight: 700; color: var(--ink-3); }
+.ref-shots { display: grid; grid-template-columns: 3fr 1fr; gap: 12px; margin-top: 16px; align-items: start; }
+.ref-shots img { width: 100%; max-height: 360px; object-fit: cover; object-position: top; border: 1px solid var(--line); border-radius: var(--r-sm); cursor: zoom-in; }
+
 /* states */
 .empty { text-align: center; padding: 48px 20px; color: var(--ink-3); }
 .empty b { display: block; color: var(--ink); font-size: 15px; margin-bottom: 4px; }
@@ -247,7 +263,7 @@ textarea { min-height: 130px; resize: vertical; }
   .topbar { padding: 0 16px; gap: 10px; }
   .search { display: none; }
   main { padding: 20px 16px; }
-  .form-grid { grid-template-columns: 1fr; }
+  .form-grid, .form-grid.three, .choice, .asset-up { grid-template-columns: 1fr; }
   .scores { grid-template-columns: repeat(2, 1fr); }
   .side-by-side { grid-template-columns: 1fr; }
   .hide-sm { display: none; }

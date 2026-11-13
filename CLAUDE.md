@@ -10,7 +10,11 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
    and write a revised package for the same request id — it replaces the staged version.
 3. For each request:
    - Read `requests/<id>/request.md` and attachments (transcripts for voice notes).
-   - Read `sites/<site>/site.json`, `sites/<site>/inventory.json`, `sites/<site>/notes.md`.
+   - Read `sites/<site>/site.json`, `sites/<site>/brand.json` (brand colours, fonts, business, audience, tone,
+     `always_remember` — binding on every build and change), the file list of `sites/<site>/brand/assets/`
+     (names start with `logo--`, `guidelines--`, `image--`, `font--`; open a file only when needed), then
+     `sites/<site>/inventory.json` and `sites/<site>/notes.md`.
+   - Request has a `## Reference` section → follow the `wp-reference-build` skill.
    - If anything material is unclear → set status `needs_info`, write questions to
      `requests/<id>/questions.md`. Do NOT build on assumptions.
    - Otherwise write `sites/<site>/changes/<id>/change.json` (schema: `schemas/change.schema.json`)
@@ -77,12 +81,18 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
   (grep by post_id/element_id), never whole exports, never whole media lists.
 - Never read reports, screenshots, lighthouse JSON or logs unless the request is about them;
   QA verdicts arrive as one-line status in `state.json`.
-- Load a skill only when its trigger applies (design → wp-premium-design, content → wp-content-sourcing).
+- Load a skill only when its trigger applies (design → wp-premium-design, content → wp-content-sourcing,
+  reference → wp-reference-build).
 - Change packages carry only diffs (target + new value), never full page dumps.
 - One request per commit; batch requests for the same site in one run.
 - Questions to the client: one message, all questions at once.
 - Heavy/mechanical work (crawl, screenshots, Lighthouse, image conversion) belongs to GitHub
   Actions scripts, not to Claude.
+
+## Reference websites
+- `replicate` = same layout, sections, structure and interactions. `inspired` = same qualities, new design
+  for this business and brand. In both modes another company's text, images, logo, brand name and code are
+  never copied; only `own_site: yes` allows carrying content over. `brand.json` colours and fonts win.
 
 ## Statuses
 `new → planned → applying → preview_ready → approved → live`

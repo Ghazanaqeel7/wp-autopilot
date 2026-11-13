@@ -1,0 +1,19 @@
+name: Capture reference website
+on:
+  workflow_dispatch:
+    inputs:
+      request: { description: "Request id", required: true }
+concurrency: { group: autopilot-state, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with: { qa: "true" }
+      - env: { REQ: "${{ inputs.request }}" }
+        run: |
+          python tools/reference.py "$REQ"
+          tools/commit.sh "autopilot: reference captured for $REQ"

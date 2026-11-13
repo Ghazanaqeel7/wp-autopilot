@@ -5,7 +5,7 @@
 const SESSION_DAYS = 7;
 const MAX_UPLOAD = 8 * 1024 * 1024;
 const READ_PREFIXES = ["sites/", "reports/", "requests/", "state.json", "docs/"];
-const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml", urgent: "urgent.yml" };
+const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml", urgent: "urgent.yml", reference: "reference.yml" };
 const enc = new TextEncoder();
 
 export async function onRequest(ctx) {
@@ -25,6 +25,10 @@ export async function onRequest(ctx) {
     if (path === "/requests" && request.method === "POST") return newRequest(gh, await request.json());
     if (path === "/action" && request.method === "POST") return action(gh, await request.json());
     if (path === "/sites/update" && request.method === "POST") return updateSite(gh, await request.json());
+    if (path === "/sites/brand" && request.method === "POST") return saveBrand(gh, await request.json());
+    if (path === "/assets" && request.method === "GET") return listAssets(gh, url.searchParams.get("site") || "");
+    if (path === "/assets" && request.method === "POST") return uploadAssets(gh, await request.json());
+    if (path === "/assets/delete" && request.method === "POST") return deleteAsset(gh, await request.json());
     if (path === "/config" && request.method === "POST") return updateConfig(gh, await request.json());
     if (path === "/requests/feedback" && request.method === "POST") return feedback(gh, await request.json());
     return json({ error: "not found" }, 404);
@@ -117,6 +121,10 @@ function github(env) {
       const r = await call("PUT", `/contents/${p}`, { message, content: contentB64, ...(sha ? { sha } : {}) });
       return r.json();
     },
+    async del(p, message) {
+      const sha = await this.sha(p);
+      if (sha) await call("DELETE", `/contents/${p}`, { message, sha });
+    },
     async dispatch(workflow, inputs) {
       await call("POST", `/actions/workflows/${workflow}/dispatches`, { ref: "main", inputs });
     },
@@ -153,8 +161,16 @@ async function file(gh, p) {
   if (!READ_PREFIXES.some((x) => p.startsWith(x)) || p.includes("..")) return json({ error: "forbidden path" }, 403);
   const r = await gh.getRaw(p);
   if (!r) return json({ error: "not found" }, 404);
-  const type = p.endsWith(".jpg") ? "image/jpeg" : p.endsWith(".png") ? "image/png" : p.endsWith(".json") ? "application/json" : "text/plain; charset=utf-8";
-  return new Response(r.body, { headers: { "Content-Type": type, "Cache-Control": p.endsWith(".jpg") ? "private, max-age=86400" : "no-store" } });
+  const ext = (p.split(".").pop() || "").toLowerCase();
+  const types = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", webp: "image/webp", gif: "image/gif", svg: "image/svg+xml",
+    pdf: "application/pdf", json: "application/json", md: "text/plain; charset=utf-8", txt: "text/plain; charset=utf-8" };
+  return new Response(r.body, { headers: {
+    "Content-Type": types[ext] || "application/octet-stream",
+    "Cache-Control": ext === "jpg" ? "private, max-age=86400" : "no-store",
+    "X-Content-Type-Options": "nosniff",
+    "Content-Security-Policy": "sandbox; default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'",
+    ...(types[ext] ? {} : { "Content-Disposition": `attachment; filename="${p.split("/").pop().replace(/[^A-Za-z0-9._-]/g, "_")}"` }),
+  } });
 }
 
 async function runs(gh) {
@@ -186,6 +202,11 @@ async function newRequest(gh, b) {
   const text = String(b.text || "").trim();
   if (!/^[a-z0-9-]{2,40}$/.test(site) || !text) return json({ error: "Choose a site and describe the request." }, 400);
   const kind = ["change", "new_site", "revamp", "brief", "maintenance"].includes(b.kind) ? b.kind : "change";
+  const rb = b.reference || {};
+  const refUrl = String(rb.url || "").trim();
+  if (refUrl && !/^https?:\/\/[^\s]+\.[^\s]+$/.test(refUrl)) return json({ error: "Reference URL must start with http:// or https://" }, 400);
+  const ref = refUrl ? { url: refUrl.slice(0, 300), mode: rb.mode === "replicate" ? "replicate" : "inspired", own: !!rb.own,
+    notes: String(rb.notes || "").replace(/\s+/g, " ").trim().slice(0, 1000) } : null;
 
   for (let attempt = 0; attempt < 3; attempt++) {
     const state = await gh.getJson("state.json");
@@ -203,7 +224,8 @@ async function newRequest(gh, b) {
       await gh.put(`requests/${id}/attachments/${name}`, f.data, `dashboard: attachment for ${id}`);
       names.push(name);
     }
-    const md = `---\nid: ${id}\nsite: ${site}\nkind: ${kind}\nsource: dashboard\n---\n\n## Request\n${text}\n\n## Attachments\n${
+    const refMd = ref ? `\n\n## Reference\n- url: ${ref.url}\n- mode: ${ref.mode}\n- own_site: ${ref.own ? "yes" : "no"}\n- notes: ${ref.notes || "-"}` : "";
+    const md = `---\nid: ${id}\nsite: ${site}\nkind: ${kind}\nsource: dashboard\n---\n\n## Request\n${text}${refMd}\n\n## Attachments\n${
       names.map((n) => `- attachments/${n}`).join("\n") || "- none"
     }\n\n## Acceptance\n${String(b.acceptance || "").trim() || "- (as described above)"}\n`;
     await gh.put(`requests/${id}/request.md`, b64(md), `dashboard: request ${id}`);
@@ -212,9 +234,10 @@ async function newRequest(gh, b) {
     if (fresh.requests.some((r) => r.id === id)) continue; // id taken meanwhile → retry
     const now = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
     const urgent = !!b.urgent;
-    fresh.requests.push({ id, site, kind, status: "new", source: "dashboard", urgent, title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
+    fresh.requests.push({ id, site, kind, status: "new", source: "dashboard", urgent, ...(ref ? { reference: { url: ref.url, mode: ref.mode } } : {}), title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
     try {
       await gh.put("state.json", b64(JSON.stringify(fresh, null, 2) + "\n"), `dashboard: new request ${id}`);
+      if (ref) await gh.dispatch(WORKFLOWS.reference, { request: id }).catch(() => {});
       if (urgent) await gh.dispatch(WORKFLOWS.urgent, { request: id }).catch(() => {});
       return json({ ok: true, id, urgent });
     } catch (e) {
@@ -266,6 +289,52 @@ async function updateSite(gh, b) {
     if (b.archive === false && s.status === "archived") s.status = "pending_connect";
   }, `dashboard: update site ${id}`);
   return err || json({ ok: true });
+}
+
+const SITE_RE = /^[a-z0-9-]{2,40}$/;
+const ASSET_KINDS = ["logo", "guidelines", "image", "font", "other"];
+const clip = (v, n) => String(v ?? "").trim().slice(0, n);
+const hex = (v) => (/^#[0-9a-fA-F]{3,8}$/.test(String(v || "").trim()) ? String(v).trim() : "");
+
+async function saveBrand(gh, b) {
+  const id = String(b.id || "");
+  if (!SITE_RE.test(id) || !(await gh.sha(`sites/${id}/site.json`))) return json({ error: "bad site" }, 400);
+  const brand = {
+    colors: { primary: hex(b.primary), secondary: hex(b.secondary), accent: hex(b.accent) },
+    fonts: { heading: clip(b.font_heading, 80), body: clip(b.font_body, 80) },
+    business: clip(b.business, 1500), audience: clip(b.audience, 1000), tone: clip(b.tone, 1000),
+    always_remember: clip(b.always_remember, 4000),
+    updated_at: new Date().toISOString(),
+  };
+  await gh.put(`sites/${id}/brand.json`, b64(JSON.stringify(brand, null, 2) + "\n"), `dashboard: brand for ${id}`);
+  return json({ ok: true });
+}
+
+async function listAssets(gh, site) {
+  if (!SITE_RE.test(site)) return json({ error: "bad site" }, 400);
+  const items = await gh.list(`sites/${site}/brand/assets`);
+  return json((Array.isArray(items) ? items : []).filter((f) => f.type === "file").map((f) => ({ name: f.name, size: f.size || 0 })));
+}
+
+async function uploadAssets(gh, b) {
+  const site = String(b.site || "");
+  if (!SITE_RE.test(site) || !(await gh.sha(`sites/${site}/site.json`))) return json({ error: "bad site" }, 400);
+  const kind = ASSET_KINDS.includes(b.kind) ? b.kind : "other";
+  const files = Array.isArray(b.files) ? b.files.slice(0, 10) : [];
+  if (!files.length) return json({ error: "Choose at least one file." }, 400);
+  if (files.reduce((n, f) => n + (f.data || "").length * 0.75, 0) > MAX_UPLOAD) return json({ error: "Files are larger than 8 MB in total." }, 400);
+  for (const f of files) {
+    const name = String(f.name || "file").replace(/[^A-Za-z0-9._-]/g, "_").replace(/^\.+/, "").slice(0, 80) || "file";
+    await gh.put(`sites/${site}/brand/assets/${kind}--${name}`, f.data, `dashboard: brand asset for ${site}`);
+  }
+  return json({ ok: true });
+}
+
+async function deleteAsset(gh, b) {
+  const site = String(b.site || ""), name = String(b.name || "");
+  if (!SITE_RE.test(site) || !/^[A-Za-z0-9._-]{1,100}$/.test(name) || name.includes("..")) return json({ error: "bad request" }, 400);
+  await gh.del(`sites/${site}/brand/assets/${name}`, `dashboard: remove brand asset from ${site}`);
+  return json({ ok: true });
 }
 
 async function updateConfig(gh, b) {

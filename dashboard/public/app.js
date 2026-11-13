@@ -167,7 +167,7 @@ async function site(id, tab = "overview") {
   crumbs(["Sites", "#/sites"], [s.name]);
   const reqs = st.requests.filter((r) => r.site === id);
   const connected = !!s.bridge?.version && s.status === "active";
-  const tabs = { overview: "Overview", pages: "Pages", requests: `Requests (${reqs.length})`, settings: "Settings" };
+  const tabs = { overview: "Overview", brand: "Brand & assets", pages: "Pages", requests: `Requests (${reqs.length})`, settings: "Settings" };
   view.innerHTML = `
     <div class="page-head"><div><div class="title-row"><span class="favicon">${esc(initials(s.name))}</span><h1>${esc(s.name)}</h1>
       ${s.paused ? '<span class="badge warn">Paused</span>' : badge(s.status)}</div>
@@ -207,6 +207,7 @@ async function site(id, tab = "overview") {
         <td>${esc(p.builder)}</td><td class="hide-sm">${esc(p.status)}</td><td class="hide-sm muted">${ago(p.modified && p.modified.replace(" ", "T") + "Z")}</td></tr>`).join("")}
       </tbody></table>` : `<div class="empty"><b>No page data yet</b>Connect and scan the site to see its pages.</div>`}</section>`;
   }
+  if (tab === "brand") await brandTab(el, id);
   if (tab === "requests") el.innerHTML = `<section class="panel">${reqTable(reqs, false)}</section>`;
   if (tab === "settings") {
     el.innerHTML = `<section class="panel"><div class="panel-head"><h2>General</h2></div><div class="panel-body">
@@ -237,6 +238,68 @@ async function site(id, tab = "overview") {
     };
   }
   bindRows();
+}
+
+/* ================================================================ brand & assets */
+const ASSET_KIND = { logo: "Logo", guidelines: "Brand guidelines", image: "Image", font: "Font", other: "Other" };
+const readFiles = (files) => Promise.all(files.map((file) => new Promise((res, rej) => {
+  const rd = new FileReader(); rd.onload = () => res({ name: file.name, data: String(rd.result).split(",")[1] || "" }); rd.onerror = rej; rd.readAsDataURL(file);
+})));
+
+async function brandTab(el, id) {
+  const [raw, assets] = await Promise.all([file(`sites/${id}/brand.json`), api(`/assets?site=${encodeURIComponent(id)}`).catch(() => [])]);
+  const b = raw && typeof raw === "object" ? raw : {};
+  const c = b.colors || {}, f = b.fonts || {};
+  const color = (name, label) => `<label class="field"><span>${label}</span><span class="color-field"><i class="swatch" style="background:${esc(c[name] || "transparent")}"></i>
+    <input type="text" name="${name}" value="${esc(c[name] || "")}" placeholder="#000000" pattern="#[0-9a-fA-F]{3,8}" maxlength="9"></span></label>`;
+  el.innerHTML = `
+    <div class="callout">Claude reads everything on this page before any work on this website — fill it once and it is applied to every build and change.</div>
+    <section class="panel"><div class="panel-head"><h2>Brand guidelines</h2>${b.updated_at ? `<span class="muted">Saved ${ago(b.updated_at)}</span>` : ""}</div><div class="panel-body">
+      <form class="form" id="bf">
+        <div class="form-grid three">${color("primary", "Primary colour")}${color("secondary", "Secondary colour")}${color("accent", "Accent colour")}</div>
+        <div class="form-grid"><label class="field"><span>Heading font</span><input type="text" name="font_heading" value="${esc(f.heading || "")}" maxlength="80" placeholder="e.g. Manrope"></label>
+          <label class="field"><span>Body font</span><input type="text" name="font_body" value="${esc(f.body || "")}" maxlength="80" placeholder="e.g. Inter"></label></div>
+        <label class="field"><span>Business <small>— what the company does, where, and what makes it different</small></span><textarea name="business" style="min-height:90px" maxlength="1500">${esc(b.business || "")}</textarea></label>
+        <div class="form-grid"><label class="field"><span>Audience</span><textarea name="audience" style="min-height:80px" maxlength="1000" placeholder="Who the website is for.">${esc(b.audience || "")}</textarea></label>
+          <label class="field"><span>Tone of voice</span><textarea name="tone" style="min-height:80px" maxlength="1000" placeholder="e.g. Confident, plain, no jargon.">${esc(b.tone || "")}</textarea></label></div>
+        <label class="field"><span>Always remember <small>— standing rules for this website</small></span><textarea name="always_remember" maxlength="4000" placeholder="e.g. Never show prices. WhatsApp button on every page. Client dislikes sliders.">${esc(b.always_remember || "")}</textarea></label>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Save brand guidelines</button></div><p class="form-error" id="be"></p></form></div></section>
+    <section class="panel"><div class="panel-head"><h2>Assets</h2><span class="muted">${assets.length} file${assets.length === 1 ? "" : "s"}</span></div><div class="panel-body">
+      <form class="form" id="af" style="max-width:none"><div class="asset-up"><label class="field"><span>Type</span><select name="kind">${Object.entries(ASSET_KIND).map(([k, l]) => `<option value="${k}">${l}</option>`).join("")}</select></label>
+        <label class="dropzone" id="adz"><input type="file" id="afiles" multiple hidden><b>Drop files here or click to browse</b><span>Logos, brand book PDF, photos, fonts — up to 8 MB per upload</span></label></div>
+        <p class="form-error" id="ae"></p></form>
+      ${assets.length ? `<ul class="asset-list">${assets.map((a) => { const [k, ...rest] = a.name.split("--"); const nm = rest.join("--") || a.name; const isImg = /\.(png|jpe?g|webp|gif|svg)$/i.test(a.name);
+        const href = fileUrl(`sites/${id}/brand/assets/${a.name}`);
+        return `<li>${isImg ? `<img src="${href}" alt="">` : `<span class="file-ico">${esc((a.name.split(".").pop() || "").slice(0, 4).toUpperCase())}</span>`}
+          <div class="grow"><a href="${href}" target="_blank" rel="noopener" class="cell-title ellipsis">${esc(nm)}</a><div class="cell-sub">${esc(ASSET_KIND[k] || "Other")} · ${(a.size / 1024).toFixed(0)} KB</div></div>
+          <button class="btn btn-sm btn-danger" data-del="${esc(a.name)}">Remove</button></li>`; }).join("")}</ul>`
+        : `<div class="empty" style="padding:24px"><b>No assets yet</b>Upload the logo and brand guidelines first.</div>`}</div></section>`;
+  $$(".color-field input", el).forEach((i) => (i.oninput = () => (i.previousElementSibling.style.background = /^#[0-9a-fA-F]{3,8}$/.test(i.value) ? i.value : "transparent")));
+  $("#bf").onsubmit = async (e) => {
+    e.preventDefault(); const btn = e.target.querySelector("button"); btn.disabled = true; $("#be").textContent = "";
+    try { await api("/sites/brand", { method: "POST", body: { id, ...Object.fromEntries(new FormData(e.target)) } }); toast("Brand guidelines saved."); }
+    catch (err) { $("#be").textContent = err.message; } finally { btn.disabled = false; }
+  };
+  const upload = async (list) => {
+    if (!list.length) return;
+    $("#ae").textContent = "";
+    try {
+      if (list.reduce((n, x) => n + x.size, 0) > 8 * 1024 * 1024) throw new Error("Files are larger than 8 MB in total — upload in smaller batches.");
+      toast("Uploading…", 20000);
+      await api("/assets", { method: "POST", body: { site: id, kind: $("#af").kind.value, files: await readFiles(list) } });
+      toast("Uploaded."); route();
+    } catch (err) { $("#ae").textContent = err.message; toast("Upload failed."); }
+  };
+  const dz = $("#adz");
+  $("#afiles").onchange = (e) => upload([...e.target.files]);
+  ["dragenter", "dragover"].forEach((t) => dz.addEventListener(t, (e) => { e.preventDefault(); dz.classList.add("drag"); }));
+  ["dragleave", "drop"].forEach((t) => dz.addEventListener(t, (e) => { e.preventDefault(); dz.classList.remove("drag"); }));
+  dz.addEventListener("drop", (e) => upload([...e.dataTransfer.files]));
+  $$("[data-del]", el).forEach((btn) => (btn.onclick = async () => {
+    if (!confirm("Remove this asset?")) return; btn.disabled = true;
+    try { await api("/assets/delete", { method: "POST", body: { site: id, name: btn.dataset.del } }); toast("Removed."); route(); }
+    catch (err) { toast(err.message, 6000); btn.disabled = false; }
+  }));
 }
 
 /* ================================================================ requests */
@@ -282,6 +345,8 @@ async function request(id) {
   ]);
   const section = (name) => (typeof md === "string" ? ((md.split(`## ${name}`)[1] || "").split("\n## ")[0] || "").trim() : "");
   const attachments = section("Attachments").split("\n").map((l) => l.replace(/^- /, "").trim()).filter((l) => l && l !== "none");
+  const refInfo = Object.fromEntries(section("Reference").split("\n").map((l) => l.match(/^- (\w+): (.*)$/)).filter(Boolean).map((m) => [m[1], m[2].trim()]));
+  if (refInfo.url && !/^https?:\/\//.test(refInfo.url)) delete refInfo.url;
   const previewOk = prev && prev.url && new Date(prev.expires) > new Date() && ["preview_ready", "qa_failed"].includes(r.status);
   const problems = [...new Set(meta?.problems || [])], warnings = [...new Set(meta?.warnings || [])];
   const lh = qa?.lighthouse;
@@ -319,6 +384,12 @@ async function request(id) {
         ${attachments.length ? `<div style="margin-top:16px"><div class="muted" style="font-size:12px;margin-bottom:6px">Attachments</div><ul class="files">
           ${attachments.map((a) => `<li><a href="${fileUrl(`requests/${id}/${a}`)}" target="_blank" rel="noopener">${esc(a.split("/").pop())}</a></li>`).join("")}</ul></div>` : ""}
       </div></section>
+      ${refInfo.url ? `<section class="panel"><div class="panel-head"><h2>Reference website</h2><span class="badge plain">${refInfo.mode === "replicate" ? "Replicate" : "Inspiration"}</span></div><div class="panel-body">
+        <dl class="kv"><dt>URL</dt><dd><a href="${esc(refInfo.url)}" target="_blank" rel="noopener noreferrer">${esc(refInfo.url)} ↗</a></dd>
+          <dt>Content</dt><dd>${refInfo.own_site === "yes" ? "Own website — text and images may be reused" : "Layout and structure only — their text and images are not copied"}</dd>
+          ${refInfo.notes && refInfo.notes !== "-" ? `<dt>Notes</dt><dd>${esc(refInfo.notes)}</dd>` : ""}</dl>
+        <div class="ref-shots"><img data-opt src="${fileUrl(`requests/${id}/reference/desktop.jpg`)}" alt="Reference website on desktop"><img data-opt src="${fileUrl(`requests/${id}/reference/mobile.jpg`)}" alt="Reference website on mobile"></div>
+      </div></section>` : ""}
       ${typeof fb === "string" ? `<section class="panel"><div class="panel-head"><h2>Feedback history</h2></div><div class="panel-body">
         <p class="prose">${esc(fb.replace(/^# Feedback\s*/, "").replace(/^## /gm, ""))}</p></div></section>` : ""}
     </div><div class="stack">
@@ -347,6 +418,7 @@ async function request(id) {
   if (r.status === "live") add("Roll back", "btn-danger", run("rollback", "Restore the website to how it was before this change?", "Rolling back."));
   if (["error", "planned"].includes(r.status)) add("Apply again", "", run("apply", null, "Applying again."));
 
+  $$("img[data-opt]", view).forEach((im) => { im.onerror = () => im.remove(); im.onclick = () => lightbox(im.src); });
   const cp = $("#cp"); if (cp) cp.onclick = async () => { await navigator.clipboard.writeText(prev.url); toast("Preview link copied."); };
   if (qa?.pages?.length) compare(qa, base);
   if (["new", "changes_requested", "planned", "applying", "approved"].includes(r.status)) timer = setTimeout(route, 30000);
@@ -425,6 +497,13 @@ async function newRequest(params) {
       <label class="field"><span>Done when… <small>optional</small></span><textarea name="acceptance" style="min-height:80px" placeholder="How you'll know it's right."></textarea></label>
       <div class="field"><span>Attachments <small>— up to 10 files, 8 MB total</small></span>
         <label class="dropzone" id="dz"><input type="file" id="files" multiple hidden><b>Drop files here or click to browse</b><span>PDF, DOCX, images, audio</span></label><ul class="files" id="fl"></ul></div>
+      <fieldset class="group"><legend>Reference website <small>optional</small></legend>
+        <label class="field"><span>URL</span><input type="url" name="ref_url" placeholder="https://a-site-you-like.com"></label>
+        <div class="choice"><label class="check"><input type="radio" name="ref_mode" value="inspired" checked><div><b>Use as inspiration</b><span>Similar feel and quality, redesigned for this business, its content and its brand colours.</span></div></label>
+          <label class="check"><input type="radio" name="ref_mode" value="replicate"><div><b>Replicate</b><span>Same layout, sections, structure and interactions — with this business's own content, images and branding.</span></div></label></div>
+        <label class="check"><input type="checkbox" name="ref_own"><div><b>The reference is our own website</b><span>Allows its text and images to be carried over too (redesign or migration). Other companies' text, photos and logos are never copied.</span></div></label>
+        <label class="field"><span>What do you like about it? <small>optional</small></span><input type="text" name="ref_notes" maxlength="1000" placeholder="e.g. The hero layout and the pricing table."></label>
+      </fieldset>
       <label class="check"><input type="checkbox" name="urgent"><div><b>Urgent</b><span>Starts Claude immediately when an Anthropic API key is configured (pay per use). Otherwise it goes to the front of the queue.</span></div></label>
       <div class="form-actions"><button class="btn btn-primary" type="submit" ${sites.length ? "" : "disabled"}>Send request</button><a class="btn" href="#/requests">Cancel</a></div>
       <p class="form-error" id="err"></p></form></div></section>`;
@@ -441,9 +520,10 @@ async function newRequest(params) {
     e.preventDefault(); const f = e.target; const b = f.querySelector("[type=submit]"); b.disabled = true; $("#err").textContent = "";
     try {
       if (files.reduce((n, x) => n + x.size, 0) > 8 * 1024 * 1024) throw new Error("Attachments are larger than 8 MB in total.");
-      const data = await Promise.all(files.map((file) => new Promise((res, rej) => { const rd = new FileReader(); rd.onload = () => res({ name: file.name, data: String(rd.result).split(",")[1] || "" }); rd.onerror = rej; rd.readAsDataURL(file); })));
+      const data = await readFiles(files);
       const d = Object.fromEntries(new FormData(f));
-      const res = await api("/requests", { method: "POST", body: { ...d, urgent: !!f.urgent.checked, files: data } });
+      const reference = d.ref_url ? { url: d.ref_url, mode: d.ref_mode, own: !!f.ref_own.checked, notes: d.ref_notes } : null;
+      const res = await api("/requests", { method: "POST", body: { site: d.site, kind: d.kind, title: d.title, text: d.text, acceptance: d.acceptance, reference, urgent: !!f.urgent.checked, files: data } });
       toast(`Request ${res.id} created.`); go("#/req/" + res.id);
     } catch (err) { $("#err").textContent = err.message; b.disabled = false; }
   };
