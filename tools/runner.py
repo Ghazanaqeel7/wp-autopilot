@@ -9,8 +9,8 @@
   runner.py discard  <site> <request>         drop a staged change
   runner.py health                            check every active site
 
-Secret via env: AP_SIGNING_KEY (key id is derived). Preview links are secrets too: they go to
-$RUNNER_TEMP / step summary only, never into git.
+Secret via env: AP_SIGNING_KEY (key id is derived). Preview links are time-limited (default 72h) and
+are stored only in reports/<site>/<request>/preview.json of this private repo for the dashboard.
 """
 import base64, datetime as dt, json, os, pathlib, re, sys
 
@@ -246,6 +246,8 @@ def stage(site, req):
     urls = [u if u.startswith("http") else base + "/" + u.lstrip("/") for u in change["qa"].get("urls") or ["/"]]
     save(TMP / "qa_input.json", {"site": site, "request": req, "preview_url": res["preview_url"], "urls": urls[:8],
                                  "viewports": load(STATE)["config"]["qa"]["viewports"]})
+    # Time-limited capability link for QA/PM in the password-protected dashboard (private repo, expires).
+    save(report_dir(site, req) / "preview.json", {"url": res["preview_url"], "expires": res["preview_expires"]})
     save(report_dir(site, req) / "meta.json", {"site": site, "request": req, "staged_at": now(),
                                                "results": res["results"], "preview_expires": res["preview_expires"]})
     audit(site, f"{req} staged ops={len(ops)}")
@@ -284,6 +286,7 @@ def finalize(site, req):
     if not qa:
         problems.append("QA did not run")
 
+    problems, warnings = list(dict.fromkeys(problems)), list(dict.fromkeys(warnings))
     passed = not problems
     meta.update(qa_passed=passed, problems=problems, warnings=warnings, finalized_at=now())
     save(rdir / "meta.json", meta)

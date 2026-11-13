@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>WP Autopilot</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div id="login" class="login" hidden>
+    <form id="login-form" class="login-card">
+      <div class="brand"><span class="mark"></span>WP Autopilot</div>
+      <label>Password<input type="password" name="password" autocomplete="current-password" required autofocus></label>
+      <button class="btn primary" type="submit">Sign in</button>
+      <p class="err" id="login-err" role="alert"></p>
+    </form>
+  </div>
+
+  <div id="app" hidden>
+    <header class="top">
+      <a class="brand" href="#/"><span class="mark"></span>WP Autopilot</a>
+      <nav>
+        <a href="#/" data-nav="sites">Sites</a>
+        <a href="#/requests" data-nav="requests">Requests</a>
+        <a href="#/activity" data-nav="activity">Activity</a>
+      </nav>
+      <div class="top-actions">
+        <a class="btn" href="#/new-site">Add website</a>
+        <a class="btn primary" href="#/new-request">New request</a>
+        <button class="link" id="logout" title="Sign out">Sign out</button>
+      </div>
+    </header>
+    <main id="view" tabindex="-1"></main>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

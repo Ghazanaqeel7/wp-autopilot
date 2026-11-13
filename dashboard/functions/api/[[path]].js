@@ -1,0 +1,242 @@
+// WP Autopilot dashboard API — Cloudflare Pages Function.
+// Env: GITHUB_TOKEN (secret), GITHUB_REPO ("owner/repo"), DASHBOARD_PASSWORD (secret), SESSION_SECRET (secret).
+// The GitHub token never reaches the browser; every route except /api/login needs a valid session cookie.
+
+const SESSION_DAYS = 7;
+const MAX_UPLOAD = 8 * 1024 * 1024;
+const READ_PREFIXES = ["sites/", "reports/", "requests/", "state.json", "docs/"];
+const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml" };
+const enc = new TextEncoder();
+
+export async function onRequest(ctx) {
+  const { request, env, params } = ctx;
+  const path = "/" + [].concat(params.path || []).join("/");
+  try {
+    if (path === "/login" && request.method === "POST") return login(request, env);
+    if (path === "/logout") return json({ ok: true }, 200, { "Set-Cookie": cookie("", 0) });
+    if (!(await authed(request, env))) return json({ error: "unauthorized" }, 401);
+    const gh = github(env);
+    const url = new URL(request.url);
+
+    if (path === "/state" && request.method === "GET") return json(await loadState(gh));
+    if (path === "/file" && request.method === "GET") return file(gh, url.searchParams.get("path") || "");
+    if (path === "/runs" && request.method === "GET") return json(await runs(gh));
+    if (path === "/sites" && request.method === "POST") return addSite(gh, await request.json());
+    if (path === "/requests" && request.method === "POST") return newRequest(gh, await request.json());
+    if (path === "/action" && request.method === "POST") return action(gh, await request.json());
+    return json({ error: "not found" }, 404);
+  } catch (e) {
+    return json({ error: e.message || String(e) }, e.status || 500);
+  }
+}
+
+/* ---------------------------------------------------------------- auth */
+
+async function login(request, env) {
+  if (!env.DASHBOARD_PASSWORD || !env.SESSION_SECRET) return json({ error: "Dashboard is not configured (env vars missing)." }, 500);
+  const body = await request.json().catch(() => ({}));
+  await sleep(400); // slows guessing
+  if (!(await safeEqual(String(body.password || ""), env.DASHBOARD_PASSWORD))) return json({ error: "Wrong password" }, 401);
+  const exp = Math.floor(Date.now() / 1000) + SESSION_DAYS * 86400;
+  const token = `${exp}.${await hmac(env.SESSION_SECRET, String(exp))}`;
+  return json({ ok: true }, 200, { "Set-Cookie": cookie(token, SESSION_DAYS * 86400) });
+}
+
+async function authed(request, env) {
+  const m = (request.headers.get("Cookie") || "").match(/(?:^|;\s*)ap_session=([^;]+)/);
+  if (!m || !env.SESSION_SECRET) return false;
+  const [exp, sig] = m[1].split(".");
+  if (!exp || !sig || Number(exp) < Date.now() / 1000) return false;
+  return safeEqual(sig, await hmac(env.SESSION_SECRET, exp));
+}
+
+function cookie(value, maxAge) {
+  return `ap_session=${value}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${maxAge}`;
+}
+
+async function hmac(secret, msg) {
+  const key = await crypto.subtle.importKey("raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", key, enc.encode(msg));
+  return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function safeEqual(a, b) {
+  const [x, y] = await Promise.all([a, b].map((s) => crypto.subtle.digest("SHA-256", enc.encode(s))));
+  const u = new Uint8Array(x), v = new Uint8Array(y);
+  let d = 0;
+  for (let i = 0; i < u.length; i++) d |= u[i] ^ v[i];
+  return d === 0;
+}
+
+/* ---------------------------------------------------------------- github */
+
+function github(env) {
+  const repo = env.GITHUB_REPO;
+  const base = `${env.GITHUB_API || "https://api.github.com"}/repos/${repo}`; // GITHUB_API: tests only
+  async function call(method, p, body, accept = "application/vnd.github+json") {
+    const r = await fetch(base + p, {
+      method,
+      headers: {
+        Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+        Accept: accept,
+        "User-Agent": "wp-autopilot-dashboard",
+        "X-GitHub-Api-Version": "2022-11-28",
+        ...(body ? { "Content-Type": "application/json" } : {}),
+      },
+      body: body ? JSON.stringify(body) : undefined,
+      signal: AbortSignal.timeout(20000),
+    });
+    if (!r.ok && r.status !== 404) {
+      const t = await r.text();
+      throw Object.assign(new Error(`GitHub ${r.status}: ${t.slice(0, 200)}`), { status: r.status === 409 ? 409 : 502 });
+    }
+    return r;
+  }
+  return {
+    async getJson(p) {
+      const r = await call("GET", `/contents/${p}`, null, "application/vnd.github.raw+json");
+      return r.status === 404 ? null : r.json();
+    },
+    async getRaw(p) {
+      const r = await call("GET", `/contents/${p}`, null, "application/vnd.github.raw+json");
+      return r.status === 404 ? null : r;
+    },
+    async list(p) {
+      const r = await call("GET", `/contents/${p}`);
+      return r.status === 404 ? [] : r.json();
+    },
+    async sha(p) {
+      const r = await call("GET", `/contents/${p}`);
+      return r.status === 404 ? null : (await r.json()).sha;
+    },
+    async put(p, contentB64, message) {
+      const sha = await this.sha(p);
+      const r = await call("PUT", `/contents/${p}`, { message, content: contentB64, ...(sha ? { sha } : {}) });
+      return r.json();
+    },
+    async dispatch(workflow, inputs) {
+      await call("POST", `/actions/workflows/${workflow}/dispatches`, { ref: "main", inputs });
+    },
+    async runs() {
+      const r = await call("GET", `/actions/runs?per_page=20`);
+      return r.json();
+    },
+  };
+}
+
+function b64(s) {
+  const bytes = enc.encode(s);
+  let bin = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+
+/* ---------------------------------------------------------------- routes */
+
+async function loadState(gh) {
+  const state = (await gh.getJson("state.json")) || { sites: [], requests: [] };
+  const dirs = (await gh.list("sites")).filter((d) => d.type === "dir" && !d.name.startsWith("_"));
+  const sites = await Promise.all(
+    dirs.map(async (d) => {
+      const cfg = (await gh.getJson(`sites/${d.name}/site.json`)) || { id: d.name };
+      const live = state.sites.find((s) => s.id === d.name) || {};
+      return { ...cfg, ...live, id: d.name };
+    })
+  );
+  return { config: state.config || {}, sites, requests: (state.requests || []).slice().reverse() };
+}
+
+async function file(gh, p) {
+  if (!READ_PREFIXES.some((x) => p.startsWith(x)) || p.includes("..")) return json({ error: "forbidden path" }, 403);
+  const r = await gh.getRaw(p);
+  if (!r) return json({ error: "not found" }, 404);
+  const type = p.endsWith(".jpg") ? "image/jpeg" : p.endsWith(".png") ? "image/png" : p.endsWith(".json") ? "application/json" : "text/plain; charset=utf-8";
+  return new Response(r.body, { headers: { "Content-Type": type, "Cache-Control": p.endsWith(".jpg") ? "private, max-age=86400" : "no-store" } });
+}
+
+async function runs(gh) {
+  const d = await gh.runs();
+  return (d.workflow_runs || []).map((r) => ({
+    id: r.id, name: r.name, title: r.display_title, status: r.status, conclusion: r.conclusion,
+    created: r.created_at, url: r.html_url, event: r.event,
+  }));
+}
+
+async function addSite(gh, b) {
+  const id = String(b.id || "").trim().toLowerCase();
+  const url = String(b.url || "").trim().replace(/\/+$/, "");
+  if (!/^[a-z0-9-]{2,40}$/.test(id)) return json({ error: "Site ID: 2–40 lowercase letters, numbers or dashes." }, 400);
+  if (!/^https:\/\/[^\s/]+\.[^\s]+$/.test(url)) return json({ error: "URL must start with https://" }, 400);
+  if (await gh.sha(`sites/${id}/site.json`)) return json({ error: "A site with this ID already exists." }, 409);
+  const site = {
+    id, tenant: "default", name: String(b.name || id).slice(0, 80), client: String(b.client || "").slice(0, 80), url,
+    type: ["existing", "new", "revamp"].includes(b.type) ? b.type : "existing", status: "pending_connect", paused: false,
+    builder: "unknown", theme: "", css_prefix: (id.replace(/[^a-z]/g, "").slice(0, 4) || "ap") + "-", bridge: {}, channels: {},
+    created_at: new Date().toISOString(),
+  };
+  await gh.put(`sites/${id}/site.json`, b64(JSON.stringify(site, null, 2) + "\n"), `dashboard: add site ${id}`);
+  return json({ ok: true, id });
+}
+
+async function newRequest(gh, b) {
+  const site = String(b.site || "");
+  const text = String(b.text || "").trim();
+  if (!/^[a-z0-9-]{2,40}$/.test(site) || !text) return json({ error: "Choose a site and describe the request." }, 400);
+  const kind = ["change", "new_site", "revamp", "brief", "maintenance"].includes(b.kind) ? b.kind : "change";
+
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const state = await gh.getJson("state.json");
+    const day = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const n = state.requests.filter((r) => r.id.startsWith(`R${day}-`)).length + 1;
+    const id = `R${day}-${String(n).padStart(3, "0")}`;
+
+    const files = Array.isArray(b.files) ? b.files.slice(0, 10) : [];
+    let total = 0;
+    const names = [];
+    for (const f of files) {
+      const name = String(f.name || "file").replace(/[^A-Za-z0-9._-]/g, "_").slice(0, 80);
+      total += (f.data || "").length * 0.75;
+      if (total > MAX_UPLOAD) return json({ error: "Attachments are larger than 8 MB in total." }, 400);
+      await gh.put(`requests/${id}/attachments/${name}`, f.data, `dashboard: attachment for ${id}`);
+      names.push(name);
+    }
+    const md = `---\nid: ${id}\nsite: ${site}\nkind: ${kind}\nsource: dashboard\n---\n\n## Request\n${text}\n\n## Attachments\n${
+      names.map((n) => `- attachments/${n}`).join("\n") || "- none"
+    }\n\n## Acceptance\n${String(b.acceptance || "").trim() || "- (as described above)"}\n`;
+    await gh.put(`requests/${id}/request.md`, b64(md), `dashboard: request ${id}`);
+
+    const fresh = await gh.getJson("state.json");
+    if (fresh.requests.some((r) => r.id === id)) continue; // id taken meanwhile → retry
+    const now = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
+    fresh.requests.push({ id, site, kind, status: "new", source: "dashboard", title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
+    try {
+      await gh.put("state.json", b64(JSON.stringify(fresh, null, 2) + "\n"), `dashboard: new request ${id}`);
+      return json({ ok: true, id });
+    } catch (e) {
+      if (e.status !== 409) throw e;
+    }
+  }
+  return json({ error: "Busy — please try again." }, 409);
+}
+
+async function action(gh, b) {
+  const a = String(b.action || "");
+  const site = String(b.site || "");
+  const req = String(b.request || "");
+  if (site && !/^[a-z0-9-]{2,40}$/.test(site)) return json({ error: "bad site" }, 400);
+  if (req && !/^R\d{8}-\d{3}$/.test(req)) return json({ error: "bad request id" }, 400);
+  if (["promote", "rollback", "discard"].includes(a)) await gh.dispatch(WORKFLOWS.decide, { action: a, site, request: req });
+  else if (a === "onboard") await gh.dispatch(WORKFLOWS.onboard, { site });
+  else if (a === "apply") await gh.dispatch(WORKFLOWS.apply, { site, request: req });
+  else if (a === "health") await gh.dispatch(WORKFLOWS.health, {});
+  else return json({ error: "unknown action" }, 400);
+  return json({ ok: true, queued: a });
+}
+
+/* ---------------------------------------------------------------- utils */
+
+function json(data, status = 200, headers = {}) {
+  return new Response(JSON.stringify(data), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", ...headers } });
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

@@ -10,3 +10,5 @@ secrets/
 dashboard/dist/
 reports/**/*.tmp
 dist/
+.dev.vars
+.wrangler/

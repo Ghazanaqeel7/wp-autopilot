@@ -21,7 +21,8 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Never: edit WP core, edit plugin/theme vendor files, drop/alter DB tables, delete media,
   change users/roles, change permalinks or site URL, disable security plugins.
 - Code/plugin-install/PHP changes → `risk: "high"` → requires full clone staging (Step 6).
-- Secrets never appear in the repo, in commits, in reports or in messages.
+- Secrets never appear in the repo, in commits, in reports or in messages. (Preview links are time-limited
+  capability links kept only in reports/<site>/<id>/preview.json for the dashboard — never copy them elsewhere.)
 - Use the site's adapter (`site.json → builder`). Never write raw Elementor JSON by hand-guessing
   widget schemas; read the existing structure from `inventory.json` and follow it.
 
