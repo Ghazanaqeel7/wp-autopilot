@@ -28,7 +28,10 @@
       "id": "nextleveldigitals",
       "name": "Next Level Digitals",
       "url": "https://nextleveldigitals.com",
-      "status": "pending_connect"
+      "status": "active",
+      "builder": "elementor",
+      "last_inventory": "2026-11-13T07:31:59+00:00",
+      "pages": 33
     }
   ],
   "requests": []

@@ -5,12 +5,23 @@
   "client": "Next Level Digitals",
   "url": "https://nextleveldigitals.com",
   "type": "existing",
-  "status": "pending_connect",
+  "status": "active",
   "paused": false,
-  "builder": "unknown",
-  "theme": "",
+  "builder": "elementor",
+  "theme": "Hamela",
   "css_prefix": "nld-",
-  "bridge": {},
+  "bridge": {
+    "version": "0.1.1",
+    "site_key_id": "hub-986b5a6aea",
+    "connected_at": "2026-11-13T07:31:59+00:00",
+    "checks": {
+      "https": true,
+      "sodium": true,
+      "file_mods": true,
+      "wp": "6.8.12",
+      "php": "8.2.35"
+    }
+  },
   "channels": {},
   "created_at": "2026-11-13T07:12:00+00:00"
 }
