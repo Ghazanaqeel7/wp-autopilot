@@ -10,3 +10,7 @@ run_worker_first = ["/api/*"]
 
 [vars]
 GITHUB_REPO = "Ghazanaqeel7/wp-autopilot"
+
+# Encrypted store for the tokens saved on the Connections page. No id: Cloudflare creates it on first deploy.
+[[kv_namespaces]]
+binding = "CONNECTIONS"
