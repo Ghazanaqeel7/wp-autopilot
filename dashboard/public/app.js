@@ -634,7 +634,8 @@ async function connections() {
   view.innerHTML = `<div class="page-head"><div><h1>Connections</h1><p>Connect Slack, Trello, ClickUp and email once. Messages arrive in the Inbox, and answers go back to where they were asked.</p></div></div>
     ${c.storage ? "" : `<div class="callout warn"><div><b>Storage is not connected yet.</b> Saving tokens here needs a small encrypted store (Cloudflare KV, binding <span class="mono">CONNECTIONS</span>). It is created on the next deploy; if this notice stays after a deploy, see <span class="mono">docs/CHANNELS.md</span> → Storage.</div></div>`}
     <section class="panel conn">${head("Slack", "slack")}<div class="panel-body">
-      ${P.slack ? `${routes("slack", "Channels")}<p class="muted">Invite the bot to each routed channel: <span class="mono">/invite @WP Autopilot</span>. Update the token: ${secretForm("slack", [["bot_token", "Bot token"], ["signing_secret", "Signing secret"]], "Update")}</p>${dis("slack")}`
+      ${P.slack ? `${routes("slack", "Channels")}<p class="muted">Public channels: the bot joins by itself when you route them. Private channels: type <span class="mono">/invite @WP Autopilot</span> in them. People can also message the bot directly, or use the message menu → <b>Send to Autopilot</b> on any message, including ones in private chats.</p>
+        <p class="muted"><button class="btn btn-sm" id="cpm">Copy updated app manifest</button> Paste it in your Slack app → App Manifest → Save (reinstall if Slack asks; if the token changes, paste the new one below).</p><p class="muted">Update the token: ${secretForm("slack", [["bot_token", "Bot token"], ["signing_secret", "Signing secret"]], "Update")}</p>${dis("slack")}`
       : `<ol class="steps"><li><button class="btn btn-sm" id="cpm">Copy app manifest</button> — it sets every permission and event for you.</li>
         <li>Open <a href="https://api.slack.com/apps?new_app=1" target="_blank" rel="noopener">api.slack.com/apps ↗</a> → <b>From an app manifest</b> → pick your workspace → paste → <b>Create</b>.</li>
         <li>Press <b>Install to Workspace</b>. Then copy the <b>Bot User OAuth Token</b> (OAuth &amp; Permissions) and the <b>Signing Secret</b> (Basic Information) into the boxes below.</li></ol>
@@ -681,7 +682,8 @@ async function connections() {
         const pick = $("[data-pick]", box); pick.innerHTML = items.map((i) => `<option value="${esc(i.id)}">${esc(i.name)}${i.member === false ? " (bot not invited)" : ""}</option>`).join(""); pick.hidden = false; $("[data-add]", box).hidden = false; e.target.hidden = true;
       } else if (e.target.dataset.add !== undefined) {
         const site = $("[data-site]", box).value, id = $("[data-pick]", box).value; if (!site) { toast("Choose the website first.", 5000); return; }
-        e.target.disabled = true; await api("/connections/watch", { method: "POST", body: { provider: prov, id, site } }); toast("Done."); await state(); route();
+        e.target.disabled = true; const r = await api("/connections/watch", { method: "POST", body: { provider: prov, id, site } });
+        toast(prov !== "slack" ? "Watching. New cards and tasks will arrive in the Inbox." : r.joined ? "Routed, and the bot joined the channel." : "Routed. If this is a private channel, type /invite @WP Autopilot in it.", 7000); await state(); route();
       } else if (e.target.dataset.rm) {
         e.preventDefault(); await api("/connections/map", { method: "POST", body: { provider: prov, id: e.target.dataset.rm, site: e.target.dataset.s, remove: true } }); await state(); route();
       }

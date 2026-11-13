@@ -10,6 +10,10 @@ and sends the answers back to where the request came from. Only one thing is lef
 "Storage is not connected", create it by hand: Cloudflare → Storage & databases → KV → Create (any name), then in `wrangler.toml` set `id = "<its id>"`
 under `[[kv_namespaces]]`, commit, and let it deploy. Tokens are encrypted with a key derived from `SESSION_SECRET`; changing that secret means reconnecting.
 
+**Slack extras (in the manifest):** public channels are joined by the bot when you route them (private ones need `/invite @WP Autopilot`);
+anyone can message the bot directly (DM); and every message has a **Send to Autopilot** item in its ⋯ menu, which works for messages in private chats too
+(the person who clicks it chooses to share that one message; the bot never reads private chats by itself). Updating an existing Slack app: App Manifest → paste the new manifest → Save (reinstall if asked).
+
 Everything below is the manual alternative (secrets in Cloudflare/GitHub instead of the Connections page) and still works.
 
 Everything lands in the dashboard **Inbox** first. Per website (Site → Settings → *Where changes come from*) you list the Slack

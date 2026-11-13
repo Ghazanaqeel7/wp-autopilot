@@ -413,7 +413,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const INBOX_SOURCES = ["slack", "trello", "clickup", "email", "chat", "document", "raw", "other"];
 const cleanOrigin = (o) => {
   const out = {};
-  for (const k of ["source", "url", "from", "channel", "thread_ts", "card", "board", "task", "list", "message_id"]) if (o[k]) out[k] = clip(o[k], 300);
+  for (const k of ["source", "url", "from", "channel", "src_channel", "thread_ts", "card", "board", "task", "list", "message_id"]) if (o[k]) out[k] = clip(o[k], 300);
   return out;
 };
 const strip = (html) => String(html || "").replace(/<style[\s\S]*?<\/style>|<script[\s\S]*?<\/script>/gi, " ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/\s+\n/g, "\n").replace(/[ \t]{2,}/g, " ").trim();
@@ -436,7 +436,7 @@ function resolveSite(sites, item) {
   const o = item.origin || {};
   return sites.find((s) => {
     const c = s.channels || {};
-    if (item.source === "slack") return (c.slack || []).includes(o.channel);
+    if (item.source === "slack") return (c.slack || []).includes(o.src_channel || o.channel);
     if (item.source === "trello") return (c.trello || []).includes(o.board);
     if (item.source === "clickup") return (c.clickup || []).includes(o.list);
     if (item.source === "email") {
@@ -542,11 +542,46 @@ async function hmacRaw(secret, msg, hash = "SHA-256", out = "hex") {
   return out === "hex" ? [...sig].map((b) => b.toString(16).padStart(2, "0")).join("") : btoa(String.fromCharCode(...sig));
 }
 
+async function slackVerify(request, raw, secret) {
+  const ts = request.headers.get("X-Slack-Request-Timestamp") || "";
+  if (Math.abs(Date.now() / 1000 - Number(ts)) > 300) throw bad("stale", 401);
+  const sig = request.headers.get("X-Slack-Signature") || "";
+  if (!(await safeEqual(sig, `v0=${await hmacRaw(secret, `v0:${ts}:${raw}`)}`))) throw bad("bad signature", 401);
+}
+
+// "Send to Autopilot" message shortcut: anyone can push any message (also from private chats they are in) into the Inbox.
+async function slackAction(gh, env, request, raw) {
+  const c = await creds(env, "slack");
+  const secret = c.signing_secret || env.SLACK_SIGNING_SECRET;
+  if (!secret) throw bad("This channel is not configured on the dashboard.", 503);
+  await slackVerify(request, raw, secret);
+  let pl = {};
+  try { pl = JSON.parse(new URLSearchParams(raw).get("payload") || "{}"); } catch { throw bad("bad payload"); }
+  if (pl.type !== "message_action" || pl.callback_id !== "send_to_autopilot") return json({ ok: true });
+  const m = pl.message || {};
+  const text = clip(m.text, 20000);
+  let reply = "Added to the WP Autopilot Inbox.";
+  if (!text) reply = "That message has no text to send.";
+  else {
+    const r = await inboxAdd(gh, {
+      source: "slack", external_id: `${pl.channel?.id}:${m.ts}`, text, title: text.split("\n")[0], from: pl.user?.name || pl.user?.id,
+      created_at: new Date(Number(m.ts) * 1000).toISOString(), origin: { channel: pl.user?.id, src_channel: pl.channel?.id },
+    });
+    if (r.duplicate) reply = "That message is already in the Inbox.";
+    else if (r.request) reply = `Added and turned into request ${r.request}.`;
+  }
+  if (/^https:\/\/hooks\.slack\.com\//.test(pl.response_url || "")) {
+    await fetch(pl.response_url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ response_type: "ephemeral", text: reply }), signal: AbortSignal.timeout(8000) }).catch(() => {});
+  }
+  return json({ ok: true });
+}
+
 async function hooks(name, request, env, ctx) {
   if (request.method === "HEAD" || request.method === "GET") return new Response("ok"); // Trello checks the URL with HEAD
   if (request.method !== "POST") return json({ error: "method" }, 405);
   const raw = await request.text();
   if (raw.length > 6 * 1024 * 1024) return json({ error: "too large" }, 413);
+  if (name === "slack-action") return slackAction(github(env), env, request, raw);
   let body;
   try { body = JSON.parse(raw || "{}"); } catch { return json({ error: "bad json" }, 400); }
   const need = (v) => { if (!v) throw bad("This channel is not configured on the dashboard.", 503); return v; };
@@ -557,11 +592,7 @@ async function hooks(name, request, env, ctx) {
   const c = await creds(env, name === "generic" ? "email" : name);
 
   if (name === "slack") {
-    const secret = need(c.signing_secret || env.SLACK_SIGNING_SECRET);
-    const ts = request.headers.get("X-Slack-Request-Timestamp") || "";
-    if (Math.abs(Date.now() / 1000 - Number(ts)) > 300) throw bad("stale", 401);
-    const sig = request.headers.get("X-Slack-Signature") || "";
-    if (!(await safeEqual(sig, `v0=${await hmacRaw(secret, `v0:${ts}:${raw}`)}`))) throw bad("bad signature", 401);
+    await slackVerify(request, raw, need(c.signing_secret || env.SLACK_SIGNING_SECRET));
     const ev = body.event || {};
     if (body.type !== "event_callback" || !["message", "app_mention"].includes(ev.type) || ev.bot_id || (ev.subtype && ev.subtype !== "file_share")) return json({ ok: true, ignored: true });
     const text = String(ev.text || "").replace(/<@[A-Z0-9]+>/g, "").trim();
@@ -675,9 +706,11 @@ const ext = async (url, opt = {}) => {
 };
 const slackManifest = (origin) => ({
   display_information: { name: "WP Autopilot", description: "Sends website change requests to WP Autopilot" },
-  features: { bot_user: { display_name: "WP Autopilot", always_online: false } },
-  oauth_config: { scopes: { bot: ["app_mentions:read", "channels:history", "channels:read", "chat:write", "groups:history", "groups:read"] } },
-  settings: { event_subscriptions: { request_url: `${origin}/api/hooks/slack`, bot_events: ["app_mention", "message.channels", "message.groups"] },
+  features: { bot_user: { display_name: "WP Autopilot", always_online: false }, app_home: { messages_tab_enabled: true, messages_tab_read_only_enabled: false },
+    shortcuts: [{ name: "Send to Autopilot", type: "message", callback_id: "send_to_autopilot", description: "Add this message to the WP Autopilot Inbox" }] },
+  oauth_config: { scopes: { bot: ["app_mentions:read", "channels:history", "channels:join", "channels:read", "chat:write", "groups:history", "groups:read", "im:history"] } },
+  settings: { event_subscriptions: { request_url: `${origin}/api/hooks/slack`, bot_events: ["app_mention", "message.channels", "message.groups", "message.im"] },
+    interactivity: { is_enabled: true, request_url: `${origin}/api/hooks/slack-action` },
     org_deploy_enabled: false, socket_mode_enabled: false, token_rotation_enabled: false },
 });
 
@@ -788,6 +821,14 @@ async function connections(sub, request, env, url) {
         c.webhooks = { ...(c.webhooks || {}), [id]: { id: r.data.id, secret: r.data.webhook.secret } };
         await putCreds(env, "clickup", c, (await getMeta(env, "clickup")) || {});
       }
+    } else if (prov === "slack") {
+      let joined = false;
+      if (/^C/.test(id)) {   // public channels: the bot joins itself; private ones need /invite
+        const r = await ext("https://slack.com/api/conversations.join", { method: "POST", headers: { Authorization: `Bearer ${c.bot_token}`, "Content-Type": "application/json" }, body: JSON.stringify({ channel: id }) });
+        joined = !!r.data.ok;
+      }
+      const res = await mapChannel(gh, prov, id, site, false);
+      return res.status === 200 ? json({ ok: true, joined }) : res;
     } else throw bad("unknown provider");
     return mapChannel(gh, prov, id, site, false);
   }
