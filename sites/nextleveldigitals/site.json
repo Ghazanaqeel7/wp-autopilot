@@ -2,7 +2,7 @@
   "id": "nextleveldigitals",
   "tenant": "default",
   "name": "Next Level Digitals",
-  "client": "",
+  "client": "Next Level Digitals (test)",
   "url": "https://nextleveldigitals.com",
   "type": "existing",
   "status": "pending_connect",
