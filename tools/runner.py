@@ -68,10 +68,10 @@ def site_cfg(site):
     return cfg
 
 
-def call(cfg, route, body=None):
+def call(cfg, route, body=None, timeout=120):
     if load(STATE, {}).get("config", {}).get("paused") or cfg.get("paused"):
         fail("Autopilot is paused (state.json or site.json) — nothing sent")
-    status, data = ap_client.call(cfg["url"], route, body or {}, timeout=120,
+    status, data = ap_client.call(cfg["url"], route, body or {}, timeout=timeout,
                                   pretty_permalinks=cfg.get("pretty_permalinks", True))
     return status, data
 
@@ -109,7 +109,11 @@ def report_dir(site, req):
 # ---------------------------------------------------------------- commands
 def onboard(site):
     cfg = site_cfg(site)
-    status, h = call(cfg, "health")
+    try:
+        status, h = call(cfg, "health", timeout=25)
+    except Exception as e:
+        fail(f"Site did not answer in 25s ({type(e).__name__}). A firewall (Cloudflare / Wordfence / host WAF) may be "
+             f"blocking GitHub's servers — allow the path /wp-json/autopilot/* and try again.")
     if status in (401, 403) and h.get("code") in ("ap_not_connected", "ap_bad_key"):
         code = ap_client.connection_code(site)
         cfg["status"] = "pending_connect"
