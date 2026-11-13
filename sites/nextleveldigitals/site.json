@@ -1,0 +1,16 @@
+{
+  "id": "nextleveldigitals",
+  "tenant": "default",
+  "name": "Next Level Digitals",
+  "client": "",
+  "url": "https://nextleveldigitals.com",
+  "type": "existing",
+  "status": "pending_connect",
+  "paused": false,
+  "builder": "unknown",
+  "theme": "",
+  "css_prefix": "nld-",
+  "bridge": {},
+  "channels": {},
+  "created_at": "2026-11-13T07:12:00+00:00"
+}
