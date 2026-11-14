@@ -30,10 +30,17 @@ jobs:
           if [ -n "${{ github.event.inputs.site }}" ]; then
             echo "list=${{ github.event.inputs.site }}" >> "$GITHUB_OUTPUT"
           else
-            # push trigger: find every site under sites/*/build that changed in this push
-            changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'sites/*/build/**' \
-              | cut -d/ -f2 | sort -u | tr '\n' ' ')
-            echo "list=$changed" >> "$GITHUB_OUTPUT"
+            # push trigger: redeploy every site that has a build/ dir and is kind:custom.
+            # (Not diff-based: a shallow checkout can't always resolve github.event.before,
+            # and redeploying all custom sites on any build/ change is cheap and safe.)
+            list=""
+            for d in sites/*/build; do
+              [ -d "$d" ] || continue
+              s=$(basename "$(dirname "$d")")
+              kind=$(python3 -c "import json;print(json.load(open('sites/$s/site.json')).get('kind','wordpress-bridge'))" 2>/dev/null || echo "")
+              [ "$kind" = "custom" ] && list="$list $s"
+            done
+            echo "list=$list" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Verify each site is kind:custom
