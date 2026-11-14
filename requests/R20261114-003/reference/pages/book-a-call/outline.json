@@ -1,0 +1,205 @@
+{
+ "title": "Book a Free Consultation | Metech Studio",
+ "nav": [
+  {
+   "text": "Home",
+   "href": "/"
+  },
+  {
+   "text": "Services",
+   "href": "/services"
+  },
+  {
+   "text": "Industries",
+   "href": "/industries"
+  },
+  {
+   "text": "Our Work",
+   "href": "/our-work"
+  },
+  {
+   "text": "About",
+   "href": "/about"
+  },
+  {
+   "text": "Contact Us",
+   "href": "/contact"
+  },
+  {
+   "text": "Book a Call",
+   "href": "/book-a-call"
+  },
+  {
+   "text": "Home",
+   "href": "/"
+  },
+  {
+   "text": "Book a Call",
+   "href": "/book-a-call"
+  },
+  {
+   "text": "AI Automation",
+   "href": "/services/ai-automation"
+  },
+  {
+   "text": "AI Agents",
+   "href": "/services/ai-agents"
+  },
+  {
+   "text": "Website & Custom App Developme",
+   "href": "/services/no-code-apps-websites"
+  },
+  {
+   "text": "Business Process Automation",
+   "href": "/services/business-process-automation"
+  },
+  {
+   "text": "Small Businesses",
+   "href": "/industries"
+  },
+  {
+   "text": "Professional Services",
+   "href": "/industries"
+  },
+  {
+   "text": "Real Estate",
+   "href": "/industries"
+  },
+  {
+   "text": "E-commerce",
+   "href": "/industries"
+  },
+  {
+   "text": "Marketing Agencies",
+   "href": "/industries"
+  },
+  {
+   "text": "Construction & Trades",
+   "href": "/industries"
+  },
+  {
+   "text": "Healthcare",
+   "href": "/industries"
+  },
+  {
+   "text": "Financial Services",
+   "href": "/industries"
+  },
+  {
+   "text": "Agriculture",
+   "href": "/industries"
+  },
+  {
+   "text": "Hospitality & Restaurants",
+   "href": "/industries"
+  },
+  {
+   "text": "Services",
+   "href": "/services"
+  },
+  {
+   "text": "Industries",
+   "href": "/industries"
+  },
+  {
+   "text": "Our Work",
+   "href": "/our-work"
+  },
+  {
+   "text": "About",
+   "href": "/about"
+  },
+  {
+   "text": "Contact Us",
+   "href": "/contact"
+  },
+  {
+   "text": "Book a Call",
+   "href": "/book-a-call"
+  },
+  {
+   "text": "Manitoba",
+   "href": "/locations/manitoba"
+  },
+  {
+   "text": "Saskatchewan",
+   "href": "/locations/saskatchewan"
+  },
+  {
+   "text": "Alberta",
+   "href": "/locations/alberta"
+  },
+  {
+   "text": "Winnipeg",
+   "href": "/locations/manitoba"
+  },
+  {
+   "text": "Brandon",
+   "href": "/locations/manitoba"
+  },
+  {
+   "text": "Regina",
+   "href": "/locations/saskatchewan"
+  },
+  {
+   "text": "Saskatoon",
+   "href": "/locations/saskatchewan"
+  },
+  {
+   "text": "Calgary",
+   "href": "/locations/alberta"
+  },
+  {
+   "text": "Edmonton",
+   "href": "/locations/alberta"
+  }
+ ],
+ "fonts": {
+  "body": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "heading": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "h1_size": "49.6px"
+ },
+ "button": {
+  "bg": "rgba(0, 0, 0, 0)",
+  "color": "oklch(0.298 0.05 255)",
+  "radius": "12px"
+ },
+ "top_colors": [
+  "oklch(0.974 0.004 255)",
+  "oklch(0.225 0.048 255)",
+  "oklch(0.995 0.0015 255 / 0.7)",
+  "oklch(0.995 0.0015 255)",
+  "oklch(0.468 0.045 255)",
+  "oklch(0.298 0.05 255)",
+  "oklch(0.505 0.198 258)",
+  "oklch(0.645 0.035 255)"
+ ],
+ "page_height": 3218,
+ "sections": [
+  {
+   "tag": "div",
+   "height": 540,
+   "bg": "rgba(0, 0, 0, 0)",
+   "headings": [],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 0
+  },
+  {
+   "tag": "div",
+   "height": 540,
+   "bg": "rgba(0, 0, 0, 0)",
+   "headings": [
+    "h1: Book a Free Consultation"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 3
+  }
+ ],
+ "url": "https://metechstudio.com/book-a-call",
+ "mode": "replicate",
+ "own_site": false
+}

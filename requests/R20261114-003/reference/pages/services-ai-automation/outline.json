@@ -1,0 +1,268 @@
+{
+ "title": "AI Automation Services | Metech Studio",
+ "nav": [
+  {
+   "text": "Home",
+   "href": "/"
+  },
+  {
+   "text": "Services",
+   "href": "/services"
+  },
+  {
+   "text": "Industries",
+   "href": "/industries"
+  },
+  {
+   "text": "Our Work",
+   "href": "/our-work"
+  },
+  {
+   "text": "About",
+   "href": "/about"
+  },
+  {
+   "text": "Contact Us",
+   "href": "/contact"
+  },
+  {
+   "text": "Book a Call",
+   "href": "/book-a-call"
+  },
+  {
+   "text": "Home",
+   "href": "/"
+  },
+  {
+   "text": "Services",
+   "href": "/services"
+  },
+  {
+   "text": "Book a Call",
+   "href": "/book-a-call"
+  },
+  {
+   "text": "AI Automation",
+   "href": "/services/ai-automation"
+  },
+  {
+   "text": "AI Agents",
+   "href": "/services/ai-agents"
+  },
+  {
+   "text": "Website & Custom App Developme",
+   "href": "/services/no-code-apps-websites"
+  },
+  {
+   "text": "Business Process Automation",
+   "href": "/services/business-process-automation"
+  },
+  {
+   "text": "Small Businesses",
+   "href": "/industries"
+  },
+  {
+   "text": "Professional Services",
+   "href": "/industries"
+  },
+  {
+   "text": "Real Estate",
+   "href": "/industries"
+  },
+  {
+   "text": "E-commerce",
+   "href": "/industries"
+  },
+  {
+   "text": "Marketing Agencies",
+   "href": "/industries"
+  },
+  {
+   "text": "Construction & Trades",
+   "href": "/industries"
+  },
+  {
+   "text": "Healthcare",
+   "href": "/industries"
+  },
+  {
+   "text": "Financial Services",
+   "href": "/industries"
+  },
+  {
+   "text": "Agriculture",
+   "href": "/industries"
+  },
+  {
+   "text": "Hospitality & Restaurants",
+   "href": "/industries"
+  },
+  {
+   "text": "Services",
+   "href": "/services"
+  },
+  {
+   "text": "Industries",
+   "href": "/industries"
+  },
+  {
+   "text": "Our Work",
+   "href": "/our-work"
+  },
+  {
+   "text": "About",
+   "href": "/about"
+  },
+  {
+   "text": "Contact Us",
+   "href": "/contact"
+  },
+  {
+   "text": "Book a Call",
+   "href": "/book-a-call"
+  },
+  {
+   "text": "Manitoba",
+   "href": "/locations/manitoba"
+  },
+  {
+   "text": "Saskatchewan",
+   "href": "/locations/saskatchewan"
+  },
+  {
+   "text": "Alberta",
+   "href": "/locations/alberta"
+  },
+  {
+   "text": "Winnipeg",
+   "href": "/locations/manitoba"
+  },
+  {
+   "text": "Brandon",
+   "href": "/locations/manitoba"
+  },
+  {
+   "text": "Regina",
+   "href": "/locations/saskatchewan"
+  },
+  {
+   "text": "Saskatoon",
+   "href": "/locations/saskatchewan"
+  },
+  {
+   "text": "Calgary",
+   "href": "/locations/alberta"
+  }
+ ],
+ "fonts": {
+  "body": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "heading": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "h1_size": "48px"
+ },
+ "button": {
+  "bg": "rgba(0, 0, 0, 0)",
+  "color": "oklch(0.298 0.05 255)",
+  "radius": "12px"
+ },
+ "top_colors": [
+  "oklch(0.225 0.048 255)",
+  "oklch(0.974 0.004 255)",
+  "oklch(0.995 0.0015 255)",
+  "oklch(0.505 0.198 258)",
+  "oklch(0.995 0.0015 255 / 0.7)",
+  "oklch(0.56 0.04 255)",
+  "oklch(0.972 0.02 258)",
+  "oklch(0.378 0.05 255)"
+ ],
+ "page_height": 5487,
+ "sections": [
+  {
+   "tag": "section",
+   "height": 701,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h1: Automate Your Business. Work Smarter."
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 2
+  },
+  {
+   "tag": "section",
+   "height": 590,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: Automate the Work That Slows You Down"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 8
+  },
+  {
+   "tag": "section",
+   "height": 965,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h2: From Trigger to Action",
+    "h3: Trigger",
+    "h3: AI Processing",
+    "h3: Result",
+    "h3: Connect",
+    "h3: Action"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 5
+  },
+  {
+   "tag": "section",
+   "height": 611,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: Built With the Right Tools for Your Workflow"
+   ],
+   "images": 8,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 8
+  },
+  {
+   "tag": "section",
+   "height": 924,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h2: Work Smarter with AI Automation",
+    "h3: Save Time",
+    "h3: Reduce Errors",
+    "h3: Improve Efficiency",
+    "h3: Connect Tools",
+    "h3: Faster Response"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 8
+  },
+  {
+   "tag": "section",
+   "height": 695,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: Explore More Ways We Can Help",
+    "h3: AI Agents",
+    "h3: Business Process Automation",
+    "h3: Website & Custom App Development"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 4
+  }
+ ],
+ "url": "https://metechstudio.com/services/ai-automation",
+ "mode": "replicate",
+ "own_site": false
+}
