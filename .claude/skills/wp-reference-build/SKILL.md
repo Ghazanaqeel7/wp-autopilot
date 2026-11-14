@@ -35,6 +35,22 @@ captured section order — don't reuse the homepage's structure for every page.
 - Re-plan the sections for this business (brief, audience, conversion goal) and design with
   wp-premium-design. Brand colours and fonts lead. It must not be recognisable as a copy.
 
+## reference.theme (saved theme, instead of or alongside a URL)
+A request's `## Reference` block can carry `theme: <slug>` in place of (or next to) a `url`,
+written by the dashboard's "Themes" feature. It points at `themes/<slug>/build/` (static files)
+and `themes/<slug>/design.json` (colours/type/spacing) — a previous custom site saved as a
+reusable starting point for the same kind of business. If `theme` is set:
+- Read `themes/<slug>/build/*` and `themes/<slug>/design.json` directly (no capture step needed —
+  these are this repo's own files, already real).
+- Treat it like `mode: replicate` against that theme's own structure/section order/component types,
+  but this is always `own_site: no` for *content*: carry over the layout, design system and section
+  structure, never the previous client's actual text, images, logo, testimonials or brand name —
+  replace all of that with this client's real content per wp-content-sourcing. Brand colours/fonts
+  follow `sites/<site>/brand.json` for the new site, not the theme's saved palette, unless the
+  request says to keep the theme's look too.
+- If `themes/<slug>/` doesn't exist, that's a `needs_info` case ("no such saved theme") — don't
+  guess at a theme's structure from its name.
+
 ## Content rules — both modes (non-negotiable)
 - `own_site: no` → never reuse the reference's text, photos, illustrations, icons sets, logo, brand
   name, testimonials, client logos or trademarks. Write content with wp-content-sourcing; use the

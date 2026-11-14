@@ -48,6 +48,8 @@ async function handle(ctx) {
     if (path === "/requests/feedback" && request.method === "POST") return feedback(gh, await request.json());
     if (path === "/requests/answer" && request.method === "POST") return answer(gh, await request.json());
     if (path === "/requests/edit" && request.method === "POST") return editRequest(gh, await request.json());
+    if (path === "/themes" && request.method === "GET") return listThemes(gh);
+    if (path === "/themes/save" && request.method === "POST") return saveTheme(gh, await request.json());
     return json({ error: "not found" }, 404);
   }
 }
@@ -150,6 +152,20 @@ function github(env) {
   };
 }
 
+// Recursively list file paths (not dirs) under a repo directory via the Contents API.
+async function listDirRecursive(gh, dir) {
+  const out = [];
+  async function walk(d) {
+    const entries = await gh.list(d);
+    for (const e of entries) {
+      if (e.type === "dir") await walk(e.path);
+      else if (e.type === "file") out.push(e.path);
+    }
+  }
+  await walk(dir);
+  return out;
+}
+
 function bufB64(buf) {
   const bytes = new Uint8Array(buf);
   let bin = "";
@@ -244,8 +260,9 @@ async function createRequest(gh, b) {
   const kind = ["change", "new_site", "revamp", "brief", "maintenance"].includes(b.kind) ? b.kind : "change";
   const rb = b.reference || {};
   const refUrl = String(rb.url || "").trim();
+  const refTheme = String(rb.theme || "").replace(/[^a-z0-9-]/g, "").slice(0, 60);
   if (refUrl && !/^https?:\/\/[^\s]+\.[^\s]+$/.test(refUrl)) throw bad("Reference URL must start with http:// or https://");
-  const ref = refUrl ? { url: refUrl.slice(0, 300), mode: rb.mode === "replicate" ? "replicate" : "inspired", own: !!rb.own,
+  const ref = (refUrl || refTheme) ? { url: refUrl.slice(0, 300), theme: refTheme, mode: rb.mode === "replicate" ? "replicate" : "inspired", own: !!rb.own,
     notes: String(rb.notes || "").replace(/\s+/g, " ").trim().slice(0, 1000) } : null;
 
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -264,7 +281,7 @@ async function createRequest(gh, b) {
       await gh.put(`requests/${id}/attachments/${name}`, f.data, `dashboard: attachment for ${id}`);
       names.push(name);
     }
-    const refMd = ref ? `\n\n## Reference\n- url: ${ref.url}\n- mode: ${ref.mode}\n- own_site: ${ref.own ? "yes" : "no"}\n- notes: ${ref.notes || "-"}` : "";
+    const refMd = ref ? `\n\n## Reference\n${ref.theme ? `- theme: ${ref.theme}\n` : ""}${ref.url ? `- url: ${ref.url}\n` : ""}- mode: ${ref.mode}\n- own_site: ${ref.own ? "yes" : "no"}\n- notes: ${ref.notes || "-"}` : "";
     const md = `---\nid: ${id}\nsite: ${site}\nkind: ${kind}\nsource: ${source}\n---\n\n## Request\n${text}${refMd}${origin ? `\n\n## Origin\n- source: ${source}\n- url: ${clip(origin.url, 300) || "-"}\n- from: ${clip(origin.from, 120) || "-"}` : ""}\n\n## Attachments\n${
       names.map((n) => `- attachments/${n}`).join("\n") || "- none"
     }\n\n## Acceptance\n${String(b.acceptance || "").trim() || "- (as described above)"}\n`;
@@ -274,10 +291,10 @@ async function createRequest(gh, b) {
     if (fresh.requests.some((r) => r.id === id)) continue; // id taken meanwhile → retry
     const now = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
     const urgent = !!b.urgent;
-    fresh.requests.push({ id, site, kind, status: "new", source, urgent, ...(origin ? { origin: cleanOrigin(origin) } : {}), ...(ref ? { reference: { url: ref.url, mode: ref.mode } } : {}), title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
+    fresh.requests.push({ id, site, kind, status: "new", source, urgent, ...(origin ? { origin: cleanOrigin(origin) } : {}), ...(ref ? { reference: { ...(ref.url ? { url: ref.url } : {}), ...(ref.theme ? { theme: ref.theme } : {}), mode: ref.mode } } : {}), title: String(b.title || text).slice(0, 120), created_at: now, updated_at: now });
     try {
       await gh.put("state.json", b64(JSON.stringify(fresh, null, 2) + "\n"), `dashboard: new request ${id}`);
-      if (ref) await gh.dispatch(WORKFLOWS.reference, { request: id }).catch(() => {});
+      if (ref && ref.url) await gh.dispatch(WORKFLOWS.reference, { request: id }).catch(() => {});
       if (urgent) await gh.dispatch(WORKFLOWS.urgent, { request: id }).catch(() => {});
       return { ok: true, id, urgent };
     } catch (e) {
@@ -316,6 +333,48 @@ async function mutateJson(gh, p, fn, message) {
     }
   }
   throw Object.assign(new Error("Busy — please try again."), { status: 409 });
+}
+
+// Themes: a built custom site's build/ + design.json, saved under themes/<slug>/ so a
+// future site of the same kind of business can be started from it with a reference.theme.
+async function listThemes(gh) {
+  const d = await gh.getJson("themes/index.json");
+  return json((d && d.themes) || []);
+}
+
+async function saveTheme(gh, b) {
+  const site = String(b.site || "");
+  if (!SITE_RE.test(site)) return json({ error: "bad site" }, 400);
+  const siteJson = await gh.getJson(`sites/${site}/site.json`);
+  if (!siteJson) return json({ error: "Website not found." }, 404);
+  if (siteJson.kind !== "custom") return json({ error: "Only custom (non-WordPress) sites can be saved as a theme right now." }, 400);
+  const name = clip(b.name, 80) || siteJson.name || site;
+  const business = clip(b.business, 300);
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || `theme-${Date.now()}`;
+
+  const files = await listDirRecursive(gh, `sites/${site}/build`);
+  if (!files.length) return json({ error: "No build files to save yet — send a request to build the site first." }, 400);
+  const prefix = `sites/${site}/build/`;
+  for (const p of files) {
+    const r = await gh.getRaw(p);
+    if (!r) continue;
+    const text = await r.text();
+    await gh.put(`themes/${slug}/build/${p.slice(prefix.length)}`, b64(text), `dashboard: save theme ${slug}`);
+  }
+  const design = await gh.getRaw(`sites/${site}/design.json`);
+  if (design) await gh.put(`themes/${slug}/design.json`, b64(await design.text()), `dashboard: save theme ${slug}`);
+
+  const meta = { slug, name, business, source_site: site, created_at: new Date().toISOString() };
+  const idx = await gh.getJson("themes/index.json");
+  if (!idx) {
+    await gh.put("themes/index.json", b64(JSON.stringify({ themes: [meta] }, null, 2) + "\n"), `dashboard: create theme index (${slug})`);
+  } else {
+    await mutateJson(gh, "themes/index.json", (d) => {
+      d.themes = (d.themes || []).filter((t) => t.slug !== slug);
+      d.themes.push(meta);
+    }, `dashboard: register theme ${slug}`);
+  }
+  return json({ ok: true, slug });
 }
 
 async function updateSite(gh, b) {

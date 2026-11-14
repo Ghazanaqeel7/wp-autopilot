@@ -173,20 +173,49 @@ async function site(id, tab = "overview") {
     <div class="page-head"><div><div class="title-row"><span class="favicon">${esc(initials(s.name))}</span><h1>${esc(s.name)}</h1>
       ${s.paused ? '<span class="badge warn">Paused</span>' : badge(s.status)}</div>
       <p>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(host(s.url))} ↗</a>` : '<span class="muted">No URL yet</span>'}${s.client ? ` · ${esc(s.client)}` : ""}</p></div>
-      <div class="actions">${isCustom ? "" : `<button class="btn" id="onboard">${connected ? "Rescan site" : "Check connection"}</button>`}
+      <div class="actions">${isCustom ? `<button class="btn" id="savetheme">Save as theme</button>` : `<button class="btn" id="onboard">${connected ? "Rescan site" : "Check connection"}</button>`}
       <a class="btn btn-primary" href="#/new-request?site=${esc(id)}">New request</a></div></div>
     <nav class="tabs">${Object.entries(tabs).map(([k, l]) => `<a href="#/site/${esc(id)}/${k}" class="${k === tab ? "on" : ""}">${esc(l)}</a>`).join("")}</nav>
     <div id="tab"></div>`;
   if (!isCustom) $("#onboard").onclick = (e) => act(e.target, { action: "onboard", site: id }, connected ? "Rescanning the site." : "Checking the connection. Refresh in a minute.");
+  if (isCustom) $("#savetheme").onclick = () => toggleThemeBox();
+  function toggleThemeBox() {
+    let box = $("#theme-box");
+    if (box) { box.remove(); return; }
+    box = document.createElement("section"); box.className = "panel"; box.id = "theme-box";
+    box.innerHTML = `<div class="panel-head"><h2>Save this site as a theme</h2></div><div class="panel-body">
+      <form class="form" id="tf"><div class="form-grid">
+        <label class="field"><span>Theme name</span><input type="text" name="name" required maxlength="80" value="${esc(s.name)}"></label>
+        <label class="field"><span>Business type</span><input type="text" name="business" maxlength="300" placeholder="e.g. AI automation agency"></label></div>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Save theme</button></div><p class="form-error" id="te"></p></form></div>`;
+    $(".page-head").after(box);
+    $("#tf").onsubmit = async (e) => {
+      e.preventDefault(); const b = e.target.querySelector("button"); b.disabled = true; $("#te").textContent = "";
+      try {
+        const d = Object.fromEntries(new FormData(e.target));
+        await api("/themes/save", { method: "POST", body: { site: id, name: d.name, business: d.business } });
+        toast("Theme saved."); box.remove();
+      } catch (err) { $("#te").textContent = err.message; b.disabled = false; }
+    };
+  }
   const el = $("#tab");
 
   if (tab === "overview") {
     const code = isCustom || connected ? null : await file(`sites/${id}/connection-code.txt`);
     const preview = isCustom ? await file(`reports/${id}/latest/preview.json`) : null;
+    const liveUrl = preview && typeof preview === "object" && preview.url;
     el.innerHTML = `${isCustom ? `<section class="panel"><div class="panel-head"><h2>Custom build</h2></div><div class="panel-body">
         <p>No plugin or login needed — this site builds as files and deploys to Cloudflare Pages.</p>
-        ${preview && typeof preview === "object" && preview.url
-          ? `<div class="callout">Live preview: <a href="${esc(preview.url)}" target="_blank" rel="noopener">${esc(preview.url)}</a></div>`
+        ${liveUrl
+          ? `<div class="callout">Live preview: <a href="${esc(liveUrl)}" target="_blank" rel="noopener">${esc(liveUrl)}</a></div>
+             <iframe src="${esc(liveUrl)}" title="Live preview" style="width:100%;height:420px;border:1px solid var(--border,#2a2f3a);border-radius:10px;margin-top:10px"></iframe>
+             <form class="form" id="qc" style="margin-top:16px">
+               <label class="field"><span>Request a change while it's live <small>developer quick-send</small></span>
+                 <textarea name="text" required placeholder="e.g. Make the hero headline bigger and move the CTA button up"></textarea></label>
+               <div class="field"><span>Screenshot <small>optional — what you want it to look like</small></span>
+                 <label class="dropzone" id="qdz"><input type="file" id="qfiles" accept="image/*" multiple hidden><b>Drop a screenshot or click to browse</b></label><ul class="files" id="qfl"></ul></div>
+               <label class="check"><input type="checkbox" name="urgent" checked><div><b>Urgent</b><span>Starts Claude on this right away.</span></div></label>
+               <div class="form-actions"><button class="btn btn-primary" type="submit">Send change</button></div><p class="form-error" id="qe"></p></form>`
           : `<div class="callout">No build deployed yet — send a request to start the first build.</div>`}</div></section>`
       : connected ? "" : `<section class="panel"><div class="panel-head"><h2>Connect this website</h2></div><div class="panel-body">
         <ol class="steps"><li>Download <a href="/downloads/autopilot-bridge.zip"><b>autopilot-bridge.zip</b></a> and install it: Plugins → Add New → Upload → Activate.</li>
@@ -204,6 +233,25 @@ async function site(id, tab = "overview") {
           <dt>Last scan</dt><dd>${ago(s.last_inventory)}</dd></dl></div></section></div>`;
     const c = $("#copy");
     if (c) c.onclick = async () => { await navigator.clipboard.writeText($("#code").value); toast("Connection code copied."); };
+    const qc = $("#qc");
+    if (qc) {
+      let qfiles = [];
+      const qlist = () => ($("#qfl").innerHTML = qfiles.map((f, i) => `<li><span>${esc(f.name)}</span><span class="muted">${(f.size / 1024).toFixed(0)} KB · <a href="#" data-x="${i}">remove</a></span></li>`).join(""));
+      const qdz = $("#qdz");
+      $("#qfiles").onchange = (e) => { qfiles = [...e.target.files].slice(0, 5); qlist(); };
+      ["dragenter", "dragover"].forEach((t) => qdz.addEventListener(t, (e) => { e.preventDefault(); qdz.classList.add("drag"); }));
+      ["dragleave", "drop"].forEach((t) => qdz.addEventListener(t, (e) => { e.preventDefault(); qdz.classList.remove("drag"); }));
+      qdz.addEventListener("drop", (e) => { qfiles = [...e.dataTransfer.files].slice(0, 5); qlist(); });
+      $("#qfl").onclick = (e) => { if (e.target.dataset.x) { e.preventDefault(); qfiles.splice(+e.target.dataset.x, 1); qlist(); } };
+      qc.onsubmit = async (e) => {
+        e.preventDefault(); const f = e.target; const b = f.querySelector("[type=submit]"); b.disabled = true; $("#qe").textContent = "";
+        try {
+          const text = f.text.value.trim();
+          const res = await api("/requests", { method: "POST", body: { site: id, kind: "change", title: text.slice(0, 120), text, urgent: !!f.urgent.checked, files: await readFiles(qfiles) } });
+          toast(`Request ${res.id} sent.`); go("#/req/" + res.id);
+        } catch (err) { $("#qe").textContent = err.message; b.disabled = false; }
+      };
+    }
   }
   if (tab === "pages") {
     const inv = await file(`sites/${id}/inventory.json`);
@@ -573,20 +621,38 @@ async function newSite() {
   };
 }
 
+/* ================================================================ themes */
+async function themesPage() {
+  crumbs(["Themes"]);
+  const themes = await api("/themes").catch(() => []);
+  view.innerHTML = `<div class="page-head"><div><h1>Themes</h1><p>Any custom site built here can be saved as a reusable theme — start a new site or revamp from it, then adjust for that client's brand and content.</p></div></div>
+    <section class="panel">${themes.length ? `<table class="table"><thead><tr><th>Name</th><th class="hide-sm">Business</th><th class="hide-sm">Source site</th><th class="hide-sm">Saved</th><th></th></tr></thead><tbody>
+      ${themes.map((t) => `<tr><td><div class="cell-title">${esc(t.name)}</div><div class="cell-sub mono">${esc(t.slug)}</div></td>
+        <td class="hide-sm">${esc(t.business || "—")}</td><td class="hide-sm">${t.source_site ? `<a href="#/site/${esc(t.source_site)}">${esc(t.source_site)}</a>` : "—"}</td>
+        <td class="hide-sm muted">${ago(t.created_at)}</td>
+        <td style="text-align:right"><a class="btn btn-sm" href="#/new-request?theme=${esc(t.slug)}">Use for a new site</a></td></tr>`).join("")}
+      </tbody></table>` : `<div class="empty"><b>No themes saved yet</b>Open a built custom site and use "Save as theme" to add one.</div>`}</section>`;
+}
+
 async function newRequest(params) {
   crumbs(["Requests", "#/requests"], ["New request"]);
   const st = await state(false);
   const sites = st.sites.filter((s) => s.status === "active");
+  const themes = await api("/themes").catch(() => []);
+  const preTheme = params.get("theme") || "";
   view.innerHTML = `<div class="page-head"><div><h1>New request</h1><p>Describe it in plain words. Attach briefs, documents, screenshots or voice notes.</p></div></div>
     <section class="panel"><div class="panel-body"><form class="form" id="f">
       <div class="form-grid"><label class="field"><span>Website</span><select name="site" required>${sites.map((s) => `<option value="${esc(s.id)}" ${params.get("site") === s.id ? "selected" : ""}>${esc(s.name)}</option>`).join("")}</select>
         ${sites.length ? "" : `<small>No connected websites — <a href="#/new-site">add one</a> first.</small>`}</label>
-      <label class="field"><span>Type</span><select name="kind"><option value="change">Change on the website</option><option value="new_site">Build a new website</option><option value="revamp">Revamp the website</option><option value="brief">Client brief form</option><option value="maintenance">Maintenance or fix</option></select></label></div>
+      <label class="field"><span>Type</span><select name="kind"><option value="change">Change on the website</option><option value="new_site" ${preTheme ? "selected" : ""}>Build a new website</option><option value="revamp">Revamp the website</option><option value="brief">Client brief form</option><option value="maintenance">Maintenance or fix</option></select></label></div>
       <label class="field"><span>Title</span><input type="text" name="title" required maxlength="120" placeholder="Update pricing on the homepage"></label>
-      <label class="field"><span>What needs to be done?</span><textarea name="text" required placeholder="Paste the client's message or describe the change in detail…"></textarea></label>
+      <label class="field"><span>What needs to be done?</span><textarea name="text" required placeholder="Paste the client's message or describe the change in detail…">${preTheme ? "Build a new site from the saved theme, adjusted for this client's brand, content and business." : ""}</textarea></label>
       <label class="field"><span>Done when… <small>optional</small></span><textarea name="acceptance" style="min-height:80px" placeholder="How you'll know it's right."></textarea></label>
       <div class="field"><span>Attachments <small>— up to 10 files, 8 MB total</small></span>
         <label class="dropzone" id="dz"><input type="file" id="files" multiple hidden><b>Drop files here or click to browse</b><span>PDF, DOCX, images, audio</span></label><ul class="files" id="fl"></ul></div>
+      ${themes.length ? `<fieldset class="group"><legend>Start from a saved theme <small>optional</small></legend>
+        <label class="field"><span>Theme</span><select name="ref_theme"><option value="">— None —</option>${themes.map((t) => `<option value="${esc(t.slug)}" ${t.slug === preTheme ? "selected" : ""}>${esc(t.name)}${t.business ? ` — ${esc(t.business)}` : ""}</option>`).join("")}</select>
+        <small>Same layout and design system as that theme, with this client's own content, images and brand colours.</small></label></fieldset>` : ""}
       <fieldset class="group"><legend>Reference website <small>optional</small></legend>
         <label class="field"><span>URL</span><input type="url" name="ref_url" placeholder="https://a-site-you-like.com"></label>
         <div class="choice"><label class="check"><input type="radio" name="ref_mode" value="inspired" checked><div><b>Use as inspiration</b><span>Similar feel and quality, redesigned for this business, its content and its brand colours.</span></div></label>
@@ -612,7 +678,7 @@ async function newRequest(params) {
       if (files.reduce((n, x) => n + x.size, 0) > 8 * 1024 * 1024) throw new Error("Attachments are larger than 8 MB in total.");
       const data = await readFiles(files);
       const d = Object.fromEntries(new FormData(f));
-      const reference = d.ref_url ? { url: d.ref_url, mode: d.ref_mode, own: !!f.ref_own.checked, notes: d.ref_notes } : null;
+      const reference = (d.ref_url || d.ref_theme) ? { url: d.ref_url || "", theme: d.ref_theme || "", mode: d.ref_mode, own: !!f.ref_own.checked, notes: d.ref_notes } : null;
       const res = await api("/requests", { method: "POST", body: { site: d.site, kind: d.kind, title: d.title, text: d.text, acceptance: d.acceptance, reference, urgent: !!f.urgent.checked, files: data } });
       toast(`Request ${res.id} created.`); go("#/req/" + res.id);
     } catch (err) { $("#err").textContent = err.message; b.disabled = false; }
@@ -851,6 +917,7 @@ async function route() {
     else if (p[0] === "new-site") await newSite();
     else if (p[0] === "new-request") await newRequest(params);
     else if (p[0] === "inbox") await inbox(params);
+    else if (p[0] === "themes") await themesPage();
     else if (p[0] === "connections") await connections();
     else if (p[0] === "activity") await activity();
     else if (p[0] === "settings") await settings();
