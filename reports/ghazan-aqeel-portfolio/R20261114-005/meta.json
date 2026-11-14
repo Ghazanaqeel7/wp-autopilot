@@ -7,5 +7,8 @@
     "Lighthouse accessibility 89 (min 90)",
     "Lighthouse seo 54 (min 90)"
   ],
-  "finalized_at": "2026-11-14T22:34:39+00:00"
+  "finalized_at": "2026-11-14T22:34:39+00:00",
+  "promoted_at": "2026-11-14T22:36:22+00:00",
+  "approved_by": "Ghazanaqeel7",
+  "prev_live_commit": "224938fdcb12262031d7a19f0638ff1a44543602"
 }
