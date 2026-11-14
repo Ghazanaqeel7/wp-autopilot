@@ -23,10 +23,19 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
    - Request has a `## Reference` section → follow the `wp-reference-build` skill.
    - If anything material is unclear → set status `needs_info`, write questions to
      `requests/<id>/questions.md`. Do NOT build on assumptions.
-   - Otherwise write `sites/<site>/changes/<id>/change.json` (schema: `schemas/change.schema.json`)
-     plus any asset files, set request status `planned`, commit. After setting `needs_info` run `python tools/runner.py notice <site> <id> needs_info` so the requester is told where they asked (Slack thread, Trello card, ClickUp task, email).
+   - Otherwise, for a `wordpress-bridge` site: write `sites/<site>/changes/<id>/change.json` (schema:
+     `schemas/change.schema.json`) plus any asset files, set request status `planned`, commit.
+     For a `kind: "custom"` site: write/update the files under `sites/<site>/build/` (and
+     `sites/<site>/design.json`) directly, commit, then dispatch `deploy-custom.yml` with
+     `site=<site> request=<id> mode=stage` — this deploys to a preview branch, runs QA
+     (Lighthouse + Playwright checks, same thresholds as WordPress sites) and sets the request
+     to `preview_ready` or `qa_failed`. Never set a custom site's request to `live` yourself —
+     that only happens when the owner approves in the dashboard ("Approve & publish" → `promote`
+     mode), same as the WordPress flow.
+     After setting `needs_info` run `python tools/runner.py notice <site> <id> needs_info` so the requester is told where they asked (Slack thread, Trello card, ClickUp task, email).
    If the request has an `## Origin` block, the answer goes back there automatically; never paste preview links or secrets into those channels.
-4. Never call a site directly. GitHub Actions applies changes through the Bridge plugin.
+4. Never call a site directly. GitHub Actions applies changes through the Bridge plugin (WordPress) or the
+   `deploy-custom.yml` stage/promote/rollback modes (custom sites) — both run QA before anything can go live.
 
 ## Hard rules
 - Change ONLY what the request asks. No drive-by refactors, no redesign of untouched sections.

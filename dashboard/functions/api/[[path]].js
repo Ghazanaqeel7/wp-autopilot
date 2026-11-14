@@ -5,7 +5,7 @@
 const SESSION_DAYS = 7;
 const MAX_UPLOAD = 8 * 1024 * 1024;
 const READ_PREFIXES = ["sites/", "reports/", "requests/", "state.json", "docs/"];
-const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml", urgent: "urgent.yml", reference: "reference.yml" };
+const WORKFLOWS = { onboard: "onboard.yml", apply: "apply.yml", health: "health.yml", decide: "decide.yml", urgent: "urgent.yml", reference: "reference.yml", deployCustom: "deploy-custom.yml" };
 const enc = new TextEncoder();
 
 export async function onRequest(ctx) {
@@ -310,7 +310,11 @@ async function action(gh, b) {
   const req = String(b.request || "");
   if (site && !/^[a-z0-9-]{2,40}$/.test(site)) return json({ error: "bad site" }, 400);
   if (req && !/^R\d{8}-\d{3}$/.test(req)) return json({ error: "bad request id" }, 400);
-  if (["promote", "rollback", "discard"].includes(a)) await gh.dispatch(WORKFLOWS.decide, { action: a, site, request: req });
+  if (["promote", "rollback"].includes(a)) {
+    const siteJson = site ? await gh.getJson(`sites/${site}/site.json`) : null;
+    if (siteJson && siteJson.kind === "custom") await gh.dispatch(WORKFLOWS.deployCustom, { site, request: req, mode: a });
+    else await gh.dispatch(WORKFLOWS.decide, { action: a, site, request: req });
+  } else if (a === "discard") await gh.dispatch(WORKFLOWS.decide, { action: a, site, request: req });
   else if (a === "onboard") await gh.dispatch(WORKFLOWS.onboard, { site });
   else if (a === "apply") await gh.dispatch(WORKFLOWS.apply, { site, request: req });
   else if (a === "health") await gh.dispatch(WORKFLOWS.health, {});

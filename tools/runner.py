@@ -380,8 +380,96 @@ Snapshot is taken automatically at go-live. Revert: run **Rollback** with site `
     (report_dir(site, req) / "report.md").write_text(md)
 
 
+def _pages_for(site):
+    bd = ROOT / "sites" / site / "build"
+    pages = [f"/{f.name}" if f.name != "index.html" else "/" for f in sorted(bd.glob("*.html"))]
+    return pages or ["/"]
+
+
+def stage_custom(site, req, preview_url):
+    if not REQ_RE.match(req):
+        fail(f"invalid request id {req!r}")
+    pages = _pages_for(site)
+    save(TMP / "qa_input.json", {"site": site, "request": req, "preview_url": preview_url,
+                                 "pages": pages[:8], "viewports": load(STATE)["config"]["qa"]["viewports"]})
+    save(report_dir(site, req) / "preview.json", {"url": preview_url, "expires": None})
+    save(report_dir(site, req) / "meta.json", {"site": site, "request": req, "staged_at": now()})
+    audit(site, f"{req} staged (custom) pages={len(pages)} preview={preview_url}")
+    summary(f"### Staged {req} (custom)\nPreview: {preview_url}")
+
+
+def finalize_custom(site, req):
+    qa_cfg = load(STATE)["config"]["qa"]
+    rdir = report_dir(site, req)
+    meta = load(rdir / "meta.json", {})
+    qa = load(rdir / "qa.json", {})
+    problems = []
+    for pg in qa.get("pages", []):
+        for v in pg["viewports"]:
+            after = v["after"]
+            if after.get("overflow"):
+                problems.append(f"Horizontal overflow at {v['width']}px on {pg['path']}")
+            new_err = after.get("console_errors") or []
+            if new_err:
+                problems.append(f"Console errors at {v['width']}px on {pg['path']}: {new_err[:2]}")
+            if after.get("status", 200) >= 400:
+                problems.append(f"HTTP {after['status']} on {pg['path']}")
+        if pg.get("broken_links"):
+            problems.append(f"Broken links on {pg['path']}: {pg['broken_links'][:3]}")
+    lh = (qa.get("lighthouse") or {}).get("after") or {}
+    for k, minimum in qa_cfg["lighthouse_min"].items():
+        score = lh.get(k)
+        if score is not None and score < minimum:
+            problems.append(f"Lighthouse {k} {score} (min {minimum})")
+    if not qa:
+        problems.append("QA did not run")
+    problems = list(dict.fromkeys(problems))
+    passed = not problems
+    meta.update(qa_passed=passed, problems=problems, finalized_at=now())
+    save(rdir / "meta.json", meta)
+    set_request(site, req, status="preview_ready" if passed else "qa_failed", problems=len(problems))
+    audit(site, f"{req} qa {'pass' if passed else 'FAIL'} problems={len(problems)}")
+    summary(f"### QA {'✅ passed — waiting for approval' if passed else '❌ failed'} ({req})\n" +
+            "".join(f"- {p}\n" for p in problems))
+    if not passed:
+        sys.exit(2)
+
+
+def promote_custom(site, req, prev_live_commit=None):
+    meta = load(report_dir(site, req) / "meta.json", {})
+    if not meta.get("qa_passed") and os.environ.get("AP_FORCE") != "1":
+        fail("QA has not passed for this request — refusing to go live")
+    meta.update(promoted_at=now(), approved_by=os.environ.get("GITHUB_ACTOR", ""),
+                prev_live_commit=prev_live_commit or meta.get("prev_live_commit"))
+    save(report_dir(site, req) / "meta.json", meta)
+    set_request(site, req, status="live", approved_by=meta["approved_by"])
+    audit(site, f"{req} LIVE (custom) by {meta['approved_by']}")
+    summary(f"### 🚀 {req} is live")
+
+
+def rollback_custom(site, req):
+    meta = load(report_dir(site, req) / "meta.json", {})
+    prev_sha = meta.get("prev_live_commit")
+    if not prev_sha:
+        fail("No previous live build recorded for this request — nothing to roll back to.")
+    print(prev_sha)  # the workflow reads this line to know which commit's build/ to redeploy
+    meta.update(rolled_back_at=now(), rolled_back_by=os.environ.get("GITHUB_ACTOR", ""))
+    save(report_dir(site, req) / "meta.json", meta)
+    set_request(site, req, status="rolled_back")
+    audit(site, f"{req} ROLLED BACK (custom) by {meta['rolled_back_by']}")
+    summary(f"### ↩️ {req} rolled back")
+
+
+def discard_custom(site, req):
+    set_request(site, req, status="rejected")
+    audit(site, f"{req} discarded (custom)")
+    summary(f"### {req} discarded")
+
+
 def promote(site, req):
     cfg = site_cfg(site)
+    if cfg.get("kind") == "custom":
+        return promote_custom(site, req)
     meta = load(report_dir(site, req) / "meta.json", {})
     if not meta.get("qa_passed") and os.environ.get("AP_FORCE") != "1":
         fail("QA has not passed for this request — refusing to go live")
@@ -397,6 +485,8 @@ def promote(site, req):
 
 def rollback(site, req):
     cfg = site_cfg(site)
+    if cfg.get("kind") == "custom":
+        return rollback_custom(site, req)
     meta = load(report_dir(site, req) / "meta.json", {})
     if not meta.get("snapshot_id"):
         fail("No snapshot recorded for this request (was it promoted?)")
@@ -412,6 +502,8 @@ def rollback(site, req):
 
 def discard(site, req):
     cfg = site_cfg(site)
+    if cfg.get("kind") == "custom":
+        return discard_custom(site, req)
     status, res = call(cfg, "changeset/discard", {"changeset": req})
     if status != 200:
         fail(f"discard failed: HTTP {status} {res.get('message')}")
@@ -445,7 +537,9 @@ def health():
 
 if __name__ == "__main__":
     cmds = {"onboard": onboard, "stage": stage, "finalize": finalize, "promote": promote,
-            "rollback": rollback, "discard": discard, "health": health, "notice": notice}
+            "rollback": rollback, "discard": discard, "health": health, "notice": notice,
+            "stage_custom": stage_custom, "finalize_custom": finalize_custom,
+            "promote_custom": promote_custom, "rollback_custom": rollback_custom}
     if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         print(__doc__)
         sys.exit(64)
