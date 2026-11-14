@@ -51,6 +51,21 @@
       "report": "reports/nextleveldigitals/R20261113-001/report.md",
       "problems": 6,
       "note": "Obsolete: site was reset (post 7593 no longer exists)"
+    },
+    {
+      "id": "R20261114-001",
+      "site": "nextleveldigitals",
+      "kind": "change",
+      "status": "new",
+      "source": "chat",
+      "urgent": false,
+      "origin": {
+        "source": "chat",
+        "from": "dashboard"
+      },
+      "title": "Home page",
+      "created_at": "2026-11-14T13:53:41+00:00",
+      "updated_at": "2026-11-14T13:53:41+00:00"
     }
   ]
 }
