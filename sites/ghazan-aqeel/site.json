@@ -1,0 +1,16 @@
+{
+  "id": "ghazan-aqeel",
+  "tenant": "default",
+  "name": "ghazan aqeel",
+  "client": "my self",
+  "url": "https://ghazan.portfolio.com",
+  "type": "new",
+  "status": "pending_connect",
+  "paused": false,
+  "builder": "unknown",
+  "theme": "",
+  "css_prefix": "ghaz-",
+  "bridge": {},
+  "channels": {},
+  "created_at": "2026-11-14T15:45:59.712Z"
+}
