@@ -72,6 +72,26 @@
   .ghaz-work-tags{display:flex;gap:10px;flex-wrap:wrap;}
   .ghaz-tag{font-size:12px;padding:6px 14px;border:1px solid var(--ghaz-line);border-radius:100px;color:var(--ghaz-text-dim);}
 
+  /* EXPERIENCE */
+  .ghaz-exp-list{border-top:1px solid var(--ghaz-line);}
+  .ghaz-exp-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--ghaz-line);}
+  .ghaz-exp-dates{font-size:13px;color:var(--ghaz-text-dim);letter-spacing:0.03em;padding-top:4px;}
+  .ghaz-exp-role{font-size:19px;font-weight:600;margin-bottom:4px;}
+  .ghaz-exp-org{font-size:14px;color:var(--ghaz-accent);margin-bottom:10px;}
+  .ghaz-exp-desc{font-size:14px;color:var(--ghaz-text-dim);max-width:600px;}
+  .ghaz-exp-earlier{padding:28px 0;border-bottom:1px solid var(--ghaz-line);}
+  .ghaz-exp-earlier-title{font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-text-dim);margin-bottom:16px;}
+  .ghaz-exp-earlier-row{display:flex;justify-content:space-between;gap:24px;padding:10px 0;font-size:14px;flex-wrap:wrap;}
+  .ghaz-exp-earlier-row span:first-child{color:var(--ghaz-text);}
+  .ghaz-exp-earlier-row span:last-child{color:var(--ghaz-text-dim);white-space:nowrap;}
+
+  /* EDUCATION / CERTS */
+  .ghaz-edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:64px;}
+  .ghaz-edu-col-title{font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-accent);margin-bottom:24px;}
+  .ghaz-edu-item{padding:20px 0;border-bottom:1px solid var(--ghaz-line);}
+  .ghaz-edu-item h4{font-size:16px;font-weight:600;margin-bottom:4px;}
+  .ghaz-edu-item p{font-size:13px;color:var(--ghaz-text-dim);}
+
   /* ABOUT */
   .ghaz-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
   .ghaz-about-text p{color:var(--ghaz-text-dim);font-size:17px;margin-bottom:22px;max-width:480px;}
@@ -92,6 +112,8 @@
     .ghaz-service-row p{display:none;}
     .ghaz-about-grid{grid-template-columns:1fr;gap:48px;}
     .ghaz-section{padding:100px 0;}
+    .ghaz-exp-row{grid-template-columns:1fr;gap:6px;}
+    .ghaz-edu-grid{grid-template-columns:1fr;gap:32px;}
   }
 </style>
 </head>
@@ -103,6 +125,7 @@
     <div class="ghaz-nav-links">
       <a href="#services">Services</a>
       <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
@@ -111,13 +134,13 @@
 
 <header class="ghaz-hero">
   <div class="ghaz-wrap">
-    <div class="ghaz-hero-eyebrow"><span>WordPress Developer &amp; Production Lead — GCC / UAE</span></div>
+    <div class="ghaz-hero-eyebrow"><span>Production Team Lead — WordPress, Shopify &amp; AI Automation</span></div>
     <h1>
-      <span class="ghaz-line"><span>Building fast,</span></span>
+      <span class="ghaz-line"><span>7+ years building</span></span>
       <span class="ghaz-line"><span>production-grade</span></span>
-      <span class="ghaz-line"><span><span class="ghaz-accent">websites</span> &amp; plugins.</span></span>
+      <span class="ghaz-line"><span><span class="ghaz-accent">websites</span> &amp; systems.</span></span>
     </h1>
-    <div class="ghaz-hero-tagline"><span>I design and ship WordPress sites, custom plugins and delivery systems for travel, Hajj &amp; Umrah, and GCC-market businesses.</span></div>
+    <div class="ghaz-hero-tagline"><span>I lead production at Centric Tech Inc. across Pakistan and the UAE, and build custom WordPress/Shopify platforms and AI automation workflows for clients across the US, UK, Germany, Australia and the GCC.</span></div>
     <div class="ghaz-hero-cta">
       <a href="#contact" class="ghaz-btn ghaz-btn-primary">Start a project</a>
       <a href="#work" class="ghaz-btn">See the work</a>
@@ -166,22 +189,154 @@
     <h2 class="ghaz-section-title ghaz-reveal"><span>A few things I've built and shipped.</span></h2>
     <div class="ghaz-work-grid">
       <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Hajj &amp; Umrah travel tech</div>
-        <h3>Guide to Haramain</h3>
-        <p>A Hajj/Umrah guidance site with custom Elementor widgets — Nusuk-integrated tools for photo, passport and green-card processing for pilgrims.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">Elementor</span><span class="ghaz-tag">Custom widgets</span><span class="ghaz-tag">Travel tech</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Commercial WordPress plugin</div>
-        <h3>LiveCraft Pro</h3>
-        <p>An inline, frontend visual editor plugin for WordPress, built to work alongside Elementor — live editing without leaving the page.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress plugin</span><span class="ghaz-tag">Frontend editor</span><span class="ghaz-tag">Elementor-friendly</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Automated delivery system</div>
+        <div class="ghaz-work-kicker">Automated delivery system — In progress</div>
         <h3>WP Autopilot</h3>
-        <p>An end-to-end automated WordPress delivery pipeline — client requests become reviewed, reversible change packages applied through a dashboard, with live previews before anything goes live. This very site was built through it.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">Automation</span><span class="ghaz-tag">CI/CD</span><span class="ghaz-tag">Dashboard</span></div>
+        <p>Turns a client brief, an existing site or raw requirements into a researched, responsive, secure WordPress site — connected directly through WordPress with no hosting access needed. Applies change requests from docs, voice notes or Slack automatically, with a live dashboard, QA preview link and screenshot report after each change. This very site was built through it.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">n8n</span><span class="ghaz-tag">GitHub</span><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">Slack</span><span class="ghaz-tag">AI</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">Hajj &amp; Umrah travel tech — Live</div>
+        <h3>Guide to Haramain — Nusuk Photo Resizer Suite</h3>
+        <p>Three free tools that format pilgrims' documents to official Nusuk upload requirements: personal photo resizer, passport info-page tool, and green-card front/back stacker. Guided crop flows with locked aspect ratios, auto-orientation and minimum-area checks cut Nusuk OCR rejections. Privacy-first PHP/AJAX pipeline that never stores images.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">JavaScript</span><span class="ghaz-tag">Cropper.js</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">Commercial WordPress plugin — v2.1, staging</div>
+        <h3>LiveCraft Pro — Frontend Visual Editor</h3>
+        <p>A lightweight inline editor for Elementor and modern WordPress sites: edit text, replace images, adjust styles and drag to reorder sections directly on the frontend. AI section/layout generation, chunked saving and edits written into real page HTML to stay SEO-safe.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress plugin</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">JavaScript</span><span class="ghaz-tag">AI</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">Automated content pipeline — Live</div>
+        <h3>Sneaky Deals</h3>
+        <p>An end-to-end automated faceless channel: daily trend and competitor research, script writing, video rendering, auto-generated thumbnails and a weekly content calendar. Scripts and videos are approved in Slack, then scheduled to YouTube and cross-posted to Instagram and Facebook Reels.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">n8n</span><span class="ghaz-tag">GitHub Actions</span><span class="ghaz-tag">Slack</span><span class="ghaz-tag">YouTube/Meta APIs</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">Hajj 2027 booking system — Delivered</div>
+        <h3>Mashaer Travel</h3>
+        <p>A custom Hajj 2027 package confirmation and booking plugin built end to end, frontend and backend — including a refined booking-flow UI/UX and redesigned transactional email templates.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress plugin</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">JavaScript</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">Lead management plugin — In progress</div>
+        <h3>Centric Form Centralise System</h3>
+        <p>Brings every Centric Tech website form into one lead dashboard — instant alerts to admin emails and WhatsApp, routing each lead to the right staff member, and dynamic thank-you pages for conversion tracking.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">WhatsApp/email alerts</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">Centralised lead system — Delivered</div>
+        <h3>Circle Collision Center</h3>
+        <p>A fully custom website replacing separate page forms with one centralised appointment form used across every page, plus a single admin dashboard tracking each lead's source page.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">Elementor</span><span class="ghaz-tag">HTML/CSS/JS</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">SaaS dealer management — Completed</div>
+        <h3>Nexus DMS</h3>
+        <p>A low-cost dashboard for small car dealers: drag-and-drop Kanban lead pipeline, a debt-recovery module flagging overdue installments, inventory margin analysis, Gemini-powered sales insights and one-click WhatsApp payment reminders.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">React/TypeScript</span><span class="ghaz-tag">Tailwind CSS</span><span class="ghaz-tag">Recharts</span><span class="ghaz-tag">Gemini</span></div>
+      </div>
+      <div class="ghaz-work-card ghaz-reveal-row">
+        <div class="ghaz-work-kicker">AI-first ATS — Completed</div>
+        <h3>RecruitSynch AI</h3>
+        <p>A lightweight applicant tracking system for small businesses, covering job creation through offer letter — Gemini drafts job descriptions and speeds up resume screening.</p>
+        <div class="ghaz-work-tags"><span class="ghaz-tag">React/TypeScript</span><span class="ghaz-tag">Vite</span><span class="ghaz-tag">Tailwind CSS</span><span class="ghaz-tag">Gemini API</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ghaz-section" id="experience">
+  <div class="ghaz-wrap">
+    <div class="ghaz-section-tag ghaz-reveal"><span>Experience</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>7+ years leading production and shipping code.</span></h2>
+    <div class="ghaz-exp-list">
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Nov 2025 — Present</div>
+        <div>
+          <div class="ghaz-exp-role">Senior Full Stack Developer, UAE Branch</div>
+          <div class="ghaz-exp-org">Centric Tech Inc. — Dubai, UAE</div>
+          <div class="ghaz-exp-desc">Extending production leadership to the UAE branch, supporting senior-level e-commerce and web development for the GCC market.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Mar 2023 — Present</div>
+        <div>
+          <div class="ghaz-exp-role">Production Manager</div>
+          <div class="ghaz-exp-org">Centric Tech Inc. — Karachi, Pakistan</div>
+          <div class="ghaz-exp-desc">Own end-to-end production workflows, keeping timelines, quality standards and client deliverables on track across WordPress, Shopify and AI development streams.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Aug 2022 — Present</div>
+        <div>
+          <div class="ghaz-exp-role">Production Team Lead</div>
+          <div class="ghaz-exp-org">Centric Tech Inc. — Karachi, Pakistan</div>
+          <div class="ghaz-exp-desc">Lead developers and designers, shaping e-commerce strategy and new Shopify store development to industry standards.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Dec 2023 — Present</div>
+        <div>
+          <div class="ghaz-exp-role">WordPress / Shopify / AI Systems Developer · Freelance</div>
+          <div class="ghaz-exp-org">Remote — GCC, UK, US clients</div>
+          <div class="ghaz-exp-desc">Delivering custom websites, WordPress plugins and AI automation workflows for agencies and direct clients.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Jan 2025 — Feb 2026</div>
+        <div>
+          <div class="ghaz-exp-role">Senior WordPress &amp; Shopify Developer</div>
+          <div class="ghaz-exp-org">Vertex Digital Labs — Remote</div>
+          <div class="ghaz-exp-desc">Delivered senior-level WordPress and Shopify builds, from custom themes to storefront optimisation.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Jan 2025 — Dec 2025</div>
+        <div>
+          <div class="ghaz-exp-role">Senior Shopify Developer</div>
+          <div class="ghaz-exp-org">ArcPoint Solutions (Pvt) Ltd — Germany, Remote</div>
+          <div class="ghaz-exp-desc">Built Shopify solutions focused on user experience and growth for international clients.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Jan 2024 — Feb 2025</div>
+        <div>
+          <div class="ghaz-exp-role">Senior Developer</div>
+          <div class="ghaz-exp-org">Freedom Web Experts — Raleigh, NC, USA, Remote</div>
+          <div class="ghaz-exp-desc">Delivered senior-level web development support for US-based client engagements.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Oct 2023 — Jan 2025</div>
+        <div>
+          <div class="ghaz-exp-role">Senior Developer &amp; Social Media Content Creator</div>
+          <div class="ghaz-exp-org">Freedom Gifts, Inc. — USA, Remote</div>
+          <div class="ghaz-exp-desc">Combined web development with social media content creation for a non-profit's online presence and outreach.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Nov 2021 — Aug 2022</div>
+        <div>
+          <div class="ghaz-exp-role">Team Lead Manager / Senior Developer</div>
+          <div class="ghaz-exp-org">InovioTech Pvt Ltd — Karachi</div>
+          <div class="ghaz-exp-desc">Managed a development team, overseeing project execution and delivery quality on client web projects.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-row ghaz-reveal-row">
+        <div class="ghaz-exp-dates">Sep 2021 — Aug 2022</div>
+        <div>
+          <div class="ghaz-exp-role">WordPress &amp; Shopify Developer, Graphic Designer</div>
+          <div class="ghaz-exp-org">CBE — The Infinite Solution — Australia, Remote</div>
+          <div class="ghaz-exp-desc">Built and maintained WordPress and Shopify sites, plus graphic design deliverables, for Australian clients.</div>
+        </div>
+      </div>
+      <div class="ghaz-exp-earlier ghaz-reveal-row">
+        <div class="ghaz-exp-earlier-title">Earlier roles</div>
+        <div class="ghaz-exp-earlier-row"><span>WordPress &amp; Shopify Developer — Oztudeo Digital Technologies, UK, Remote</span><span>Jan 2020 – Nov 2021</span></div>
+        <div class="ghaz-exp-earlier-row"><span>WordPress &amp; Shopify Developer — Bee Creative, Karachi</span><span>Mar 2020 – Aug 2021</span></div>
+        <div class="ghaz-exp-earlier-row"><span>WordPress Developer &amp; Graphic Designer — QLABS Network, Karachi</span><span>Jan 2019 – Mar 2020</span></div>
+        <div class="ghaz-exp-earlier-row"><span>.NET Developer — Business Experts Pakistan, Karachi</span><span>Sep 2018 – Jan 2019</span></div>
       </div>
     </div>
   </div>
@@ -192,26 +347,60 @@
     <div class="ghaz-section-tag ghaz-reveal"><span>About</span></div>
     <div class="ghaz-about-grid">
       <div class="ghaz-about-text ghaz-reveal-row">
-        <p>I've worked across agencies and as a freelancer since 2018, focused on WordPress development and web production — from senior developer roles to leading production teams end to end.</p>
-        <p>Computer Science background, with certifications in data science and AI tooling — which is also what powers the delivery automation behind projects like this one.</p>
-        <p>Based in Pakistan, working primarily with clients and teams across the GCC and UAE.</p>
+        <p>Production Team Lead and full-stack WordPress/Shopify developer with 7 years of experience building, scaling and maintaining e-commerce, content and custom business platforms.</p>
+        <p>Leads production at Centric Tech Inc. across Pakistan and the UAE, owning delivery standards for clients in the US, UK, Germany, Australia and the GCC.</p>
+        <p>Builds AI automation systems (n8n, GitHub Actions, LLM APIs) and custom WordPress plugins that replace manual work, and runs multiple AI projects and automation workflows at any given time.</p>
+        <p>Based in Karachi, Pakistan.</p>
       </div>
       <div class="ghaz-stats ghaz-reveal-row">
         <div>
-          <div class="ghaz-stat-num">2018</div>
-          <div class="ghaz-stat-label">Working since</div>
+          <div class="ghaz-stat-num">7+</div>
+          <div class="ghaz-stat-label">Years experience</div>
         </div>
         <div>
-          <div class="ghaz-stat-num">CS</div>
-          <div class="ghaz-stat-label">Core background</div>
+          <div class="ghaz-stat-num">5</div>
+          <div class="ghaz-stat-label">Countries served</div>
         </div>
         <div>
           <div class="ghaz-stat-num">AI</div>
-          <div class="ghaz-stat-label">+ Data science certified</div>
+          <div class="ghaz-stat-label">Automation specialist</div>
         </div>
         <div>
           <div class="ghaz-stat-num">GCC</div>
           <div class="ghaz-stat-label">Primary market</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ghaz-edu-grid">
+      <div class="ghaz-reveal-row">
+        <div class="ghaz-edu-col-title">Education</div>
+        <div class="ghaz-edu-item">
+          <h4>Bachelor of Science, Computer Science</h4>
+          <p>Iqra University (Usman Institute of Technology), Karachi — 2016 – 2020</p>
+        </div>
+        <div class="ghaz-edu-item">
+          <h4>Intermediate, Pre-Engineering</h4>
+          <p>Bahria College Karsaz, Karachi — 2014 – 2016</p>
+        </div>
+      </div>
+      <div class="ghaz-reveal-row">
+        <div class="ghaz-edu-col-title">Certifications</div>
+        <div class="ghaz-edu-item">
+          <h4>n8n: No-Code AI Agent Builder</h4>
+          <p>Simplilearn, 2026</p>
+        </div>
+        <div class="ghaz-edu-item">
+          <h4>Data Mining with Python</h4>
+          <p>Pirple, 2023</p>
+        </div>
+        <div class="ghaz-edu-item">
+          <h4>Data Science Methodology</h4>
+          <p>IBM</p>
+        </div>
+        <div class="ghaz-edu-item">
+          <h4>Python for Data Science</h4>
+          <p>IBM</p>
         </div>
       </div>
     </div>
@@ -222,7 +411,12 @@
   <div class="ghaz-wrap">
     <div class="ghaz-section-tag ghaz-reveal"><span>Get in touch</span></div>
     <h2 class="ghaz-reveal-row">Have a site or<br>plugin to build?</h2>
-    <a href="mailto:ghazan.centric@gmail.com" class="ghaz-contact-email ghaz-reveal-row">ghazan.centric@gmail.com →</a>
+    <a href="mailto:ghazanaqeel73@gmail.com" class="ghaz-contact-email ghaz-reveal-row">ghazanaqeel73@gmail.com →</a>
+    <div class="ghaz-contact-meta ghaz-reveal-row" style="margin-top:28px;display:flex;gap:28px;flex-wrap:wrap;color:var(--ghaz-text-dim);font-size:14px;">
+      <a href="tel:+923362033220">+92 336 2033220</a>
+      <a href="https://linkedin.com/in/ghazanautomates" target="_blank" rel="noopener">linkedin.com/in/ghazanautomates</a>
+      <span>Karachi, Pakistan</span>
+    </div>
   </div>
 </section>
 
@@ -268,7 +462,7 @@
   });
 
   // Row / card reveals, staggered within their section
-  document.querySelectorAll('.ghaz-services-list, .ghaz-work-grid, .ghaz-about-grid').forEach(function(group){
+  document.querySelectorAll('.ghaz-services-list, .ghaz-work-grid, .ghaz-exp-list, .ghaz-about-grid, .ghaz-edu-grid').forEach(function(group){
     var rows = group.querySelectorAll('.ghaz-reveal-row');
     gsap.fromTo(rows, { y:50, opacity:0 }, {
       y:0, opacity:1, duration:0.8, ease:'power3.out', stagger:0.12,
