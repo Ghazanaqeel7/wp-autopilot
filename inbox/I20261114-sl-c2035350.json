@@ -1,0 +1,19 @@
+{
+  "id": "I20261114-sl-c2035350",
+  "source": "slack",
+  "site": "",
+  "title": "hello",
+  "text": "hello",
+  "from": "U09NXUML2AY",
+  "url": "",
+  "origin": {
+    "source": "slack",
+    "channel": "D0CHL0TSCKB",
+    "thread_ts": "1794668216.332419",
+    "url": "",
+    "from": "U09NXUML2AY"
+  },
+  "attachments": [],
+  "status": "new",
+  "created_at": "2026-11-14T14:56:56.332Z"
+}
