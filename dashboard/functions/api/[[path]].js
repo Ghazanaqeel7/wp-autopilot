@@ -50,6 +50,9 @@ async function handle(ctx) {
     if (path === "/requests/edit" && request.method === "POST") return editRequest(gh, await request.json());
     if (path === "/themes" && request.method === "GET") return listThemes(gh);
     if (path === "/themes/save" && request.method === "POST") return saveTheme(gh, await request.json());
+    if (path === "/suggestions" && request.method === "GET") return suggestionsList(gh);
+    if (path === "/suggestions/convert" && request.method === "POST") return suggestionsConvert(gh, await request.json());
+    if (path === "/suggestions/dismiss" && request.method === "POST") return suggestionsDismiss(gh, await request.json());
     return json({ error: "not found" }, 404);
   }
 }
@@ -645,6 +648,40 @@ async function inboxIgnore(gh, b) {
   const id = String(b.id || "");
   if (!/^I\d{8}-[a-z]{2}-[0-9a-f]{8}$/.test(id)) throw bad("bad item");
   const err = await mutateJson(gh, `inbox/${id}.json`, (d) => { d.status = b.restore ? "new" : "ignored"; }, `inbox: ${id} ${b.restore ? "restored" : "ignored"}`);
+  return err || json({ ok: true });
+}
+
+/* ------------------------------------------------------------ suggestions */
+// Filed by the weekly suggest.yml run (tools/suggest.py), never by a person or a
+// client channel. The dashboard only lets the owner turn one into a real request
+// or dismiss it — it never edits a site by itself.
+const SUGG_RE = /^SG\d{8}-[a-z0-9-]{1,12}-[0-9a-f]{8}$/;
+
+async function suggestionsList(gh) {
+  const names = (await gh.list("suggestions")).filter((f) => f.type === "file" && f.name.endsWith(".json")).map((f) => f.name).sort().reverse().slice(0, 100);
+  const items = (await Promise.all(names.map((n) => gh.getJson(`suggestions/${n}`)))).filter(Boolean);
+  items.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  return json(items);
+}
+
+async function suggestionsConvert(gh, b) {
+  const id = String(b.id || "");
+  if (!SUGG_RE.test(id)) throw bad("bad suggestion");
+  const doc = await gh.getJson(`suggestions/${id}.json`);
+  if (!doc) throw bad("Suggestion not found.", 404);
+  if (doc.status === "converted") throw bad(`Already turned into ${doc.request}.`, 409);
+  const res = await createRequest(gh, {
+    site: doc.site, kind: "change", title: clip(b.title, 120) || doc.title, text: doc.detail,
+    source: "other", origin: { source: "suggestion", id },
+  });
+  await mutateJson(gh, `suggestions/${id}.json`, (d) => { d.status = "converted"; d.request = res.id; }, `suggestions: ${id} → ${res.id}`);
+  return json({ ok: true, ...res });
+}
+
+async function suggestionsDismiss(gh, b) {
+  const id = String(b.id || "");
+  if (!SUGG_RE.test(id)) throw bad("bad suggestion");
+  const err = await mutateJson(gh, `suggestions/${id}.json`, (d) => { d.status = b.restore ? "new" : "dismissed"; }, `suggestions: ${id} ${b.restore ? "restored" : "dismissed"}`);
   return err || json({ ok: true });
 }
 

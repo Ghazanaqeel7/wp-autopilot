@@ -5,6 +5,10 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 
 ## Loop (each run)
 0. If connectors for Slack/Outlook/Trello/ClickUp are available and `wp-inbox-poll` applies, pull new messages into `inbox/` first. Inbox items are not requests until converted (dashboard or `channels.auto`).
+   `suggest.yml` runs weekly on its own (`tools/suggest.py`) and files proactive SEO/content/CTA ideas
+   under `suggestions/<id>.json`, shown in the dashboard's Suggestions tab. These are not requests
+   either — they only become one if the owner clicks "Create request" there. Never act on a
+   suggestion yourself; it is not yours to pick up in this loop.
 1. Read `state.json`. If `config.paused` is true → stop.
 2. Pick requests with `status: "new"` or `"changes_requested"` (urgent first, then oldest). Skip sites whose
    `site.json → paused` is true. For `changes_requested`, read `requests/<id>/feedback.md` (latest entry wins)

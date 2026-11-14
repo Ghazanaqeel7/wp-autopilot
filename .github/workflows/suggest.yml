@@ -1,0 +1,27 @@
+name: Proactive suggestions
+# Weekly: for every active, unpaused site, ask the free-model router for a few
+# specific SEO/content/CTA ideas and file them under suggestions/ for the dashboard's
+# Suggestions tab. Never opens a request or touches a site by itself — the owner
+# reviews and clicks "Create request" (or dismisses it).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1"   # Monday 08:00 PKT
+concurrency: { group: autopilot-state, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: |
+          for d in sites/*/; do
+            site="$(basename "$d")"
+            [ -f "$d/site.json" ] || continue
+            python tools/suggest.py "$site" || echo "::warning::suggest.py failed for $site"
+          done
+          tools/commit.sh "autopilot - weekly suggestions"

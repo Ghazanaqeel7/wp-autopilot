@@ -750,6 +750,39 @@ async function inbox(params) {
 }
 
 
+/* ================================================================ suggestions */
+const SUGG_T = { seo: "SEO", content: "Content", cta: "CTA" };
+async function suggestions(params) {
+  crumbs(["Suggestions"]);
+  const [items, st] = await Promise.all([api("/suggestions"), state(false)]);
+  const siteName = (id) => st.sites.find((s) => s.id === id)?.name || id;
+  const filter = params.get("show") || "new";
+  const shown = items.filter((i) => filter === "all" || i.status === filter);
+  const count = (k) => items.filter((i) => i.status === k).length;
+  const nc = $("#sugg-count"); nc.textContent = count("new"); nc.hidden = !count("new");
+  view.innerHTML = `<div class="page-head"><div><h1>Suggestions</h1><p>Ideas the system found on its own — SEO, content and CTA improvements for your sites, based on each site's market. Nothing here touches a site; review and turn one into a request, or dismiss it.</p></div>
+      <div class="actions"><button class="btn" id="re">Refresh</button></div></div>
+    <nav class="tabs">${[["new", "New"], ["converted", "Requests"], ["dismissed", "Dismissed"], ["all", "All"]].map(([k, l]) => `<a href="#/suggestions?show=${k}" class="${k === filter ? "on" : ""}">${l}${k !== "all" ? ` (${count(k)})` : ""}</a>`).join("")}</nav>
+    <section class="panel inbox">${shown.length ? `<table class="table"><thead><tr><th>Suggestion</th><th class="hide-sm">Website</th><th class="hide-sm">Found</th><th></th></tr></thead><tbody>
+      ${shown.map((i) => `<tr data-id="${esc(i.id)}"><td style="max-width:460px"><div class="cell-title"><span class="badge">${esc(SUGG_T[i.type] || i.type)}</span> ${esc(i.title)}</div>
+        <div class="cell-sub ellipsis">${esc(i.detail || "")}</div></td>
+        <td class="hide-sm muted">${esc(siteName(i.site))}</td><td class="hide-sm muted">${ago(i.created_at)}</td>
+        <td style="text-align:right;white-space:nowrap">${i.status === "new" ? `<button class="btn btn-sm btn-primary" data-go>Create request</button> <button class="btn btn-sm" data-dis>Dismiss</button>`
+          : i.status === "converted" ? `<a class="btn btn-sm" href="#/req/${esc(i.request)}">View request</a>` : i.status === "dismissed" ? `<button class="btn btn-sm" data-un>Restore</button>` : ""}</td></tr>`).join("")}
+      </tbody></table>` : `<div class="empty"><b>${filter === "new" ? "Nothing waiting" : "Nothing here"}</b>${filter === "new" ? "New ideas show up here after the weekly check (Mondays), or run it any time from Activity." : ""}</div>`}</section>`;
+  $("#re").onclick = () => route();
+  view.onclick = async (e) => {
+    const tr = e.target.closest("tr[data-id]"); if (!tr) return;
+    const id = tr.dataset.id, btn = e.target.closest("button"); if (!btn) return;
+    try {
+      if (btn.dataset.go !== undefined) { btn.disabled = true; const r = await api("/suggestions/convert", { method: "POST", body: { id } }); toast(`Request ${r.id} created.`); go("#/req/" + r.id); }
+      else if (btn.dataset.dis !== undefined) { btn.disabled = true; await api("/suggestions/dismiss", { method: "POST", body: { id } }); route(); }
+      else if (btn.dataset.un !== undefined) { btn.disabled = true; await api("/suggestions/dismiss", { method: "POST", body: { id, restore: true } }); route(); }
+    } catch (err) { toast(err.message, 6000); btn.disabled = false; }
+  };
+}
+
+
 /* ================================================================ connections */
 async function connections() {
   crumbs(["Connections"]);
@@ -917,6 +950,7 @@ async function route() {
     else if (p[0] === "new-site") await newSite();
     else if (p[0] === "new-request") await newRequest(params);
     else if (p[0] === "inbox") await inbox(params);
+    else if (p[0] === "suggestions") await suggestions(params);
     else if (p[0] === "themes") await themesPage();
     else if (p[0] === "connections") await connections();
     else if (p[0] === "activity") await activity();
@@ -932,6 +966,7 @@ function showLogin() { $("#app").hidden = true; $("#login").hidden = false; }
 function showApp() {
   $("#login").hidden = true; $("#app").hidden = false; route();
   api("/inbox").then((l) => { const n = l.filter((i) => i.status === "new").length; $("#inbox-count").textContent = n; $("#inbox-count").hidden = !n; }).catch(() => {});
+  api("/suggestions").then((l) => { const n = l.filter((i) => i.status === "new").length; $("#sugg-count").textContent = n; $("#sugg-count").hidden = !n; }).catch(() => {});
 }
 
 $("#login-form").onsubmit = async (e) => {
