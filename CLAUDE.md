@@ -90,6 +90,11 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Questions to the client: one message, all questions at once.
 - Heavy/mechanical work (crawl, screenshots, Lighthouse, image conversion) belongs to GitHub
   Actions scripts, not to Claude.
+- First-pass drafting of low-stakes copy (SEO meta options, alt text, FAQ copy, paraphrasing
+  research notes) → shell out to `python tools/llm_router.py ask "..."` (free OpenRouter model)
+  and review/edit its output, instead of drafting it yourself from zero. Needs `OPENROUTER_API_KEY`
+  set; if it's missing or the call fails, just draft it yourself — don't block on it. Never use it
+  for change.json/code decisions, anything in Hard rules, or facts that must come from the client.
 
 ## Reference websites
 - `replicate` = same layout, sections, structure and interactions. `inspired` = same qualities, new design
