@@ -68,7 +68,8 @@ jobs:
             if [ -z "$url" ]; then
               echo "::error::Could not parse a deploy URL for $s from wrangler output"; cat /tmp/deploy-$s.log; exit 1
             fi
-            echo "DEPLOY_URL_$s=$url" >> "$GITHUB_ENV"
+            var_name="DEPLOY_URL_$(echo "$s" | tr -c 'A-Za-z0-9_' '_')"
+            echo "$var_name=$url" >> "$GITHUB_ENV"
             echo "::endgroup::"
           done
 
@@ -78,7 +79,7 @@ jobs:
             req="${{ github.event.inputs.request }}"
             [ -z "$req" ] && req="latest"
             mkdir -p "reports/$s/$req"
-            url_var="DEPLOY_URL_$s"
+            url_var="DEPLOY_URL_$(echo "$s" | tr -c 'A-Za-z0-9_' '_')"
             python3 -c 'import sys, json; site, req, url = sys.argv[1:4]; open(f"reports/{site}/{req}/preview.json", "w").write(json.dumps({"url": url, "expires": None}, indent=2))' "$s" "$req" "${!url_var}"
           done
 
