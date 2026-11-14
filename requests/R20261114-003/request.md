@@ -10,9 +10,10 @@ I have attached the reference website I want you to clone it 100% all of its pag
 
 ## Reference
 - url: https://metechstudio.com/
-- mode: inspired
+- mode: replicate
 - own_site: no
-- notes: -
+- pages: all
+- notes: Owner confirmed via dashboard answer (2026-11-14 19:39 UTC): replicate the whole site, own brand colours/fonts and a GSAP-based (not WebGL) 3D/4D scroll hero.
 
 ## Attachments
 - attachments/My_Brand_Guide_Line.pdf

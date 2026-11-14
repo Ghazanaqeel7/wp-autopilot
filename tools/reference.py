@@ -4,11 +4,18 @@
   reference.py <request-id>
 
 Reads the "## Reference" section of requests/<id>/request.md and writes requests/<id>/reference/:
-  desktop.jpg, mobile.jpg   full-page screenshots
-  outline.json              structure only: sections, headings, nav, CTAs, fonts, colours
+  desktop.jpg, mobile.jpg   full-page screenshots of the given url
+  outline.json              structure only: sections, headings, nav (text + href), CTAs, fonts, colours
   content.txt               page text — ONLY when own_site is "yes" (never for third-party sites)
+
+If the Reference block has `pages: all`, also crawls same-origin links found in the homepage's
+nav/header/footer (deduped, capped at 10) and captures each the same way into
+requests/<id>/reference/pages/<slug>/{desktop.jpg,mobile.jpg,outline.json}. Each page outline's
+`nav` entries include `href` so this crawl (and any future one) can follow real links instead of
+guessing URLs.
 """
 import json, pathlib, re, sys
+from urllib.parse import urljoin, urlparse
 
 from playwright.sync_api import sync_playwright
 
@@ -23,6 +30,7 @@ url = ref.get("url", "").strip()
 if not re.match(r"^https?://", url):
     sys.exit("no reference url in request")
 own = ref.get("own_site", "no").strip() == "yes"
+crawl_all = ref.get("pages", "").strip().lower() == "all"
 out = ROOT / "requests" / rid / "reference"
 out.mkdir(parents=True, exist_ok=True)
 
@@ -46,7 +54,10 @@ OUTLINE_JS = r"""() => {
   const count = {};
   [...document.querySelectorAll('body *')].slice(0, 1500).forEach((el) => { const s = cs(el);
     [s.color, s.backgroundColor].forEach((c) => { if (c && c !== 'rgba(0, 0, 0, 0)') count[c] = (count[c] || 0) + 1; }); });
-  return { title: document.title.slice(0, 120), nav: [...document.querySelectorAll('header a, nav a')].slice(0, 14).map((a) => t(a, 30)).filter(Boolean),
+  return { title: document.title.slice(0, 120),
+    nav: [...document.querySelectorAll('header a, nav a, footer a')].slice(0, 40)
+      .map((a) => ({ text: t(a, 30), href: a.getAttribute('href') || '' }))
+      .filter((l) => l.text),
     fonts: { body: cs(document.body).fontFamily, heading: h1 ? cs(h1).fontFamily : null, h1_size: h1 ? cs(h1).fontSize : null },
     button: btn ? { bg: cs(btn).backgroundColor, color: cs(btn).color, radius: cs(btn).borderRadius } : null,
     top_colors: Object.entries(count).sort((a, b) => b[1] - a[1]).slice(0, 8).map((e) => e[0]),
@@ -55,12 +66,20 @@ OUTLINE_JS = r"""() => {
 SCROLL_JS = """async () => { for (let y = 0; y < document.body.scrollHeight; y += innerHeight) {
   window.scrollTo(0, y); await new Promise(r => setTimeout(r, 150)); } window.scrollTo(0, 0); }"""
 
-with sync_playwright() as p:
-    b = p.chromium.launch(args=["--no-sandbox"])
+
+def slugify(u):
+    p = urlparse(u).path.strip("/") or "home"
+    s = re.sub(r"[^a-z0-9]+", "-", p.lower()).strip("-")
+    return s[:60] or "home"
+
+
+def capture_page(pg_url, dest):
+    dest.mkdir(parents=True, exist_ok=True)
+    outline = None
     for name, w, h in (("desktop", 1366, 900), ("mobile", 375, 800)):
-        pg = b.new_page(viewport={"width": w, "height": h})
+        pg = browser.new_page(viewport={"width": w, "height": h})
         try:
-            pg.goto(url, wait_until="domcontentloaded", timeout=60000)
+            pg.goto(pg_url, wait_until="domcontentloaded", timeout=60000)
             pg.wait_for_load_state("networkidle", timeout=15000)
         except Exception as e:
             print("load warning:", str(e)[:120])
@@ -69,13 +88,46 @@ with sync_playwright() as p:
             pg.wait_for_timeout(500)
         except Exception:
             pass
-        pg.screenshot(path=str(out / f"{name}.jpg"), full_page=True, type="jpeg", quality=55)
+        pg.screenshot(path=str(dest / f"{name}.jpg"), full_page=True, type="jpeg", quality=55)
         if name == "desktop":
             outline = pg.evaluate(OUTLINE_JS)
-            outline.update(url=url, mode=ref.get("mode", "inspired"), own_site=own)
-            (out / "outline.json").write_text(json.dumps(outline, indent=1, ensure_ascii=False))
+            outline.update(url=pg_url, mode=ref.get("mode", "inspired"), own_site=own)
+            (dest / "outline.json").write_text(json.dumps(outline, indent=1, ensure_ascii=False))
             if own:
-                (out / "content.txt").write_text(pg.evaluate("document.body.innerText")[:30000])
+                (dest / "content.txt").write_text(pg.evaluate("document.body.innerText")[:30000])
         pg.close()
-    b.close()
-print(f"captured {url} → {out.relative_to(ROOT)} (own_site={own})")
+    return outline
+
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(args=["--no-sandbox"])
+    home_outline = capture_page(url, out)
+    print(f"captured {url} → {out.relative_to(ROOT)} (own_site={own})")
+
+    if crawl_all and home_outline:
+        origin = urlparse(url)
+        seen = {urlparse(url).path.rstrip("/") or "/"}
+        queue = []
+        for link in home_outline.get("nav", []):
+            href = (link.get("href") or "").strip()
+            if not href or href.startswith(("#", "mailto:", "tel:", "javascript:")):
+                continue
+            full = urljoin(url, href)
+            pu = urlparse(full)
+            if pu.netloc != origin.netloc:
+                continue
+            path = pu.path.rstrip("/") or "/"
+            if path in seen:
+                continue
+            seen.add(path)
+            queue.append(full)
+        queue = queue[:10]
+        for pg_url in queue:
+            slug = slugify(pg_url)
+            dest = out / "pages" / slug
+            try:
+                capture_page(pg_url, dest)
+                print(f"captured {pg_url} → {dest.relative_to(ROOT)}")
+            except Exception as e:
+                print(f"skip {pg_url}: {str(e)[:150]}")
+    browser.close()
