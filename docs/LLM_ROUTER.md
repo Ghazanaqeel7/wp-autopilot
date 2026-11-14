@@ -15,20 +15,27 @@ judgment and QA, not on generating first-draft prose it then has to re-read anyw
      `export OPENROUTER_API_KEY=sk-or-...` — this is what lets Claude call it mid-run.
 
 ## What it's for
-Low-stakes, easily-reviewed text only:
+Anything Claude would otherwise draft from a blank page, as a **first pass only**:
 - SEO meta description / title options
 - Image alt text drafts
 - FAQ answer drafts
 - Paraphrasing/condensing research notes already gathered
+- A first-pass PHP/JS/CSS snippet or plugin-config for `wp-functionality` (describe the
+  feature, the site's `css_prefix`, and the constraints from that skill's "Writing a PHP
+  snippet" section in the prompt)
 
-Claude always reads the result and edits it before it goes in a change package — it is a
-draft, not a shippable output. Facts that must be real (prices, stats, client names,
-awards, testimonials) still come only from the client per `wp-content-sourcing` — never
-invented by the free model either.
+Claude always reads the result line by line and fixes/rewrites it before it goes in a
+change package — it is a draft, never a shippable output, code included. Claude is still
+the engineer of record: a bug or a rule violation (missing escaping/sanitizing, wrong
+prefix, an invented fact, a forbidden op) that ships is Claude's mistake, not the free
+model's, because Claude signed off on it. Facts that must be real (prices, stats, client
+names, awards, testimonials) still come only from the client per `wp-content-sourcing` —
+never invented by the free model either.
 
 ## What it's NOT for
-- `change.json` contents, any code/plugin decisions, anything under CLAUDE.md's **Hard
-  rules** or **Quality bar** — those need Claude's own judgment, not a free model's.
+- Deciding the mechanism (snippet vs. plugin, which plugin, risk level) — that's Claude's
+  call per `wp-functionality`, informed by a draft at most.
+- Anything going into `change.json` without Claude's own line-by-line review first.
 - QA / Lighthouse / pass-fail decisions.
 - Anything where a wrong fact could ship to a live client site unreviewed.
 

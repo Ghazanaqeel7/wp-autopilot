@@ -7,6 +7,11 @@ description: How to add new functionality to an Autopilot site with code snippet
 
 The owner describes the function once; Claude decides the mechanism.
 
+**Drafting:** you may get a first-pass snippet from `python tools/llm_router.py ask "..."`
+(free model) to save time, but you decide the mechanism, and you review and fix the draft
+line by line against every rule below before it goes in a change package. Ship it only once
+it's correct by your own judgment — not the draft's.
+
 1. **Snippet** (`snippet.set`, php/js/css) when the feature is small and specific: a shortcode, calculator, tool, filter, redirect, schema output, tracking tag, small widget, form tweak. One feature = one snippet slug (`a-z0-9-`, e.g. `price-calculator`). Re-use the slug to update it.
 2. **Plugin** (`plugin.install` + `activate`) only when a mature plugin clearly does it better (forms, caching, SEO, WooCommerce add-ons, backups, security hardening it does not already have). WordPress.org only, ≥10,000 active installs. Prefer one well-known plugin over three small ones.
 3. Never both for the same job. Never replace a plugin that already does it (check `inventory.json`).

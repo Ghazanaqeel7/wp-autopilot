@@ -90,11 +90,21 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 - Questions to the client: one message, all questions at once.
 - Heavy/mechanical work (crawl, screenshots, Lighthouse, image conversion) belongs to GitHub
   Actions scripts, not to Claude.
-- First-pass drafting of low-stakes copy (SEO meta options, alt text, FAQ copy, paraphrasing
-  research notes) → shell out to `python tools/llm_router.py ask "..."` (free OpenRouter model)
-  and review/edit its output, instead of drafting it yourself from zero. Needs `OPENROUTER_API_KEY`
-  set; if it's missing or the call fails, just draft it yourself — don't block on it. Never use it
-  for change.json/code decisions, anything in Hard rules, or facts that must come from the client.
+- First-pass drafting → shell out to `python tools/llm_router.py ask "..."` (free OpenRouter
+  model) instead of drafting from zero yourself. Covers both:
+  - low-stakes copy: SEO meta options, alt text, FAQ copy, paraphrasing research notes.
+  - a first-pass PHP/JS/CSS snippet or plugin-config draft for `wp-functionality` (give it the
+    site's `css_prefix`, the exact feature, and the constraints from "Writing a PHP snippet").
+  Needs `OPENROUTER_API_KEY` set; if it's missing or the call fails, just draft it yourself —
+  don't block on it.
+  **Mandatory review, every time, no exceptions:** a free model's output — code or copy — is a
+  draft, never a finished change. Before it goes anywhere near `change.json` you personally
+  re-read it line by line and fix/rewrite whatever's wrong: every rule in Hard rules, every rule
+  in Writing a PHP snippet (prefixing, escaping/sanitizing, no eval/exec/file-writes/forbidden
+  ops, nonces), every fact that must come from the client, every Quality-bar item. You are the
+  engineer of record and sign off on it as if you wrote it yourself — a mistake the free model
+  made is your mistake if it ships. If you're not confident after review, rewrite that part
+  yourself instead of patching the draft.
 
 ## Reference websites
 - `replicate` = same layout, sections, structure and interactions. `inspired` = same qualities, new design
