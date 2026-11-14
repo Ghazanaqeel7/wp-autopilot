@@ -1,0 +1,216 @@
+{
+ "title": "AI Automation Agency in Manitoba, Saskatchewan & Alberta | Metech Studio",
+ "nav": [
+  "Home",
+  "Services",
+  "Industries",
+  "Our Work",
+  "About",
+  "Contact Us",
+  "Book a Call",
+  "AI Automation",
+  "AI Agents",
+  "Website & Custom App Developme",
+  "Business Process Automation",
+  "Small Businesses",
+  "Professional Services"
+ ],
+ "fonts": {
+  "body": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "heading": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+  "h1_size": "54.4px"
+ },
+ "button": {
+  "bg": "rgba(0, 0, 0, 0)",
+  "color": "oklch(0.298 0.05 255)",
+  "radius": "12px"
+ },
+ "top_colors": [
+  "oklch(0.225 0.048 255)",
+  "oklch(0.995 0.0015 255)",
+  "oklch(0.974 0.004 255)",
+  "oklch(0.56 0.04 255)",
+  "oklch(0.425 0.176 258)",
+  "oklch(0.378 0.05 255)",
+  "oklch(0.505 0.198 258)",
+  "oklch(0.995 0.0015 255 / 0.7)"
+ ],
+ "page_height": 11194,
+ "sections": [
+  {
+   "tag": "section",
+   "height": 791,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h1: AI Automation, Websites & Custom Apps for Businesses"
+   ],
+   "images": 1,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 2
+  },
+  {
+   "tag": "section",
+   "height": 931,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h2: Where Growing Businesses Get Stuck",
+    "h3: Work That Shouldn't Need a Person",
+    "h3: Tools That Don't Talk to Each Other",
+    "h3: A System Built Around Your Business"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 3
+  },
+  {
+   "tag": "section",
+   "height": 1299,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: Digital Solutions Built Around Your Business",
+    "h3: AI Automation",
+    "h3: AI Agents",
+    "h3: Website & Custom App Development",
+    "h3: Business Process Automation",
+    "h3: Not sure where to start?"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 8
+  },
+  {
+   "tag": "section",
+   "height": 747,
+   "bg": "rgba(0, 0, 0, 0)",
+   "headings": [
+    "h2: Watch Repetitive Work Handle Itself"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 2
+  },
+  {
+   "tag": "section",
+   "height": 940,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: From Manual Processes to Smarter Systems",
+    "h3: Understand",
+    "h3: Plan",
+    "h3: Build",
+    "h3: Launch",
+    "h3: Improve"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 5
+  },
+  {
+   "tag": "section",
+   "height": 1051,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h2: AI & Automation Solutions for Different Industries",
+    "h3: Small Businesses",
+    "h3: Professional Services",
+    "h3: Real Estate",
+    "h3: E-commerce",
+    "h3: Marketing Agencies"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 8
+  },
+  {
+   "tag": "section",
+   "height": 709,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h2: We Connect the Tools Your Business Already Uses"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 8
+  },
+  {
+   "tag": "section",
+   "height": 1230,
+   "bg": "oklch(0.995 0.0015 255)",
+   "headings": [
+    "h2: Serving Western Canada. Building for Businesses Beyond.",
+    "h3: Across Western Canada",
+    "h3: United States",
+    "h3: Global Reach"
+   ],
+   "images": 3,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 7
+  },
+  {
+   "tag": "section",
+   "height": 904,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: Solutions Built to Solve Real Business Problems",
+    "h3: AI Lead Automation",
+    "h3: AI Email Automation",
+    "h3: AI Customer Support",
+    "h3: Business Workflow Automation",
+    "h3: No-Code Business App"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 2
+  },
+  {
+   "tag": "section",
+   "height": 688,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: What Better Systems Can Do for Your Business",
+    "h3: Save Time",
+    "h3: Reduce Errors",
+    "h3: Respond Faster",
+    "h3: Scale More Easily"
+   ],
+   "images": 0,
+   "buttons": [],
+   "forms": 0,
+   "max_columns": 4
+  },
+  {
+   "tag": "section",
+   "height": 904,
+   "bg": "oklch(0.974 0.004 255)",
+   "headings": [
+    "h2: Questions people ask before working with us.",
+    "h3: What does Metech Studio do?",
+    "h3: What types of businesses do you work with?",
+    "h3: Which areas do you serve?",
+    "h3: How do we get started?",
+    "h3: What is AI automation and how can it help my business?"
+   ],
+   "images": 0,
+   "buttons": [
+    "What does Metech Studio do?",
+    "What types of businesses do you work wit",
+    "Which areas do you serve?",
+    "How do we get started?"
+   ],
+   "forms": 0,
+   "max_columns": 2
+  }
+ ],
+ "url": "https://metechstudio.com/",
+ "mode": "inspired",
+ "own_site": false
+}
