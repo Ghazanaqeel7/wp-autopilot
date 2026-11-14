@@ -203,3 +203,6 @@
   .ghaz-app-grid,.ghaz-seg-grid,.ghaz-contact-grid{grid-template-columns:1fr;}
   .ghaz-steps-row.cols-4,.ghaz-steps-row.cols-3{grid-template-columns:repeat(2,1fr);}
 }
+@media (max-width:520px){
+  .ghaz-logo-grid,.ghaz-steps-row.cols-4,.ghaz-steps-row.cols-3{grid-template-columns:1fr;}
+}
