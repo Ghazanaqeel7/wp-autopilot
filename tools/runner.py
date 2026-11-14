@@ -129,6 +129,21 @@ def report_dir(site, req):
 # ---------------------------------------------------------------- commands
 def onboard(site):
     cfg = site_cfg(site)
+    kind = cfg.get("kind", "wordpress-bridge")
+    if kind == "custom":
+        # No Bridge plugin to onboard — a custom site goes live via the Cloudflare Pages deploy
+        # workflow instead (triggered by sites/<site>/build/**). Mark it active once it has a
+        # build/ dir; otherwise leave it pending until the first build exists.
+        has_build = (ROOT / "sites" / site / "build").is_dir()
+        new_status = "active" if has_build else "pending_connect"
+        cfg["status"] = new_status
+        save(ROOT / "sites" / site / "site.json", cfg)
+        set_site(site, name=cfg["name"], url=cfg.get("url", ""), status=new_status)
+        summary(f"### {cfg['name']} (custom site)\nNo Bridge connection needed — this is a non-WordPress "
+                f"site. {'It has a build/ folder and is active; it deploys via the Cloudflare Pages workflow.' if has_build else 'Waiting for its first build (sites/' + site + '/build/) before it can deploy.'}")
+        return
+    if kind == "wordpress-local":
+        fail("kind 'wordpress-local' is not wired up yet — see docs/CUSTOM_AND_LOCAL_SITES.md.")
     try:
         status, h = call(cfg, "health", timeout=25)
     except Exception as e:

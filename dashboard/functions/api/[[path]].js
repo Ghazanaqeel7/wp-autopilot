@@ -203,17 +203,26 @@ async function runs(gh) {
 
 async function addSite(gh, b) {
   const id = String(b.id || "").trim().toLowerCase();
+  const kind = ["wordpress-bridge", "custom"].includes(b.kind) ? b.kind : "wordpress-bridge";
   const url = String(b.url || "").trim().replace(/\/+$/, "");
   if (!/^[a-z0-9-]{2,40}$/.test(id)) return json({ error: "Site ID: 2–40 lowercase letters, numbers or dashes." }, 400);
-  if (!/^https:\/\/[^\s/]+\.[^\s]+$/.test(url)) return json({ error: "URL must start with https://" }, 400);
+  if (kind === "wordpress-bridge" && !/^https:\/\/[^\s/]+\.[^\s]+$/.test(url)) return json({ error: "URL must start with https://" }, 400);
+  if (kind === "custom" && url && !/^https:\/\/[^\s/]+\.[^\s]+$/.test(url)) return json({ error: "URL must start with https:// (or leave it blank for now)." }, 400);
   if (await gh.sha(`sites/${id}/site.json`)) return json({ error: "A site with this ID already exists." }, 409);
   const site = {
     id, tenant: "default", name: String(b.name || id).slice(0, 80), client: String(b.client || "").slice(0, 80), url,
-    type: ["existing", "new", "revamp"].includes(b.type) ? b.type : "existing", status: "pending_connect", paused: false,
-    builder: "unknown", theme: "", css_prefix: (id.replace(/[^a-z]/g, "").slice(0, 4) || "ap") + "-", bridge: {}, channels: {},
+    type: ["existing", "new", "revamp"].includes(b.type) ? b.type : "existing",
+    status: "pending_connect", paused: false, kind,
+    builder: kind === "custom" ? "custom" : "unknown", theme: "",
+    css_prefix: (id.replace(/[^a-z]/g, "").slice(0, 4) || "ap") + "-", bridge: {}, channels: {},
     created_at: new Date().toISOString(),
   };
   await gh.put(`sites/${id}/site.json`, b64(JSON.stringify(site, null, 2) + "\n"), `dashboard: add site ${id}`);
+  if (kind === "custom") {
+    // No Bridge onboarding to run — give it an empty build/ placeholder so the deploy workflow
+    // (and anyone browsing the repo) finds the expected folder right away.
+    await gh.put(`sites/${id}/build/.gitkeep`, b64(""), `dashboard: scaffold build/ for ${id}`);
+  }
   return json({ ok: true, id });
 }
 

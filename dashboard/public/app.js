@@ -166,22 +166,29 @@ async function site(id, tab = "overview") {
   if (!s) return notFound("Site");
   crumbs(["Sites", "#/sites"], [s.name]);
   const reqs = st.requests.filter((r) => r.site === id);
-  const connected = !!s.bridge?.version && s.status === "active";
+  const isCustom = s.kind === "custom";
+  const connected = isCustom ? s.status === "active" : !!s.bridge?.version && s.status === "active";
   const tabs = { overview: "Overview", brand: "Brand & assets", pages: "Pages", requests: `Requests (${reqs.length})`, settings: "Settings" };
   view.innerHTML = `
     <div class="page-head"><div><div class="title-row"><span class="favicon">${esc(initials(s.name))}</span><h1>${esc(s.name)}</h1>
       ${s.paused ? '<span class="badge warn">Paused</span>' : badge(s.status)}</div>
-      <p><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(host(s.url))} ↗</a>${s.client ? ` · ${esc(s.client)}` : ""}</p></div>
-      <div class="actions"><button class="btn" id="onboard">${connected ? "Rescan site" : "Check connection"}</button>
+      <p>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(host(s.url))} ↗</a>` : '<span class="muted">No URL yet</span>'}${s.client ? ` · ${esc(s.client)}` : ""}</p></div>
+      <div class="actions">${isCustom ? "" : `<button class="btn" id="onboard">${connected ? "Rescan site" : "Check connection"}</button>`}
       <a class="btn btn-primary" href="#/new-request?site=${esc(id)}">New request</a></div></div>
     <nav class="tabs">${Object.entries(tabs).map(([k, l]) => `<a href="#/site/${esc(id)}/${k}" class="${k === tab ? "on" : ""}">${esc(l)}</a>`).join("")}</nav>
     <div id="tab"></div>`;
-  $("#onboard").onclick = (e) => act(e.target, { action: "onboard", site: id }, connected ? "Rescanning the site." : "Checking the connection. Refresh in a minute.");
+  if (!isCustom) $("#onboard").onclick = (e) => act(e.target, { action: "onboard", site: id }, connected ? "Rescanning the site." : "Checking the connection. Refresh in a minute.");
   const el = $("#tab");
 
   if (tab === "overview") {
-    const code = connected ? null : await file(`sites/${id}/connection-code.txt`);
-    el.innerHTML = `${connected ? "" : `<section class="panel"><div class="panel-head"><h2>Connect this website</h2></div><div class="panel-body">
+    const code = isCustom || connected ? null : await file(`sites/${id}/connection-code.txt`);
+    const preview = isCustom ? await file(`reports/${id}/latest/preview.json`) : null;
+    el.innerHTML = `${isCustom ? `<section class="panel"><div class="panel-head"><h2>Custom build</h2></div><div class="panel-body">
+        <p>No plugin or login needed — this site builds as files and deploys to Cloudflare Pages.</p>
+        ${preview && typeof preview === "object" && preview.url
+          ? `<div class="callout">Live preview: <a href="${esc(preview.url)}" target="_blank" rel="noopener">${esc(preview.url)}</a></div>`
+          : `<div class="callout">No build deployed yet — send a request to start the first build.</div>`}</div></section>`
+      : connected ? "" : `<section class="panel"><div class="panel-head"><h2>Connect this website</h2></div><div class="panel-body">
         <ol class="steps"><li>Download <a href="/downloads/autopilot-bridge.zip"><b>autopilot-bridge.zip</b></a> and install it: Plugins → Add New → Upload → Activate.</li>
         <li>In wp-admin open <b>Tools → Autopilot Bridge</b>, paste the code and press <b>Connect</b>.</li><li>Press <b>Check connection</b> above.</li></ol>
         ${typeof code === "string" ? `<div class="code-box"><textarea readonly id="code" aria-label="Connection code">${esc(code.trim())}</textarea><button class="btn" id="copy">Copy</button></div>`
@@ -490,21 +497,40 @@ function lightbox(src) { const d = document.createElement("div"); d.className = 
 /* ================================================================ forms */
 async function newSite() {
   crumbs(["Sites", "#/sites"], ["Add website"]);
-  view.innerHTML = `<div class="page-head"><div><h1>Add website</h1><p>Any WordPress site you can log in to. No hosting access needed.</p></div></div>
+  view.innerHTML = `<div class="page-head"><div><h1>Add website</h1><p>A WordPress site you can log in to, or a custom (non-WordPress) build.</p></div></div>
     <section class="panel"><div class="panel-body"><form class="form" id="f">
+      <div class="choice">
+        <label class="check"><input type="radio" name="kind" value="wordpress-bridge" checked><div><b>WordPress</b><span>Connects to a live WordPress site via the Autopilot Bridge plugin. No hosting access needed.</span></div></label>
+        <label class="check"><input type="radio" name="kind" value="custom"><div><b>Custom build</b><span>Not WordPress — built as files and deployed to a live preview link (Cloudflare Pages). No plugin or login needed.</span></div></label>
+      </div>
       <div class="form-grid"><label class="field"><span>Website name</span><input type="text" name="name" required maxlength="80" placeholder="Acme Dental"></label>
       <label class="field"><span>Client <small>optional</small></span><input type="text" name="client" maxlength="80"></label></div>
-      <label class="field"><span>Website URL</span><input type="url" name="url" required placeholder="https://example.com"></label>
+      <label class="field" id="url-field"><span>Website URL</span><input type="url" name="url" required placeholder="https://example.com"></label>
       <label class="field"><span>Site ID <small>— used in the system, lowercase and dashes</small></span><input type="text" name="id" required minlength="2" maxlength="40" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" placeholder="acme-dental"></label>
-      <label class="field"><span>What is this website?</span><select name="type"><option value="existing">Existing website — maintain and change</option><option value="revamp">Existing website — full revamp</option><option value="new">New website — build from scratch</option></select></label>
+      <label class="field" id="type-field"><span>What is this website?</span><select name="type"><option value="existing">Existing website — maintain and change</option><option value="revamp">Existing website — full revamp</option><option value="new">New website — build from scratch</option></select></label>
       <div class="form-actions"><button class="btn btn-primary" type="submit">Add website</button><a class="btn" href="#/sites">Cancel</a></div>
       <p class="form-error" id="err"></p></form></div></section>`;
   const f = $("#f");
+  const urlInput = f.url, urlField = $("#url-field");
+  const syncKind = () => {
+    const custom = f.kind.value === "custom";
+    urlInput.required = !custom;
+    urlInput.placeholder = custom ? "https://example.com (optional — fill in once it has a domain)" : "https://example.com";
+    urlField.querySelector("span").textContent = custom ? "Website URL (optional, for later)" : "Website URL";
+    if (custom) { f.type.value = "new"; }
+  };
+  $$('input[name="kind"]').forEach((r) => (r.onchange = syncKind));
+  syncKind();
   f.name.oninput = () => { if (!f.id.dataset.touched) f.id.value = f.name.value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40); };
   f.id.oninput = () => (f.id.dataset.touched = "1");
   f.onsubmit = async (e) => {
     e.preventDefault(); const b = f.querySelector("[type=submit]"); b.disabled = true; $("#err").textContent = "";
-    try { const d = Object.fromEntries(new FormData(f)); await api("/sites", { method: "POST", body: d }); toast("Website added — preparing the connection code."); go("#/site/" + d.id); }
+    try {
+      const d = Object.fromEntries(new FormData(f));
+      await api("/sites", { method: "POST", body: d });
+      toast(d.kind === "custom" ? "Website added — it'll go live once the first build is deployed." : "Website added — preparing the connection code.");
+      go("#/site/" + d.id);
+    }
     catch (err) { $("#err").textContent = err.message; b.disabled = false; }
   };
 }
