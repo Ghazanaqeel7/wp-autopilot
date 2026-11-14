@@ -56,7 +56,7 @@
       "id": "R20261114-001",
       "site": "nextleveldigitals",
       "kind": "change",
-      "status": "new",
+      "status": "needs_info",
       "source": "chat",
       "urgent": false,
       "origin": {
@@ -65,7 +65,8 @@
       },
       "title": "Home page",
       "created_at": "2026-11-14T13:53:41+00:00",
-      "updated_at": "2026-11-14T13:53:41+00:00"
+      "updated_at": "2026-11-14T19:59:00+00:00",
+      "questions": "requests/R20261114-001/questions.md"
     }
   ]
 }
