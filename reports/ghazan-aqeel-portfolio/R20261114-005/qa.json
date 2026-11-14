@@ -1,0 +1,492 @@
+{
+  "pages": [
+    {
+      "path": "/about.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/abouthtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/abouthtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/abouthtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/abouthtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/abouthtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/abouthtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/ai-agents.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/ai-agentshtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/ai-agentshtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-agentshtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-agentshtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-agentshtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-agentshtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/ai-automation.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/ai-automationhtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/ai-automationhtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-automationhtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-automationhtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-automationhtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/ai-automationhtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/book-a-call.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/book-a-callhtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/book-a-callhtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/book-a-callhtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/book-a-callhtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/book-a-callhtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/book-a-callhtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/business-process-automation.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/business-process-automationhtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/business-process-automationhtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/business-process-automationhtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/business-process-automationhtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/business-process-automationhtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/business-process-automationhtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/contact.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/contacthtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/contacthtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/contacthtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/contacthtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/contacthtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/contacthtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/home-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/home-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/home-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/home-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/home-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/home-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    },
+    {
+      "path": "/industries.html",
+      "viewports": [
+        {
+          "width": 320,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/industrieshtml-320.jpg"
+          }
+        },
+        {
+          "width": 375,
+          "after": {
+            "status": 200,
+            "overflow": true,
+            "console_errors": [],
+            "shot": "screens/industrieshtml-375.jpg"
+          }
+        },
+        {
+          "width": 768,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/industrieshtml-768.jpg"
+          }
+        },
+        {
+          "width": 1024,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/industrieshtml-1024.jpg"
+          }
+        },
+        {
+          "width": 1366,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/industrieshtml-1366.jpg"
+          }
+        },
+        {
+          "width": 1920,
+          "after": {
+            "status": 200,
+            "overflow": false,
+            "console_errors": [],
+            "shot": "screens/industrieshtml-1920.jpg"
+          }
+        }
+      ],
+      "broken_links": []
+    }
+  ],
+  "lighthouse": {
+    "after": {
+      "performance": 91,
+      "accessibility": 89,
+      "best_practices": 100,
+      "seo": 54
+    }
+  }
+}

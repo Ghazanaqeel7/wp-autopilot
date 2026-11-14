@@ -125,12 +125,13 @@
       "id": "R20261114-005",
       "site": "ghazan-aqeel-portfolio",
       "kind": "change",
-      "status": "new",
+      "status": "qa_failed",
       "source": "dashboard",
       "urgent": true,
       "title": "right now website scroller is not working website is not scrolling smoothly please resolve this issue \n\nI want something",
       "created_at": "2026-11-14T22:14:55+00:00",
-      "updated_at": "2026-11-14T22:14:55+00:00"
+      "updated_at": "2026-11-14T22:30:14+00:00",
+      "problems": 13
     }
   ]
 }
