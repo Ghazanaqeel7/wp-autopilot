@@ -372,9 +372,10 @@ async function request(id) {
   if (!r) return notFound("Request");
   crumbs(["Requests", "#/requests"], [id]);
   const base = `reports/${r.site}/${id}`;
-  const [md, meta, qa, prev, fb, qs] = await Promise.all([
+  const [md, meta, qa, prev, fb, qs, fbAns] = await Promise.all([
     file(`requests/${id}/request.md`), file(`${base}/meta.json`), file(`${base}/qa.json`), file(`${base}/preview.json`),
     file(`requests/${id}/feedback.md`), r.status === "needs_info" ? file(`requests/${id}/questions.md`) : null,
+    file(`requests/${id}/answers.md`),
   ]);
   const section = (name) => (typeof md === "string" ? ((md.split(`## ${name}`)[1] || "").split("\n## ")[0] || "").trim() : "");
   const attachments = section("Attachments").split("\n").map((l) => l.replace(/^- /, "").trim()).filter((l) => l && l !== "none");
@@ -397,6 +398,8 @@ async function request(id) {
       <div class="actions" id="acts"></div></div>
     ${r.status === "new" || r.status === "changes_requested" ? `<div class="callout">${r.status === "new" ? "Queued — Claude will plan this request on the next run." : "Your feedback is queued — Claude will prepare a revised version."}</div>` : ""}
     ${typeof qs === "string" ? `<div class="callout warn"><div><b>Claude needs more information</b><p class="prose" style="margin-top:6px">${esc(qs)}</p></div></div>` : ""}
+    ${typeof fbAns === "string" ? `<section class="panel"><div class="panel-head"><h2>Your answers</h2></div><div class="panel-body"><p class="prose">${esc(fbAns.replace(/^# Answers\s*/, "").replace(/^## /gm, ""))}</p></div></section>` : ""}
+    ${r.status === "needs_info" ? `<div id="abox"></div>` : ""}
     ${r.error ? `<div class="callout bad">${esc(r.error)}</div>` : ""}
     <div class="split"><div class="stack">
       ${previewOk ? `<section class="panel"><div class="panel-head"><h2>Preview</h2><span class="muted">Expires ${esc(fmt(prev.expires))}</span></div><div class="panel-body">
@@ -446,6 +449,8 @@ async function request(id) {
     add("Discard", "btn-danger", run("discard", "Discard this change? The live site stays as it is.", "Discarding the change."));
     add("Request changes", "", () => feedbackBox(r));
   }
+  if (r.status === "needs_info") add("Answer questions", "btn-accent", () => answerBox(r));
+  if (["new", "needs_info"].includes(r.status)) add("Edit request", "", () => editRequestBox(r, section("Request")));
   if (r.status === "qa_failed") add("Run QA again", "", run("apply", null, "Re-running the change and QA."));
   if (r.status === "preview_ready") add("Approve & publish", "btn-accent", run("promote", "Publish this change to the live website?", "Publishing — a backup is taken first."));
   if (r.status === "live") add("Roll back", "btn-danger", run("rollback", "Restore the website to how it was before this change?", "Rolling back."));
@@ -470,6 +475,39 @@ function feedbackBox(r) {
     e.preventDefault(); const b = e.target.querySelector("[type=submit]"); b.disabled = true;
     try { await api("/requests/feedback", { method: "POST", body: { request: r.id, note: $("#fb-text").value } }); toast("Feedback sent — a revision is queued."); route(); }
     catch (err) { $("#fbe").textContent = err.message; b.disabled = false; }
+  };
+}
+
+function answerBox(r) {
+  const box = $("#abox");
+  if (!box) return;
+  if (box.innerHTML) return $("#ans-text").focus();
+  box.innerHTML = `<section class="panel"><div class="panel-head"><h2>Answer Claude's questions</h2></div><div class="panel-body"><form class="form" id="ansf">
+    <label class="field"><span>Your answer</span><textarea id="ans-text" required placeholder="Answer the questions above — as much detail as you can."></textarea></label>
+    <div class="form-actions"><button class="btn btn-primary" type="submit">Send answer</button><button class="btn" type="button" id="ansc">Cancel</button></div>
+    <p class="form-error" id="anse"></p></form></div></section>`;
+  $("#ans-text").focus();
+  $("#ansc").onclick = () => (box.innerHTML = "");
+  $("#ansf").onsubmit = async (e) => {
+    e.preventDefault(); const b = e.target.querySelector("[type=submit]"); b.disabled = true;
+    try { await api("/requests/answer", { method: "POST", body: { request: r.id, note: $("#ans-text").value } }); toast("Answer sent — queued for the next run."); route(); }
+    catch (err) { $("#anse").textContent = err.message; b.disabled = false; }
+  };
+}
+
+function editRequestBox(r, currentText) {
+  const box = $("#fbox");
+  box.innerHTML = `<section class="panel"><div class="panel-head"><h2>Edit request</h2></div><div class="panel-body"><form class="form" id="edf">
+    <label class="field"><span>Title</span><input id="ed-title" value="${esc(r.title || "")}" maxlength="120"></label>
+    <label class="field"><span>Request</span><textarea id="ed-text" required>${esc(currentText || "")}</textarea></label>
+    <div class="form-actions"><button class="btn btn-primary" type="submit">Save &amp; requeue</button><button class="btn" type="button" id="edc">Cancel</button></div>
+    <p class="form-error" id="ede"></p></form></div></section>`;
+  $("#ed-text").focus();
+  $("#edc").onclick = () => (box.innerHTML = "");
+  $("#edf").onsubmit = async (e) => {
+    e.preventDefault(); const b = e.target.querySelector("[type=submit]"); b.disabled = true;
+    try { await api("/requests/edit", { method: "POST", body: { request: r.id, title: $("#ed-title").value, text: $("#ed-text").value } }); toast("Request updated — queued for the next run."); route(); }
+    catch (err) { $("#ede").textContent = err.message; b.disabled = false; }
   };
 }
 

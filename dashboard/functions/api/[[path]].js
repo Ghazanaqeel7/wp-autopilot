@@ -46,6 +46,8 @@ async function handle(ctx) {
     if (path.startsWith("/connections")) return connections(path.slice(12), request, env, url);
     if (path === "/config" && request.method === "POST") return updateConfig(gh, await request.json());
     if (path === "/requests/feedback" && request.method === "POST") return feedback(gh, await request.json());
+    if (path === "/requests/answer" && request.method === "POST") return answer(gh, await request.json());
+    if (path === "/requests/edit" && request.method === "POST") return editRequest(gh, await request.json());
     return json({ error: "not found" }, 404);
   }
 }
@@ -405,6 +407,55 @@ async function feedback(gh, b) {
     r.revision = (r.revision || 1) + 1;
     r.updated_at = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
   }, `dashboard: changes requested on ${id}`);
+  return err || json({ ok: true });
+}
+
+// Owner answers the question(s) Claude asked on a needs_info request. Appends to
+// requests/<id>/answers.md (Claude reads this alongside questions.md on the next run)
+// and requeues the request as "new" so it's picked up on the next pass.
+async function answer(gh, b) {
+  const id = String(b.request || "");
+  const note = String(b.note || "").trim();
+  if (!/^R\d{8}-\d{3}$/.test(id) || !note) return json({ error: "Write your answer." }, 400);
+  const p = `requests/${id}/answers.md`;
+  const prev = await gh.getRaw(p);
+  const old = prev ? await prev.text() : "# Answers\n";
+  const stamp = new Date().toISOString().slice(0, 16).replace("T", " ");
+  await gh.put(p, b64(`${old}\n## ${stamp} UTC\n${note.slice(0, 5000)}\n`), `dashboard: answer on ${id}`);
+  const err = await mutateJson(gh, "state.json", (st) => {
+    const r = st.requests.find((x) => x.id === id);
+    if (!r) return json({ error: "Request not found." }, 404);
+    if (r.status !== "needs_info") return json({ error: "This request isn't waiting on an answer." }, 409);
+    r.status = "new";
+    r.answers = p;
+    r.updated_at = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
+  }, `dashboard: answered ${id}, requeued`);
+  return err || json({ ok: true });
+}
+
+// Edit the original request text/title before it's been built (status new or needs_info only).
+// Rewrites the "## Request" section of request.md and requeues as "new".
+async function editRequest(gh, b) {
+  const id = String(b.request || "");
+  const text = String(b.text || "").trim();
+  const title = b.title != null ? String(b.title).trim() : null;
+  if (!/^R\d{8}-\d{3}$/.test(id) || !text) return json({ error: "Write the request." }, 400);
+  const p = `requests/${id}/request.md`;
+  const cur = await gh.getRaw(p);
+  if (!cur) return json({ error: "Request file not found." }, 404);
+  let md = await cur.text();
+  if (!/## Request\n/.test(md)) return json({ error: "Unexpected request format." }, 500);
+  md = md.replace(/## Request\n[\s\S]*?(?=\n## |$)/, `## Request\n${text}\n`);
+  await gh.put(p, b64(md), `dashboard: edited ${id}`);
+  const err = await mutateJson(gh, "state.json", (st) => {
+    const r = st.requests.find((x) => x.id === id);
+    if (!r) return json({ error: "Request not found." }, 404);
+    if (!["new", "needs_info"].includes(r.status)) return json({ error: "This request has already started building and can't be edited here — use “Request changes” instead." }, 409);
+    r.status = "new";
+    if (title) r.title = title.slice(0, 120);
+    r.edited = true;
+    r.updated_at = new Date().toISOString().replace(/\.\d+Z$/, "+00:00");
+  }, `dashboard: ${id} edited, requeued`);
   return err || json({ ok: true });
 }
 

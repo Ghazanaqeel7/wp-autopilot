@@ -8,7 +8,12 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
 1. Read `state.json`. If `config.paused` is true → stop.
 2. Pick requests with `status: "new"` or `"changes_requested"` (urgent first, then oldest). Skip sites whose
    `site.json → paused` is true. For `changes_requested`, read `requests/<id>/feedback.md` (latest entry wins)
-   and write a revised package for the same request id — it replaces the staged version.
+   and write a revised package for the same request id — it replaces the staged version. A request that was
+   `needs_info` and came back to `new` via the dashboard's "Answer questions" form carries `requests/<id>/answers.md`
+   (and the `state.json` entry gets `answers: "requests/<id>/answers.md"`) — read it alongside `questions.md`
+   before planning; the latest entry wins if answered more than once. A request edited via "Edit request" has
+   `state.json → edited: true` and an updated `## Request` section in `request.md` — treat it as the current
+   request, not the original.
 3. For each request:
    - Read `requests/<id>/request.md` and attachments (transcripts for voice notes).
    - Read `sites/<site>/site.json`, `sites/<site>/brand.json` (brand colours, fonts, business, audience, tone,
