@@ -165,6 +165,14 @@
 .ghaz-seg-card h3{font-size:17px;margin-bottom:10px;}
 .ghaz-seg-card p{font-size:13px;color:var(--ghaz-mist);}
 
+/* demo before/after */
+.ghaz-demo-row{display:flex;align-items:center;gap:24px;}
+.ghaz-demo-card{flex:1;background:rgba(182,195,214,0.05);border:1px solid rgba(182,195,214,0.12);border-radius:var(--ghaz-radius);padding:28px;}
+.ghaz-demo-card-on{border-color:var(--ghaz-orange);background:rgba(255,122,26,0.08);}
+.ghaz-demo-card p{font-size:14px;color:var(--ghaz-mist);margin-top:10px;}
+.ghaz-demo-arrow{font-size:28px;color:var(--ghaz-orange);}
+@media (max-width:900px){.ghaz-demo-row{flex-direction:column;}.ghaz-demo-arrow{transform:rotate(90deg);}}
+
 /* contact form */
 .ghaz-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
 .ghaz-channel{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid rgba(182,195,214,0.12);}
