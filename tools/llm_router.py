@@ -24,10 +24,11 @@ Prints ONLY the model's reply to stdout (nothing else), so the caller spends as 
 tokens as possible reading it back. Exits non-zero with a one-line error on failure —
 callers should fall back to doing the drafting themselves rather than retrying forever.
 
-Model selection: uses OpenRouter's "openrouter/free" meta-router (auto-picks whichever
-free model is healthy right now) as the primary, then falls back through a short list
-of commonly-free model ids if that errors. The free model roster on OpenRouter rotates
-weekly — do not hardcode a single model id as the only option.
+Model selection is self-updating — no one needs to hand-maintain a model id list that
+rotates weekly. On every run it asks OpenRouter's public /models endpoint (no key
+needed, no shell/curl involved) for whichever models are free *right now* and tries
+them in order; only if that lookup itself fails does it fall back to a small hardcoded
+list, which may be stale by the time you read this.
 """
 import json
 import os
@@ -35,13 +36,12 @@ import sys
 import urllib.request
 import urllib.error
 
+MODELS_URL = "https://openrouter.ai/api/v1/models"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
-# Tried in order. "openrouter/free" is OpenRouter's own router across whatever free
-# models are healthy; the rest are plain fallbacks in case that meta-router itself is
-# unavailable. Free IDs rotate — if all of these start failing, check
-# https://openrouter.ai/collections/free-models and update this list.
-MODEL_CHAIN = [
+# Last-resort fallback only, used when the live /models lookup itself fails (e.g. no
+# network). May be stale — the live lookup above is the real source of truth.
+STATIC_FALLBACK = [
     "openrouter/free",
     "meta-llama/llama-3.1-8b-instruct:free",
     "google/gemma-2-9b-it:free",
@@ -49,27 +49,40 @@ MODEL_CHAIN = [
 ]
 
 TIMEOUT_SECS = 60
+MAX_MODELS_TRIED = 6
 
 
-def _call(model, system, prompt, max_tokens):
-    key = os.environ.get("OPENROUTER_API_KEY")
-    if not key:
-        sys.exit("llm_router: OPENROUTER_API_KEY is not set")
+def _live_free_models():
+    """Ask OpenRouter which models are free right now. Pure stdlib HTTP GET, no
+    curl/shell involved (that's what broke on Windows) — returns [] on any failure
+    so the caller falls back to STATIC_FALLBACK."""
+    try:
+        req = urllib.request.Request(MODELS_URL, headers={"Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode())
+        free = [
+            m["id"]
+            for m in data.get("data", [])
+            if m.get("pricing", {}).get("prompt") == "0"
+            and m.get("pricing", {}).get("completion") == "0"
+        ]
+        return free[:MAX_MODELS_TRIED]
+    except Exception:
+        return []
 
+
+def model_chain():
+    return _live_free_models() or STATIC_FALLBACK
+
+
+def _call(model, system, prompt, max_tokens, key):
     messages = []
     if system:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
     body = json.dumps(
-        {
-            "model": model,
-            "messages": messages,
-            "max_tokens": max_tokens,
-            # Let OpenRouter itself fail over across free providers behind this one
-            # model slug when it's the meta-router; harmless for a plain model id.
-            "models": MODEL_CHAIN,
-        }
+        {"model": model, "messages": messages, "max_tokens": max_tokens}
     ).encode()
 
     req = urllib.request.Request(
@@ -90,10 +103,14 @@ def _call(model, system, prompt, max_tokens):
 
 
 def ask(prompt, system=None, max_tokens=800):
+    key = os.environ.get("OPENROUTER_API_KEY")
+    if not key:
+        sys.exit("llm_router: OPENROUTER_API_KEY is not set")
+
     last_err = None
-    for model in MODEL_CHAIN:
+    for model in model_chain():
         try:
-            return _call(model, system, prompt, max_tokens)
+            return _call(model, system, prompt, max_tokens, key)
         except (urllib.error.URLError, urllib.error.HTTPError, KeyError, IndexError) as e:
             last_err = e
             continue
