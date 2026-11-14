@@ -101,7 +101,7 @@ jobs:
           python tools/runner.py finalize_custom "${{ inputs.site }}" "$req"
       - name: Commit reports
         if: always()
-        run: tools/commit.sh "autopilot: staged ${{ inputs.site }}/${{ inputs.request }} (custom)"
+        run: tools/commit.sh "autopilot - staged ${{ inputs.site }}/${{ inputs.request }} (custom)"
 
   promote:
     if: github.event_name == 'workflow_dispatch' && inputs.mode == 'promote'
@@ -133,7 +133,7 @@ jobs:
         run: python tools/runner.py promote_custom "${{ inputs.site }}" "${{ inputs.request }}" "${{ steps.deploy.outputs.prev }}"
       - name: Commit
         if: always()
-        run: tools/commit.sh "autopilot: ${{ inputs.site }}/${{ inputs.request }} is LIVE (custom)"
+        run: tools/commit.sh "autopilot - ${{ inputs.site }}/${{ inputs.request }} is LIVE (custom)"
 
   rollback:
     if: github.event_name == 'workflow_dispatch' && inputs.mode == 'rollback'
@@ -168,4 +168,4 @@ jobs:
           echo "$sha" > "reports/$s/live-commit.txt"
       - name: Commit
         if: always()
-        run: tools/commit.sh "autopilot: ${{ inputs.site }}/${{ inputs.request }} rolled back (custom)"
+        run: tools/commit.sh "autopilot - ${{ inputs.site }}/${{ inputs.request }} rolled back (custom)"
