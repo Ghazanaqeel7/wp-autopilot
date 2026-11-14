@@ -5,7 +5,7 @@
   "client": "",
   "url": "",
   "type": "new",
-  "status": "pending_connect",
+  "status": "active",
   "paused": false,
   "kind": "custom",
   "builder": "custom",
