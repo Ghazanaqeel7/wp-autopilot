@@ -1,7 +1,7 @@
 {
   "id": "I20261114-ch-cc806289",
   "source": "chat",
-  "site": "",
+  "site": "nextleveldigitals",
   "title": "Home page",
   "text": "Create home page on elementor",
   "from": "dashboard",
@@ -12,6 +12,7 @@
     "from": "dashboard"
   },
   "attachments": [],
-  "status": "new",
-  "created_at": "2026-11-14T13:53:23.314Z"
+  "status": "converted",
+  "created_at": "2026-11-14T13:53:23.314Z",
+  "request": "R20261114-001"
 }
