@@ -39,20 +39,30 @@
       </div>
     </div>
     <div class="ghaz-hero-stage" id="stage">
-      <div class="ghaz-card3d ghaz-card-a" id="c1">
-        <div class="ghaz-tag-chip">Automation</div>
-        <div class="ghaz-card-title">Lead routing — live</div>
-        <div class="ghaz-card-bar"><i style="width:86%"></i></div>
-      </div>
-      <div class="ghaz-card3d ghaz-card-b" id="c2">
-        <div class="ghaz-tag-chip">WordPress</div>
-        <div class="ghaz-card-title">Plugin build — v2.1</div>
-        <div class="ghaz-card-bar"><i style="width:64%"></i></div>
-      </div>
-      <div class="ghaz-card3d ghaz-card-c" id="c3">
-        <div class="ghaz-tag-chip">AI Agent</div>
-        <div class="ghaz-card-title">n8n workflow</div>
-        <div class="ghaz-card-bar"><i style="width:92%"></i></div>
+      <div class="ghaz-flow-card" id="flowcard">
+        <div class="ghaz-flow-head">
+          <span class="ghaz-flow-dots"><i></i><i></i><i></i></span>
+          <span class="ghaz-flow-title">Automation Flow</span>
+          <span class="ghaz-flow-live"><i></i>Live</span>
+        </div>
+        <div class="ghaz-flow-step ghaz-reveal-row" id="fs1">
+          <div class="ghaz-flow-icon">✉</div>
+          <div><div class="ghaz-flow-step-title">New enquiry received</div><div class="ghaz-flow-step-sub">Website form or WhatsApp</div></div>
+          <span class="ghaz-flow-badge">TRIGGER</span>
+        </div>
+        <div class="ghaz-flow-arrow">↓</div>
+        <div class="ghaz-flow-step ghaz-reveal-row" id="fs2">
+          <div class="ghaz-flow-icon">⚙</div>
+          <div><div class="ghaz-flow-step-title">n8n routes &amp; qualifies</div><div class="ghaz-flow-step-sub">Scores intent, picks the owner</div></div>
+          <span class="ghaz-flow-badge">AI</span>
+        </div>
+        <div class="ghaz-flow-arrow">↓</div>
+        <div class="ghaz-flow-step ghaz-reveal-row" id="fs3">
+          <div class="ghaz-flow-icon">✓</div>
+          <div><div class="ghaz-flow-step-title">CRM updated + alert sent</div><div class="ghaz-flow-step-sub">Routed to the right staff member</div></div>
+          <span class="ghaz-flow-badge">ACTION</span>
+        </div>
+        <div class="ghaz-flow-foot">Runs automatically — no manual follow-up required.</div>
       </div>
     </div>
   </div>

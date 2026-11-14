@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (typeof Lenis !== 'undefined') {
     var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -34,24 +32,28 @@ document.addEventListener('DOMContentLoaded', function () {
       .to('.ghaz-hero-sub', { y: 0, opacity: 1, duration: 0.7 }, 0.45)
       .to('.ghaz-hero-cta', { opacity: 1, duration: 0.6 }, 0.65);
 
-    gsap.set(['#c1', '#c2', '#c3'], { opacity: 0, z: -200 });
-    gsap.timeline({ defaults: { ease: 'power3.out' } })
-      .to('#c1', { opacity: 1, z: 0, duration: 1, rotateY: -8, rotateX: 6 }, 0.5)
-      .to('#c2', { opacity: 1, z: 0, duration: 1, rotateY: 10, rotateX: -4 }, 0.65)
-      .to('#c3', { opacity: 1, z: 0, duration: 1, rotateY: -6, rotateX: 4 }, 0.8);
+    var card = document.getElementById('flowcard');
+    if (card) {
+      gsap.set(card, { opacity: 0, z: -160, rotateY: -10, rotateX: 6 });
+      gsap.to(card, { opacity: 1, z: 0, rotateY: -6, rotateX: 3, duration: 1, ease: 'power3.out', delay: 0.4 });
+      gsap.set('#fs1, #fs2, #fs3', { opacity: 0, x: 24 });
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .to('#fs1', { opacity: 1, x: 0, duration: 0.6 }, 1.0)
+        .to('#fs2', { opacity: 1, x: 0, duration: 0.6 }, 1.25)
+        .to('#fs3', { opacity: 1, x: 0, duration: 0.6 }, 1.5);
 
-    stage.addEventListener('mousemove', function (e) {
-      var r = stage.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      gsap.to('#c1', { rotateY: -8 + px * 14, rotateX: 6 - py * 14, duration: 0.6, ease: 'power2.out' });
-      gsap.to('#c2', { rotateY: 10 + px * 18, rotateX: -4 - py * 18, duration: 0.6, ease: 'power2.out' });
-      gsap.to('#c3', { rotateY: -6 + px * 10, rotateX: 4 - py * 10, duration: 0.6, ease: 'power2.out' });
-    });
+      stage.addEventListener('mousemove', function (e) {
+        var r = stage.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        gsap.to(card, { rotateY: -6 + px * 12, rotateX: 3 - py * 10, duration: 0.6, ease: 'power2.out' });
+      });
+      stage.addEventListener('mouseleave', function () {
+        gsap.to(card, { rotateY: -6, rotateX: 3, duration: 0.8, ease: 'power3.out' });
+      });
 
-    gsap.to('#c1', { z: 120, rotateY: '+=18', y: -40, ease: 'none', scrollTrigger: { trigger: '.ghaz-hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('#c2', { z: -80, rotateY: '-=14', y: 60, ease: 'none', scrollTrigger: { trigger: '.ghaz-hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to('#c3', { z: 60, rotateX: '+=10', y: -20, ease: 'none', scrollTrigger: { trigger: '.ghaz-hero', start: 'top top', end: 'bottom top', scrub: true } });
+      gsap.to(card, { z: 60, y: -20, ease: 'none', scrollTrigger: { trigger: '.ghaz-hero', start: 'top top', end: 'bottom top', scrub: true } });
+    }
     gsap.to('.ghaz-hero-grid > div:first-child', { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '.ghaz-hero', start: 'top top', end: 'bottom top', scrub: true } });
   }
 
