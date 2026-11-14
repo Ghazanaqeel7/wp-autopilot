@@ -3,117 +3,145 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ghazan Aqeel — WordPress Developer</title>
-<meta name="description" content="WordPress developer building fast, production-grade websites and plugins for the GCC market.">
+<title>Ghazan Aqeel — Business Automation &amp; Custom Systems</title>
+<meta name="description" content="Business Automation & Custom Systems. WordPress, Shopify and AI automation builds that replace manual work for businesses in the GCC, UAE, US, UK and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ghaz-bg:#0a0a0c;
-    --ghaz-bg-alt:#111114;
-    --ghaz-text:#f2f2f0;
-    --ghaz-text-dim:#8c8c93;
-    --ghaz-accent:#c9a14a;
-    --ghaz-line:#232327;
-    --ghaz-radius:4px;
+    --ghaz-navy:#0A1220;
+    --ghaz-light:#F4F6FA;
+    --ghaz-orange:#FF7A1A;
+    --ghaz-orange-2:#FF5A0A;
+    --ghaz-mist:#B6C3D6;
+    --ghaz-slate:#44556A;
+    --ghaz-sky:#1E90FF;
+    --ghaz-radius:12px;
+    --font-head:'Sora',sans-serif;
+    --font-body:'Inter',sans-serif;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{background:var(--ghaz-bg);color:var(--ghaz-text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden;}
-  body{font-size:16px;line-height:1.6;}
-  .ghaz-wrap{max-width:1140px;margin:0 auto;padding:0 32px;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--ghaz-navy);color:var(--ghaz-mist);font-family:var(--font-body);font-size:16px;line-height:1.5;overflow-x:hidden;}
   a{color:inherit;text-decoration:none;}
-  .ghaz-accent{color:var(--ghaz-accent);}
+  .ghaz-wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .ghaz-orange-text{color:var(--ghaz-orange);}
+  h1,h2,h3{font-family:var(--font-head);color:#fff;line-height:1.08;letter-spacing:-0.01em;}
+  .ghaz-section-light{background:var(--ghaz-light);color:var(--ghaz-slate);}
+  .ghaz-section-light h1,.ghaz-section-light h2,.ghaz-section-light h3{color:var(--ghaz-navy);}
 
   /* NAV */
-  .ghaz-nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:28px 0;mix-blend-mode:difference;}
+  .ghaz-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:22px 0;background:rgba(10,18,32,0.72);backdrop-filter:blur(10px);border-bottom:1px solid rgba(182,195,214,0.1);}
   .ghaz-nav .ghaz-wrap{display:flex;justify-content:space-between;align-items:center;}
-  .ghaz-logo{font-weight:700;font-size:15px;letter-spacing:0.08em;text-transform:uppercase;}
-  .ghaz-nav-links{display:flex;gap:36px;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;}
-  .ghaz-nav-links a{opacity:0.75;transition:opacity .25s;}
-  .ghaz-nav-links a:hover{opacity:1;}
+  .ghaz-logo{font-family:var(--font-head);font-weight:800;font-size:16px;color:#fff;}
+  .ghaz-logo span{color:var(--ghaz-orange);}
+  .ghaz-nav-links{display:flex;gap:34px;font-size:14px;font-weight:500;}
+  .ghaz-nav-links a{opacity:0.85;transition:opacity .25s;}
+  .ghaz-nav-links a:hover{opacity:1;color:var(--ghaz-orange);}
+  .ghaz-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-family:var(--font-head);font-weight:700;font-size:14px;transition:transform .25s,box-shadow .25s;}
+  .ghaz-btn-cta{background:linear-gradient(135deg,var(--ghaz-orange),var(--ghaz-orange-2));color:#fff;box-shadow:0 8px 24px -8px rgba(255,122,26,0.6);}
+  .ghaz-btn-cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(255,122,26,0.75);}
+  .ghaz-btn-ghost{border:1px solid rgba(182,195,214,0.3);color:#fff;}
+  .ghaz-btn-ghost:hover{border-color:var(--ghaz-orange);}
 
-  /* HERO */
-  .ghaz-hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:120px;padding-bottom:80px;}
-  .ghaz-hero-eyebrow{font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:var(--ghaz-text-dim);margin-bottom:28px;overflow:hidden;}
-  .ghaz-hero-eyebrow span{display:inline-block;}
-  .ghaz-hero h1{font-size:clamp(48px,9vw,112px);font-weight:700;line-height:0.98;letter-spacing:-0.02em;margin-bottom:36px;}
-  .ghaz-hero h1 .ghaz-line{overflow:hidden;display:block;}
-  .ghaz-hero h1 .ghaz-line span{display:inline-block;}
-  .ghaz-hero-tagline{font-size:clamp(17px,2vw,22px);color:var(--ghaz-text-dim);max-width:560px;margin-bottom:48px;overflow:hidden;}
-  .ghaz-hero-tagline span{display:inline-block;}
-  .ghaz-hero-cta{display:flex;gap:20px;align-items:center;opacity:0;}
-  .ghaz-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:1px solid var(--ghaz-line);border-radius:var(--ghaz-radius);font-size:14px;letter-spacing:0.03em;text-transform:uppercase;transition:border-color .3s,background .3s;}
-  .ghaz-btn:hover{border-color:var(--ghaz-accent);background:rgba(201,161,74,0.08);}
-  .ghaz-btn-primary{background:var(--ghaz-accent);color:#0a0a0c;border-color:var(--ghaz-accent);}
-  .ghaz-btn-primary:hover{background:#ddb65e;}
-  .ghaz-scroll-hint{position:absolute;bottom:40px;left:32px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-text-dim);display:flex;align-items:center;gap:10px;}
-  .ghaz-scroll-hint::after{content:'';width:1px;height:40px;background:var(--ghaz-line);display:block;}
+  /* HERO — 3D/4D scroll */
+  .ghaz-hero{min-height:100vh;display:flex;align-items:center;position:relative;padding-top:100px;perspective:1400px;overflow:hidden;}
+  .ghaz-hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;width:100%;}
+  .ghaz-hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-head);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ghaz-orange);background:rgba(255,122,26,0.1);border:1px solid rgba(255,122,26,0.25);padding:8px 16px;border-radius:999px;margin-bottom:28px;}
+  .ghaz-hero h1{font-size:clamp(40px,5.2vw,64px);font-weight:800;margin-bottom:24px;}
+  .ghaz-hero-sub{font-size:19px;color:var(--ghaz-mist);max-width:520px;margin-bottom:38px;}
+  .ghaz-hero-cta{display:flex;gap:16px;flex-wrap:wrap;}
+  .ghaz-hero-stage{position:relative;height:460px;transform-style:preserve-3d;}
+  .ghaz-card3d{position:absolute;border-radius:16px;background:linear-gradient(160deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));border:1px solid rgba(182,195,214,0.18);backdrop-filter:blur(6px);box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);padding:20px;transform-style:preserve-3d;}
+  .ghaz-card3d .ghaz-tag-chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ghaz-orange);margin-bottom:8px;}
+  .ghaz-card3d .ghaz-card-title{font-family:var(--font-head);font-weight:700;color:#fff;font-size:16px;margin-bottom:6px;}
+  .ghaz-card3d .ghaz-card-bar{height:6px;border-radius:4px;background:rgba(182,195,214,0.18);overflow:hidden;margin-top:10px;}
+  .ghaz-card3d .ghaz-card-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ghaz-orange),var(--ghaz-sky));}
+  .ghaz-card-a{width:260px;top:0;left:10%;z-index:3;}
+  .ghaz-card-b{width:220px;top:140px;left:46%;z-index:2;}
+  .ghaz-card-c{width:200px;top:300px;left:6%;z-index:1;}
+  .ghaz-glow{position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(30,144,255,0.25),transparent 70%);border-radius:50%;top:-80px;right:-120px;filter:blur(10px);pointer-events:none;}
 
   /* SECTION SHARED */
-  .ghaz-section{padding:160px 0;position:relative;border-top:1px solid var(--ghaz-line);}
-  .ghaz-section-tag{font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:var(--ghaz-accent);margin-bottom:20px;}
-  .ghaz-section-title{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-0.01em;margin-bottom:64px;max-width:720px;}
+  .ghaz-section{padding:130px 0;position:relative;}
+  .ghaz-tag-label{font-family:var(--font-head);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-orange);margin-bottom:16px;}
+  .ghaz-section-title{font-size:clamp(28px,4vw,44px);font-weight:800;max-width:760px;margin-bottom:60px;}
   .ghaz-reveal{overflow:hidden;}
 
-  /* SERVICES */
-  .ghaz-services-list{border-top:1px solid var(--ghaz-line);}
-  .ghaz-service-row{display:grid;grid-template-columns:60px 1fr 1fr;gap:32px;align-items:center;padding:36px 0;border-bottom:1px solid var(--ghaz-line);transition:padding-left .4s;}
-  .ghaz-service-row:hover{padding-left:16px;background:rgba(255,255,255,0.015);}
-  .ghaz-service-num{font-size:13px;color:var(--ghaz-text-dim);font-weight:600;}
-  .ghaz-service-row h3{font-size:clamp(20px,2.6vw,28px);font-weight:600;}
-  .ghaz-service-row p{color:var(--ghaz-text-dim);font-size:15px;max-width:380px;}
+  /* 3-col pain points */
+  .ghaz-pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .ghaz-pain-card{background:rgba(182,195,214,0.05);border:1px solid rgba(182,195,214,0.12);border-radius:var(--ghaz-radius);padding:36px;transition:border-color .3s,transform .3s;}
+  .ghaz-pain-card:hover{border-color:var(--ghaz-orange);transform:translateY(-4px);}
+  .ghaz-pain-card h3{font-size:19px;margin-bottom:12px;}
+  .ghaz-pain-card p{font-size:14px;color:var(--ghaz-mist);}
 
-  /* WORK */
+  /* services grid */
+  .ghaz-svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+  .ghaz-svc-card{background:var(--ghaz-navy);border:1px solid rgba(182,195,214,0.14);padding:34px;transition:background .3s;}
+  .ghaz-svc-card:hover{background:rgba(255,122,26,0.06);}
+  .ghaz-svc-num{font-family:var(--font-head);font-size:13px;color:var(--ghaz-orange);font-weight:700;margin-bottom:16px;}
+  .ghaz-svc-card h3{font-size:19px;margin-bottom:10px;}
+  .ghaz-svc-card p{font-size:14px;color:var(--ghaz-mist);}
+
+  /* process steps */
+  .ghaz-process{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;}
+  .ghaz-process-step{text-align:left;}
+  .ghaz-process-num{width:44px;height:44px;border-radius:50%;background:rgba(255,122,26,0.12);border:1px solid rgba(255,122,26,0.4);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;color:var(--ghaz-orange);margin-bottom:16px;}
+  .ghaz-process-step h3{font-size:16px;margin-bottom:6px;}
+  .ghaz-process-step p{font-size:13px;color:var(--ghaz-mist);}
+
+  /* tools strip */
+  .ghaz-tools-strip{display:flex;flex-wrap:wrap;gap:14px;}
+  .ghaz-tool-pill{font-family:var(--font-head);font-size:14px;font-weight:700;padding:12px 22px;border-radius:999px;border:1px solid rgba(182,195,214,0.2);color:#fff;}
+
+  /* geo */
+  .ghaz-geo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;}
+  .ghaz-geo-card h3{font-size:17px;margin-bottom:10px;}
+  .ghaz-geo-card p{font-size:14px;}
+
+  /* problem/solution 2col */
+  .ghaz-ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .ghaz-ps-row{display:flex;gap:16px;padding:22px;border-radius:var(--ghaz-radius);background:#fff;border:1px solid rgba(68,85,106,0.12);}
+  .ghaz-ps-row b{display:block;font-family:var(--font-head);font-size:15px;color:var(--ghaz-navy);margin-bottom:4px;}
+  .ghaz-ps-row span{font-size:13px;color:var(--ghaz-slate);}
+
+  /* benefits 4col */
+  .ghaz-benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .ghaz-benefit{text-align:center;padding:30px 16px;}
+  .ghaz-benefit .num{font-family:var(--font-head);font-weight:800;font-size:30px;color:var(--ghaz-orange);margin-bottom:10px;}
+
+  /* work */
   .ghaz-work-grid{display:grid;gap:4px;}
-  .ghaz-work-card{position:relative;border:1px solid var(--ghaz-line);border-radius:8px;padding:48px;overflow:hidden;transition:border-color .3s;}
-  .ghaz-work-card:hover{border-color:var(--ghaz-accent);}
+  .ghaz-work-card{border:1px solid rgba(182,195,214,0.14);border-radius:var(--ghaz-radius);padding:40px;transition:border-color .3s;}
+  .ghaz-work-card:hover{border-color:var(--ghaz-orange);}
   .ghaz-work-card + .ghaz-work-card{margin-top:4px;}
-  .ghaz-work-kicker{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-text-dim);margin-bottom:16px;}
-  .ghaz-work-card h3{font-size:clamp(24px,3.2vw,36px);font-weight:700;margin-bottom:14px;}
-  .ghaz-work-card p{color:var(--ghaz-text-dim);max-width:600px;margin-bottom:20px;}
-  .ghaz-work-tags{display:flex;gap:10px;flex-wrap:wrap;}
-  .ghaz-tag{font-size:12px;padding:6px 14px;border:1px solid var(--ghaz-line);border-radius:100px;color:var(--ghaz-text-dim);}
+  .ghaz-work-kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ghaz-orange);font-family:var(--font-head);font-weight:700;margin-bottom:14px;}
+  .ghaz-work-card h3{font-size:clamp(20px,2.6vw,28px);margin-bottom:12px;}
+  .ghaz-work-card p{font-size:14px;color:var(--ghaz-mist);max-width:640px;margin-bottom:16px;}
+  .ghaz-tag{font-size:12px;padding:5px 13px;border:1px solid rgba(182,195,214,0.2);border-radius:999px;color:var(--ghaz-mist);margin-right:8px;display:inline-block;margin-bottom:6px;}
 
-  /* EXPERIENCE */
-  .ghaz-exp-list{border-top:1px solid var(--ghaz-line);}
-  .ghaz-exp-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--ghaz-line);}
-  .ghaz-exp-dates{font-size:13px;color:var(--ghaz-text-dim);letter-spacing:0.03em;padding-top:4px;}
-  .ghaz-exp-role{font-size:19px;font-weight:600;margin-bottom:4px;}
-  .ghaz-exp-org{font-size:14px;color:var(--ghaz-accent);margin-bottom:10px;}
-  .ghaz-exp-desc{font-size:14px;color:var(--ghaz-text-dim);max-width:600px;}
-  .ghaz-exp-earlier{padding:28px 0;border-bottom:1px solid var(--ghaz-line);}
-  .ghaz-exp-earlier-title{font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-text-dim);margin-bottom:16px;}
-  .ghaz-exp-earlier-row{display:flex;justify-content:space-between;gap:24px;padding:10px 0;font-size:14px;flex-wrap:wrap;}
-  .ghaz-exp-earlier-row span:first-child{color:var(--ghaz-text);}
-  .ghaz-exp-earlier-row span:last-child{color:var(--ghaz-text-dim);white-space:nowrap;}
+  /* faq */
+  .ghaz-faq-item{border-bottom:1px solid rgba(68,85,106,0.15);padding:26px 0;}
+  .ghaz-faq-item h3{font-size:17px;color:var(--ghaz-navy);margin-bottom:8px;}
+  .ghaz-faq-item p{font-size:14px;color:var(--ghaz-slate);max-width:720px;}
 
-  /* EDUCATION / CERTS */
-  .ghaz-edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:64px;}
-  .ghaz-edu-col-title{font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ghaz-accent);margin-bottom:24px;}
-  .ghaz-edu-item{padding:20px 0;border-bottom:1px solid var(--ghaz-line);}
-  .ghaz-edu-item h4{font-size:16px;font-weight:600;margin-bottom:4px;}
-  .ghaz-edu-item p{font-size:13px;color:var(--ghaz-text-dim);}
+  /* contact */
+  .ghaz-contact h2{font-size:clamp(34px,6vw,64px);font-weight:800;margin-bottom:36px;}
+  .ghaz-contact-email{font-size:clamp(18px,2.2vw,24px);display:inline-flex;align-items:center;gap:14px;border-bottom:1px solid rgba(182,195,214,0.3);padding-bottom:10px;font-family:var(--font-head);font-weight:700;color:#fff;}
+  .ghaz-contact-email:hover{color:var(--ghaz-orange);border-color:var(--ghaz-orange);}
+  .ghaz-contact-meta{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;font-size:14px;}
 
-  /* ABOUT */
-  .ghaz-about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
-  .ghaz-about-text p{color:var(--ghaz-text-dim);font-size:17px;margin-bottom:22px;max-width:480px;}
-  .ghaz-stats{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
-  .ghaz-stat-num{font-size:clamp(36px,5vw,52px);font-weight:700;color:var(--ghaz-accent);}
-  .ghaz-stat-label{font-size:13px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ghaz-text-dim);margin-top:8px;}
+  .ghaz-footer{padding:36px 0;border-top:1px solid rgba(182,195,214,0.1);display:flex;justify-content:space-between;font-size:13px;color:var(--ghaz-mist);}
 
-  /* CONTACT */
-  .ghaz-contact{text-align:left;}
-  .ghaz-contact h2{font-size:clamp(40px,7vw,88px);font-weight:700;letter-spacing:-0.02em;line-height:1.02;margin-bottom:48px;}
-  .ghaz-contact-email{font-size:clamp(20px,2.4vw,28px);display:inline-flex;align-items:center;gap:16px;border-bottom:1px solid var(--ghaz-line);padding-bottom:12px;transition:border-color .3s,color .3s;}
-  .ghaz-contact-email:hover{color:var(--ghaz-accent);border-color:var(--ghaz-accent);}
-  .ghaz-footer{padding:40px 0;border-top:1px solid var(--ghaz-line);display:flex;justify-content:space-between;font-size:13px;color:var(--ghaz-text-dim);}
-
-  @media (max-width: 780px){
+  @media (max-width:900px){
+    .ghaz-hero-grid{grid-template-columns:1fr;}
+    .ghaz-hero-stage{display:none;}
+    .ghaz-pain-grid,.ghaz-svc-grid,.ghaz-geo-grid,.ghaz-ps-grid{grid-template-columns:1fr;}
+    .ghaz-process{grid-template-columns:repeat(2,1fr);}
+    .ghaz-benefit-grid{grid-template-columns:repeat(2,1fr);}
     .ghaz-nav-links{display:none;}
-    .ghaz-service-row{grid-template-columns:40px 1fr;}
-    .ghaz-service-row p{display:none;}
-    .ghaz-about-grid{grid-template-columns:1fr;gap:48px;}
-    .ghaz-section{padding:100px 0;}
-    .ghaz-exp-row{grid-template-columns:1fr;gap:6px;}
-    .ghaz-edu-grid{grid-template-columns:1fr;gap:32px;}
+    .ghaz-section{padding:90px 0;}
   }
 </style>
 </head>
@@ -121,298 +149,173 @@
 
 <nav class="ghaz-nav">
   <div class="ghaz-wrap">
-    <div class="ghaz-logo">Ghazan Aqeel</div>
+    <div class="ghaz-logo">Ghazan <span>Aqeel</span></div>
     <div class="ghaz-nav-links">
       <a href="#services">Services</a>
       <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
-      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
+    <a href="#contact" class="ghaz-btn ghaz-btn-cta">Book a call</a>
   </div>
 </nav>
 
 <header class="ghaz-hero">
-  <div class="ghaz-wrap">
-    <div class="ghaz-hero-eyebrow"><span>Production Team Lead — WordPress, Shopify &amp; AI Automation</span></div>
-    <h1>
-      <span class="ghaz-line"><span>7+ years building</span></span>
-      <span class="ghaz-line"><span>production-grade</span></span>
-      <span class="ghaz-line"><span><span class="ghaz-accent">websites</span> &amp; systems.</span></span>
-    </h1>
-    <div class="ghaz-hero-tagline"><span>I lead production at Centric Tech Inc. across Pakistan and the UAE, and build custom WordPress/Shopify platforms and AI automation workflows for clients across the US, UK, Germany, Australia and the GCC.</span></div>
-    <div class="ghaz-hero-cta">
-      <a href="#contact" class="ghaz-btn ghaz-btn-primary">Start a project</a>
-      <a href="#work" class="ghaz-btn">See the work</a>
+  <div class="ghaz-glow"></div>
+  <div class="ghaz-wrap ghaz-hero-grid">
+    <div>
+      <div class="ghaz-hero-eyebrow ghaz-reveal"><span>Business Automation &amp; Custom Systems</span></div>
+      <h1 class="ghaz-reveal"><span>AI Automation, WordPress &amp; Custom Systems for Growing Businesses</span></h1>
+      <p class="ghaz-hero-sub ghaz-reveal"><span>I lead production at Centric Tech Inc. and build WordPress, Shopify and AI automation systems that replace manual work — for clients across the GCC, UAE, US, UK, Germany and Australia.</span></p>
+      <div class="ghaz-hero-cta">
+        <a href="#contact" class="ghaz-btn ghaz-btn-cta">Start a project</a>
+        <a href="#work" class="ghaz-btn ghaz-btn-ghost">See the work</a>
+      </div>
+    </div>
+    <div class="ghaz-hero-stage" id="stage">
+      <div class="ghaz-card3d ghaz-card-a" id="c1">
+        <div class="ghaz-tag-chip">Automation</div>
+        <div class="ghaz-card-title">Lead routing — live</div>
+        <div class="ghaz-card-bar"><i style="width:86%"></i></div>
+      </div>
+      <div class="ghaz-card3d ghaz-card-b" id="c2">
+        <div class="ghaz-tag-chip">WordPress</div>
+        <div class="ghaz-card-title">Plugin build — v2.1</div>
+        <div class="ghaz-card-bar"><i style="width:64%"></i></div>
+      </div>
+      <div class="ghaz-card3d ghaz-card-c" id="c3">
+        <div class="ghaz-tag-chip">AI Agent</div>
+        <div class="ghaz-card-title">n8n workflow</div>
+        <div class="ghaz-card-bar"><i style="width:92%"></i></div>
+      </div>
     </div>
   </div>
-  <div class="ghaz-scroll-hint">Scroll</div>
 </header>
+
+<section class="ghaz-section" id="pain">
+  <div class="ghaz-wrap">
+    <div class="ghaz-tag-label ghaz-reveal"><span>Where businesses get stuck</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>Growth slows down when systems can't keep up.</span></h2>
+    <div class="ghaz-pain-grid">
+      <div class="ghaz-pain-card ghaz-reveal-row"><h3>Work that shouldn't need a person</h3><p>Leads, forms and follow-ups handled manually, one at a time, instead of routed and tracked automatically.</p></div>
+      <div class="ghaz-pain-card ghaz-reveal-row"><h3>Tools that don't talk to each other</h3><p>A website, a form tool and a spreadsheet that all hold a different version of the same lead.</p></div>
+      <div class="ghaz-pain-card ghaz-reveal-row"><h3>A website that can't keep up</h3><p>Built once, never touched again — no plugin, system or process built to grow with the business.</p></div>
+    </div>
+  </div>
+</section>
 
 <section class="ghaz-section" id="services">
   <div class="ghaz-wrap">
-    <div class="ghaz-section-tag ghaz-reveal"><span>What I do</span></div>
-    <h2 class="ghaz-section-title ghaz-reveal"><span>Full-stack WordPress — from plugin code to production delivery.</span></h2>
-    <div class="ghaz-services-list">
-      <div class="ghaz-service-row ghaz-reveal-row">
-        <div class="ghaz-service-num">01</div>
-        <h3>WordPress plugin development</h3>
-        <p>Custom plugins and commercial tools, including inline visual editors and Elementor-friendly builders.</p>
-      </div>
-      <div class="ghaz-service-row ghaz-reveal-row">
-        <div class="ghaz-service-num">02</div>
-        <h3>Elementor &amp; site builds</h3>
-        <p>Full site builds on Elementor and Gutenberg — performant, accessible, on-brand.</p>
-      </div>
-      <div class="ghaz-service-row ghaz-reveal-row">
-        <div class="ghaz-service-num">03</div>
-        <h3>UX &amp; web consulting</h3>
-        <p>Structuring content, flows and conversion paths before a single line of code.</p>
-      </div>
-      <div class="ghaz-service-row ghaz-reveal-row">
-        <div class="ghaz-service-num">04</div>
-        <h3>Production &amp; team leadership</h3>
-        <p>Running WordPress production teams and delivery pipelines across multiple concurrent sites.</p>
-      </div>
-      <div class="ghaz-service-row ghaz-reveal-row">
-        <div class="ghaz-service-num">05</div>
-        <h3>Automated delivery tooling</h3>
-        <p>Building systems that take a client request to a reviewed, reversible, live change — at scale.</p>
-      </div>
+    <div class="ghaz-tag-label ghaz-reveal"><span>What I do</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>Digital solutions built around your business.</span></h2>
+    <div class="ghaz-svc-grid">
+      <div class="ghaz-svc-card ghaz-reveal-row"><div class="ghaz-svc-num">01</div><h3>WordPress Plugin Development</h3><p>Custom plugins and commercial tools, Elementor-friendly, built to production standard.</p></div>
+      <div class="ghaz-svc-card ghaz-reveal-row"><div class="ghaz-svc-num">02</div><h3>WordPress &amp; Shopify Builds</h3><p>Full site builds — performant, accessible, on-brand, from theme to checkout.</p></div>
+      <div class="ghaz-svc-card ghaz-reveal-row"><div class="ghaz-svc-num">03</div><h3>AI Automation (n8n)</h3><p>Workflow automation connecting your tools — leads, content, approvals — with AI steps where they help.</p></div>
+      <div class="ghaz-svc-card ghaz-reveal-row"><div class="ghaz-svc-num">04</div><h3>UX &amp; Web Consulting</h3><p>Structuring content, flows and conversion paths before a single line of code is written.</p></div>
+      <div class="ghaz-svc-card ghaz-reveal-row"><div class="ghaz-svc-num">05</div><h3>Production Leadership</h3><p>Running production teams and delivery pipelines across multiple concurrent client sites.</p></div>
+      <div class="ghaz-svc-card ghaz-reveal-row"><div class="ghaz-svc-num">06</div><h3>Automated Delivery Systems</h3><p>Pipelines that turn a client request into a reviewed, reversible, live change — at scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ghaz-section" id="process">
+  <div class="ghaz-wrap">
+    <div class="ghaz-tag-label ghaz-reveal"><span>How it works</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>From manual process to working system.</span></h2>
+    <div class="ghaz-process">
+      <div class="ghaz-process-step ghaz-reveal-row"><div class="ghaz-process-num">1</div><h3>Understand</h3><p>What's manual today, and where it breaks.</p></div>
+      <div class="ghaz-process-step ghaz-reveal-row"><div class="ghaz-process-num">2</div><h3>Plan</h3><p>The system, tools and scope — agreed before we build.</p></div>
+      <div class="ghaz-process-step ghaz-reveal-row"><div class="ghaz-process-num">3</div><h3>Build</h3><p>WordPress, Shopify or automation, built to production standard.</p></div>
+      <div class="ghaz-process-step ghaz-reveal-row"><div class="ghaz-process-num">4</div><h3>Launch</h3><p>Reviewed, tested, and shipped without surprises.</p></div>
+      <div class="ghaz-process-step ghaz-reveal-row"><div class="ghaz-process-num">5</div><h3>Improve</h3><p>Iterate as the business changes — not a one-off build.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ghaz-section" id="tools">
+  <div class="ghaz-wrap">
+    <div class="ghaz-tag-label ghaz-reveal"><span>Stack</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>Tools I build with.</span></h2>
+    <div class="ghaz-tools-strip ghaz-reveal-row">
+      <span class="ghaz-tool-pill">WordPress</span><span class="ghaz-tool-pill">Elementor</span><span class="ghaz-tool-pill">Shopify</span>
+      <span class="ghaz-tool-pill">n8n</span><span class="ghaz-tool-pill">GitHub Actions</span><span class="ghaz-tool-pill">PHP</span>
+      <span class="ghaz-tool-pill">React / TypeScript</span><span class="ghaz-tool-pill">Tailwind CSS</span><span class="ghaz-tool-pill">Gemini API</span>
+    </div>
+  </div>
+</section>
+
+<section class="ghaz-section" id="geo">
+  <div class="ghaz-wrap">
+    <div class="ghaz-tag-label ghaz-reveal"><span>Where I work</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>Based in Karachi. Delivering across the GCC and beyond.</span></h2>
+    <div class="ghaz-geo-grid">
+      <div class="ghaz-geo-card ghaz-reveal-row"><h3>GCC &amp; UAE</h3><p>Production lead at Centric Tech Inc., Karachi and Dubai — the core of my day-to-day work.</p></div>
+      <div class="ghaz-geo-card ghaz-reveal-row"><h3>US, UK &amp; Germany</h3><p>Freelance WordPress, Shopify and automation builds for remote clients since 2018.</p></div>
+      <div class="ghaz-geo-card ghaz-reveal-row"><h3>Australia &amp; beyond</h3><p>Remote-first — every engagement above has been delivered without being on-site.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ghaz-section ghaz-section-light" id="problems">
+  <div class="ghaz-wrap">
+    <div class="ghaz-tag-label ghaz-reveal"><span>Real problems, real systems</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>Solutions built to solve problems I've actually shipped.</span></h2>
+    <div class="ghaz-ps-grid">
+      <div class="ghaz-ps-row ghaz-reveal-row"><span class="ghaz-tag" style="margin:0">⚡</span><div><b>Lead routing &amp; alerts</b><span>Centric Form Centralise System — every site form into one dashboard, instant email/WhatsApp alerts, routed to the right staff member.</span></div></div>
+      <div class="ghaz-ps-row ghaz-reveal-row"><span class="ghaz-tag" style="margin:0">⚡</span><div><b>Booking automation</b><span>Mashaer Travel — a custom Hajj 2027 booking plugin, frontend and backend, with redesigned transactional emails.</span></div></div>
+      <div class="ghaz-ps-row ghaz-reveal-row"><span class="ghaz-tag" style="margin:0">⚡</span><div><b>Frontend visual editing</b><span>LiveCraft Pro — inline WordPress editor with AI section generation, built to work alongside Elementor.</span></div></div>
+      <div class="ghaz-ps-row ghaz-reveal-row"><span class="ghaz-tag" style="margin:0">⚡</span><div><b>Content pipelines</b><span>Sneaky Deals — a fully automated faceless channel, from research to scheduled publish, approved in Slack.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ghaz-section" id="benefits">
+  <div class="ghaz-wrap">
+    <div class="ghaz-tag-label ghaz-reveal"><span>Why it matters</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>What a better system does for your business.</span></h2>
+    <div class="ghaz-benefit-grid">
+      <div class="ghaz-benefit ghaz-reveal-row"><div class="num">↓</div><h3>Save time</h3></div>
+      <div class="ghaz-benefit ghaz-reveal-row"><div class="num">×</div><h3>Reduce errors</h3></div>
+      <div class="ghaz-benefit ghaz-reveal-row"><div class="num">→</div><h3>Respond faster</h3></div>
+      <div class="ghaz-benefit ghaz-reveal-row"><div class="num">↑</div><h3>Scale more easily</h3></div>
     </div>
   </div>
 </section>
 
 <section class="ghaz-section" id="work">
   <div class="ghaz-wrap">
-    <div class="ghaz-section-tag ghaz-reveal"><span>Selected work</span></div>
-    <h2 class="ghaz-section-title ghaz-reveal"><span>A few things I've built and shipped.</span></h2>
+    <div class="ghaz-tag-label ghaz-reveal"><span>Selected work</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>A closer look at what I've built.</span></h2>
     <div class="ghaz-work-grid">
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Automated delivery system — In progress</div>
-        <h3>WP Autopilot</h3>
-        <p>Turns a client brief, an existing site or raw requirements into a researched, responsive, secure WordPress site — connected directly through WordPress with no hosting access needed. Applies change requests from docs, voice notes or Slack automatically, with a live dashboard, QA preview link and screenshot report after each change. This very site was built through it.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">n8n</span><span class="ghaz-tag">GitHub</span><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">Slack</span><span class="ghaz-tag">AI</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Hajj &amp; Umrah travel tech — Live</div>
-        <h3>Guide to Haramain — Nusuk Photo Resizer Suite</h3>
-        <p>Three free tools that format pilgrims' documents to official Nusuk upload requirements: personal photo resizer, passport info-page tool, and green-card front/back stacker. Guided crop flows with locked aspect ratios, auto-orientation and minimum-area checks cut Nusuk OCR rejections. Privacy-first PHP/AJAX pipeline that never stores images.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">JavaScript</span><span class="ghaz-tag">Cropper.js</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Commercial WordPress plugin — v2.1, staging</div>
-        <h3>LiveCraft Pro — Frontend Visual Editor</h3>
-        <p>A lightweight inline editor for Elementor and modern WordPress sites: edit text, replace images, adjust styles and drag to reorder sections directly on the frontend. AI section/layout generation, chunked saving and edits written into real page HTML to stay SEO-safe.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress plugin</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">JavaScript</span><span class="ghaz-tag">AI</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Automated content pipeline — Live</div>
-        <h3>Sneaky Deals</h3>
-        <p>An end-to-end automated faceless channel: daily trend and competitor research, script writing, video rendering, auto-generated thumbnails and a weekly content calendar. Scripts and videos are approved in Slack, then scheduled to YouTube and cross-posted to Instagram and Facebook Reels.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">n8n</span><span class="ghaz-tag">GitHub Actions</span><span class="ghaz-tag">Slack</span><span class="ghaz-tag">YouTube/Meta APIs</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Hajj 2027 booking system — Delivered</div>
-        <h3>Mashaer Travel</h3>
-        <p>A custom Hajj 2027 package confirmation and booking plugin built end to end, frontend and backend — including a refined booking-flow UI/UX and redesigned transactional email templates.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress plugin</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">JavaScript</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Lead management plugin — In progress</div>
-        <h3>Centric Form Centralise System</h3>
-        <p>Brings every Centric Tech website form into one lead dashboard — instant alerts to admin emails and WhatsApp, routing each lead to the right staff member, and dynamic thank-you pages for conversion tracking.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">WhatsApp/email alerts</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">Centralised lead system — Delivered</div>
-        <h3>Circle Collision Center</h3>
-        <p>A fully custom website replacing separate page forms with one centralised appointment form used across every page, plus a single admin dashboard tracking each lead's source page.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">Elementor</span><span class="ghaz-tag">HTML/CSS/JS</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">SaaS dealer management — Completed</div>
-        <h3>Nexus DMS</h3>
-        <p>A low-cost dashboard for small car dealers: drag-and-drop Kanban lead pipeline, a debt-recovery module flagging overdue installments, inventory margin analysis, Gemini-powered sales insights and one-click WhatsApp payment reminders.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">React/TypeScript</span><span class="ghaz-tag">Tailwind CSS</span><span class="ghaz-tag">Recharts</span><span class="ghaz-tag">Gemini</span></div>
-      </div>
-      <div class="ghaz-work-card ghaz-reveal-row">
-        <div class="ghaz-work-kicker">AI-first ATS — Completed</div>
-        <h3>RecruitSynch AI</h3>
-        <p>A lightweight applicant tracking system for small businesses, covering job creation through offer letter — Gemini drafts job descriptions and speeds up resume screening.</p>
-        <div class="ghaz-work-tags"><span class="ghaz-tag">React/TypeScript</span><span class="ghaz-tag">Vite</span><span class="ghaz-tag">Tailwind CSS</span><span class="ghaz-tag">Gemini API</span></div>
-      </div>
+      <div class="ghaz-work-card ghaz-reveal-row"><div class="ghaz-work-kicker">Automated delivery — in progress</div><h3>WP Autopilot</h3><p>An end-to-end automated WordPress delivery pipeline — client requests become reviewed, reversible change packages, applied through a dashboard with live previews. This site was built through it.</p><div><span class="ghaz-tag">n8n</span><span class="ghaz-tag">GitHub</span><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">AI</span></div></div>
+      <div class="ghaz-work-card ghaz-reveal-row"><div class="ghaz-work-kicker">Hajj &amp; Umrah travel tech — live</div><h3>Guide to Haramain — Nusuk Photo Resizer Suite</h3><p>Three free tools that format pilgrims' documents to official Nusuk upload requirements, cutting OCR rejections via guided crop flows and orientation checks.</p><div><span class="ghaz-tag">WordPress</span><span class="ghaz-tag">PHP</span><span class="ghaz-tag">Cropper.js</span></div></div>
+      <div class="ghaz-work-card ghaz-reveal-row"><div class="ghaz-work-kicker">Commercial plugin — v2.1, staging</div><h3>LiveCraft Pro</h3><p>A lightweight inline editor for Elementor and modern WordPress sites — edit text, images and layout directly on the frontend, with AI section generation.</p><div><span class="ghaz-tag">WordPress plugin</span><span class="ghaz-tag">AI</span></div></div>
+      <div class="ghaz-work-card ghaz-reveal-row"><div class="ghaz-work-kicker">SaaS dealer management — completed</div><h3>Nexus DMS</h3><p>A low-cost dashboard for small car dealers — Kanban lead pipeline, debt-recovery alerts, inventory margins and Gemini-powered sales insights.</p><div><span class="ghaz-tag">React/TypeScript</span><span class="ghaz-tag">Gemini</span></div></div>
     </div>
   </div>
 </section>
 
-<section class="ghaz-section" id="experience">
+<section class="ghaz-section ghaz-section-light" id="faq">
   <div class="ghaz-wrap">
-    <div class="ghaz-section-tag ghaz-reveal"><span>Experience</span></div>
-    <h2 class="ghaz-section-title ghaz-reveal"><span>7+ years leading production and shipping code.</span></h2>
-    <div class="ghaz-exp-list">
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Nov 2025 — Present</div>
-        <div>
-          <div class="ghaz-exp-role">Senior Full Stack Developer, UAE Branch</div>
-          <div class="ghaz-exp-org">Centric Tech Inc. — Dubai, UAE</div>
-          <div class="ghaz-exp-desc">Extending production leadership to the UAE branch, supporting senior-level e-commerce and web development for the GCC market.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Mar 2023 — Present</div>
-        <div>
-          <div class="ghaz-exp-role">Production Manager</div>
-          <div class="ghaz-exp-org">Centric Tech Inc. — Karachi, Pakistan</div>
-          <div class="ghaz-exp-desc">Own end-to-end production workflows, keeping timelines, quality standards and client deliverables on track across WordPress, Shopify and AI development streams.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Aug 2022 — Present</div>
-        <div>
-          <div class="ghaz-exp-role">Production Team Lead</div>
-          <div class="ghaz-exp-org">Centric Tech Inc. — Karachi, Pakistan</div>
-          <div class="ghaz-exp-desc">Lead developers and designers, shaping e-commerce strategy and new Shopify store development to industry standards.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Dec 2023 — Present</div>
-        <div>
-          <div class="ghaz-exp-role">WordPress / Shopify / AI Systems Developer · Freelance</div>
-          <div class="ghaz-exp-org">Remote — GCC, UK, US clients</div>
-          <div class="ghaz-exp-desc">Delivering custom websites, WordPress plugins and AI automation workflows for agencies and direct clients.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Jan 2025 — Feb 2026</div>
-        <div>
-          <div class="ghaz-exp-role">Senior WordPress &amp; Shopify Developer</div>
-          <div class="ghaz-exp-org">Vertex Digital Labs — Remote</div>
-          <div class="ghaz-exp-desc">Delivered senior-level WordPress and Shopify builds, from custom themes to storefront optimisation.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Jan 2025 — Dec 2025</div>
-        <div>
-          <div class="ghaz-exp-role">Senior Shopify Developer</div>
-          <div class="ghaz-exp-org">ArcPoint Solutions (Pvt) Ltd — Germany, Remote</div>
-          <div class="ghaz-exp-desc">Built Shopify solutions focused on user experience and growth for international clients.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Jan 2024 — Feb 2025</div>
-        <div>
-          <div class="ghaz-exp-role">Senior Developer</div>
-          <div class="ghaz-exp-org">Freedom Web Experts — Raleigh, NC, USA, Remote</div>
-          <div class="ghaz-exp-desc">Delivered senior-level web development support for US-based client engagements.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Oct 2023 — Jan 2025</div>
-        <div>
-          <div class="ghaz-exp-role">Senior Developer &amp; Social Media Content Creator</div>
-          <div class="ghaz-exp-org">Freedom Gifts, Inc. — USA, Remote</div>
-          <div class="ghaz-exp-desc">Combined web development with social media content creation for a non-profit's online presence and outreach.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Nov 2021 — Aug 2022</div>
-        <div>
-          <div class="ghaz-exp-role">Team Lead Manager / Senior Developer</div>
-          <div class="ghaz-exp-org">InovioTech Pvt Ltd — Karachi</div>
-          <div class="ghaz-exp-desc">Managed a development team, overseeing project execution and delivery quality on client web projects.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-row ghaz-reveal-row">
-        <div class="ghaz-exp-dates">Sep 2021 — Aug 2022</div>
-        <div>
-          <div class="ghaz-exp-role">WordPress &amp; Shopify Developer, Graphic Designer</div>
-          <div class="ghaz-exp-org">CBE — The Infinite Solution — Australia, Remote</div>
-          <div class="ghaz-exp-desc">Built and maintained WordPress and Shopify sites, plus graphic design deliverables, for Australian clients.</div>
-        </div>
-      </div>
-      <div class="ghaz-exp-earlier ghaz-reveal-row">
-        <div class="ghaz-exp-earlier-title">Earlier roles</div>
-        <div class="ghaz-exp-earlier-row"><span>WordPress &amp; Shopify Developer — Oztudeo Digital Technologies, UK, Remote</span><span>Jan 2020 – Nov 2021</span></div>
-        <div class="ghaz-exp-earlier-row"><span>WordPress &amp; Shopify Developer — Bee Creative, Karachi</span><span>Mar 2020 – Aug 2021</span></div>
-        <div class="ghaz-exp-earlier-row"><span>WordPress Developer &amp; Graphic Designer — QLABS Network, Karachi</span><span>Jan 2019 – Mar 2020</span></div>
-        <div class="ghaz-exp-earlier-row"><span>.NET Developer — Business Experts Pakistan, Karachi</span><span>Sep 2018 – Jan 2019</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="ghaz-section" id="about">
-  <div class="ghaz-wrap">
-    <div class="ghaz-section-tag ghaz-reveal"><span>About</span></div>
-    <div class="ghaz-about-grid">
-      <div class="ghaz-about-text ghaz-reveal-row">
-        <p>Production Team Lead and full-stack WordPress/Shopify developer with 7 years of experience building, scaling and maintaining e-commerce, content and custom business platforms.</p>
-        <p>Leads production at Centric Tech Inc. across Pakistan and the UAE, owning delivery standards for clients in the US, UK, Germany, Australia and the GCC.</p>
-        <p>Builds AI automation systems (n8n, GitHub Actions, LLM APIs) and custom WordPress plugins that replace manual work, and runs multiple AI projects and automation workflows at any given time.</p>
-        <p>Based in Karachi, Pakistan.</p>
-      </div>
-      <div class="ghaz-stats ghaz-reveal-row">
-        <div>
-          <div class="ghaz-stat-num">7+</div>
-          <div class="ghaz-stat-label">Years experience</div>
-        </div>
-        <div>
-          <div class="ghaz-stat-num">5</div>
-          <div class="ghaz-stat-label">Countries served</div>
-        </div>
-        <div>
-          <div class="ghaz-stat-num">AI</div>
-          <div class="ghaz-stat-label">Automation specialist</div>
-        </div>
-        <div>
-          <div class="ghaz-stat-num">GCC</div>
-          <div class="ghaz-stat-label">Primary market</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ghaz-edu-grid">
-      <div class="ghaz-reveal-row">
-        <div class="ghaz-edu-col-title">Education</div>
-        <div class="ghaz-edu-item">
-          <h4>Bachelor of Science, Computer Science</h4>
-          <p>Iqra University (Usman Institute of Technology), Karachi — 2016 – 2020</p>
-        </div>
-        <div class="ghaz-edu-item">
-          <h4>Intermediate, Pre-Engineering</h4>
-          <p>Bahria College Karsaz, Karachi — 2014 – 2016</p>
-        </div>
-      </div>
-      <div class="ghaz-reveal-row">
-        <div class="ghaz-edu-col-title">Certifications</div>
-        <div class="ghaz-edu-item">
-          <h4>n8n: No-Code AI Agent Builder</h4>
-          <p>Simplilearn, 2026</p>
-        </div>
-        <div class="ghaz-edu-item">
-          <h4>Data Mining with Python</h4>
-          <p>Pirple, 2023</p>
-        </div>
-        <div class="ghaz-edu-item">
-          <h4>Data Science Methodology</h4>
-          <p>IBM</p>
-        </div>
-        <div class="ghaz-edu-item">
-          <h4>Python for Data Science</h4>
-          <p>IBM</p>
-        </div>
-      </div>
+    <div class="ghaz-tag-label ghaz-reveal"><span>FAQ</span></div>
+    <h2 class="ghaz-section-title ghaz-reveal"><span>Questions people ask before working with me.</span></h2>
+    <div class="ghaz-faq-list">
+      <div class="ghaz-faq-item ghaz-reveal-row"><h3>What does Ghazan Aqeel do?</h3><p>Builds WordPress and Shopify sites, custom plugins, and AI automation systems (n8n, APIs) for businesses that need manual work replaced with a working system.</p></div>
+      <div class="ghaz-faq-item ghaz-reveal-row"><h3>What types of businesses do you work with?</h3><p>Small and mid-size businesses, agencies and professional services — from travel and e-commerce to automotive and recruitment, based on what I've delivered to date.</p></div>
+      <div class="ghaz-faq-item ghaz-reveal-row"><h3>Where are you based, and which areas do you serve?</h3><p>Based in Karachi, Pakistan, leading production for Centric Tech Inc. across Pakistan and the UAE — plus remote clients in the US, UK, Germany and Australia.</p></div>
+      <div class="ghaz-faq-item ghaz-reveal-row"><h3>How do we get started?</h3><p>Email or message me with what's manual or broken today — I'll scope the system before any build starts.</p></div>
+      <div class="ghaz-faq-item ghaz-reveal-row"><h3>What makes this different from a typical freelancer?</h3><p>7+ years leading production teams, not just writing code — delivery standards, QA and reversible changes are built into how I work, not an afterthought.</p></div>
     </div>
   </div>
 </section>
 
 <section class="ghaz-section ghaz-contact" id="contact">
   <div class="ghaz-wrap">
-    <div class="ghaz-section-tag ghaz-reveal"><span>Get in touch</span></div>
-    <h2 class="ghaz-reveal-row">Have a site or<br>plugin to build?</h2>
+    <div class="ghaz-tag-label ghaz-reveal"><span>Get in touch</span></div>
+    <h2 class="ghaz-reveal-row">Have a system<br>to build?</h2>
     <a href="mailto:ghazanaqeel73@gmail.com" class="ghaz-contact-email ghaz-reveal-row">ghazanaqeel73@gmail.com →</a>
-    <div class="ghaz-contact-meta ghaz-reveal-row" style="margin-top:28px;display:flex;gap:28px;flex-wrap:wrap;color:var(--ghaz-text-dim);font-size:14px;">
+    <div class="ghaz-contact-meta ghaz-reveal-row">
       <a href="tel:+923362033220">+92 336 2033220</a>
       <a href="https://linkedin.com/in/ghazanautomates" target="_blank" rel="noopener">linkedin.com/in/ghazanautomates</a>
       <span>Karachi, Pakistan</span>
@@ -423,7 +326,7 @@
 <footer class="ghaz-footer">
   <div class="ghaz-wrap" style="display:flex;justify-content:space-between;width:100%;">
     <span>© <span id="ghaz-year"></span> Ghazan Aqeel</span>
-    <span>Built with WP Autopilot</span>
+    <span>Business Automation &amp; Custom Systems</span>
   </div>
 </footer>
 
@@ -433,52 +336,54 @@
 <script>
   document.getElementById('ghaz-year').textContent = new Date().getFullYear();
 
-  // Smooth scroll
   var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
   function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
+  gsap.registerPlugin(ScrollTrigger);
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time)=>{ lenis.raf(time*1000); });
   gsap.ticker.lagSmoothing(0);
 
-  gsap.registerPlugin(ScrollTrigger);
+  // Hero entrance
+  gsap.set('.ghaz-hero-eyebrow, .ghaz-hero h1, .ghaz-hero-sub', { y: 30, opacity: 0 });
+  gsap.set('.ghaz-hero-cta', { opacity: 0 });
+  gsap.timeline({ defaults:{ ease:'power3.out' } })
+    .to('.ghaz-hero-eyebrow', { y:0, opacity:1, duration:0.6 }, 0.1)
+    .to('.ghaz-hero h1', { y:0, opacity:1, duration:0.8 }, 0.25)
+    .to('.ghaz-hero-sub', { y:0, opacity:1, duration:0.7 }, 0.45)
+    .to('.ghaz-hero-cta', { opacity:1, duration:0.6 }, 0.65);
 
-  // Hero entrance timeline
-  var heroTl = gsap.timeline({ defaults:{ ease:'power3.out' } });
-  heroTl
-    .to('.ghaz-hero-eyebrow span', { y:0, opacity:1, duration:0.7 }, 0.1)
-    .fromTo('.ghaz-hero h1 .ghaz-line span', { yPercent:110, opacity:0 }, { yPercent:0, opacity:1, duration:0.9, stagger:0.08 }, 0.25)
-    .fromTo('.ghaz-hero-tagline span', { yPercent:110, opacity:0 }, { yPercent:0, opacity:1, duration:0.8 }, 0.6)
-    .to('.ghaz-hero-cta', { opacity:1, duration:0.6 }, 0.85);
+  // 3D/4D hero stage: perspective tilt cards, mouse parallax + scroll-driven rotation
+  gsap.set(['#c1','#c2','#c3'], { opacity:0, z:-200 });
+  gsap.timeline({ defaults:{ ease:'power3.out' } })
+    .to('#c1', { opacity:1, z:0, duration:1, rotateY:-8, rotateX:6 }, 0.5)
+    .to('#c2', { opacity:1, z:0, duration:1, rotateY:10, rotateX:-4 }, 0.65)
+    .to('#c3', { opacity:1, z:0, duration:1, rotateY:-6, rotateX:4 }, 0.8);
 
-  gsap.set('.ghaz-hero-eyebrow span', { y:20, opacity:0 });
+  var stage = document.getElementById('stage');
+  if (stage) {
+    stage.addEventListener('mousemove', function(e){
+      var r = stage.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      gsap.to('#c1', { rotateY: -8 + px*14, rotateX: 6 - py*14, duration:0.6, ease:'power2.out' });
+      gsap.to('#c2', { rotateY: 10 + px*18, rotateX: -4 - py*18, duration:0.6, ease:'power2.out' });
+      gsap.to('#c3', { rotateY: -6 + px*10, rotateX: 4 - py*10, duration:0.6, ease:'power2.out' });
+    });
+  }
+  // Scroll-driven 4th-dimension feel: depth + rotation tied to scroll position
+  gsap.to('#c1', { z:120, rotateY:'+=18', y:-40, ease:'none', scrollTrigger:{ trigger:'.ghaz-hero', start:'top top', end:'bottom top', scrub:true } });
+  gsap.to('#c2', { z:-80, rotateY:'-=14', y:60, ease:'none', scrollTrigger:{ trigger:'.ghaz-hero', start:'top top', end:'bottom top', scrub:true } });
+  gsap.to('#c3', { z:60, rotateX:'+=10', y:-20, ease:'none', scrollTrigger:{ trigger:'.ghaz-hero', start:'top top', end:'bottom top', scrub:true } });
+  gsap.to('.ghaz-hero-grid > div:first-child', { yPercent:-10, ease:'none', scrollTrigger:{ trigger:'.ghaz-hero', start:'top top', end:'bottom top', scrub:true } });
 
-  // Section reveal: tag + title
+  // Section reveals
   document.querySelectorAll('.ghaz-reveal').forEach(function(el){
-    gsap.fromTo(el, { yPercent:100, opacity:0 }, {
-      yPercent:0, opacity:1, duration:0.8, ease:'power3.out',
-      scrollTrigger:{ trigger: el, start:'top 85%' }
-    });
+    gsap.fromTo(el, { y:40, opacity:0 }, { y:0, opacity:1, duration:0.8, ease:'power3.out', scrollTrigger:{ trigger: el, start:'top 85%' } });
   });
-
-  // Row / card reveals, staggered within their section
-  document.querySelectorAll('.ghaz-services-list, .ghaz-work-grid, .ghaz-exp-list, .ghaz-about-grid, .ghaz-edu-grid').forEach(function(group){
+  document.querySelectorAll('.ghaz-pain-grid, .ghaz-svc-grid, .ghaz-process, .ghaz-tools-strip, .ghaz-geo-grid, .ghaz-ps-grid, .ghaz-benefit-grid, .ghaz-work-grid, .ghaz-faq-list, .ghaz-contact').forEach(function(group){
     var rows = group.querySelectorAll('.ghaz-reveal-row');
-    gsap.fromTo(rows, { y:50, opacity:0 }, {
-      y:0, opacity:1, duration:0.8, ease:'power3.out', stagger:0.12,
-      scrollTrigger:{ trigger: group, start:'top 80%' }
-    });
-  });
-
-  gsap.fromTo('.ghaz-contact .ghaz-reveal-row', { y:40, opacity:0 }, {
-    y:0, opacity:1, duration:0.9, ease:'power3.out', stagger:0.15,
-    scrollTrigger:{ trigger:'.ghaz-contact', start:'top 80%' }
-  });
-
-  // Subtle parallax on hero on scroll
-  gsap.to('.ghaz-hero', {
-    yPercent: -8, ease:'none',
-    scrollTrigger:{ trigger:'.ghaz-hero', start:'top top', end:'bottom top', scrub:true }
+    gsap.fromTo(rows, { y:36, opacity:0 }, { y:0, opacity:1, duration:0.7, ease:'power3.out', stagger:0.1, scrollTrigger:{ trigger: group, start:'top 82%' } });
   });
 </script>
 </body>

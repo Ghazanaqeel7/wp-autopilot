@@ -1,0 +1,23 @@
+{
+  "source": "requests/R20261114-003/attachments/My_Brand_Guide_Line.pdf",
+  "colors": {
+    "navy": { "hex": "#0A1220", "use": "background, 60%" },
+    "orange": { "hex": "#FF7A1A", "gradientTo": "#FF5A0A", "use": "accent, 10% — keyword/button/number only" },
+    "light": { "hex": "#F4F6FA", "use": "alternate sections, 25%" },
+    "mist": { "hex": "#B6C3D6", "use": "body text on navy" },
+    "slate": { "hex": "#44556A", "use": "body text on light" },
+    "sky": { "hex": "#1E90FF", "use": "glow/detail only, under 5%" }
+  },
+  "fonts": {
+    "heading": "Sora (700/800) — headlines, numbers, buttons only",
+    "body": "Inter (400/500/700) — paragraphs, labels, captions",
+    "rule": "two fonts max, never mix a third"
+  },
+  "type_scale": {
+    "h1": "40-64px", "h2": "28-44px", "h3": "16-19px", "body": "14-16px", "button": "14px"
+  },
+  "radius": "12px",
+  "spacing": "8px grid, section padding 90-130px",
+  "reference": { "url": "https://metechstudio.com/", "mode": "replicate", "request": "R20261114-003" },
+  "notes": "Section order/components replicate metechstudio.com's homepage (hero, pain points, services, process, tools strip, geo reach, problem/solution, benefits, FAQ) adapted to a solo consultant instead of a multi-department agency (dropped their per-industry grid). All copy/projects/facts are Ghazan's own, sourced from his CV and existing site content — nothing copied from the reference. Hero uses a GSAP 3D-perspective card stack (mouse parallax + scroll-driven depth/rotation) rather than a WebGL 3D scene, per the owner's confirmed intent (GSAP-based 'feels 3D', not literal 3D models)."
+}
