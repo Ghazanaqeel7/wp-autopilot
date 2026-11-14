@@ -169,9 +169,77 @@ class AP_Changesets {
 			case 'plugin.deactivate':
 				return AP_Functions::op_plugin_stage( $cs, $type, (array) $payload );
 			case 'menu.update':
-				return new WP_Error( 'ap_not_implemented', 'menu.update is not available in this version.' );
+				return self::op_menu( $cs, $target, (array) $payload );
 		}
 		return new WP_Error( 'ap_payload', 'Unknown op: ' . $type );
+	}
+
+	/**
+	 * target: {menu: "<slug-or-id>"}
+	 * payload.items[]: existing → {id, title?, order?, url?, parent?} (only listed fields change);
+	 *                  new      → {title, url|post_id, order?, parent?} (no id).
+	 * Edits to existing items reuse the generic post overlay (fields/meta) so they stay staged
+	 * until promote, same as any other op. New items are inserted as draft nav_menu_item posts
+	 * now (not yet attached to the menu) and only attached to it at promote(), via the pending
+	 * meta key below — nothing is visible on the live menu until promote.
+	 */
+	private static function op_menu( &$cs, $target, $payload ) {
+		$menu = wp_get_nav_menu_object( (string) ( $target['menu'] ?? '' ) );
+		if ( ! $menu ) {
+			return new WP_Error( 'ap_not_found', 'Menu not found: ' . ( $target['menu'] ?? '' ) );
+		}
+		$existing_ids = wp_list_pluck( (array) wp_get_nav_menu_items( $menu->term_id ), 'ID' );
+		$touched      = array();
+		foreach ( (array) ( $payload['items'] ?? array() ) as $item ) {
+			$item = (array) $item;
+			if ( ! empty( $item['id'] ) ) {
+				$pid = (int) $item['id'];
+				if ( ! in_array( $pid, $existing_ids, true ) ) {
+					return new WP_Error( 'ap_payload', "Menu item $pid is not in menu {$menu->slug}." );
+				}
+				$post = get_post( $pid );
+				if ( isset( $item['title'] ) ) {
+					self::set_field( $cs, $pid, 'post_title', sanitize_text_field( (string) $item['title'] ), (string) $post->post_title );
+				}
+				if ( isset( $item['order'] ) ) {
+					self::set_field( $cs, $pid, 'menu_order', (string) (int) $item['order'], (string) $post->menu_order );
+				}
+				if ( isset( $item['url'] ) ) {
+					self::set_meta( $cs, $pid, '_menu_item_url', esc_url_raw( (string) $item['url'] ), (string) get_post_meta( $pid, '_menu_item_url', true ) );
+				}
+				if ( isset( $item['parent'] ) ) {
+					self::set_meta( $cs, $pid, '_menu_item_parent_id', (string) (int) $item['parent'], (string) get_post_meta( $pid, '_menu_item_parent_id', true ) );
+				}
+				$touched[] = $pid;
+				continue;
+			}
+			if ( empty( $item['title'] ) || ( empty( $item['url'] ) && empty( $item['post_id'] ) ) ) {
+				return new WP_Error( 'ap_payload', 'New menu item needs title and (url or post_id).' );
+			}
+			$is_post_link = ! empty( $item['post_id'] );
+			$pid          = wp_insert_post( wp_slash( array(
+				'post_type'   => 'nav_menu_item',
+				'post_status' => 'draft',
+				'post_title'  => sanitize_text_field( (string) $item['title'] ),
+				'menu_order'  => (int) ( $item['order'] ?? 0 ),
+			) ), true );
+			if ( is_wp_error( $pid ) ) {
+				return $pid;
+			}
+			update_post_meta( $pid, '_menu_item_type', $is_post_link ? 'post_type' : 'custom' );
+			update_post_meta( $pid, '_menu_item_object', $is_post_link ? (string) get_post_type( (int) $item['post_id'] ) : 'custom' );
+			update_post_meta( $pid, '_menu_item_object_id', $is_post_link ? (int) $item['post_id'] : 0 );
+			update_post_meta( $pid, '_menu_item_url', $is_post_link ? '' : esc_url_raw( (string) $item['url'] ) );
+			update_post_meta( $pid, '_menu_item_parent_id', (int) ( $item['parent'] ?? 0 ) );
+			update_post_meta( $pid, '_menu_item_target', '' );
+			update_post_meta( $pid, '_menu_item_classes', '' );
+			update_post_meta( $pid, '_menu_item_xfn', '' );
+			update_post_meta( $pid, '_ap_changeset', $cs['id'] );
+			update_post_meta( $pid, '_ap_pending_nav_menu', (int) $menu->term_id );
+			$cs['created_posts'][ (string) $pid ] = 'nav-item-' . $pid;
+			$touched[]                            = $pid;
+		}
+		return array( 'op' => 'menu.update', 'menu' => $menu->slug, 'items' => $touched );
 	}
 
 	private static function op_section( &$cs, $target, $payload, $expect ) {
@@ -468,6 +536,11 @@ class AP_Changesets {
 		}
 		foreach ( array_keys( $cs['created_posts'] ) as $pid ) {
 			self::set_status( (int) $pid, 'publish' );
+			$nav_term = (int) get_post_meta( (int) $pid, '_ap_pending_nav_menu', true );
+			if ( $nav_term ) {
+				wp_set_object_terms( (int) $pid, array( $nav_term ), 'nav_menu', true );
+				delete_post_meta( (int) $pid, '_ap_pending_nav_menu' );
+			}
 		}
 		self::purge( array_merge( array_keys( $cs['overlay']['posts'] ), array_keys( $cs['created_posts'] ) ) );
 

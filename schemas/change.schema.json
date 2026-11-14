@@ -28,7 +28,7 @@
           },
           "target": {
             "type": "object",
-            "description": "e.g. {post_id, element_id} for Elementor, {post_id, block_path} for Gutenberg"
+            "description": "e.g. {post_id, element_id} for Elementor, {post_id, block_path} for Gutenberg, {menu: slug-or-id} for menu.update"
           },
           "adapter": { "type": "string" },
           "payload": {},
