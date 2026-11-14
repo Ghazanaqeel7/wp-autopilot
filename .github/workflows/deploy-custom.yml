@@ -21,6 +21,10 @@ on:
         type: choice
         options: [stage, promote, rollback]
         default: stage
+      force:
+        description: "promote only: go live even if QA did not pass (use with a reason you understand)"
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ["sites/*/build/**"]
@@ -130,6 +134,7 @@ jobs:
           python3 -c 'import sys,json; json.dump({"url":sys.argv[2],"expires":None}, open(f"reports/{sys.argv[1]}/latest/preview.json","w"), indent=2)' "$s" "$url"
           git rev-parse HEAD > "reports/$s/live-commit.txt"
       - name: Record approval
+        env: { AP_FORCE: "${{ inputs.force == true && '1' || '' }}" }
         run: python tools/runner.py promote_custom "${{ inputs.site }}" "${{ inputs.request }}" "${{ steps.deploy.outputs.prev }}"
       - name: Commit
         if: always()
