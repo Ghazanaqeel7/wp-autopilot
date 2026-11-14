@@ -1,22 +1,11 @@
 {
   "site": "ghazan-aqeel-portfolio",
   "request": "R20261114-005",
-  "staged_at": "2026-11-14T22:28:27+00:00",
+  "staged_at": "2026-11-14T22:32:53+00:00",
   "qa_passed": false,
   "problems": [
-    "Horizontal overflow at 320px on /about.html",
-    "Horizontal overflow at 375px on /about.html",
-    "Horizontal overflow at 320px on /ai-agents.html",
-    "Horizontal overflow at 375px on /ai-agents.html",
-    "Horizontal overflow at 320px on /ai-automation.html",
-    "Horizontal overflow at 375px on /ai-automation.html",
-    "Horizontal overflow at 320px on /business-process-automation.html",
-    "Horizontal overflow at 320px on /contact.html",
-    "Horizontal overflow at 375px on /contact.html",
-    "Horizontal overflow at 320px on /industries.html",
-    "Horizontal overflow at 375px on /industries.html",
     "Lighthouse accessibility 89 (min 90)",
     "Lighthouse seo 54 (min 90)"
   ],
-  "finalized_at": "2026-11-14T22:30:14+00:00"
+  "finalized_at": "2026-11-14T22:34:39+00:00"
 }

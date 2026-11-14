@@ -7,7 +7,7 @@
           "width": 320,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/abouthtml-320.jpg"
           }
@@ -16,7 +16,7 @@
           "width": 375,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/abouthtml-375.jpg"
           }
@@ -67,7 +67,7 @@
           "width": 320,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/ai-agentshtml-320.jpg"
           }
@@ -76,7 +76,7 @@
           "width": 375,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/ai-agentshtml-375.jpg"
           }
@@ -127,7 +127,7 @@
           "width": 320,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/ai-automationhtml-320.jpg"
           }
@@ -136,7 +136,7 @@
           "width": 375,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/ai-automationhtml-375.jpg"
           }
@@ -247,7 +247,7 @@
           "width": 320,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/business-process-automationhtml-320.jpg"
           }
@@ -307,7 +307,7 @@
           "width": 320,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/contacthtml-320.jpg"
           }
@@ -316,7 +316,7 @@
           "width": 375,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/contacthtml-375.jpg"
           }
@@ -427,7 +427,7 @@
           "width": 320,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/industrieshtml-320.jpg"
           }
@@ -436,7 +436,7 @@
           "width": 375,
           "after": {
             "status": 200,
-            "overflow": true,
+            "overflow": false,
             "console_errors": [],
             "shot": "screens/industrieshtml-375.jpg"
           }
@@ -483,7 +483,7 @@
   ],
   "lighthouse": {
     "after": {
-      "performance": 91,
+      "performance": 97,
       "accessibility": 89,
       "best_practices": 100,
       "seo": 54
