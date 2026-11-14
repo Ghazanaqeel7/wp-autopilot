@@ -32,7 +32,7 @@
       "builder": "gutenberg",
       "last_inventory": "2026-11-13T07:43:30+00:00",
       "pages": 2,
-      "last_health": "2026-11-14T08:59:22+00:00",
+      "last_health": "2026-11-14T19:42:53+00:00",
       "health": "ok",
       "paused_on_site": false,
       "bridge_version": "0.1.1"
@@ -41,7 +41,11 @@
       "id": "ghazan-aqeel-portfolio",
       "name": "ghazan aqeel portfolio",
       "url": "",
-      "status": "active"
+      "status": "active",
+      "last_health": "2026-11-14T19:42:53+00:00",
+      "health": "down (0)",
+      "paused_on_site": null,
+      "bridge_version": null
     }
   ],
   "requests": [
