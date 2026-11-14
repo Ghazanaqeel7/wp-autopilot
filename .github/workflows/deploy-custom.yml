@@ -1,0 +1,84 @@
+name: Deploy custom site (Cloudflare Pages)
+# For sites with site.json -> kind: "custom" (non-WordPress, see docs/CUSTOM_AND_LOCAL_SITES.md).
+# Builds live in sites/<site>/build/ ; every push gets its own Pages preview URL, which this
+# workflow writes to reports/<site>/<request>/preview.json in the same {url, expires} shape the
+# WordPress preview flow uses, so the dashboard's preview-link UI works unmodified.
+on:
+  workflow_dispatch:
+    inputs:
+      site: { description: "Site id (folder under sites/)", required: true }
+      request: { description: "Request id, e.g. R20261114-002 (for the preview report)", required: false }
+  push:
+    branches: [main]
+    paths: ["sites/*/build/**"]
+concurrency: { group: "deploy-custom-${{ github.event.inputs.site || 'auto' }}", cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      PAGES_PROJECT: wp-autopilot-sites
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve changed site(s)
+        id: sites
+        run: |
+          if [ -n "${{ github.event.inputs.site }}" ]; then
+            echo "list=${{ github.event.inputs.site }}" >> "$GITHUB_OUTPUT"
+          else
+            # push trigger: find every site under sites/*/build that changed in this push
+            changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'sites/*/build/**' \
+              | cut -d/ -f2 | sort -u | tr '\n' ' ')
+            echo "list=$changed" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify each site is kind:custom
+        run: |
+          for s in ${{ steps.sites.outputs.list }}; do
+            kind=$(python3 -c "import json;print(json.load(open('sites/$s/site.json')).get('kind','wordpress-bridge'))" 2>/dev/null || echo "missing")
+            if [ "$kind" != "custom" ]; then
+              echo "::error::sites/$s/site.json kind is '$kind', not 'custom' — refusing to deploy. This workflow only handles custom (non-WordPress) sites."
+              exit 1
+            fi
+          done
+
+      - name: Install wrangler
+        run: npm install -g wrangler@latest
+
+      - name: Deploy each site to its own Pages path
+        run: |
+          for s in ${{ steps.sites.outputs.list }}; do
+            echo "::group::Deploying $s"
+            out=$(wrangler pages deploy "sites/$s/build" \
+              --project-name "$PAGES_PROJECT" \
+              --branch "$s" \
+              --commit-dirty=true 2>&1 | tee /tmp/deploy-$s.log)
+            url=$(echo "$out" | grep -Eo 'https://[a-z0-9.-]*\.pages\.dev' | tail -1)
+            if [ -z "$url" ]; then
+              echo "::error::Could not parse a deploy URL for $s from wrangler output"; cat /tmp/deploy-$s.log; exit 1
+            fi
+            echo "DEPLOY_URL_$s=$url" >> "$GITHUB_ENV"
+            echo "::endgroup::"
+          done
+
+      - name: Write preview.json (same shape as the WordPress preview flow)
+        run: |
+          for s in ${{ steps.sites.outputs.list }}; do
+            req="${{ github.event.inputs.request }}"
+            [ -z "$req" ] && req="latest"
+            mkdir -p "reports/$s/$req"
+            url_var="DEPLOY_URL_$s"
+            python3 -c 'import sys, json; site, req, url = sys.argv[1:4]; open(f"reports/{site}/{req}/preview.json", "w").write(json.dumps({"url": url, "expires": None}, indent=2))' "$s" "$req" "${!url_var}"
+          done
+
+      - name: Commit preview.json
+        run: |
+          git config user.name "wp-autopilot[bot]"
+          git config user.email "wp-autopilot@users.noreply.github.com"
+          git add reports
+          git diff --cached --quiet || git commit -qm "deploy: custom site preview link(s)"
+          git pull -q --rebase origin main && git push -q origin HEAD:main || true

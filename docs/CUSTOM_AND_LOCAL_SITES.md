@@ -97,3 +97,13 @@ preview-link UI works unmodified for every kind.
 Nothing here is fake-completed: the agent, the sandbox host and the Pages project don't exist
 yet, so no site can actually use `wordpress-local` or `custom` yet. `kind` defaults to
 `wordpress-bridge` so every existing site keeps working exactly as before.
+
+## Wiring (2026-11-14)
+- Cloudflare Pages project: `wp-autopilot-sites` (connected to this repo).
+- GitHub secrets added: `CLOUDFLARE_API_TOKEN` (Account: Cloudflare Pages Edit), `CLOUDFLARE_ACCOUNT_ID`.
+- `.github/workflows/deploy-custom.yml` added: deploys `sites/<site>/build/` to Pages
+  (one Pages branch per site, so each gets its own stable `*.pages.dev` preview URL), refuses
+  to run on any site whose `site.json -> kind` isn't `custom`, writes
+  `reports/<site>/<request>/preview.json` in the same shape the WordPress flow uses.
+- Not yet verified end to end (no `custom`-kind site with a `build/` folder exists yet to
+  trigger it) — first real use will confirm the wrangler/Pages wiring works as designed.
