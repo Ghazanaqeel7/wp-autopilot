@@ -9,8 +9,17 @@ Goal: work that looks like a senior agency team crafted it for this client, not 
 
 ## 1. Inputs before designing (read, don't guess)
 `sites/<site>/design.json` (tokens) · `brief.md` (audience, competitors) · `inventory.json`
-(existing sections to match). If `design.json` is missing, create it first from the client's logo,
-current site and brief, then stop and ask for approval.
+(existing sections to match).
+- `design.json → source: "auto-analyzed"` means `tools/analyze_site.py` drafted it from the
+  site's own live homepage during onboarding (GitHub Actions, no Claude tokens) — this is an
+  existing/already-built client site, so new pages/sections must match ITS current theme, not a
+  new one you invent. Review it once: confirm which colors are primary/accent/neutral (drop
+  anything incidental like a border or shadow colour), cross-check fonts/radius/spacing against a
+  couple of `inventory.json` pages, then rewrite it as a confirmed `design.json` (drop the
+  `source`/`status` draft fields) before the first build. Don't re-crawl the site yourself for
+  this — the draft plus `inventory.json` is normally enough.
+- If `design.json` is missing entirely (no url yet, or a from-scratch build with nothing to
+  analyse), create it from the client's logo, brand.json and brief, then stop and ask for approval.
 
 ## 2. House patterns (proven in our portfolio — reuse, adapt, don't copy blindly)
 - Text-led hero with one clear promise + two CTAs (primary action / secondary explore).

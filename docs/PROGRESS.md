@@ -20,6 +20,17 @@ stand — Ghazan forgets the details between sessions, this file is the source o
 - **2026-11-14** — `tools/llm_router.py` added: routes low-stakes drafting (SEO meta, alt
   text, FAQ copy, paraphrasing) to a free OpenRouter model so it doesn't cost Claude's own
   tokens. Wired into `CLAUDE.md` → Token economy. Setup/usage in `docs/LLM_ROUTER.md`.
+- **2026-11-15** — `tools/design_lint.py` added: checks any model's CSS/HTML/PHP draft against
+  a site's `design.json` tokens (colors/fonts) so output stays visually consistent whichever
+  model drafted it. Wired into CLAUDE.md → Design as mandatory before shipping.
+- **2026-11-15** — `tools/analyze_site.py` added: when a site with an existing live homepage is
+  onboarded, this auto-drafts `sites/<site>/design.json` from that homepage (colors, fonts,
+  button style, spacing) — GitHub Actions, no Claude tokens, same Playwright approach as
+  `tools/reference.py`. Wired into `onboard.yml` (runs right after `runner.py onboard`, skips
+  sites with no url or an already-confirmed design.json) and into `wp-premium-design` (Claude
+  reviews/confirms the draft once instead of extracting tokens by hand). **Not yet tested
+  against a real live site** — by design, since Ghazan doesn't want Claude burning weekly-limit
+  tokens on test runs; he'll exercise it himself once he's testing the product (from Monday on).
 
 ## Pending (in rough order)
 1. Connect Slack on the dashboard Connections page.

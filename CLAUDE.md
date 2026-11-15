@@ -26,7 +26,10 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
    - Read `sites/<site>/site.json`, `sites/<site>/brand.json` (brand colours, fonts, business, audience, tone,
      `always_remember` — binding on every build and change), the file list of `sites/<site>/brand/assets/`
      (names start with `logo--`, `guidelines--`, `image--`, `font--`; open a file only when needed), then
-     `sites/<site>/inventory.json` and `sites/<site>/notes.md`.
+     `sites/<site>/inventory.json` and `sites/<site>/notes.md`. A connected site that already has a live
+     website gets its `design.json` auto-drafted from that live homepage during onboarding
+     (`tools/analyze_site.py`, runs in GitHub Actions — no Claude tokens); see `wp-premium-design` →
+     "Inputs before designing" for how to review and confirm that draft before building on it.
    - Request has a `## Reference` section → follow the `wp-reference-build` skill.
    - If anything material is unclear → set status `needs_info`, write questions to
      `requests/<id>/questions.md`. Do NOT build on assumptions.
