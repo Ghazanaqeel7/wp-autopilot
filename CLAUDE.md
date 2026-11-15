@@ -10,7 +10,10 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
    either — they only become one if the owner clicks "Create request" there. Never act on a
    suggestion yourself; it is not yours to pick up in this loop.
 1. Read `state.json`. If `config.paused` is true → stop.
-2. Pick requests with `status: "new"` or `"changes_requested"` (urgent first, then oldest). Skip sites whose
+2. Pick requests with `status: "new"` or `"changes_requested"` (urgent first, then oldest) — Claude
+   runs this whole loop itself, urgent or not (see "Why Claude runs the loop" in
+   `docs/LLM_ROUTER.md` — urgency does not change which model orchestrates a request, only how
+   soon Claude gets to it). Skip sites whose
    `site.json → paused` is true. For `changes_requested`, read `requests/<id>/feedback.md` (latest entry wins)
    and write a revised package for the same request id — it replaces the staged version. A request that was
    `needs_info` and came back to `new` via the dashboard's "Answer questions" form carries `requests/<id>/answers.md`
@@ -87,6 +90,15 @@ correct first, then fast. When unsure, ask — never guess on a client's site.
   no emoji icons, no identical three-card grids repeated down the page.
 - Real design system per site: type scale, spacing scale (8px grid), 2–3 brand colours + neutrals,
   one icon family, consistent radii/shadows. Store it in `sites/<site>/design.json` and reuse it.
+  `design.json` is Claude's to create or change — never the free model's; it is the one source
+  of truth every other model's draft must match.
+- Before any change ships — and *always* when a free-model draft (llm_router) touched CSS/HTML/PHP
+  with visual styling — run `python tools/design_lint.py <site> <changed files>`. It flags any
+  hex colour or font-family not already in that site's `design.json`. A clean run is not a
+  substitute for your own line-by-line review (Token economy, below) — it only catches literal
+  drift a quick read might miss. If it reports a finding, fix the value to match a token, or add
+  the token to `design.json` yourself if the design genuinely needs to grow (never let the free
+  model add tokens).
 - Layout rhythm: vary section structure (split, full-bleed, editorial, asymmetric), deliberate
   whitespace, strong typographic hierarchy, real content density — like a senior agency designer.
 - Micro-interactions subtle and purposeful (hover, focus, reveal); respect `prefers-reduced-motion`.

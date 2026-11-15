@@ -48,6 +48,31 @@ never invented by the free model either.
   error. Claude's instruction (CLAUDE.md → Token economy) is to just draft the copy itself
   in that case, not to retry in a loop.
 
+## Why Claude runs the loop (not the free model), urgent or not
+The free model never picks up a request on its own — it has no state.json, no memory across
+calls, and no authority to decide risk level or sign off on a change. Every run of the loop
+(reading `state.json`, planning, writing `change.json`, QA sign-off) is Claude's job end to end;
+`llm_router.py` is a tool Claude calls *from inside* that run for one sub-step (a copy draft, a
+first-pass snippet), never the thing that runs the loop. Marking a request "urgent" only moves it
+to the front of step 2's queue — it does not hand the request to a different model, because the
+orchestration, the fact-checking against Hard rules, and the final sign-off are the same job
+regardless of urgency. If this changes later (e.g. a paid Claude plan lets more of the loop itself
+be parallelized), it will be a deliberate architecture change recorded here and in
+`docs/PROGRESS.md` — not something urgency alone should trigger.
+
+## Design-system consistency across models
+`sites/<site>/design.json` is the single source of truth for colours, fonts, type scale, spacing
+and radii (see CLAUDE.md → Design). Only Claude creates or edits it. Any model's draft — Claude's
+own first pass, or a free-model draft from this router — must use only the tokens already in that
+file (CSS custom properties referencing them are fine; inventing a new hex/font is not). Before a
+change ships, run:
+```
+python tools/design_lint.py <site> <changed-file-or-dir> [...]
+```
+It flags hex colours/font-families in the diff that aren't in `design.json` yet. It's a mechanical
+grep-grade check, not a design reviewer — Claude's own line-by-line review (Token economy, CLAUDE.md)
+is still mandatory on every free-model draft.
+
 ## Usage
 ```
 python tools/llm_router.py ask "Write 3 SEO meta description options (≤155 chars) for a
